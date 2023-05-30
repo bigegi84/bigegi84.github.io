@@ -51,7 +51,7 @@ var state = {
     },
   ],
   address: {
-    id: "Kebun Raya Residence, Cluster Citra Park Extention No. 7, Kota Batu, Ciomas, Kabupaten Bogor, Jawa Barat Indonesia, 16610. ",
+    id: "Kebun Raya Residence, Cluster Citra Park Extention No. 7, Kota Batu, Ciomas, Kabupaten Bogor, Jawa Barat, Indonesia, 16610. ",
   },
   waLink: "https://wa.me/+6288975329400",
   link: {

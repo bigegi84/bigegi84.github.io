@@ -8,17 +8,19 @@ $(document).ready(() => {
       "<br>" +
       state.email +
       "<br>" +
-      "Full Stack Developer. Berpengalaman lebih dari 6 Tahun. " +
+      "<strong>Full Stack Developer. Berpengalaman lebih dari 6 Tahun.</strong>" +
       "<br>" +
       state.address["id"]
   );
   $(prefix + "contactMe")
     .attr("href", state.waLink)
-    .text("Kontak Saya");
+    .attr("target", "_blank")
+    .text("Kontak Saya")
+    .removeClass("smooth-scroll-middle");
 
   $(prefix + "educationTitle").text("Pendidikan");
   $(prefix + "educationSubtitle").html(
-    "Sarjana " +
+    "<strong>Sarjana S1</strong><br>" +
       state.education.bachelor.major +
       " - " +
       state.education.bachelor.university +
@@ -32,6 +34,44 @@ $(document).ready(() => {
       " sampai " +
       state.education.bachelor.yearTo
   );
+  $(prefix + "educationMore").hide();
+
+  $(prefix + "experienceTitle").text("Pengalaman");
+  var experienceContentHtml = "";
+  state.experience.forEach((d) => {
+    experienceContentHtml +=
+      // '<span class="image right"><img style="height:100px;" src="' +
+      // d.image +
+      // '" alt=""></span>' +
+      d.as +
+      " di " +
+      d.company +
+      "<br> Tahun " +
+      d.from +
+      " sampai " +
+      d.to +
+      "<br>";
+  });
+  $(prefix + "experienceContent").html(experienceContentHtml);
+  $(prefix + "experienceMore").text("Selengkapnya");
+
+  $(prefix + "portofolioTitle").text("Portofolio");
+  $(prefix + "portofolioContent").html("Segera Hadir");
+  $(prefix + "portofolioMore").hide();
+
+  $(prefix + "skillTitle").text("Kemampuan");
+  var skillContentHtml = "";
+  state.skill.forEach((d) => {
+    skillContentHtml +=
+      "<strong>" + d.category + "</strong><br>" + d.list.join(", ") + "<br>";
+  });
+  $(prefix + "skillContent").html(skillContentHtml);
+  $(prefix + "skillMore").text("Selengkapnya");
+
+  $(prefix + "gallery").hide();
+  $(prefix + "detail").hide();
+  $(prefix + "getInTouch").hide();
+
   $(prefix + "copyright").html(
     "&copy; " +
       state.fullName +

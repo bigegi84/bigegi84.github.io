@@ -3547,7 +3547,7 @@ input, select, textarea {
 				-webkit-flex-direction: column-reverse;
 				-ms-flex-direction: column-reverse;
 				flex-direction: column-reverse;
-				text-align: center;
+				text-align: justify;
 			}
 
 				.banner.style1 .content {
@@ -3610,7 +3610,7 @@ input, select, textarea {
 			}
 
 		.banner.style1.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.banner.style1.content-align-right {
@@ -3620,7 +3620,7 @@ input, select, textarea {
 			@media screen and (orientation: portrait) {
 
 				.banner.style1.content-align-right {
-					text-align: center;
+					text-align: justify;
 				}
 
 			}
@@ -3657,7 +3657,7 @@ input, select, textarea {
 		justify-content: center;
 		background-color: inherit;
 		position: relative;
-		text-align: center;
+		text-align: justify;
 		overflow-x: hidden;
 	}
 
@@ -3925,7 +3925,7 @@ input, select, textarea {
 				-webkit-flex-direction: column-reverse;
 				-ms-flex-direction: column-reverse;
 				flex-direction: column-reverse;
-				text-align: center;
+				text-align: justify;
 			}
 
 				.banner.style3 .content {
@@ -3978,7 +3978,7 @@ input, select, textarea {
 			}
 
 		.banner.style3.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.banner.style3.content-align-right {
@@ -4183,7 +4183,7 @@ input, select, textarea {
 				-webkit-flex-direction: column-reverse;
 				-ms-flex-direction: column-reverse;
 				flex-direction: column-reverse;
-				text-align: center;
+				text-align: justify;
 			}
 
 				.banner.style4 .content {
@@ -4231,7 +4231,7 @@ input, select, textarea {
 			}
 
 		.banner.style4.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.banner.style4.content-align-right {
@@ -4270,7 +4270,7 @@ input, select, textarea {
 		justify-content: center;
 		background-color: inherit;
 		position: relative;
-		text-align: center;
+		text-align: justify;
 		overflow-x: hidden;
 	}
 
@@ -4957,7 +4957,7 @@ input, select, textarea {
 			-webkit-flex-direction: column-reverse;
 			-ms-flex-direction: column-reverse;
 			flex-direction: column-reverse;
-			text-align: center !important;
+			text-align: justify !important;
 		}
 
 			.spotlight.style1 .content {
@@ -4993,7 +4993,7 @@ input, select, textarea {
 	}
 
 		.spotlight.style1.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.spotlight.style1.content-align-right {
@@ -5132,7 +5132,7 @@ input, select, textarea {
 				-webkit-flex-direction: column-reverse;
 				-ms-flex-direction: column-reverse;
 				flex-direction: column-reverse;
-				text-align: center !important;
+				text-align: justify !important;
 			}
 
 				.spotlight.style2 .content {
@@ -5181,7 +5181,7 @@ input, select, textarea {
 			}
 
 		.spotlight.style2.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.spotlight.style2.content-align-right {
@@ -5386,7 +5386,7 @@ input, select, textarea {
 				-webkit-flex-direction: column-reverse;
 				-ms-flex-direction: column-reverse;
 				flex-direction: column-reverse;
-				text-align: center !important;
+				text-align: justify !important;
 			}
 
 				.spotlight.style3 .content {
@@ -5430,7 +5430,7 @@ input, select, textarea {
 			}
 
 		.spotlight.style3.content-align-center {
-			text-align: center;
+			text-align: justify;
 		}
 
 		.spotlight.style3.content-align-right {
@@ -5470,7 +5470,7 @@ input, select, textarea {
 		background-color: inherit;
 		position: relative;
 		overflow-x: hidden;
-		text-align: center;
+		text-align: justify;
 	}
 
 		.spotlight.style4 .content {
@@ -5650,7 +5650,7 @@ input, select, textarea {
 		background-color: inherit;
 		position: relative;
 		overflow-x: hidden;
-		text-align: center;
+		text-align: justify;
 	}
 
 		.spotlight.style5 .content {

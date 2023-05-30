@@ -59,6 +59,23 @@ $(document).ready(() => {
   $(prefix + "portofolioContent").html("Segera Hadir");
   $(prefix + "portofolioMore").hide();
 
+  $(prefix + "creativityTitle").text("Kreativitas");
+  var creativityContentHtml = "";
+  state.creativity.forEach((d) => {
+    creativityContentHtml +=
+      '<a href="' +
+      d.link +
+      '"><strong>' +
+      d.name +
+      "</strong></a><br>" +
+      d.description +
+      "<br>";
+  });
+  $(prefix + "creativityContent").html(creativityContentHtml);
+  $(prefix + "creativityMore")
+    .text("Selengkapnya")
+    .hide();
+
   $(prefix + "skillTitle").text("Kemampuan");
   var skillContentHtml = "";
   state.skill.forEach((d) => {

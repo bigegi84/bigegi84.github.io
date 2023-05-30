@@ -61,4 +61,12 @@ var state = {
     linkedin: "",
     email: "",
   },
+  creativity: [
+    {
+      name: "Chord Player Piano",
+      description:
+        "Aplikasi web untuk memainkan bass dan chord piano melalui shortcut keyboard.",
+      link: "/app/chord-player-piano",
+    },
+  ],
 };

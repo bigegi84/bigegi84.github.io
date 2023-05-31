@@ -1,4 +1,4 @@
-(function () {
+(() => {
   var keys = [
     "A2",
     "Bb2",
@@ -110,7 +110,7 @@
             "easeOutExpo"
           );
         }
-      }, 1000);
+      }, 2000);
     }
   }
   function fade(key) {
@@ -209,30 +209,51 @@
     a: "#chord-C7",
     z: "#key-C3,#key-G3",
     2: "#chord-Db",
+    w: "#chord-Dbm",
+    s: "#chord-Db7",
+    x: "#key-Db3,#key-Ab3",
     3: "#chord-D",
     e: "#chord-Dm",
     c: "#key-D3,#key-A3",
     4: "#chord-Eb",
+    r: "#chord-Ebm",
+    f: "#chord-Eb7",
+    v: "#key-Eb3,#key-Bb3",
     5: "#chord-E",
     t: "#chord-Em",
+    g: "#chord-E7",
     b: "#key-E3,#key-B3",
     6: "#chord-F",
     y: "#chord-Fm",
+    h: "#chord-F7",
     n: "#key-F3,#key-C4",
     7: "#chord-Gb",
+    u: "#chord-Gbm",
+    j: "#chord-Gb7",
+    m: "#key-Gb3,#key-Db4",
     8: "#chord-G",
     i: "#chord-Gm",
+    k: "#chord-G7",
     ",": "#key-G3,#key-D4",
     9: "#chord-Ab",
+    o: "#chord-Abm",
+    l: "#chord-Ab7",
+    ".": "#key-Ab3,#key-Eb4",
     0: "#chord-A",
     p: "#chord-Am",
+    ";": "#chord-A7",
     "/": "#key-A2,#key-E3",
     "-": "#chord-Bb",
+    "[": "#chord-Bbm",
+    "'": "#chord-Bb7",
+    ArrowLeft: "#key-Bb2,#key-F3",
     "=": "#chord-B",
     "]": "#chord-Bm",
-    ArrowUp: "#key-B2,#key-Gb3",
+    "\\": "#chord-B7",
+    "`": "#key-B2,#key-Gb3",
   };
   function keyPress(key = "", press = true) {
+    //   console.log(key);
     if (keymap[key]) {
       if (press) {
         const index = keyPressed.indexOf(keymap[key]);
@@ -244,7 +265,7 @@
           keyPressed.splice(index, 1);
         }
       }
-      $(".chord-info").text(keyPressed.sort().join(" "));
+      $(".chord-info").html("<strong>Pressed : </strong>" + keyPressed.sort().join(" "));
       if (press) $(keymap[key]).mousedown();
       else $(keymap[key]).mouseup();
     }

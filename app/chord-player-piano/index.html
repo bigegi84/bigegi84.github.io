@@ -1,94 +1,308 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
+    <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="../../template/story/assets/css/noscript.css"
+    /></noscript>
+    <link rel="stylesheet" href="piano.css" />
 
-<head>
-  <title></title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
-  <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
-  <noscript>
-    <link rel="stylesheet" href="../../template/story/assets/css/noscript.css" /></noscript>
-  <link rel="stylesheet" href="piano.css" />
+    <!-- <script src="vendor/jquery-1.7.2.min.js"></script> -->
 
-  <!-- <script src="vendor/jquery-1.7.2.min.js"></script> -->
+    <title>bigegi84-Chord Player Piano</title>
+  </head>
 
-  <title>bigegi84-Chord Player Piano</title>
-</head>
-
-<body class="is-preload">
-  <!-- Wrapper -->
-  <div id="wrapper" class="divided">
-    <!-- One -->
-    <section
-      class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
-      <div class="content">
-        <h2>bigegi84 - Chord Player Piano</h2>
-        <div class="major">
-          <audio id="sound-A2" src="sound/acoustic/A2.mp3" preload="auto"></audio>
-          <audio id="sound-Bb2" src="sound/acoustic/Bb2.mp3" preload="auto"></audio>
-          <audio id="sound-B2" src="sound/acoustic/B2.mp3" preload="auto"></audio>
-          <audio id="sound-Ab3" src="sound/acoustic/Ab3.mp3" preload="auto"></audio>
-          <audio id="sound-A3" src="sound/acoustic/A3.mp3" preload="auto"></audio>
-          <audio id="sound-Bb3" src="sound/acoustic/Bb3.mp3" preload="auto"></audio>
-          <audio id="sound-B3" src="sound/acoustic/B3.mp3" preload="auto"></audio>
-          <audio id="sound-C3" src="sound/acoustic/C3.mp3" preload="auto"></audio>
-          <audio id="sound-Db3" src="sound/acoustic/Db3.mp3" preload="auto"></audio>
-          <audio id="sound-D3" src="sound/acoustic/D3.mp3" preload="auto"></audio>
-          <audio id="sound-Eb3" src="sound/acoustic/Eb3.mp3" preload="auto"></audio>
-          <audio id="sound-E3" src="sound/acoustic/E3.mp3" preload="auto"></audio>
-          <audio id="sound-F3" src="sound/acoustic/F3.mp3" preload="auto"></audio>
-          <audio id="sound-Gb3" src="sound/acoustic/Gb3.mp3" preload="auto"></audio>
-          <audio id="sound-G3" src="sound/acoustic/G3.mp3" preload="auto"></audio>
-          <audio id="sound-Ab4" src="sound/acoustic/Ab4.mp3" preload="auto"></audio>
-          <audio id="sound-A4" src="sound/acoustic/A4.mp3" preload="auto"></audio>
-          <audio id="sound-Bb4" src="sound/acoustic/Bb4.mp3" preload="auto"></audio>
-          <audio id="sound-B4" src="sound/acoustic/B4.mp3" preload="auto"></audio>
-          <audio id="sound-C4" src="sound/acoustic/C4.mp3" preload="auto"></audio>
-          <audio id="sound-Db4" src="sound/acoustic/Db4.mp3" preload="auto"></audio>
-          <audio id="sound-D4" src="sound/acoustic/D4.mp3" preload="auto"></audio>
-          <audio id="sound-Eb4" src="sound/acoustic/Eb4.mp3" preload="auto"></audio>
-          <audio id="sound-E4" src="sound/acoustic/E4.mp3" preload="auto"></audio>
-          <audio id="sound-F4" src="sound/acoustic/F4.mp3" preload="auto"></audio>
-          <audio id="sound-Gb4" src="sound/acoustic/Gb4.mp3" preload="auto"></audio>
-          <audio id="sound-G4" src="sound/acoustic/G4.mp3" preload="auto"></audio>
-          <audio id="sound-C5" src="sound/acoustic/C5.mp3" preload="auto"></audio>
-          <audio id="sound-Db5" src="sound/acoustic/Db5.mp3" preload="auto"></audio>
-          <audio id="sound-D5" src="sound/acoustic/D5.mp3" preload="auto"></audio>
-          <audio id="sound-Eb5" src="sound/acoustic/Eb5.mp3" preload="auto"></audio>
-          <audio id="sound-E5" src="sound/acoustic/E5.mp3" preload="auto"></audio>
-          <audio id="sound-F5" src="sound/acoustic/F5.mp3" preload="auto"></audio>
-          <audio id="sound-Gb5" src="sound/acoustic/Gb5.mp3" preload="auto"></audio>
-          <audio id="sound-G5" src="sound/acoustic/G5.mp3" preload="auto"></audio>
-          <audio id="sound-Ab5" src="sound/acoustic/Ab5.mp3" preload="auto"></audio>
-          <audio id="sound-A5" src="sound/acoustic/A5.mp3" preload="auto"></audio>
-          <audio id="sound-Bb5" src="sound/acoustic/Bb5.mp3" preload="auto"></audio>
-          <audio id="sound-B5" src="sound/acoustic/B5.mp3" preload="auto"></audio>
-          <audio id="sound-C6" src="sound/acoustic/C6.mp3" preload="auto"></audio>
-          <audio id="sound-Db6" src="sound/acoustic/Db6.mp3" preload="auto"></audio>
-          <audio id="sound-D6" src="sound/acoustic/D6.mp3" preload="auto"></audio>
-          <audio id="sound-Eb6" src="sound/acoustic/Eb6.mp3" preload="auto"></audio>
-          <audio id="sound-E6" src="sound/acoustic/E6.mp3" preload="auto"></audio>
-          <audio id="sound-F6" src="sound/acoustic/F6.mp3" preload="auto"></audio>
-          <audio id="sound-Gb6" src="sound/acoustic/Gb6.mp3" preload="auto"></audio>
-          <audio id="sound-G6" src="sound/acoustic/G6.mp3" preload="auto"></audio>
-          <audio id="sound-Ab6" src="sound/acoustic/Ab6.mp3" preload="auto"></audio>
-          <audio id="sound-A6" src="sound/acoustic/A6.mp3" preload="auto"></audio>
-          <audio id="sound-Bb6" src="sound/acoustic/Bb6.mp3" preload="auto"></audio>
-          <audio id="sound-B6" src="sound/acoustic/B6.mp3" preload="auto"></audio>
-          <div>
-            <p class="play-info" style="margin: 0;"><strong>Tipe Bermain:</strong></p>
-            <p class="chord-info" style="margin: 0;"><strong>Ditekan:</strong></p>
-            <div style="
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper" class="divided">
+      <!-- One -->
+      <section
+        class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right"
+      >
+        <div class="content">
+          <h2>bigegi84 - Chord Player Piano</h2>
+          <div class="major">
+            <audio
+              id="sound-A2"
+              src="sound/acoustic/A2.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Bb2"
+              src="sound/acoustic/Bb2.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-B2"
+              src="sound/acoustic/B2.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Ab3"
+              src="sound/acoustic/Ab3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-A3"
+              src="sound/acoustic/A3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Bb3"
+              src="sound/acoustic/Bb3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-B3"
+              src="sound/acoustic/B3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-C3"
+              src="sound/acoustic/C3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Db3"
+              src="sound/acoustic/Db3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-D3"
+              src="sound/acoustic/D3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Eb3"
+              src="sound/acoustic/Eb3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-E3"
+              src="sound/acoustic/E3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-F3"
+              src="sound/acoustic/F3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Gb3"
+              src="sound/acoustic/Gb3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-G3"
+              src="sound/acoustic/G3.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Ab4"
+              src="sound/acoustic/Ab4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-A4"
+              src="sound/acoustic/A4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Bb4"
+              src="sound/acoustic/Bb4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-B4"
+              src="sound/acoustic/B4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-C4"
+              src="sound/acoustic/C4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Db4"
+              src="sound/acoustic/Db4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-D4"
+              src="sound/acoustic/D4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Eb4"
+              src="sound/acoustic/Eb4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-E4"
+              src="sound/acoustic/E4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-F4"
+              src="sound/acoustic/F4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Gb4"
+              src="sound/acoustic/Gb4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-G4"
+              src="sound/acoustic/G4.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-C5"
+              src="sound/acoustic/C5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Db5"
+              src="sound/acoustic/Db5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-D5"
+              src="sound/acoustic/D5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Eb5"
+              src="sound/acoustic/Eb5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-E5"
+              src="sound/acoustic/E5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-F5"
+              src="sound/acoustic/F5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Gb5"
+              src="sound/acoustic/Gb5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-G5"
+              src="sound/acoustic/G5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Ab5"
+              src="sound/acoustic/Ab5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-A5"
+              src="sound/acoustic/A5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Bb5"
+              src="sound/acoustic/Bb5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-B5"
+              src="sound/acoustic/B5.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-C6"
+              src="sound/acoustic/C6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Db6"
+              src="sound/acoustic/Db6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-D6"
+              src="sound/acoustic/D6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Eb6"
+              src="sound/acoustic/Eb6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-E6"
+              src="sound/acoustic/E6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-F6"
+              src="sound/acoustic/F6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Gb6"
+              src="sound/acoustic/Gb6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-G6"
+              src="sound/acoustic/G6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Ab6"
+              src="sound/acoustic/Ab6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-A6"
+              src="sound/acoustic/A6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-Bb6"
+              src="sound/acoustic/Bb6.mp3"
+              preload="auto"
+            ></audio>
+            <audio
+              id="sound-B6"
+              src="sound/acoustic/B6.mp3"
+              preload="auto"
+            ></audio>
+            <div>
+              <p class="play-info" style="margin: 0">
+                <strong>Tipe Bermain:</strong>
+              </p>
+              <p class="chord-info" style="margin: 0">
+                <strong>Ditekan:</strong>
+              </p>
+              <div
+                style="
                   display: flex;
                   flex-direction: row;
                   justify-content: center;
-                ">
-              <div style="display: flex; flex-direction: column">
-                <div id="chord-C" class="chord piano-C4 piano-E4 piano-G4">
-                  C
-                </div>
-                <div id="chord-Cmaj7" class="chord piano-C4 piano-E4 piano-G4 piano-B4">
+                "
+              >
+                <div style="display: flex; flex-direction: column">
+                  <div id="chord-C" class="chord">C</div>
+                  <!-- <div id="chord-Cmaj7" class="chord piano-C4 piano-E4 piano-G4 piano-B4">
                   Cmaj7
                 </div>
                 <div id="chord-C7" class="chord piano-C4 piano-E4 piano-G4 piano-Bb4">
@@ -96,56 +310,53 @@
                 </div>
                 <div class="chord piano-C4 piano-E4 piano-G4 piano-Bb4 piano-Db4">
                   C7b9
-                </div>
-                <div id="chord-Cm" class="chord piano-C4 piano-Eb4 piano-G4">
-                  Cm
-                </div>
-                <div id="chord-Cm7" class="chord piano-C4 piano-Eb4 piano-G4 piano-Bb4">
+                </div> -->
+                  <div id="chord-Cm" class="chord">Cm</div>
+                  <!-- <div id="chord-Cm7" class="chord piano-C4 piano-Eb4 piano-G4 piano-Bb4">
                   Cm7
+                </div> -->
                 </div>
-              </div>
+                <div style="display: flex; flex-direction: column">
+                  <div id="chord-Db" class="chord">Db</div>
+                  <!-- <div class="chord piano-Db4 piano-F4 piano-Ab4 piano-Bb4">
+                    Db6
+                  </div>
+                  <div class="chord piano-Db4 piano-F4 piano-Ab4 piano-C5">
+                    Dbmaj7
+                  </div>
+                  <div
+                    id="chord-Db7"
+                    class="chord piano-Db4 piano-F4 piano-Ab4 piano-B4"
+                  >
+                    Db7
+                  </div> -->
+                  <div id="chord-Dbm" class="chord">Dbm</div>
+                  <!--<div class="chord piano-Db4 piano-E4 piano-Ab4 piano-B4">
+                    Dbm7
+                  </div> -->
+                </div>
+
+                <div style="display: flex; flex-direction: column">
+                  <div id="chord-D" class="chord">D</div>
+                  <!-- <div class="chord piano-D4 piano-Gb4 piano-A4 piano-Db4">
+                    Dmaj7
+                  </div>
+                  <div class="chord piano-D4 piano-Gb4 piano-A4 piano-C4">
+                    D7
+                  </div>
+                  <div id="chord-Dm" class="chord piano-D4 piano-F4 piano-A4">
+                    Dm
+                  </div>
+                  <div class="chord piano-D4 piano-F4 piano-A4 piano-C5">
+                    Dm7
+                  </div> -->
+                </div>
+                
               <div style="display: flex; flex-direction: column">
-                <div id="chord-Db" class="chord piano-Db4 piano-F4 piano-Ab4">
-                  Db
-                </div>
-                <div class="chord piano-Db4 piano-F4 piano-Ab4 piano-Bb4">
-                  Db6
-                </div>
-                <div class="chord piano-Db4 piano-F4 piano-Ab4 piano-C5">
-                  Dbmaj7
-                </div>
-                <div id="chord-Db7" class="chord piano-Db4 piano-F4 piano-Ab4 piano-B4">
-                  Db7
-                </div>
-                <div id="chord-Dbm" class="chord piano-Db4 piano-E4 piano-Ab4">
-                  Dbm
-                </div>
-                <div class="chord piano-Db4 piano-E4 piano-Ab4 piano-B4">
-                  Dbm7
-                </div>
-              </div>
-              <div style="display: flex; flex-direction: column">
-                <div id="chord-D" class="chord piano-D4 piano-Gb4 piano-A4">
-                  D
-                </div>
-                <div class="chord piano-D4 piano-Gb4 piano-A4 piano-Db4">
-                  Dmaj7
-                </div>
-                <div class="chord piano-D4 piano-Gb4 piano-A4 piano-C4">
-                  D7
-                </div>
-                <div id="chord-Dm" class="chord piano-D4 piano-F4 piano-A4">
-                  Dm
-                </div>
-                <div class="chord piano-D4 piano-F4 piano-A4 piano-C5">
-                  Dm7
-                </div>
-              </div>
-              <div style="display: flex; flex-direction: column">
-                <div id="chord-Eb" class="chord piano-Eb4 piano-G4 piano-Bb4">
+                <div id="chord-Eb" class="chord">
                   Eb
                 </div>
-                <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-C5">
+                <!-- <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-C5">
                   Eb6
                 </div>
                 <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-D5">
@@ -156,14 +367,14 @@
                 </div>
                 <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-Db5 piano-E5">
                   Eb7b9
-                </div>
-                <div id="chord-Ebm" class="chord piano-Eb4 piano-Gb4 piano-Bb4">
+                </div> -->
+                <div id="chord-Ebm" class="chord">
                   Ebm
                 </div>
-                <div class="chord piano-Eb4 piano-Gb4 piano-Bb4 piano-Db5">
+                <!-- <div class="chord piano-Eb4 piano-Gb4 piano-Bb4 piano-Db5">
                   Ebm7
-                </div>
-              </div>
+                </div> -->
+              </div><!--
               <div style="display: flex; flex-direction: column">
                 <div id="chord-E" class="chord piano-E4 piano-Ab4 piano-B4">
                   E
@@ -305,86 +516,115 @@
                 <div class="chord piano-B3 piano-D4 piano-Gb4 piano-A4">
                   Bm7
                 </div>
+              </div> -->
               </div>
             </div>
-          </div>
-          <div class="piano">
-            <noscript class="piano-javascript">This program requires Javascript and HTML5 Audio
-              support.</noscript>
-            <div class="piano-container">
-              <div class="piano-keys">
-                <div id="key-A2" class="piano-white animate piano-A2">
-                  <p class="note-info-white">A2</p>
-                </div>
-                <div class="piano-black">
-                  <div id="key-Bb2" class="piano-black-raised animate piano-Bb2">
-                    <p class="note-info-black">Bb2</p>
+            <div class="piano">
+              <noscript class="piano-javascript"
+                >This program requires Javascript and HTML5 Audio
+                support.</noscript
+              >
+              <div class="piano-container">
+                <div class="piano-keys">
+                  <div id="key-A2" class="piano-white animate piano-A2">
+                    <p class="note-info-white">A2</p>
                   </div>
-                </div>
-                <div id="key-B2" class="piano-white animate piano-B2">
-                  <p class="note-info-white">B2</p>
-                </div>
-                <div id="key-C3" class="piano-white animate piano-C3">
-                  <p class="note-info-white">C3</p>
-                </div>
-                <div class="piano-black">
-                  <div id="key-Db3" class="piano-black-raised animate piano-Db3"></div>
-                </div>
-                <div id="key-D3" class="piano-white animate piano-D3"></div>
-                <div class="piano-black">
-                  <div id="key-Eb3" class="piano-black-raised animate piano-Eb3"></div>
-                </div>
-                <div id="key-E3" class="piano-white animate piano-E3"></div>
-                <div id="key-F3" class="piano-white animate piano-F3"></div>
-                <div class="piano-black">
-                  <div id="key-Gb3" class="piano-black-raised animate piano-Gb3"></div>
-                </div>
-                <div id="key-G3" class="piano-white animate piano-G3"></div>
-                <div class="piano-black">
-                  <div id="key-Ab3" class="piano-black-raised animate piano-Ab3"></div>
-                </div>
-                <div id="key-A3" class="piano-white animate piano-A3"></div>
-                <div class="piano-black">
-                  <div id="key-Bb3" class="piano-black-raised animate piano-Bb3"></div>
-                </div>
-                <div id="key-B3" class="piano-white animate piano-B3"></div>
-                <div id="key-C4" class="piano-white animate piano-C4"></div>
-                <div class="piano-black">
-                  <div id="key-Db4" class="piano-black-raised animate piano-Db4"></div>
-                </div>
-                <div id="key-D4" class="piano-white animate piano-D4"></div>
-                <div class="piano-black">
-                  <div id="key-Eb4" class="piano-black-raised animate piano-Eb4"></div>
-                </div>
-                <div id="key-E4" class="piano-white animate piano-E4"></div>
-                <div id="key-F4" class="piano-white animate piano-F4"></div>
-                <div class="piano-black">
-                  <div id="key-Gb4" class="piano-black-raised animate piano-Gb4"></div>
-                </div>
-                <div class="piano-white animate piano-G4"></div>
-                <div class="piano-black">
-                  <div class="piano-black-raised animate piano-Ab4"></div>
-                </div>
-                <div class="piano-white animate piano-A4"></div>
-                <div class="piano-black">
-                  <div class="piano-black-raised animate piano-Bb4"></div>
-                </div>
-                <div class="piano-white animate piano-B4"></div>
-                <div class="piano-white animate piano-C5"></div>
-                <div class="piano-black">
-                  <div class="piano-black-raised animate piano-Db5"></div>
-                </div>
-                <div class="piano-white animate piano-D5"></div>
-                <div class="piano-black">
-                  <div class="piano-black-raised animate piano-Eb5"></div>
-                </div>
-                <div class="piano-white animate piano-E5"></div>
-                <div class="piano-white animate piano-F5"></div>
-                <div class="piano-black">
-                  <div class="piano-black-raised animate piano-Gb5"></div>
-                </div>
-                <div id="key-G5" class="piano-white animate piano-G5"></div>
-                <!-- <div class="piano-black">
+                  <div class="piano-black">
+                    <div
+                      id="key-Bb2"
+                      class="piano-black-raised animate piano-Bb2"
+                    >
+                      <p class="note-info-black">Bb2</p>
+                    </div>
+                  </div>
+                  <div id="key-B2" class="piano-white animate piano-B2">
+                    <p class="note-info-white">B2</p>
+                  </div>
+                  <div id="key-C3" class="piano-white animate piano-C3">
+                    <p class="note-info-white">C3</p>
+                  </div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Db3"
+                      class="piano-black-raised animate piano-Db3"
+                    ></div>
+                  </div>
+                  <div id="key-D3" class="piano-white animate piano-D3"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Eb3"
+                      class="piano-black-raised animate piano-Eb3"
+                    ></div>
+                  </div>
+                  <div id="key-E3" class="piano-white animate piano-E3"></div>
+                  <div id="key-F3" class="piano-white animate piano-F3"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Gb3"
+                      class="piano-black-raised animate piano-Gb3"
+                    ></div>
+                  </div>
+                  <div id="key-G3" class="piano-white animate piano-G3"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Ab3"
+                      class="piano-black-raised animate piano-Ab3"
+                    ></div>
+                  </div>
+                  <div id="key-A3" class="piano-white animate piano-A3"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Bb3"
+                      class="piano-black-raised animate piano-Bb3"
+                    ></div>
+                  </div>
+                  <div id="key-B3" class="piano-white animate piano-B3"></div>
+                  <div id="key-C4" class="piano-white animate piano-C4"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Db4"
+                      class="piano-black-raised animate piano-Db4"
+                    ></div>
+                  </div>
+                  <div id="key-D4" class="piano-white animate piano-D4"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Eb4"
+                      class="piano-black-raised animate piano-Eb4"
+                    ></div>
+                  </div>
+                  <div id="key-E4" class="piano-white animate piano-E4"></div>
+                  <div id="key-F4" class="piano-white animate piano-F4"></div>
+                  <div class="piano-black">
+                    <div
+                      id="key-Gb4"
+                      class="piano-black-raised animate piano-Gb4"
+                    ></div>
+                  </div>
+                  <div class="piano-white animate piano-G4"></div>
+                  <div class="piano-black">
+                    <div class="piano-black-raised animate piano-Ab4"></div>
+                  </div>
+                  <div class="piano-white animate piano-A4"></div>
+                  <div class="piano-black">
+                    <div class="piano-black-raised animate piano-Bb4"></div>
+                  </div>
+                  <div class="piano-white animate piano-B4"></div>
+                  <div class="piano-white animate piano-C5"></div>
+                  <div class="piano-black">
+                    <div class="piano-black-raised animate piano-Db5"></div>
+                  </div>
+                  <div class="piano-white animate piano-D5"></div>
+                  <div class="piano-black">
+                    <div class="piano-black-raised animate piano-Eb5"></div>
+                  </div>
+                  <div class="piano-white animate piano-E5"></div>
+                  <div class="piano-white animate piano-F5"></div>
+                  <div class="piano-black">
+                    <div class="piano-black-raised animate piano-Gb5"></div>
+                  </div>
+                  <div id="key-G5" class="piano-white animate piano-G5"></div>
+                  <!-- <div class="piano-black">
                     <div class="piano-black-raised animate piano-Ab5"></div>
                   </div>
                   <div class="piano-white animate piano-A5"></div>
@@ -414,85 +654,94 @@
                     <div class="piano-black-raised animate piano-Bb6"></div>
                   </div>
                   <div class="piano-white animate piano-B6"></div> -->
+                </div>
+                <!-- <div class="piano-pedal">Just listen to that sustain!</div> -->
               </div>
-              <!-- <div class="piano-pedal">Just listen to that sustain!</div> -->
             </div>
           </div>
-        </div>
-        <br />
-        <!-- <ul class="actions stacked">
+          <br />
+          <!-- <ul class="actions stacked">
             <li>
               <a href="#first" class="button big wide smooth-scroll-middle"
                 >Get Started</a
               >
             </li>
           </ul> -->
-      </div>
-      <div class="image">
-        <img src="../../template/story/images/banner.jpg" alt="" />
-      </div>
-    </section>
+        </div>
+        <div class="image">
+          <img src="../../template/story/images/banner.jpg" alt="" />
+        </div>
+      </section>
 
-    <!-- Footer -->
-    <footer class="wrapper style1 align-center">
-      <div class="inner">
-        <ul class="icons">
-          <li>
-            <a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
-          </li>
-          <li>
-            <a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
-          </li>
-          <li>
-            <a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
-          </li>
-          <li>
-            <a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a>
-          </li>
-          <li>
-            <a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a>
-          </li>
-        </ul>
-        <p class="bigegi84-copyright"></p>
-      </div>
-    </footer>
-  </div>
+      <!-- Footer -->
+      <footer class="wrapper style1 align-center">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a href="#" class="icon brands style2 fa-twitter"
+                ><span class="label">Twitter</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-facebook-f"
+                ><span class="label">Facebook</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-instagram"
+                ><span class="label">Instagram</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-linkedin-in"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon style2 fa-envelope"
+                ><span class="label">Email</span></a
+              >
+            </li>
+          </ul>
+          <p class="bigegi84-copyright"></p>
+        </div>
+      </footer>
+    </div>
 
-  <!-- Scripts -->
-  <!-- <script src="../../template/story/assets/js/jquery.min.js"></script> -->
-  <script src="vendor/jquery-1.7.2.min.js"></script>
-  <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
-  <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
-  <script src="vendor/jquery-ui-1.8.20.custom.min.js"></script>
-  <script src="../../template/story/assets/js/browser.min.js"></script>
-  <script src="../../template/story/assets/js/breakpoints.min.js"></script>
-  <script src="../../template/story/assets/js/util.js"></script>
-  <script src="../../template/story/assets/js/main.js"></script>
-  <!-- logic -->
-  <script src="../../state.js"></script>
-  <script>
-    $(document).ready(() => {
-      var prefix = ".bigegi84-";
-      document.title = "bigegi84 - Chord Player Piano";
-      $(prefix + "icon").attr("href", "../../gold.ico");
+    <!-- Scripts -->
+    <!-- <script src="../../template/story/assets/js/jquery.min.js"></script> -->
+    <script src="vendor/jquery-1.7.2.min.js"></script>
+    <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
+    <script src="vendor/jquery-ui-1.8.20.custom.min.js"></script>
+    <script src="../../template/story/assets/js/browser.min.js"></script>
+    <script src="../../template/story/assets/js/breakpoints.min.js"></script>
+    <script src="../../template/story/assets/js/util.js"></script>
+    <script src="../../template/story/assets/js/main.js"></script>
+    <!-- logic -->
+    <script src="../../state.js"></script>
+    <script>
+      $(document).ready(() => {
+        var prefix = ".bigegi84-";
+        document.title = "bigegi84 - Chord Player Piano";
+        $(prefix + "icon").attr("href", "../../gold.ico");
 
-      // $(prefix + "skillTitle").text("404");
-      // var skillContentHtml = "";
-      // skillContentHtml +=
-      //   "<strong>Halaman yang anda cari tidak ditemukan.</strong>";
-      // $(prefix + "skillContent").html(skillContentHtml);
+        // $(prefix + "skillTitle").text("404");
+        // var skillContentHtml = "";
+        // skillContentHtml +=
+        //   "<strong>Halaman yang anda cari tidak ditemukan.</strong>";
+        // $(prefix + "skillContent").html(skillContentHtml);
 
-      $(prefix + "copyright").html(
-        "&copy; " +
-        state.fullName +
-        ", " +
-        state.degree["id"] +
-        " " +
-        new Date().getFullYear()
-      );
-    });
-  </script>
-  <script src="piano.js"></script>
-</body>
-
+        $(prefix + "copyright").html(
+          "&copy; " +
+            state.fullName +
+            ", " +
+            state.degree["id"] +
+            " " +
+            new Date().getFullYear()
+        );
+      });
+    </script>
+    <script src="piano.js"></script>
+  </body>
 </html>

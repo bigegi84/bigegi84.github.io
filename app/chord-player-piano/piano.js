@@ -209,6 +209,40 @@
   });
   var playType = { name: "2 bass dan akor", code: "twoBassAndChord" };
   var keyPressed = [];
+  var formula = {
+    C: ".piano-C4,.piano-E4,.piano-G4",
+    Cm: ".piano-C4,.piano-Eb4,.piano-G4",
+    C2Bass: ".piano-C3,.piano-G3",
+    Db: ".piano-Db4,.piano-F4,.piano-Ab4",
+    Dbm: ".piano-Db4,.piano-E4,.piano-Ab4",
+    Db2Bass: ".piano-Db3,.piano-Ab3",
+    D: ".piano-D4,.piano-Gb4,.piano-A4",
+    Dm: ".piano-D4,.piano-F4,.piano-A4",
+    D2Bass: ".piano-D3,.piano-A3",
+    Eb: ".piano-Eb4,.piano-G4,.piano-Bb4",
+    Ebm: ".piano-Eb4,.piano-Gb4,.piano-Bb4",
+    Eb2Bass: ".piano-Eb3,.piano-Bb3"
+  };
+  var playMap = {
+    twoBassAndChord: {
+      C: [formula["C"], formula["C2Bass"]].join(","),
+      Cm: [formula["Cm"], formula["C2Bass"]].join(","),
+      Db: [formula["Db"], formula["Db2Bass"]].join(","),
+      Dbm: [formula["Dbm"], formula["Db2Bass"]].join(","),
+      D: [formula["D"], formula["D2Bass"]].join(","),
+      Dm: [formula["Dm"], formula["D2Bass"]].join(","),
+      Eb: [formula["Eb"], formula["Eb2Bass"]].join(","),
+      Ebm: [formula["Ebm"], formula["Eb2Bass"]].join(","),
+    },
+  };
+  $(".chord").mousedown((e) => {
+    console.log(e.target.id);
+    $(playMap[playType.code][e.target.id.replace("chord-", "")]).mousedown();
+  });
+  $(".chord").mousedown((e) => {
+    console.log(e.target.id);
+    $(playMap[playType.code][e.target.id.replace("chord-", "")]).mouseup();
+  });
   var keymap = {
     normal: {
       1: "#chord-C",
@@ -262,13 +296,13 @@
       "`": "#key-B2,#key-Gb3",
     },
     twoBassAndChord: {
-      1: "#chord-C,#key-C3,#key-G3",
+      1:playMap.twoBassAndChord.C,
       "!": "#chord-Cmaj7",
       q: "#chord-Cm,#key-C3,#key-G3",
       Q: "#chord-Cm7,#key-C3,#key-G3",
       a: "#chord-C7,#key-C3,#key-G3",
       z: "#key-C3,#key-G3",
-      2: "#chord-Db,#key-Db3,#key-Ab3",
+      2: playMap.twoBassAndChord.Db,
       w: "#chord-Dbm,#key-Db3,#key-Ab3",
       s: "#chord-Db7,#key-Db3,#key-Ab3",
       x: "#key-Db3,#key-Ab3",

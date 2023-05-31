@@ -1,4 +1,4 @@
-const New = mobxReact.observer(() => {
+const New = mobxReact.observer((props) => {
   return (
     <div>
       <div className="container position-sticky z-index-sticky top-0">
@@ -107,7 +107,7 @@ const New = mobxReact.observer(() => {
                   <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                       <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">
-                        Sign in
+                        Isi Informasi Dasar
                       </h4>
                       <div className="row mt-3">
                         <div className="col-2 text-center ms-auto">
@@ -131,10 +131,7 @@ const New = mobxReact.observer(() => {
                   <div className="card-body">
                     <form role="form" className="text-start">
                       <div className="input-group input-group-outline my-3">
-                        <p>gg{store.fullName}</p>
-                        <label className="form-label">
-                          Nama Lengkap {store.familyName}
-                        </label>
+                        <label className="form-label">Nama Lengkap</label>
                         <input
                           value={store.fullName}
                           onChange={(e) => (store.fullName = e.target.value)}
@@ -155,6 +152,9 @@ const New = mobxReact.observer(() => {
                         <button
                           type="button"
                           className="btn bg-gradient-primary w-100 my-4 mb-2"
+                          onClick={() => {
+                            props.history.push("/dashboard");
+                          }}
                         >
                           Konfirmasi
                         </button>

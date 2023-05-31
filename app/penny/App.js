@@ -20,6 +20,7 @@ const App = () => (
 
     <Route path="/" exact component={Home} />
     <Route path="/new" component={New} />
+    <Route path="/dashboard" component={Dashboard} />
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
   </ReactRouterDOM.HashRouter>

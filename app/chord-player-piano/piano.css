@@ -102,7 +102,9 @@ audio {
 
 .chord {
   width: 50px;
-  height: 24px;
+  font-size: small;
+  font-weight: bold;
+  height: 44px;
   background-color: white;
   z-index: 1;
 }

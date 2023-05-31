@@ -1,4 +1,4 @@
-const New = () => {
+const New = mobxReact.observer(() => {
   return (
     <div>
       <div className="container position-sticky z-index-sticky top-0">
@@ -131,12 +131,25 @@ const New = () => {
                   <div className="card-body">
                     <form role="form" className="text-start">
                       <div className="input-group input-group-outline my-3">
-                        <label className="form-label">Nama Lengkap</label>
-                        <input type="text" className="form-control" />
+                        <p>gg{store.fullName}</p>
+                        <label className="form-label">
+                          Nama Lengkap {store.familyName}
+                        </label>
+                        <input
+                          value={store.fullName}
+                          onChange={(e) => (store.fullName = e.target.value)}
+                          type="text"
+                          className="form-control"
+                        />
                       </div>
                       <div className="input-group input-group-outline my-3">
                         <label className="form-label">Nama Keluarga</label>
-                        <input type="text" className="form-control" />
+                        <input
+                          defaultValue={store.familyName}
+                          onChange={(e) => (store.familyName = e.target.value)}
+                          type="text"
+                          className="form-control"
+                        />
                       </div>
                       <div className="text-center">
                         <button
@@ -173,4 +186,4 @@ const New = () => {
       </main>
     </div>
   );
-};
+});

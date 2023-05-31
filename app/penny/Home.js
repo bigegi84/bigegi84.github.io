@@ -1,5 +1,4 @@
 const Home = (props) => {
-  console.log(props);
   return (
     <div>
       <div className="container position-sticky z-index-sticky top-0">

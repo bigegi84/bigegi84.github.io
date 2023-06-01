@@ -424,7 +424,7 @@
   };
   chordWithHint();
   $(".play-info").html("<strong>Tipe Bermain:</strong> " + playType.name);
-  function keyPress(key = "", press = true) {
+  var keyPress = (key = "", press = true) => {
     console.log(key);
     var str = keymap[playType.code][key];
     if (str) {
@@ -441,39 +441,12 @@
         $(str).mouseup();
       }
     }
-  }
-  $(document).keydown(function (event) {
-    // if (event.which === pedal) {
-    //   sustaining = true;
-    //   $(pianoClass("pedal")).addClass("piano-sustain");
-    // }
+  };
+  $(document).keydown((event) => {
     keyPress(event.key, true);
   });
 
-  $(document).keyup(function (event) {
+  $(document).keyup((event) => {
     keyPress(event.key, false);
-    // if (event.which === pedal) {
-    //   sustaining = false;
-    //   $(pianoClass("pedal")).removeClass("piano-sustain");
-    //   Object.keys(depressed).forEach(function (key) {
-    //     if (!depressed[key]) {
-    //       if (fadeout) {
-    //         fade(key)();
-    //       } else {
-    //         kill(key)();
-    //       }
-    //     }
-    //   });
-    // }
-    if (keyup(event.which)) {
-      depressed[keyup(event.which)] = false;
-      if (!sustaining) {
-        if (fadeout) {
-          fade(keyup(event.which))();
-        } else {
-          kill(keyup(event.which))();
-        }
-      }
-    }
   });
 })();

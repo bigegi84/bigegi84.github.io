@@ -109,3 +109,27 @@ audio {
   background-color: white;
   z-index: 1;
 }
+
+.chord-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.chord-group {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .chord-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .chord-group {
+    display: flex;
+    flex-direction: row;
+  }
+}

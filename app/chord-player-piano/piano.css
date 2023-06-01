@@ -25,6 +25,7 @@ audio {
 }
 
 .piano-keys {
+  width: 102%;
   word-spacing: 0;
   letter-spacing: 0;
   font-size: 0;

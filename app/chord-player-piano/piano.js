@@ -204,7 +204,7 @@
     }
   });
   var playType = {
-    name: "(Kiri) 2 Bass - (Kanan) Akor",
+    name: "(Kiri) 2 Bas - (Kanan) Akor",
     code: "twoBassAndChord",
   };
   var keyPressed = [];

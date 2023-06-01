@@ -1,4 +1,13 @@
 (() => {
+  var debug = true;
+  var animateMs = 1500;
+  var fadeout = true;
+  var sustaining = true;
+  var pedal = 32;
+  var tonic = "A2";
+  var intervals = {};
+  var depressed = {};
+
   var keys = [
     "A2",
     "Bb2",
@@ -44,10 +53,6 @@
     90, 83, 88, 67, 70, 86, 71, 66, 78, 74, 77, 75, 81, 50, 87, 69, 52, 82, 53,
     84, 89, 55, 85, 56, 73, 57, 79, 80,
   ];
-  var pedal = 32;
-  var tonic = "A2";
-  var intervals = {};
-  var depressed = {};
   function pianoClass(name) {
     return ".piano-" + name;
   }
@@ -169,17 +174,6 @@
       }
     };
   }
-
-  /* Simulate a gentle release, as opposed to hard stop. */
-
-  var fadeout = true;
-
-  /* Sustain pedal, toggled by user. */
-
-  var sustaining = true;
-
-  /* Register mouse event callbacks. */
-
   keys.forEach((key) => {
     $(pianoClass(key)).mousedown(function () {
       // console.log(key);
@@ -207,7 +201,7 @@
       });
     }
   });
-  var playType = { name: "2 bass dan akor", code: "twoBassAndChord" };
+  var playType = { name: "(Kiri) 2 Bass - (Kanan) Akor", code: "twoBassAndChord" };
   var keyPressed = [];
   var formula = {
     C: ".piano-C4,.piano-E4,.piano-G4",
@@ -275,13 +269,42 @@
       Bm: [formula["Bm"], formula["B2Bass"]].join(","),
     },
   };
+  var chordAnimate = (id) => {
+    $("#" + id).animate(
+      {
+        backgroundColor: "#88FFAA",
+      },
+      0
+    );
+    if (sustaining) {
+      setTimeout(() => {
+        $("#" + id).animate(
+          {
+            backgroundColor: "white",
+          },
+          300,
+          "easeOutExpo"
+        );
+      }, animateMs);
+    }
+  };
+  var chordInfo = (str) => {
+    $(".chord-info").html(
+      "<strong>Ditekan : </strong>" + str.replaceAll(".piano-", "")
+    );
+  };
   $(".chord").mousedown((e) => {
-    console.log(e.target.id);
-    $(playMap[playType.code][e.target.id.replace("chord-", "")]).mousedown();
+    var str = playMap[playType.code][e.target.id.replace("chord-", "")];
+    console.log(str);
+    $(str).mousedown();
+    chordAnimate(e.target.id);
+    chordInfo(str);
   });
   $(".chord").mousedown((e) => {
-    console.log(e.target.id);
-    $(playMap[playType.code][e.target.id.replace("chord-", "")]).mouseup();
+    var str = playMap[playType.code][e.target.id.replace("chord-", "")];
+    $(str).mouseup();
+    chordAnimate(e.target.id);
+    chordInfo(str);
   });
   var keymap = {
     normal: {
@@ -346,8 +369,8 @@
       w: playMap.twoBassAndChord.Dbm,
       s: "#chord-Db7,#key-Db3,#key-Ab3",
       x: "#key-Db3,#key-Ab3",
-      3: playMap.twoBassAndChord.Db,
-      e: playMap.twoBassAndChord.Dbm,
+      3: playMap.twoBassAndChord.D,
+      e: playMap.twoBassAndChord.Dm,
       c: "#key-D3,#key-A3",
       4: playMap.twoBassAndChord.Eb,
       r: playMap.twoBassAndChord.Ebm,

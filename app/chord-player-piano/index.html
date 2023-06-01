@@ -550,13 +550,19 @@
             </div>
           </div>
           <br />
-          <!-- <ul class="actions stacked">
+          <p class="major"><strong>Dukungan</strong></p>
+          <ul class="actions stacked">
             <li>
-              <a href="#first" class="button big wide smooth-scroll-middle"
+              <a href="#first" class="bigegi84-saweria button big wide"
                 >Get Started</a
               >
             </li>
-          </ul> -->
+            <li>
+              <a href="#first" class="bigegi84-paypal button big wide"
+                >Get Started</a
+              >
+            </li>
+          </ul>
         </div>
         <div class="image">
           <img src="../../template/story/images/banner.jpg" alt="" />
@@ -568,27 +574,33 @@
         <div class="inner">
           <ul class="icons">
             <li>
-              <a href="#" class="icon brands style2 fa-twitter"
+              <a href="#" class="bigegi84-twitter icon brands style2 fa-twitter"
                 ><span class="label">Twitter</span></a
               >
             </li>
             <li>
-              <a href="#" class="icon brands style2 fa-facebook-f"
+              <a
+                href="#"
+                class="bigegi84-facebook icon brands style2 fa-facebook-f"
                 ><span class="label">Facebook</span></a
               >
             </li>
             <li>
-              <a href="#" class="icon brands style2 fa-instagram"
+              <a
+                href="#"
+                class="bigegi84-instagram icon brands style2 fa-instagram"
                 ><span class="label">Instagram</span></a
               >
             </li>
             <li>
-              <a href="#" class="icon brands style2 fa-linkedin-in"
+              <a
+                href="#"
+                class="bigegi84-linkedin icon brands style2 fa-linkedin-in"
                 ><span class="label">LinkedIn</span></a
               >
             </li>
             <li>
-              <a href="#" class="icon style2 fa-envelope"
+              <a href="#" class="bigegi84-email icon style2 fa-envelope"
                 ><span class="label">Email</span></a
               >
             </li>
@@ -610,8 +622,10 @@
     <script src="../../template/story/assets/js/main.js"></script>
     <!-- logic -->
     <script src="../../state.js"></script>
+    <script src="../../helper.js"></script>
     <script>
       $(document).ready(() => {
+        helper.socialLink();
         var prefix = ".bigegi84-";
         document.title = "bigegi84 - Chord Player Piano";
         $(prefix + "icon").attr("href", "../../gold.ico");

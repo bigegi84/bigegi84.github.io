@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  helper.socialLink();
   var prefix = ".bigegi84-";
   document.title = state.fullName + ", " + state.degree["id"];
   $(prefix + "icon").attr("href", "gold.ico");

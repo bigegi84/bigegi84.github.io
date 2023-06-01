@@ -55,11 +55,13 @@ var state = {
   },
   waLink: "https://wa.me/+6288975329400",
   link: {
-    twitter: "",
-    facebook: "",
-    instagram: "",
-    linkedin: "",
+    twitter: "https://twitter.com/bigegi84",
+    facebook: "https://www.facebook.com/bigegi84",
+    instagram: "https://www.instagram.com/bigegi84",
+    linkedin: "https://www.linkedin.com/in/gilang-pratama-wiguna-1009a5228",
     email: "",
+    paypal: "paypal.me/bigegi84",
+    saweria: "https://saweria.co/bigegi84",
   },
   creativity: [
     {

@@ -60,7 +60,7 @@ var state = {
     instagram: "https://www.instagram.com/bigegi84",
     linkedin: "https://www.linkedin.com/in/gilang-pratama-wiguna-1009a5228",
     email: "",
-    paypal: "paypal.me/bigegi84",
+    paypal: "https://paypal.me/bigegi84",
     saweria: "https://saweria.co/bigegi84",
   },
   creativity: [

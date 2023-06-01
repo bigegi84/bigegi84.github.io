@@ -201,7 +201,10 @@
       });
     }
   });
-  var playType = { name: "(Kiri) 2 Bass - (Kanan) Akor", code: "twoBassAndChord" };
+  var playType = {
+    name: "(Kiri) 2 Bass - (Kanan) Akor",
+    code: "twoBassAndChord",
+  };
   var keyPressed = [];
   var formula = {
     C: ".piano-C4,.piano-E4,.piano-G4",
@@ -412,13 +415,10 @@
   };
   var chordWithHint = () => {
     for (var key in keymap[playType.code]) {
-      if (keymap[playType.code][key].includes("#chord-")) {
-        $(keymap[playType.code][key].split(",")[0]).text(
-          keymap[playType.code][key].split(",")[0].replace("#chord-", "") +
-            " (" +
-            key +
-            ") "
-        );
+      var str = keymap[playType.code][key];
+      for (var ch in playMap[playType.code]) {
+        if (playMap[playType.code][ch] == str)
+          $("#chord-" + ch).text(ch + " (" + key + ")");
       }
     }
   };
@@ -426,22 +426,20 @@
   $(".play-info").html("<strong>Tipe Bermain:</strong> " + playType.name);
   function keyPress(key = "", press = true) {
     console.log(key);
-    if (keymap[playType.code][key]) {
+    var str = keymap[playType.code][key];
+    if (str) {
+      chordInfo(str);
       if (press) {
-        const index = keyPressed.indexOf(keymap[playType.code][key]);
-        if (index == -1) keyPressed.push(keymap[playType.code][key]);
+        var found;
+        for (var key in playMap[playType.code]) {
+          if (playMap[playType.code][key] == str) found = key;
+        }
+        if (found) chordAnimate("chord-" + found);
+        $(str).mousedown();
       }
       if (!press) {
-        const index = keyPressed.indexOf(keymap[playType.code][key]);
-        if (index > -1) {
-          keyPressed.splice(index, 1);
-        }
+        $(str).mouseup();
       }
-      $(".chord-info").html(
-        "<strong>Ditekan : </strong>" + keyPressed.sort().join(" ")
-      );
-      if (press) $(keymap[playType.code][key]).mousedown();
-      else $(keymap[playType.code][key]).mouseup();
     }
   }
   $(document).keydown(function (event) {

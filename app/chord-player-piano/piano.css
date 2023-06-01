@@ -101,6 +101,7 @@ audio {
 }
 
 .chord {
+  text-align: center;
   width: 50px;
   font-size: small;
   font-weight: bold;

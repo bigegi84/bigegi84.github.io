@@ -226,7 +226,7 @@
     Em: ".piano-E4,.piano-G4,.piano-B4",
     E2Bass: ".piano-E3,.piano-B3",
     F: ".piano-F4,.piano-A4,.piano-C5",
-    Fm: ".piano-F4,.piano-Ab4,.piano-C4",
+    Fm: ".piano-F4,.piano-Ab4,.piano-C5",
     F2Bass: ".piano-F3,.piano-C4",
     Gb: ".piano-Gb4,.piano-Bb4,.piano-Db5",
     Gbm: ".piano-Gb4,.piano-A4,.piano-Db5",

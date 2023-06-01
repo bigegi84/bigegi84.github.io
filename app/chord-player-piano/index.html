@@ -32,6 +32,11 @@
           <h2>bigegi84 - Chord Player Piano</h2>
           <div class="major">
             <audio
+              id="sound-Ab2"
+              src="sound/acoustic/Ab2.mp3"
+              preload="auto"
+            ></audio
+            ><audio
               id="sound-A2"
               src="sound/acoustic/A2.mp3"
               preload="auto"
@@ -206,17 +211,17 @@
               src="sound/acoustic/G5.mp3"
               preload="auto"
             ></audio>
-            <audio
+            <!-- <audio
               id="sound-Ab5"
               src="sound/acoustic/Ab5.mp3"
               preload="auto"
-            ></audio>
-            <audio
+            ></audio> -->
+            <!-- <audio
               id="sound-A5"
               src="sound/acoustic/A5.mp3"
               preload="auto"
-            ></audio>
-            <audio
+            ></audio> -->
+            <!-- <audio
               id="sound-Bb5"
               src="sound/acoustic/Bb5.mp3"
               preload="auto"
@@ -285,7 +290,7 @@
               id="sound-B6"
               src="sound/acoustic/B6.mp3"
               preload="auto"
-            ></audio>
+            ></audio> -->
             <div>
               <p class="play-info" style="margin: 0">
                 <strong>Tipe Bermain:</strong>
@@ -326,17 +331,12 @@
 
                 <div class="chord-group">
                   <div id="chord-Eb" class="chord">Eb</div>
-                  <!-- <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-C5">
-                    Eb6
-                  </div> -->
                   <div id="chord-Ebmaj7" class="chord">Ebmaj7</div>
                   <div id="chord-Eb7" class="chord">Eb7</div>
-                  <!--
-                <div class="chord piano-Eb4 piano-G4 piano-Bb4 piano-Db5 piano-E5">
-                  Eb7b9
-                </div> -->
                   <div id="chord-Ebm" class="chord">Ebm</div>
                   <div id="chord-Ebm7" class="chord">Ebm7</div>
+                  <div id="chord-Eb6" class="chord">Eb6</div>
+                  <div id="chord-Eb7b9" class="chord">Eb7b9</div>
                 </div>
                 <div class="chord-group">
                   <div id="chord-E" class="chord">E</div>
@@ -375,10 +375,7 @@
                   <div id="chord-Ab7" class="chord">Ab7</div>
                   <div id="chord-Abm" class="chord">Abm</div>
                   <div id="chord-Abm7" class="chord">Abm7</div>
-                  <!--
-                <div class="chord piano-Ab4 piano-B4 piano-Eb5 piano-Gb5 piano-Bb5">
-                  Abm9
-                </div> -->
+                  <div id="chord-Abm9" class="chord">Abm9</div>
                 </div>
                 <div class="chord-group">
                   <div id="chord-A" class="chord">A</div>
@@ -410,6 +407,14 @@
               >
               <div class="piano-container">
                 <div class="piano-keys">
+                  <div class="piano-black">
+                    <div
+                      id="key-Ab2"
+                      class="piano-black-raised animate piano-Ab2"
+                    >
+                      <p class="note-info-black">Ab2</p>
+                    </div>
+                  </div>
                   <div id="key-A2" class="piano-white animate piano-A2">
                     <p class="note-info-white">A2</p>
                   </div>
@@ -508,14 +513,14 @@
                     <div class="piano-black-raised animate piano-Gb5"></div>
                   </div>
                   <div id="key-G5" class="piano-white animate piano-G5"></div>
-                  <div class="piano-black">
+                  <!-- <div class="piano-black">
                     <div class="piano-black-raised animate piano-Ab5"></div>
-                  </div>
-                  <!--
-                  <div class="piano-white animate piano-A5"></div>
-                  <div class="piano-black">
+                  </div> -->
+                  <!-- <div class="piano-white animate piano-A5"></div> -->
+                  <!-- <div class="piano-black">
                     <div class="piano-black-raised animate piano-Bb5"></div>
-                  </div>
+                  </div> -->
+                  <!--
                   <div class="piano-white animate piano-B5"></div>
                   <div class="piano-white animate piano-C6"></div>
                   <div class="piano-black">

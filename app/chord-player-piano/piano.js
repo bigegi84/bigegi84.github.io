@@ -516,6 +516,7 @@
       "`": "#key-B2,#key-Gb3",
     },
   };
+  // 
   var chordWithHint = () => {
     for (var key in keymap[playType.code]) {
       var str = keymap[playType.code][key];

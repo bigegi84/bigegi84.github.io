@@ -117,6 +117,7 @@
       C7: "C4,E4,G4,Bb4",
       Cm: "C4,Eb4,G4",
       Cm7: "C4,Eb4,G4,Bb4",
+      C7b9: "C4,E4,G4,Bb4,Db5",
       Csus4: "C4,F4,G4",
       C2Bass: "C3,G3",
     },
@@ -176,6 +177,7 @@
       G7: "G3,B3,D4,F4",
       Gm: "G3,Bb3,D4",
       Gm7: "G3,Bb3,D4,F4",
+      Gm7b5: "G3,Bb3,Db4,F4",
       G2Bass: "G2,D3",
     },
     Ab: {

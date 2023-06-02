@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="piano.css" />
+    <script src="vendor/jquery-1.7.2.min.js"></script>
+    <script src="vendor/jquery-ui-1.8.20.custom.min.js"></script>
+    <script src="vendor/Tone.js"></script>
+    <title>bigegi84-ukulele</title>
+  </head>
+
+  <body>
+    <div>
+      <div style="display: flex; flex-direction: row; justify-content: center">
+        <div style="display: flex; flex-direction: column">
+          <div id="chord-C" class="chord piano-G4 piano-C4 piano-E4 piano-C5">
+            C
+          </div>
+          <div class="chord piano-C4 piano-E4 piano-G4 piano-B4">CM7</div>
+          <div class="chord piano-G4 piano-C4 piano-E4 piano-Bb4">C7</div>
+          <div class="chord piano-C3 piano-E3 piano-G3 piano-Bb3 piano-Db4">
+            C7b9
+          </div>
+          <div class="chord piano-G4 piano-Eb4 piano-G4 piano-C5">Cm</div>
+          <div class="chord piano-Bb4 piano-Eb4 piano-G4 piano-C5">Cm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-Db3 piano-F3 piano-Ab3">Db</div>
+          <div class="chord piano-Db3 piano-F3 piano-Ab3 piano-C4">DbM7</div>
+          <div class="chord piano-Db3 piano-F3 piano-Ab3 piano-B3">Db7</div>
+          <div class="chord piano-Db3 piano-E3 piano-Ab3">Dbm</div>
+          <div class="chord piano-Db3 piano-E3 piano-Ab3 piano-B3">Dbm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-A4 piano-D4 piano-Gb4 piano-D5">D</div>
+          <div class="chord piano-D3 piano-Gb3 piano-A3 piano-Db4">DM7</div>
+          <div class="chord piano-D3 piano-Gb3 piano-A3 piano-C4">D7</div>
+          <div class="chord piano-A4 piano-D4 piano-Gb4 piano-D5">Dm</div>
+          <div class="chord piano-D3 piano-F3 piano-A3 piano-C4">Dm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-Eb3 piano-G3 piano-Bb3 piano-C4">Eb6</div>
+          <div class="chord piano-Eb3 piano-G3 piano-Bb3">Eb</div>
+          <div class="chord piano-Bb4 piano-Eb4 piano-G4 piano-A4">EbM7</div>
+          <div class="chord piano-Eb3 piano-G3 piano-Bb3 piano-Db4">Eb7</div>
+          <div class="chord piano-Eb3 piano-G3 piano-Bb3 piano-Db4 piano-E4">
+            Eb7b9
+          </div>
+          <div class="chord piano-Eb3 piano-Gb3 piano-Bb3">Ebm</div>
+          <div class="chord piano-Eb3 piano-Gb3 piano-Bb3 piano-Db4">Ebm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-E3 piano-Ab3 piano-B3">E</div>
+          <div class="chord piano-Bb4 piano-Eb4 piano-G4 piano-A4">EM7</div>
+          <div class="chord piano-E3 piano-Ab3 piano-B3 piano-D4">E7</div>
+          <div class="chord piano-G4 piano-E4 piano-G4 piano-B4">Em</div>
+          <div class="chord piano-E3 piano-G3 piano-B3 piano-D4">Em7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-A3 piano-C3 piano-F3 piano-A4">F</div>
+          <div class="chord piano-F3 piano-A3 piano-C4 piano-E4">FM7</div>
+          <div class="chord piano-F3 piano-A3 piano-C4 piano-Eb4">F7</div>
+          <div class="chord piano-Ab4 piano-C4 piano-F4 piano-C5">Fm</div>
+          <div class="chord piano-F3 piano-Ab3 piano-C4 piano-Eb4">Fm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-Gb3 piano-Bb3 piano-Db4">Gb</div>
+          <div class="chord piano-Gb3 piano-Bb3 piano-Db4 piano-F4">GbM7</div>
+          <div class="chord piano-Gb3 piano-Bb3 piano-Db4 piano-E4">Gb7</div>
+          <div class="chord piano-Gb3 piano-A3 piano-Db4">Gbm</div>
+          <div class="chord piano-Gb3 piano-A3 piano-Db4 piano-E4">Gbm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-G4 piano-D4 piano-G4 piano-B4">G</div>
+          <div class="chord piano-G3 piano-B3 piano-D4 piano-Gb4">GM7</div>
+          <div class="chord piano-G3 piano-B3 piano-D4 piano-F4">G7</div>
+          <div class="chord piano-G4 piano-D4 piano-F4 piano-C5">Gm</div>
+          <div class="chord piano-G3 piano-Bb3 piano-Db4 piano-F4">Gm7-5</div>
+          <div class="chord piano-G3 piano-D3 piano-F3 piano-Bb3">Gm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-Ab3 piano-C4 piano-Eb4">Ab</div>
+          <div class="chord piano-Ab3 piano-C4 piano-Eb4 piano-G4">AbM7</div>
+          <div class="chord piano-Ab3 piano-C4 piano-Eb4 piano-Gb4">Ab7</div>
+          <div class="chord piano-Ab3 piano-B3 piano-Eb4">Abm</div>
+          <div class="chord piano-Ab3 piano-B3 piano-Eb4 piano-Gb4">Abm7</div>
+          <div class="chord piano-Ab3 piano-B3 piano-Eb4 piano-Gb4 piano-Bb4">
+            Abm9
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-A4 piano-Db4 piano-E4 piano-A5">A</div>
+          <div class="chord piano-A3 piano-Db4 piano-E4 piano-Ab4">AM7</div>
+          <div class="chord piano-A3 piano-Db4 piano-E4 piano-G4">A7</div>
+          <div class="chord piano-A4 piano-C4 piano-E4 piano-A5">Am</div>
+          <div class="chord piano-A3 piano-C4 piano-E4 piano-G4">Am7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-Bb4 piano-D4 piano-F4 piano-Bb4">Bb</div>
+          <div class="chord piano-Bb3 piano-D4 piano-F4 piano-A4">BbM7</div>
+          <div class="chord piano-Bb3 piano-D4 piano-F4 piano-Ab4">Bb7</div>
+          <div class="chord piano-Bb3 piano-Db4 piano-F4">Bbm</div>
+          <div class="chord piano-Bb3 piano-Db4 piano-F4 piano-Ab4">Bbm7</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <div class="chord piano-B3 piano-Eb4 piano-Gb4">B</div>
+          <div class="chord piano-B3 piano-Eb4 piano-Gb4 piano-Bb4">BM7</div>
+          <div class="chord piano-B3 piano-Eb4 piano-Gb4 piano-A4">B7</div>
+          <div class="chord piano-B3 piano-D4 piano-Gb4">Bm</div>
+          <div class="chord piano-B3 piano-D4 piano-Gb4 piano-A4">Bm7</div>
+        </div>
+      </div>
+    </div>
+    <div class="piano" style="display: none">
+      <noscript class="piano-javascript"
+        >This program requires Javascript and HTML5 Audio support.</noscript
+      >
+      <div class="piano-container">
+        <div class="piano-keys">
+          <div class="piano-white animate piano-A2"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Bb2"></div>
+          </div>
+          <div class="piano-white animate piano-B2"></div>
+          <div class="piano-white animate piano-C3"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Db3"></div>
+          </div>
+          <div class="piano-white animate piano-D3"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Eb3"></div>
+          </div>
+          <div class="piano-white animate piano-E3"></div>
+          <div class="piano-white animate piano-F3"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Gb3"></div>
+          </div>
+          <div class="piano-white animate piano-G3"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Ab3"></div>
+          </div>
+          <div class="piano-white animate piano-A3"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Bb3"></div>
+          </div>
+          <div class="piano-white animate piano-B3"></div>
+          <div class="piano-white animate piano-C4"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Db4"></div>
+          </div>
+          <div class="piano-white animate piano-D4"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Eb4"></div>
+          </div>
+          <div class="piano-white animate piano-E4"></div>
+          <div class="piano-white animate piano-F4"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Gb4"></div>
+          </div>
+          <div class="piano-white animate piano-G4"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Ab4"></div>
+          </div>
+          <div class="piano-white animate piano-A4"></div>
+          <div class="piano-black">
+            <div class="piano-black-raised animate piano-Bb4"></div>
+          </div>
+          <div class="piano-white animate piano-B4"></div>
+          <div class="piano-white animate piano-C5"></div>
+        </div>
+        <div class="piano-pedal">Just listen to that sustain!</div>
+      </div>
+    </div>
+    <div>
+      <div style="display: flex; flex-direction: row">
+        <div>1</div>
+        <div class="fret animate piano-A4">A4</div>
+        <div class="fret animate piano-Bb4">Bb4</div>
+        <div class="fret animate piano-B4">B4</div>
+        <div class="fret animate piano-C5">C5</div>
+        <div class="fret animate piano-Db5">Db5</div>
+        <div class="fret animate piano-D5">D5</div>
+        <div class="fret animate piano-Eb5">Eb5</div>
+      </div>
+      <div style="display: flex; flex-direction: row">
+        <div>2</div>
+        <div class="fret animate piano-E4">E4</div>
+        <div class="fret animate piano-F4">F4</div>
+        <div class="fret animate piano-Gb4">Gb4</div>
+        <div class="fret animate piano-G4">G4</div>
+        <div class="fret animate piano-Ab4">Ab4</div>
+        <div class="fret animate piano-A4">A4</div>
+      </div>
+      <div style="display: flex; flex-direction: row">
+        <div>3</div>
+        <div class="fret animate piano-C4">C4</div>
+        <div class="fret animate piano-Db4">Db4</div>
+        <div class="fret animate piano-D4">D4</div>
+        <div class="fret animate piano-Eb4">Eb4</div>
+        <div class="fret animate piano-E4">E4</div>
+        <div class="fret animate piano-F4">F4</div>
+      </div>
+      <div style="display: flex; flex-direction: row">
+        <div>4</div>
+        <div class="fret animate piano-G4">G4</div>
+        <div class="fret animate piano-Ab4">Ab4</div>
+        <div class="fret animate piano-A4">A4</div>
+        <div class="fret animate piano-Bb4">Bb4</div>
+        <div class="fret animate piano-B4">B4</div>
+        <div class="fret animate piano-C4">C4</div>
+      </div>
+    </div>
+    <script src="piano.js"></script>
+  </body>
+</html>

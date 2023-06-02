@@ -111,3 +111,12 @@ audio {
   display: flex;
   flex-direction: column;
 }
+.chord {
+  text-align: center;
+  font-size: small;
+  font-weight: bold;
+  /* width: 20%;
+  height: 20%; */
+  background-color: white;
+  z-index: 1;
+}

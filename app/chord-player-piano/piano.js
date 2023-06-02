@@ -1,6 +1,6 @@
 (() => {
   var debug = !true;
-  var delayMs = 0;
+  var delayMs = 15;
   var animateMs = 1500;
   let pressed = [];
   var sustaining = true;
@@ -117,6 +117,7 @@
       C7: "C4,E4,G4,Bb4",
       Cm: "C4,Eb4,G4",
       Cm7: "C4,Eb4,G4,Bb4",
+      Csus4: "C4,F4,G4",
       C2Bass: "C3,G3",
     },
     Db: {

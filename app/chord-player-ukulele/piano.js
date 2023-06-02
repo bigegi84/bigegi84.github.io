@@ -1,4 +1,63 @@
-(function () {
+(() => {
+  const debug = true;
+  let fadeout = true;
+  let sustaining = true;
+  const fret = {
+    1: { 0: "A4", 1: "Bb4", 2: "B4", 3: "C5", 4: "Db5", 5: "D5" },
+    2: { 0: "E4", 1: "F4", 2: "Gb4", 3: "G4", 4: "Ab4", 5: "A4" },
+    3: { 0: "C4", 1: "Db4", 2: "D4", 3: "Eb4", 4: "E4", 5: "F4" },
+    4: { 0: "G4", 1: "Ab4", 2: "A4", 3: "Bb4", 4: "B4", 5: "C5" },
+  };
+  const ukuleleDraw = () => {
+    let html = "";
+    for (var x in fret) {
+      var fretHtml = '<div id="fret-' + x + '" class="fret-line">';
+      for (var y in fret[x]) {
+        fretHtml +=
+          '<div id="fret-' +
+          x +
+          "-" +
+          y +
+          '" class="fret">' +
+          fret[x][y] +
+          "</div>";
+      }
+      fretHtml += "</div>";
+      html += fretHtml;
+    }
+    $("#ukulele").html(html);
+  };
+
+  const fretAnimate = (id) => {
+    $("#" + id).animate(
+      {
+        backgroundColor: "#88FFAA",
+      },
+      0
+    );
+    if (sustaining) {
+      setTimeout(() => {
+        $("#" + id).animate(
+          {
+            backgroundColor: "#deb887",
+          },
+          300,
+          "easeOutExpo"
+        );
+      }, 1500);
+    }
+  };
+  const ukuleleSound = () => {
+    $(".fret").mousedown((e) => {
+      const id = e.target.id;
+      const note =
+        fret[id.replace("fret-", "").split("-")[0]][
+          id.replace("fret-", "").split("-")[1]
+        ];
+      sampler.triggerAttackRelease([note], 4);
+      fretAnimate(id);
+    });
+  };
   const sampler = new Tone.Sampler({
     urls: {
       A4: "A4.mp3",
@@ -17,226 +76,167 @@
     release: 1,
     baseUrl: "samples/ukulele/",
   }).toDestination();
-  var keys = [
-    "A2",
-    "Bb2",
-    "B2",
-    "C3",
-    "Db3",
-    "D3",
-    "Eb3",
-    "E3",
-    "F3",
-    "Gb3",
-    "G3",
-    "Ab3",
-    "A3",
-    "Bb3",
-    "B3",
-    "C4",
-    "Db4",
-    "D4",
-    "Eb4",
-    "E4",
-    "F4",
-    "Gb4",
-    "G4",
-    "Ab4",
-    "A4",
-    "Bb4",
-    "B4",
-    "C5",
-    "Db5",
-    "D5",
-    "Eb5",
-  ];
 
-  /* Corresponding keyboard keycodes, in order w/ 'keys'. */
-  /* QWERTY layout:
-  /*   upper register: Q -> P, with 1-0 as black keys. */
-  /*   lower register: Z -> M, , with A-L as black keys. */
-
-  var codes = [
-    90, 83, 88, 67, 70, 86, 71, 66, 78, 74, 77, 75, 81, 50, 87, 69, 52, 82, 53,
-    84, 89, 55, 85, 56, 73, 57, 79, 80, 80, 80, 80,
-  ];
-
-  var pedal = 32; /* Keycode for sustain pedal. */
-  var tonic = "A2"; /* Lowest pitch. */
-
-  /* Piano state. */
-
-  var intervals = {};
-  var depressed = {};
-
-  /* Selectors */
-
-  function pianoClass(name) {
-    return ".piano-" + name;
-  }
-
-  function soundId(id) {
-    return "sound-" + id;
-  }
-
-  function sound(id) {
-    var it = document.getElementById(soundId(id));
-    return it;
-  }
-
-  /* Virtual piano keyboard events. */
-
-  function keyup(code) {
-    var offset = codes.indexOf(code);
-    var k;
-    if (offset >= 0) {
-      k = keys.indexOf(tonic) + offset;
-      return keys[k];
+  const chord = {
+    C: {
+      C: "0003",
+      Cmaj7: "0002",
+      C7: "0001",
+      Cm: "0333",
+      Cm7: "3333",
+      C6: "0000",
+      C9: "0201",
+    },
+    Db: {
+      Db: "1114",
+      Dmaj7: "1113",
+      Db7: "1112",
+      Dbm: "1101",
+      Dbm7: "4444",
+      Db6: "1111",
+      Db9: "1312",
+    },
+    D: {
+      D: "2225",
+      Dmaj7: "1113",
+      D7: "2223",
+      Dm: "2210",
+      Dm7: "2213",
+      D6: "2222",
+      D9: "2423",
+    },
+    Eb: {
+      Eb: "3331",
+      Ebmaj7: "3330",
+      Eb7: "3334",
+      Ebm: "3321",
+      Ebm7: "3324",
+      Eb6: "3333",
+      Eb9: "0111",
+    },
+    E: {
+      E: "4442",
+      Emaj7: "1302",
+      E7: "1202",
+      Em: "0432",
+      Em7: "0202",
+      E6: "1020",
+      E9: "1222",
+    },
+    F: {
+      F: "2010",
+      Fmaj7: "2413",
+      F7: "2310",
+      Fm: "1013",
+      Fm7: "1313",
+      F6: "2213",
+      F9: "2333",
+    },
+    Gb: {
+      Gb: "3121",
+      Emaj7: "1302",
+      Gb7: "3424",
+      Gbm: "2120",
+      Gbm7: "2424",
+      Gb6: "3324",
+      Gb9: "1101",
+    },
+    G: {
+      G: "0232",
+      Gmaj7: "0111",
+      G7: "0212",
+      Gm: "0231",
+      Gm7: "0211",
+      G6: "0202",
+      G9: "2212",
+    },
+    Ab: {
+      Ab: "5343",
+      Abmaj7: "1333",
+      Ab7: "1323",
+      Abm: "1342",
+      Abm7: "0322",
+      Ab6: "1313",
+      Ab9: "3323",
+    },
+    A: {
+      A: "2100",
+      Amaj7: "1100",
+      A7: "0100",
+      Am: "2000",
+      Am7: "0433",
+      A6: "2424",
+      A9: "0102",
+    },
+    Bb: {
+      Bb: "3211",
+      Bbmaj7: "3210",
+      Bb7: "1211",
+      Bbm: "3111",
+      Bbm7: "1111",
+      Bb6: "0211",
+      Bb9: "1213",
+    },
+    B: {
+      B: "4322",
+      Bmaj7: "3322",
+      B7: "2322",
+      Bm: "4222",
+      Bm7: "2222",
+      B6: "1322",
+      B9: "2324",
+    },
+  };
+  const chordDraw = () => {
+    let html = "";
+    for (var x in chord) {
+      var chordHtml = '<div id="chord-line-' + x + '" class="chord-line">';
+      for (var y in chord[x]) {
+        chordHtml +=
+          '<div id="chord-' + x + "-" + y + '" class="chord">' + y + "</div>";
+      }
+      chordHtml += "</div>";
+      html += chordHtml;
     }
-  }
-
-  function keydown(code) {
-    return keyup(code);
-  }
-
-  function press(key) {
-    console.log(key);
-    sampler.triggerAttackRelease([key], 4);
-    // var audio = sound(key);
-    // if (depressed[key]) {
-    //   return;
-    // }
-    // clearInterval(intervals[key]);
-    // if (audio) {
-    //   audio.pause();
-    //   audio.volume = 1.0;
-    //   if (audio.readyState >= 2) {
-    //     audio.currentTime = 0;
-    //     audio.play();
-    //     depressed[key] = true;
-    //   }
-    // }
-    $(".animate" + pianoClass(key)).animate(
+    $("#chord").html(html);
+  };
+  const chordAnimate = (id) => {
+    $("#" + id).animate(
       {
         backgroundColor: "#88FFAA",
       },
       0
     );
-  }
-
-  /* Manually diminish the volume when the key is not sustained. */
-  /* These values are hand-selected for a pleasant fade-out quality. */
-
-  function fade(key) {
-    var audio = sound(key);
-    var stepfade = function () {
-      if (audio) {
-        if (audio.volume < 0.03) {
-          kill(key)();
-        } else {
-          if (audio.volume > 0.2) {
-            audio.volume = audio.volume * 0.95;
-          } else {
-            audio.volume = audio.volume - 0.01;
-          }
-        }
+    if (sustaining) {
+      setTimeout(() => {
+        $("#" + id).animate(
+          {
+            backgroundColor: "white",
+          },
+          300,
+          "easeOutExpo"
+        );
+      }, 1500);
+    }
+  };
+  const chordSound = () => {
+    $(".chord").mousedown((e) => {
+      const id = e.target.id;
+      const formula =
+        chord[id.replace("chord-", "").split("-")[0]][
+          id.replace("chord-", "").split("-")[1]
+        ];
+      const jqCode = [];
+      for (var i = 0; i < formula.length; i++) {
+        jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
       }
-    };
-    return function () {
-      clearInterval(intervals[key]);
-      intervals[key] = setInterval(stepfade, 5);
-    };
-  }
-
-  /* Bring a key to an immediate halt. */
-
-  function kill(key) {
-    var audio = sound(key);
-    return function () {
-      clearInterval(intervals[key]);
-      if (audio) {
-        audio.pause();
-      }
-      $(".animate" + pianoClass(key)).animate(
-        {
-          backgroundColor: "#deb887",
-        },
-        0
-      );
-      // $('.animate'+pianoClass(key)).css("background-color", "yellow");
-      // console.log('.animate'+pianoClass(key))
-    };
-  }
-
-  /* Simulate a gentle release, as opposed to hard stop. */
-
-  var fadeout = true;
-
-  /* Sustain pedal, toggled by user. */
-
-  var sustaining = false;
-
-  /* Register mouse event callbacks. */
-
-  keys.forEach((key) => {
-    $(pianoClass(key)).mousedown(function () {
-      // $(pianoClass(key)).animate({
-      //   'backgroundColor': '#88FFAA'
-      // }, 0);
-      press(key);
+      $(jqCode.join(",")).mousedown();
+      chordAnimate(id);
     });
-    if (fadeout) {
-      $(pianoClass(key)).mouseup(function () {
-        depressed[key] = false;
-        if (!sustaining) {
-          fade(key)();
-        }
-      });
-    } else {
-      $(pianoClass(key)).mouseup(function () {
-        depressed[key] = false;
-        if (!sustaining) {
-          kill(key)();
-        }
-      });
-    }
-  });
-
-  /* Register keyboard event callbacks. */
-
-  $(document).keydown(function (event) {
-    console.log(event.key);
-    if (event.which === pedal) {
-      sustaining = true;
-      $(pianoClass("pedal")).addClass("piano-sustain");
-    }
-    if (event.key == "1") $("#chord-C").click();
-    // press(keydown(event.which));
-  });
-
-  $(document).keyup(function (event) {
-    if (event.which === pedal) {
-      sustaining = false;
-      $(pianoClass("pedal")).removeClass("piano-sustain");
-      Object.keys(depressed).forEach(function (key) {
-        if (!depressed[key]) {
-          if (fadeout) {
-            fade(key)();
-          } else {
-            kill(key)();
-          }
-        }
-      });
-    }
-    if (keyup(event.which)) {
-      depressed[keyup(event.which)] = false;
-      if (!sustaining) {
-        if (fadeout) {
-          fade(keyup(event.which))();
-        } else {
-          kill(keyup(event.which))();
-        }
-      }
-    }
-  });
+  };
+  // main
+  ukuleleDraw();
+  ukuleleSound();
+  chordDraw();
+  chordSound();
 })();

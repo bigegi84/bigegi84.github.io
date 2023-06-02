@@ -1,14 +1,14 @@
 (() => {
-  var debug = true;
+  var debug = !true;
+  var delayMs = 0;
   var animateMs = 1500;
-  var fadeout = true;
+  let pressed = [];
   var sustaining = true;
-  var pedal = 32;
-  var tonic = "A2";
-  var intervals = {};
-  var depressed = {};
-
-  var keys = [
+  var playType = {
+    name: "(Kiri) 2 Bas - (Kanan) Akor",
+    code: "twoBassAndChord",
+  };
+  const note = [
     "G2",
     "Ab2",
     "A2",
@@ -51,48 +51,34 @@
     // "Bb5",
     // "B5",
   ];
-  var codes = [
-    90, 83, 88, 67, 70, 86, 71, 66, 78, 74, 77, 75, 81, 50, 87, 69, 52, 82, 53,
-    84, 89, 55, 85, 56, 73, 57, 79, 80,
-  ];
-  function pianoClass(name) {
-    return ".piano-" + name;
-  }
-  function soundId(id) {
-    return "sound-" + id;
-  }
-  function sound(id) {
-    var it = document.getElementById(soundId(id));
-    return it;
-  }
-  function keyup(code) {
-    var offset = codes.indexOf(code);
-    var k;
-    if (offset >= 0) {
-      k = keys.indexOf(tonic) + offset;
-      return keys[k];
-    }
-  }
-  function keydown(code) {
-    return keyup(code);
-  }
-
-  function press(key) {
-    var audio = sound(key);
-    if (depressed[key]) {
-      return;
-    }
-    clearInterval(intervals[key]);
-    if (audio) {
-      audio.pause();
-      audio.volume = 1.0;
-      if (audio.readyState >= 2) {
-        audio.currentTime = 0;
-        audio.play();
-        depressed[key] = true;
-      }
-    }
-    $(".animate" + pianoClass(key)).animate(
+  const pianoDraw = () => {
+    let html = '<div class="piano-container"><div class="piano-keys">';
+    note.forEach((x) => {
+      if (x.search("b") == -1)
+        html +=
+          '<div id="note-' +
+          x +
+          '" class="note piano-white piano-' +
+          x +
+          '"><p class="note-info-white">' +
+          x +
+          "</p></div>";
+      else
+        html +=
+          '<div class="piano-black"><div id="note-' +
+          x +
+          '" class="note piano-black-raised piano-' +
+          x +
+          '"><p class="note-info-black">' +
+          x +
+          "</p></div></div>";
+    });
+    html += "</div></div>";
+    $("#piano").html(html);
+  };
+  pianoDraw();
+  const pianoAnimate = (id) => {
+    $("#" + id).animate(
       {
         backgroundColor: "#88FFAA",
       },
@@ -100,258 +86,329 @@
     );
     if (sustaining) {
       setTimeout(() => {
-        $(".chord" + pianoClass(key)).animate(
+        $("#" + id).animate(
           {
-            backgroundColor: "white",
+            backgroundColor: id.search("b") == -1 ? "white" : "black",
           },
           300,
           "easeOutExpo"
         );
-        if (key.length > 2) {
-          $(".animate" + pianoClass(key)).animate(
-            {
-              backgroundColor: "black",
-            },
-            300,
-            "easeOutExpo"
-          );
-        } else {
-          $(".animate" + pianoClass(key)).animate(
-            {
-              backgroundColor: "white",
-            },
-            300,
-            "easeOutExpo"
-          );
-        }
-      }, 2000);
+      }, 1500);
     }
-  }
-  function fade(key) {
-    var audio = sound(key);
-    var stepfade = function () {
-      if (audio) {
-        if (audio.volume < 0.03) {
-          kill(key)();
+  };
+  const pianoSound = () => {
+    $(".note").mousedown((e) => {
+      const id = e.currentTarget.id;
+      if (debug) console.log(e.currentTarget.id);
+      if (debug) console.log("#sound-" + id.replace("note-", ""));
+      if (id) {
+        $("#sound-" + id.replace("note-", ""))
+          .clone()[0]
+          .play();
+        pianoAnimate(id);
+      }
+    });
+  };
+  pianoSound();
+  const chord = {
+    C: {
+      C: "C4,E4,G4",
+      Cmaj7: "C4,E4,G4,B4",
+      C7: "C4,E4,G4,Bb4",
+      Cm: "C4,Eb4,G4",
+      Cm7: "C4,Eb4,G4,Bb4",
+      C2Bass: "C3,G3",
+    },
+    Db: {
+      Db: "Db4,F4,Ab4",
+      Dbmaj7: "Db4,F4,Ab4,C5",
+      Db7: "Db4,F4,Ab4,B4",
+      Dbm: "Db4,E4,Ab4",
+      Dbm7: "Db4,E4,Ab4,B4",
+      Db2Bass: "Db3,Ab3",
+    },
+    D: {
+      D: "D4,Gb4,A4",
+      Dmaj7: "D4,Gb4,A4,Db5",
+      D7: "D4,Gb4,A4,C5",
+      Dm: "D4,F4,A4",
+      Dm7: "D4,F4,A4,C5",
+      D2Bass: "D3,A3",
+    },
+    Eb: {
+      Eb: "Eb4,G4,Bb4",
+      Ebmaj7: "Eb4,G4,Bb4,D5",
+      Eb7: "Eb4,G4,Bb4,Db5",
+      Ebm: "Eb4,Gb4,Bb4",
+      Ebm7: "Eb4,Gb4,Bb4,Db5",
+      Eb6: "Eb4,G4,Bb4,C5",
+      Eb7b9: "Eb4,G4,Bb4,Db5,E5",
+      Eb2Bass: "Eb3,Bb3",
+    },
+    E: {
+      E: "E4,Ab4,B4",
+      Emaj7: "E4,Ab4,B4,Eb5",
+      E7: "E4,Ab4,B4,D5",
+      Em: "E4,G4,B4",
+      Em7: "E4,G4,B4,D5",
+      E2Bass: "E3,B3",
+    },
+    F: {
+      F: "F4,A4,C5",
+      Fmaj7: "F4,A4,C5,E5",
+      F7: "F4,A4,C5,Eb5",
+      Fm: "F4,Ab4,C5",
+      Fm7: "F4,Ab4,C5,Eb5",
+      F2Bass: "F3,C4",
+    },
+    Gb: {
+      Gb: "Gb4,Bb4,Db5",
+      Gbmaj7: "Gb4,Bb4,Db5,F5",
+      Gb7: "Gb4,Bb4,Db5,E5",
+      Gbm: "Gb4,A4,Db5",
+      Gbm7: "Gb4,A4,Db5,E5",
+      Gb2Bass: "Gb3,Db4",
+    },
+    G: {
+      G: "G3,B3,D4",
+      Gmaj7: "G3,B3,D4,Gb4",
+      G7: "G3,B3,D4,F4",
+      Gm: "G3,Bb3,D4",
+      Gm7: "G3,Bb3,D4,F4",
+      G2Bass: "G2,D3",
+    },
+    Ab: {
+      Ab: "Ab3,C4,Eb4",
+      Abmaj7: "Ab3,C4,Eb4,G4",
+      Ab7: "Ab3,C4,Eb4,Gb4",
+      Abm: "Ab3,B3,Eb4",
+      Abm7: "Ab3,B3,Eb4,Gb4",
+      Abm9: "Ab3,B3,Eb4,Gb4,Bb4",
+      Ab2Bass: "Ab2,Eb3",
+    },
+    A: {
+      A: "A3,Db4,E4",
+      Amaj7: "A3,Db4,E4,Ab4",
+      A7: "A3,Db4,E4,G4",
+      Am: "A3,C4,E4",
+      Am7: "A3,C4,E4,G4",
+      A2Bass: "A2,E3",
+    },
+    Bb: {
+      Bb: "Bb3,D4,F4",
+      Bbmaj7: "Bb3,D4,F4,A4",
+      Bb7: "Bb3,D4,F4,Ab4",
+      Bbm: "Bb3,Db4,F4",
+      Bbm7: "Bb3,Db4,F4,Ab4",
+      Bb2Bass: "Bb2,F3",
+    },
+    B: {
+      B: "B3,Eb4,Gb4",
+      Bmaj7: "B3,Eb4,Gb4,Bb4",
+      B7: "B3,Eb4,Gb4,A4",
+      Bm: "B3,D4,Gb4",
+      Bm7: "B3,D4,Gb4,A4",
+      B2Bass: "B2,Gb3",
+    },
+  };
+  const chordDraw = () => {
+    let html = "";
+    for (var x in chord) {
+      var chordHtml = '<div id="chord-line-' + x + '" class="chord-group">';
+      for (var y in chord[x]) {
+        chordHtml +=
+          '<div id="chord-' + x + "-" + y + '" class="chord">' + y + "</div>";
+      }
+      chordHtml += "</div>";
+      html += chordHtml;
+    }
+    $("#chord").html(html);
+  };
+  chordDraw();
+  const chordSound = () => {
+    $(".chord").mousedown((e) => {
+      const id = e.target.id;
+      let formula = [
+        chord[id.replace("chord-", "").split("-")[0]][
+          id.replace("chord-", "").split("-")[1]
+        ],
+      ];
+      if (debug) console.log(formula);
+      if (playType.code == "twoBassAndChord")
+        formula = [
+          chord[id.replace("chord-", "").split("-")[0]][
+            id.replace("chord-", "").split("-")[0] + "2Bass"
+          ],
+          ...formula,
+        ];
+      if (debug) console.log(formula);
+      let jqCode = [];
+      formula.forEach((f) => {
+        f.split(",").forEach((x) => {
+          jqCode.push("#note-" + x);
+        });
+      });
+      if (debug) console.log(jqCode);
+      // $(jqCode.join(",")).mousedown();
+      let ms = 0;
+      jqCode.forEach((it) => {
+        setTimeout(() => {
+          $(it).mousedown();
+        }, ms);
+        ms = ms + delayMs;
+      });
+      chordAnimate(e.target.id);
+      chordInfo(formula.join(" - "));
+    });
+  };
+  chordSound();
+  var keymap = {
+    1: chord.C.C,
+    "!": chord.C.Cmaj7,
+    q: chord.C.Cm,
+    Q: chord.C.Cm7,
+    a: chord.C.C7,
+    z: "#key-C3,#key-G3",
+    2: chord.Db.Db,
+    "@": chord.Db.Dbmaj7,
+    w: chord.Db.Dbm,
+    W: chord.Db.Dbm7,
+    s: chord.Db.Db7,
+    x: "#key-Db3,#key-Ab3",
+    3: chord.D.D,
+    "#": chord.D.Dmaj7,
+    e: chord.D.Dm,
+    E: chord.D.Dm7,
+    d: chord.D.D7,
+    c: "#key-D3,#key-A3",
+    4: chord.Eb.Eb,
+    $: chord.Eb.Ebmaj7,
+    r: chord.Eb.Ebm,
+    R: chord.Eb.Ebm7,
+    f: chord.Eb.Eb7,
+    v: "#key-Eb3,#key-Bb3",
+    5: chord.E.E,
+    "%": chord.E.Emaj7,
+    t: chord.E.Em,
+    T: chord.E.Em7,
+    g: chord.E.E7,
+    b: "#key-E3,#key-B3",
+    6: chord.F.F,
+    "^": chord.F.Fmaj7,
+    y: chord.F.Fm,
+    Y: chord.F.Fm7,
+    h: chord.F.F7,
+    n: "#key-F3,#key-C4",
+    7: chord.Gb.Gb,
+    "&": chord.Gb.Gbmaj7,
+    u: chord.Gb.Gbm,
+    U: chord.Gb.Gbm7,
+    j: chord.Gb.Gb7,
+    m: "#key-Gb3,#key-Db4",
+    8: chord.G.G,
+    "*": chord.G.Gmaj7,
+    i: chord.G.Gm,
+    I: chord.G.Gm7,
+    k: chord.G.G7,
+    ",": "#key-G3,#key-D4",
+    9: chord.Ab.Ab,
+    "(": chord.Ab.Abmaj7,
+    o: chord.Ab.Abm,
+    O: chord.Ab.Abm7,
+    l: chord.Ab.Ab7,
+    ".": "#key-Ab3,#key-Eb4",
+    0: chord.A.A,
+    ")": chord.A.Amaj7,
+    p: chord.A.Am,
+    P: chord.A.Am7,
+    ";": chord.A.A7,
+    "/": "#key-A2,#key-E3",
+    "-": chord.Bb.Bb,
+    _: chord.Bb.Bbmaj7,
+    "[": chord.Bb.Bbm,
+    "{": chord.Bb.Bbm7,
+    "'": chord.Bb.Bb7,
+    ArrowLeft: "#key-Bb2,#key-F3",
+    "=": chord.B.B,
+    "+": chord.B.Bmaj7,
+    "]": chord.B.Bm,
+    "}": chord.B.Bm7,
+    "\\": chord.B.B7,
+    "`": "#key-B2,#key-Gb3",
+  };
+  let lastChord = null;
+  const keyPress = () => {
+    $(document).keydown((e) => {
+      if (pressed.indexOf(e.key) != -1) return;
+      pressed.push(e.key);
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var str = keymap[e.key];
+      if (debug) console.log(str);
+      if (str) {
+        if (str == "reverse" && lastChord != null) {
+          let ms = 0;
+          lastChord.reverse().forEach((it) => {
+            setTimeout(() => {
+              $(it).mousedown();
+            }, ms);
+            ms = ms + delayMs;
+          });
         } else {
-          if (audio.volume > 0.2) {
-            audio.volume = audio.volume * 0.95;
-          } else {
-            audio.volume = audio.volume - 0.01;
+          let formula = [str];
+          if (debug) console.log(formula);
+          if (playType.code == "twoBassAndChord") {
+            var chordLine;
+            for (var x in chord) {
+              for (var y in chord[x]) {
+                if (chord[x][y] == str) chordLine = x;
+              }
+            }
+            if (debug) console.log(chordLine);
+            formula = [chord[chordLine][chordLine + "2Bass"], ...formula];
+          }
+          if (debug) console.log(formula);
+          const jqCode = [];
+          formula.forEach((f) => {
+            f.split(",").forEach((x) => {
+              jqCode.push("#note-" + x);
+            });
+          });
+          if (debug) console.log(jqCode);
+          // $(jqCode.join(",")).mousedown();
+          let ms = 0;
+          jqCode.forEach((it) => {
+            setTimeout(() => {
+              $(it).mousedown();
+            }, ms);
+            ms = ms + delayMs;
+          });
+          lastChord = jqCode;
+        }
+      }
+    });
+    $(document).keyup((e) => {
+      const i = pressed.indexOf(e.key);
+      if (i != -1) {
+        pressed.splice(i, 1);
+      }
+    });
+  };
+  keyPress();
+  var chordHint = () => {
+    for (var key in keymap) {
+      var str = keymap[key];
+      for (var chLine in chord) {
+        for (var ch in chord[chLine]) {
+          if (chord[chLine][ch] == str) {
+            if (debug) console.log("#chord-" + chLine + "-" + ch);
+            $("#chord-" + chLine + "-" + ch).html(ch + " <br>(" + key + ")");
           }
         }
       }
-    };
-    return function () {
-      clearInterval(intervals[key]);
-      intervals[key] = setInterval(stepfade, 5);
-    };
-  }
-
-  /* Bring a key to an immediate halt. */
-
-  function kill(key) {
-    var audio = sound(key);
-    return function () {
-      clearInterval(intervals[key]);
-      if (audio) {
-        audio.pause();
-      }
-      if (key.length > 2) {
-        $(".animate" + pianoClass(key)).animate(
-          {
-            backgroundColor: "black",
-          },
-          300,
-          "easeOutExpo"
-        );
-      } else {
-        $(".animate" + pianoClass(key)).animate(
-          {
-            backgroundColor: "white",
-          },
-          300,
-          "easeOutExpo"
-        );
-      }
-    };
-  }
-  keys.forEach((key) => {
-    $(pianoClass(key)).mousedown(function () {
-      // console.log(key);
-      $(pianoClass(key)).animate(
-        {
-          backgroundColor: "#88FFAA",
-        },
-        0
-      );
-      press(key);
-    });
-    if (fadeout) {
-      $(pianoClass(key)).mouseup(function () {
-        depressed[key] = false;
-        if (!sustaining) {
-          fade(key)();
-        }
-      });
-    } else {
-      $(pianoClass(key)).mouseup(function () {
-        depressed[key] = false;
-        if (!sustaining) {
-          kill(key)();
-        }
-      });
     }
-  });
-  var playType = {
-    name: "(Kiri) 2 Bas - (Kanan) Akor",
-    code: "twoBassAndChord",
   };
-  var keyPressed = [];
-  var formula = {
-    C: ".piano-C4,.piano-E4,.piano-G4",
-    Cmaj7: ".piano-C4,.piano-E4,.piano-G4,.piano-B4",
-    C7: ".piano-C4,.piano-E4,.piano-G4,.piano-Bb4",
-    Cm: ".piano-C4,.piano-Eb4,.piano-G4",
-    Cm7: ".piano-C4,.piano-Eb4,.piano-G4,.piano-Bb4",
-    C2Bass: ".piano-C3,.piano-G3",
-    Db: ".piano-Db4,.piano-F4,.piano-Ab4",
-    Dbmaj7: ".piano-Db4,.piano-F4,.piano-Ab4,.piano-C5",
-    Db7: ".piano-Db4,.piano-F4,.piano-Ab4,.piano-B4",
-    Dbm: ".piano-Db4,.piano-E4,.piano-Ab4",
-    Dbm7: ".piano-Db4,.piano-E4,.piano-Ab4,.piano-B4",
-    Db2Bass: ".piano-Db3,.piano-Ab3",
-    D: ".piano-D4,.piano-Gb4,.piano-A4",
-    Dmaj7: ".piano-D4,.piano-Gb4,.piano-A4,.piano-Db5",
-    D7: ".piano-D4,.piano-Gb4,.piano-A4,.piano-C5",
-    Dm: ".piano-D4,.piano-F4,.piano-A4",
-    Dm7: ".piano-D4,.piano-F4,.piano-A4,.piano-C5",
-    D2Bass: ".piano-D3,.piano-A3",
-    Eb: ".piano-Eb4,.piano-G4,.piano-Bb4",
-    Ebmaj7: ".piano-Eb4,.piano-G4,.piano-Bb4,.piano-D5",
-    Eb7: ".piano-Eb4,.piano-G4,.piano-Bb4,.piano-Db5",
-    Ebm: ".piano-Eb4,.piano-Gb4,.piano-Bb4",
-    Ebm7: ".piano-Eb4,.piano-Gb4,.piano-Bb4,.piano-Db5",
-    Eb6: ".piano-Eb4,.piano-G4,.piano-Bb4,.piano-C5",
-    Eb7b9: ".piano-Eb4,.piano-G4,.piano-Bb4,.piano-Db5,.piano-E5",
-    Eb2Bass: ".piano-Eb3,.piano-Bb3",
-    E: ".piano-E4,.piano-Ab4,.piano-B4",
-    Emaj7: ".piano-E4,.piano-Ab4,.piano-B4,.piano-Eb5",
-    E7: ".piano-E4,.piano-Ab4,.piano-B4,.piano-D5",
-    Em: ".piano-E4,.piano-G4,.piano-B4",
-    Em7: ".piano-E4,.piano-G4,.piano-B4,.piano-D5",
-    E2Bass: ".piano-E3,.piano-B3",
-    F: ".piano-F4,.piano-A4,.piano-C5",
-    Fmaj7: ".piano-F4,.piano-A4,.piano-C5,.piano-E5",
-    F7: ".piano-F4,.piano-A4,.piano-C5,.piano-Eb5",
-    Fm: ".piano-F4,.piano-Ab4,.piano-C5",
-    Fm7: ".piano-F4,.piano-Ab4,.piano-C5,.piano-Eb5",
-    F2Bass: ".piano-F3,.piano-C4",
-    Gb: ".piano-Gb4,.piano-Bb4,.piano-Db5",
-    Gbmaj7: ".piano-Gb4,.piano-Bb4,.piano-Db5,.piano-F5",
-    Gb7: ".piano-Gb4,.piano-Bb4,.piano-Db5,.piano-E5",
-    Gbm: ".piano-Gb4,.piano-A4,.piano-Db5",
-    Gbm7: ".piano-Gb4,.piano-A4,.piano-Db5,.piano-E5",
-    Gb2Bass: ".piano-Gb3,.piano-Db4",
-    G: ".piano-G3,.piano-B3,.piano-D4",
-    Gmaj7: ".piano-G3,.piano-B3,.piano-D4,.piano-Gb4",
-    G7: ".piano-G3,.piano-B3,.piano-D4,.piano-F4",
-    Gm: ".piano-G3,.piano-Bb3,.piano-D4",
-    Gm7: ".piano-G3,.piano-Bb3,.piano-D4,.piano-F4",
-    G2Bass: ".piano-G2,.piano-D3",
-    Ab: ".piano-Ab3,.piano-C4,.piano-Eb4",
-    Abmaj7: ".piano-Ab3,.piano-C4,.piano-Eb4,.piano-G4",
-    Ab7: ".piano-Ab3,.piano-C4,.piano-Eb4,.piano-Gb4",
-    Abm: ".piano-Ab3,.piano-B3,.piano-Eb4",
-    Abm7: ".piano-Ab3,.piano-B3,.piano-Eb4,.piano-Gb4",
-    Abm9: ".piano-Ab3,.piano-B3,.piano-Eb4,.piano-Gb4,.piano-Bb4",
-    Ab2Bass: ".piano-Ab2,.piano-Eb3",
-    A: ".piano-A3,.piano-Db4,.piano-E4",
-    Amaj7: ".piano-A3,.piano-Db4,.piano-E4,.piano-Ab4",
-    A7: ".piano-A3,.piano-Db4,.piano-E4,.piano-G4",
-    Am: ".piano-A3,.piano-C4,.piano-E4",
-    Am7: ".piano-A3,.piano-C4,.piano-E4,.piano-G4",
-    A2Bass: ".piano-A2,.piano-E3",
-    Bb: ".piano-Bb3,.piano-D4,.piano-F4",
-    Bbmaj7: ".piano-Bb3,.piano-D4,.piano-F4,.piano-A4",
-    Bb7: ".piano-Bb3,.piano-D4,.piano-F4,.piano-Ab4",
-    Bbm: ".piano-Bb3,.piano-Db4,.piano-F4",
-    Bbm7: ".piano-Bb3,.piano-Db4,.piano-F4,.piano-Ab4",
-    Bb2Bass: ".piano-Bb2,.piano-F3",
-    B: ".piano-B3,.piano-Eb4,.piano-Gb4",
-    Bmaj7: ".piano-B3,.piano-Eb4,.piano-Gb4,.piano-Bb4",
-    B7: ".piano-B3,.piano-Eb4,.piano-Gb4,.piano-A4",
-    Bm: ".piano-B3,.piano-D4,.piano-Gb4",
-    Bm7: ".piano-B3,.piano-D4,.piano-Gb4,.piano-A4",
-    B2Bass: ".piano-B2,.piano-Gb3",
-  };
-  var playMap = {
-    twoBassAndChord: {
-      C: [formula["C"], formula["C2Bass"]].reverse().join(","),
-      Cmaj7: [formula["Cmaj7"], formula["C2Bass"]].reverse().join(","),
-      C7: [formula["C7"], formula["C2Bass"]].reverse().join(","),
-      Cm: [formula["Cm"], formula["C2Bass"]].reverse().join(","),
-      Cm7: [formula["Cm7"], formula["C2Bass"]].reverse().join(","),
-      Db: [formula["Db"], formula["Db2Bass"]].reverse().join(","),
-      Dbmaj7: [formula["Dbmaj7"], formula["Db2Bass"]].reverse().join(","),
-      Db7: [formula["Db7"], formula["Db2Bass"]].reverse().join(","),
-      Dbm: [formula["Dbm"], formula["Db2Bass"]].reverse().join(","),
-      Dbm7: [formula["Dbm7"], formula["Db2Bass"]].reverse().join(","),
-      D: [formula["D"], formula["D2Bass"]].reverse().join(","),
-      Dmaj7: [formula["Dmaj7"], formula["D2Bass"]].reverse().join(","),
-      D7: [formula["D7"], formula["D2Bass"]].reverse().join(","),
-      Dm: [formula["Dm"], formula["D2Bass"]].reverse().join(","),
-      Dm7: [formula["Dm7"], formula["D2Bass"]].reverse().join(","),
-      Eb: [formula["Eb"], formula["Eb2Bass"]].reverse().join(","),
-      Ebmaj7: [formula["Ebmaj7"], formula["Eb2Bass"]].reverse().join(","),
-      Eb7: [formula["Eb7"], formula["Eb2Bass"]].reverse().join(","),
-      Ebm: [formula["Ebm"], formula["Eb2Bass"]].reverse().join(","),
-      Ebm7: [formula["Ebm7"], formula["Eb2Bass"]].reverse().join(","),
-      Eb6: [formula["Eb6"], formula["Eb2Bass"]].reverse().join(","),
-      Eb7b9: [formula["Eb7b9"], formula["Eb2Bass"]].reverse().join(","),
-      E: [formula["E"], formula["E2Bass"]].reverse().join(","),
-      Emaj7: [formula["Emaj7"], formula["E2Bass"]].reverse().join(","),
-      E7: [formula["E7"], formula["E2Bass"]].reverse().join(","),
-      Em: [formula["Em"], formula["E2Bass"]].reverse().join(","),
-      Em7: [formula["Em7"], formula["E2Bass"]].reverse().join(","),
-      F: [formula["F"], formula["F2Bass"]].reverse().join(","),
-      Fmaj7: [formula["Fmaj7"], formula["F2Bass"]].reverse().join(","),
-      F7: [formula["F7"], formula["F2Bass"]].reverse().join(","),
-      Fm: [formula["Fm"], formula["F2Bass"]].reverse().join(","),
-      Fm7: [formula["Fm7"], formula["F2Bass"]].reverse().join(","),
-      Gb: [formula["Gb"], formula["Gb2Bass"]].reverse().join(","),
-      Gbmaj7: [formula["Gbmaj7"], formula["Gb2Bass"]].reverse().join(","),
-      Gb7: [formula["Gb7"], formula["Gb2Bass"]].reverse().join(","),
-      Gbm: [formula["Gbm"], formula["Gb2Bass"]].reverse().join(","),
-      Gbm7: [formula["Gbm7"], formula["Gb2Bass"]].reverse().join(","),
-      G: [formula["G"], formula["G2Bass"]].reverse().join(","),
-      Gmaj7: [formula["Gmaj7"], formula["G2Bass"]].reverse().join(","),
-      G7: [formula["G7"], formula["G2Bass"]].reverse().join(","),
-      Gm: [formula["Gm"], formula["G2Bass"]].reverse().join(","),
-      Gm7: [formula["Gm7"], formula["G2Bass"]].reverse().join(","),
-      Ab: [formula["Ab"], formula["Ab2Bass"]].reverse().join(","),
-      Abmaj7: [formula["Abmaj7"], formula["Ab2Bass"]].reverse().join(","),
-      Ab7: [formula["Ab7"], formula["Ab2Bass"]].reverse().join(","),
-      Abm: [formula["Abm"], formula["Ab2Bass"]].reverse().join(","),
-      Abm7: [formula["Abm7"], formula["Ab2Bass"]].reverse().join(","),
-      Abm9: [formula["Abm9"], formula["Ab2Bass"]].reverse().join(","),
-      A: [formula["A"], formula["A2Bass"]].reverse().join(","),
-      Amaj7: [formula["Amaj7"], formula["A2Bass"]].reverse().join(","),
-      A7: [formula["A7"], formula["A2Bass"]].reverse().join(","),
-      Am: [formula["Am"], formula["A2Bass"]].reverse().join(","),
-      Am7: [formula["Am7"], formula["A2Bass"]].reverse().join(","),
-      Bb: [formula["Bb"], formula["Bb2Bass"]].reverse().join(","),
-      Bbmaj7: [formula["Bbmaj7"], formula["Bb2Bass"]].reverse().join(","),
-      Bb7: [formula["Bb7"], formula["Bb2Bass"]].reverse().join(","),
-      Bbm: [formula["Bbm"], formula["Bb2Bass"]].reverse().join(","),
-      Bbm7: [formula["Bbm7"], formula["Bb2Bass"]].reverse().join(","),
-      B: [formula["B"], formula["B2Bass"]].reverse().join(","),
-      Bmaj7: [formula["Bmaj7"], formula["B2Bass"]].reverse().join(","),
-      B7: [formula["B7"], formula["B2Bass"]].reverse().join(","),
-      Bm: [formula["Bm"], formula["B2Bass"]].reverse().join(","),
-      Bm7: [formula["Bm7"], formula["B2Bass"]].reverse().join(","),
-    },
-  };
+  chordHint();
   var chordAnimate = (id) => {
     $("#" + id).animate(
       {
@@ -372,185 +429,6 @@
     }
   };
   var chordInfo = (str) => {
-    $(".chord-info").html(
-      "<strong>Ditekan : </strong>" + str.replaceAll(".piano-", "")
-    );
+    $(".chord-info").html("<strong>Ditekan : </strong>" + str);
   };
-  $(".chord").mousedown((e) => {
-    var str = playMap[playType.code][e.target.id.replace("chord-", "")];
-    console.log(str);
-    $(str).mousedown();
-    chordAnimate(e.target.id);
-    chordInfo(str);
-  });
-  $(".chord").mousedown((e) => {
-    var str = playMap[playType.code][e.target.id.replace("chord-", "")];
-    $(str).mouseup();
-    chordAnimate(e.target.id);
-    chordInfo(str);
-  });
-  var keymap = {
-    normal: {
-      1: "#chord-C",
-      "!": "#chord-Cmaj7",
-      q: "#chord-Cm",
-      Q: "#chord-Cm7",
-      a: "#chord-C7",
-      z: "#key-C3,#key-G3",
-      2: "#chord-Db",
-      w: "#chord-Dbm",
-      s: "#chord-Db7",
-      x: "#key-Db3,#key-Ab3",
-      3: "#chord-D",
-      e: "#chord-Dm",
-      c: "#key-D3,#key-A3",
-      4: "#chord-Eb",
-      r: "#chord-Ebm",
-      f: "#chord-Eb7",
-      v: "#key-Eb3,#key-Bb3",
-      5: "#chord-E",
-      t: "#chord-Em",
-      g: "#chord-E7",
-      b: "#key-E3,#key-B3",
-      6: "#chord-F",
-      y: "#chord-Fm",
-      h: "#chord-F7",
-      n: "#key-F3,#key-C4",
-      7: "#chord-Gb",
-      u: "#chord-Gbm",
-      j: "#chord-Gb7",
-      m: "#key-Gb3,#key-Db4",
-      8: "#chord-G",
-      i: "#chord-Gm",
-      k: "#chord-G7",
-      ",": "#key-G3,#key-D4",
-      9: "#chord-Ab",
-      o: "#chord-Abm",
-      l: "#chord-Ab7",
-      ".": "#key-Ab3,#key-Eb4",
-      0: "#chord-A",
-      p: "#chord-Am",
-      ";": "#chord-A7",
-      "/": "#key-A2,#key-E3",
-      "-": "#chord-Bb",
-      "[": "#chord-Bbm",
-      "'": "#chord-Bb7",
-      ArrowLeft: "#key-Bb2,#key-F3",
-      "=": "#chord-B",
-      "]": "#chord-Bm",
-      "\\": "#chord-B7",
-      "`": "#key-B2,#key-Gb3",
-    },
-    twoBassAndChord: {
-      1: playMap.twoBassAndChord.C,
-      "!": playMap.twoBassAndChord.Cmaj7,
-      q: playMap.twoBassAndChord.Cm,
-      Q: playMap.twoBassAndChord.Cm7,
-      a: playMap.twoBassAndChord.C7,
-      z: "#key-C3,#key-G3",
-      2: playMap.twoBassAndChord.Db,
-      "@": playMap.twoBassAndChord.Dbmaj7,
-      w: playMap.twoBassAndChord.Dbm,
-      W: playMap.twoBassAndChord.Dbm7,
-      s: playMap.twoBassAndChord.Db7,
-      x: "#key-Db3,#key-Ab3",
-      3: playMap.twoBassAndChord.D,
-      "#": playMap.twoBassAndChord.Dmaj7,
-      e: playMap.twoBassAndChord.Dm,
-      E: playMap.twoBassAndChord.Dm7,
-      d: playMap.twoBassAndChord.D7,
-      c: "#key-D3,#key-A3",
-      4: playMap.twoBassAndChord.Eb,
-      $: playMap.twoBassAndChord.Ebmaj7,
-      r: playMap.twoBassAndChord.Ebm,
-      R: playMap.twoBassAndChord.Ebm7,
-      f: playMap.twoBassAndChord.Eb7,
-      v: "#key-Eb3,#key-Bb3",
-      5: playMap.twoBassAndChord.E,
-      "%": playMap.twoBassAndChord.Emaj7,
-      t: playMap.twoBassAndChord.Em,
-      T: playMap.twoBassAndChord.Em7,
-      g: playMap.twoBassAndChord.E7,
-      b: "#key-E3,#key-B3",
-      6: playMap.twoBassAndChord.F,
-      "^": playMap.twoBassAndChord.Fmaj7,
-      y: playMap.twoBassAndChord.Fm,
-      Y: playMap.twoBassAndChord.Fm7,
-      h: playMap.twoBassAndChord.F7,
-      n: "#key-F3,#key-C4",
-      7: playMap.twoBassAndChord.Gb,
-      "&": playMap.twoBassAndChord.Gbmaj7,
-      u: playMap.twoBassAndChord.Gbm,
-      U: playMap.twoBassAndChord.Gbm7,
-      j: playMap.twoBassAndChord.Gb7,
-      m: "#key-Gb3,#key-Db4",
-      8: playMap.twoBassAndChord.G,
-      "*": playMap.twoBassAndChord.Gmaj7,
-      i: playMap.twoBassAndChord.Gm,
-      I: playMap.twoBassAndChord.Gm7,
-      k: playMap.twoBassAndChord.G7,
-      ",": "#key-G3,#key-D4",
-      9: playMap.twoBassAndChord.Ab,
-      "(": playMap.twoBassAndChord.Abmaj7,
-      o: playMap.twoBassAndChord.Abm,
-      O: playMap.twoBassAndChord.Abm7,
-      l: playMap.twoBassAndChord.Ab7,
-      ".": "#key-Ab3,#key-Eb4",
-      0: playMap.twoBassAndChord.A,
-      ")": playMap.twoBassAndChord.Amaj7,
-      p: playMap.twoBassAndChord.Am,
-      P: playMap.twoBassAndChord.Am7,
-      ";": playMap.twoBassAndChord.A7,
-      "/": "#key-A2,#key-E3",
-      "-": playMap.twoBassAndChord.Bb,
-      _: playMap.twoBassAndChord.Bbmaj7,
-      "[": playMap.twoBassAndChord.Bbm,
-      "{": playMap.twoBassAndChord.Bbm7,
-      "'": playMap.twoBassAndChord.Bb7,
-      ArrowLeft: "#key-Bb2,#key-F3",
-      "=": playMap.twoBassAndChord.B,
-      "+": playMap.twoBassAndChord.Bmaj7,
-      "]": playMap.twoBassAndChord.Bm,
-      "}": playMap.twoBassAndChord.Bm7,
-      "\\": playMap.twoBassAndChord.B7,
-      "`": "#key-B2,#key-Gb3",
-    },
-  };
-  // 
-  var chordWithHint = () => {
-    for (var key in keymap[playType.code]) {
-      var str = keymap[playType.code][key];
-      for (var ch in playMap[playType.code]) {
-        if (playMap[playType.code][ch] == str)
-          $("#chord-" + ch).html(ch + " <br>(" + key + ")");
-      }
-    }
-  };
-  chordWithHint();
-  $(".play-info").html("<strong>Tipe Bermain:</strong> " + playType.name);
-  var keyPress = (key = "", press = true) => {
-    console.log(key);
-    var str = keymap[playType.code][key];
-    if (str) {
-      chordInfo(str);
-      if (press) {
-        var found;
-        for (var key in playMap[playType.code]) {
-          if (playMap[playType.code][key] == str) found = key;
-        }
-        if (found) chordAnimate("chord-" + found);
-        $(str).mousedown();
-      }
-      if (!press) {
-        $(str).mouseup();
-      }
-    }
-  };
-  $(document).keydown((event) => {
-    keyPress(event.key, true);
-  });
-
-  $(document).keyup((event) => {
-    keyPress(event.key, false);
-  });
 })();

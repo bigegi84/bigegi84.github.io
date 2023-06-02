@@ -70,5 +70,11 @@ var state = {
         "Aplikasi web untuk memainkan bass dan chord piano melalui shortcut keyboard.",
       link: "/app/chord-player-piano",
     },
+    {
+      name: "Chord Player Ukulele",
+      description:
+        "Aplikasi web untuk memainkan chord ukulele.",
+      link: "/app/chord-player-ukulele",
+    },
   ],
 };

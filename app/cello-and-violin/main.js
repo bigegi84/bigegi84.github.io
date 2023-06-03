@@ -103,7 +103,7 @@
         const id = e.currentTarget.id;
         const note = id.replace("note-", "");
         if (note) {
-          // cello.tone.triggerRelease([note]);
+          cello.tone.triggerRelease([note]);
           cello.animate(note, false);
           cello.depressed[note] = false;
         }

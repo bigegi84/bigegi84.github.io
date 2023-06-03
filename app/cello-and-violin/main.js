@@ -1,35 +1,34 @@
 (() => {
-  const debug = !true;
+  const debug = true;
   let fadeout = true;
   let sustaining = true;
-  let lastChord = null;
-  let sustainMs = 1500;
-  const animate = (id) => {
-    $("#" + id).animate(
-      {
-        backgroundColor: "#88FFAA",
-      },
-      0
-    );
-    if (sustaining) {
-      setTimeout(() => {
-        $("#" + id).animate(
+  const cello = {
+    animate: (note, press = true) => {
+      if (press) {
+        $("#note-" + note).animate(
           {
-            backgroundColor: "#deb887",
+            backgroundColor: "#88FFAA",
+          },
+          0
+        );
+      } else {
+        $("#note-" + note).animate(
+          {
+            backgroundColor: note.search("b") == -1 ? "white" : "black",
           },
           300,
           "easeOutExpo"
         );
-      }, 1500);
-    }
-  };
-  const cello = {
+      }
+    },
     tone: new Tone.Sampler({
       urls: {
-        C3: "C3.ogg",
+        // C3: "C3.ogg",
         Eb3: "Eb3.ogg",
         Gb3: "Gb3.ogg",
+        G3: "G3.ogg",
         A3: "A3.ogg",
+        E4: "E4.ogg",
       },
       release: 1,
       baseUrl: "../../asset/sound/cello/",
@@ -48,6 +47,22 @@
       "F3",
       "Gb3",
     ],
+    keymap: {
+      z: "G2",
+      x: "Ab2",
+      c: "A2",
+      a: "Bb2",
+      s: "B2",
+      d: "C3",
+      q: "Db3",
+      w: "D3",
+      e: "Eb3",
+      1: "E3",
+      2: "F3",
+      3: "Gb3",
+    },
+    intervals: {},
+    depressed: {},
     draw: () => {
       let html = '<div class="piano-container"><div class="piano-keys">';
       cello.note.forEach((x) => {
@@ -76,20 +91,220 @@
     sound: () => {
       $(".note").mousedown((e) => {
         const id = e.currentTarget.id;
-        if (debug) console.log(e.currentTarget.id);
-        if (debug) console.log("#sound-" + id.replace("note-", ""));
+        const note = id.replace("note-", "");
+        if (cello.depressed[note]) {
+          return;
+        }
         if (id) {
-          cello.tone.triggerAttackRelease(
-            [id.replace("note-", "")],
-            sustainMs / 1000
-          );
-          // pianoAnimate(id);
+          cello.tone.triggerAttack([note]);
+          cello.animate(note, true);
+          cello.depressed[note] = true;
         }
       });
+      $(".note").mouseup((e) => {
+        const id = e.currentTarget.id;
+        const note = id.replace("note-", "");
+        if (note) {
+          // cello.tone.triggerRelease([note]);
+          cello.animate(note, false);
+          cello.depressed[note] = false;
+        }
+      });
+    },
+    keydown: (e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = cello.keymap[e.key];
+      if (!note) return;
+      if (cello.depressed[note]) {
+        return;
+      }
+      if (note) {
+        cello.tone.triggerAttack([note]);
+        cello.animate(note, true);
+        cello.depressed[note] = true;
+      }
+    },
+    keyup: (e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = cello.keymap[e.key];
+      if (note) {
+        cello.tone.triggerRelease([note]);
+        cello.animate(note, false);
+        cello.depressed[note] = false;
+      }
     },
   };
   cello.draw();
   cello.sound();
+  const violin = {
+    animate: (note, press = true) => {
+      if (press) {
+        $("#violin-note-" + note).animate(
+          {
+            backgroundColor: "#88FFAA",
+          },
+          0
+        );
+      } else {
+        $("#violin-note-" + note).animate(
+          {
+            backgroundColor: note.search("b") == -1 ? "white" : "black",
+          },
+          300,
+          "easeOutExpo"
+        );
+      }
+    },
+    tone: new Tone.Sampler({
+      urls: {
+        G3: "G3.ogg",
+        A3: "A3.ogg",
+        C4: "C4.ogg",
+        E4: "E4.ogg",
+      },
+      release: 1,
+      baseUrl: "../../asset/sound/violin/",
+    }).toDestination(),
+    sustain: 4000,
+    note: [
+      "G3",
+      "Ab3",
+      "A3",
+      "Bb3",
+      "B3",
+      "C4",
+      "Db4",
+      "D4",
+      "Eb4",
+      "E4",
+      "F4",
+      "Gb4",
+      "G4",
+      "Ab4",
+      "A4",
+      "Bb4",
+      "B4",
+      "C5",
+      "Db5",
+      "D5",
+      "Eb5",
+      "E5",
+      "F5",
+      "Gb5",
+    ],
+    keymap: {
+      v: "G3",
+      b: "Ab3",
+      n: "A3",
+      m: "Bb3",
+      ",": "B3",
+      ".": "C4",
+      f: "Db4",
+      g: "D4",
+      h: "Eb4",
+      j: "E4",
+      k: "F4",
+      l: "Gb4",
+      r: "G4",
+      t: "Ab4",
+      y: "A4",
+      u: "Bb4",
+      i: "B4",
+      o: "C5",
+      4: "Db5",
+      5: "D5",
+      6: "Eb5",
+      7: "E5",
+      8: "F5",
+      9: "Gb5",
+    },
+    intervals: {},
+    depressed: {},
+    draw: () => {
+      let html = '<div class="piano-container"><div class="piano-keys">';
+      violin.note.forEach((x) => {
+        if (x.search("b") == -1)
+          html +=
+            '<div id="violin-note-' +
+            x +
+            '" class="violin-note piano-white piano-' +
+            x +
+            '"><p class="note-info-white">' +
+            x +
+            "</p></div>";
+        else
+          html +=
+            '<div class="piano-black"><div id="violin-note-' +
+            x +
+            '" class="violin-note piano-black-raised piano-' +
+            x +
+            '"><p class="note-info-black">' +
+            x +
+            "</p></div></div>";
+      });
+      html += "</div></div>";
+      $("#violin").html(html);
+    },
+    sound: () => {
+      $(".violin-note").mousedown((e) => {
+        const id = e.currentTarget.id;
+        const note = id.replace("violin-note-", "");
+        if (debug) console.log(e.currentTarget.id);
+        if (violin.depressed[note]) {
+          return;
+        }
+        if (id) {
+          violin.tone.triggerAttack([note]);
+          violin.animate(note, true);
+          violin.depressed[note] = true;
+        }
+      });
+      $(".violin-note").mouseup((e) => {
+        const id = e.currentTarget.id;
+        const note = id.replace("violin-note-", "");
+        if (id) {
+          violin.tone.triggerRelease([note]);
+          violin.animate(note, false);
+          violin.depressed[note] = false;
+        }
+      });
+    },
+    keydown: (e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = violin.keymap[e.key];
+      if (violin.depressed[note]) {
+        return;
+      }
+      if (note) {
+        violin.tone.triggerAttack([note]);
+        violin.animate(note, true);
+        violin.depressed[note] = true;
+      }
+    },
+    keyup: (e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = violin.keymap[e.key];
+      if (note) {
+        violin.tone.triggerRelease([note]);
+        violin.animate(note, false);
+        violin.depressed[note] = false;
+      }
+    },
+  };
+  violin.draw();
+  violin.sound();
+  $(document).keydown((e) => {
+    cello.keydown(e);
+    violin.keydown(e);
+  });
+  $(document).keyup((e) => {
+    cello.keyup(e);
+    violin.keyup(e);
+  });
   // var keymap = {
   //   " ": "reverse",
   //   1: chord.C.C,

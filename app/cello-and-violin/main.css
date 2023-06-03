@@ -105,7 +105,6 @@ audio {
   flex-direction: column;
 }
 .chord {
-  
   width: 50px;
   height: 32px;
   background-color: white;
@@ -118,4 +117,26 @@ audio {
   height: 20%; */
   background-color: white;
   z-index: 1;
+}
+
+.note-info-white {
+  line-height: 1;
+  position: absolute;
+  font-size: small;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+  bottom: 0%;
+  left: 25%;
+}
+
+.note-info-black {
+  line-height: 1;
+  position: absolute;
+  font-size: xx-small;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  bottom: 0%;
+  left: 2%;
 }

@@ -4,6 +4,12 @@
   let sustaining = true;
   let lastChord = null;
   let sustainMs = 1500;
+  let depressed = {
+    1: {},
+    2: {},
+    3: {},
+    4: {},
+  };
   const bassElectric = new Tone.Sampler({
     urls: {
       Db1: "Db1.ogg",
@@ -107,142 +113,109 @@
     }
     $("#fret").html(html);
   };
-  const fretAnimate = (id) => {
-    $("#" + id).animate(
-      {
-        backgroundColor: "#88FFAA",
-      },
-      0
-    );
-    if (sustaining) {
-      setTimeout(() => {
-        $("#" + id).animate(
-          {
-            backgroundColor: "#deb887",
-          },
-          300,
-          "easeOutExpo"
-        );
-      }, 1500);
-    }
+  const fretAnimate = (fret, press = true) => {
+    if (press)
+      $("#fret-" + fret[0] + "-" + fret[1]).animate(
+        {
+          backgroundColor: "#88FFAA",
+        },
+        0
+      );
+    else
+      $("#fret-" + fret[0] + "-" + fret[1]).animate(
+        {
+          backgroundColor: "#deb887",
+        },
+        300,
+        "easeOutExpo"
+      );
   };
+
   const fretSound = () => {
     $(".fret").mousedown((e) => {
-      const id = e.target.id;
-      const note =
-        fret[id.replace("fret-", "").split("-")[0]][
-          id.replace("fret-", "").split("-")[1]
-        ];
-      bassElectric.triggerAttackRelease([note], sustainMs / 1000);
-      fretAnimate(id);
+      const id = e.currentTarget.id;
+      const fretLine = id.replace("fret-", "").split("-")[0];
+      const fretNumber = id.replace("fret-", "").split("-")[1];
+      const note = fret[fretLine][fretNumber];
+      console.log(fretLine);
+      console.log(fretNumber);
+      if (depressed[note]) {
+        return;
+      }
+      if (id) {
+        bassElectric.triggerAttack([note]);
+        fretAnimate([fretLine, fretNumber], true);
+        depressed[fretLine][fretNumber] = true;
+      }
+    });
+    $(".fret").mouseup((e) => {
+      const id = e.currentTarget.id;
+      const fretLine = id.replace("fret-", "").split("-")[0];
+      const fretNumber = id.replace("fret-", "").split("-")[1];
+      const note = fret[fretLine][fretNumber];
+      if (note) {
+        bassElectric.triggerRelease([note]);
+        fretAnimate([fretLine, fretNumber], false);
+        depressed[fretLine][fretNumber] = false;
+      }
     });
   };
-  // var keymap = {
-  //   " ": "reverse",
-  //   1: chord.C.C,
-  //   "!": chord.C.Cmaj7,
-  //   // q: playMap.twoBassAndChord.Cm,
-  //   // Q: playMap.twoBassAndChord.Cm7,
-  //   a: chord.C.C7,
-  //   // z: "#key-C3,#key-G3",
-  //   // 2: playMap.twoBassAndChord.Db,
-  //   // "@": playMap.twoBassAndChord.Dbmaj7,
-  //   // w: playMap.twoBassAndChord.Dbm,
-  //   // W: playMap.twoBassAndChord.Dbm7,
-  //   // s: playMap.twoBassAndChord.Db7,
-  //   // x: "#key-Db3,#key-Ab3",
-  //   // 3: playMap.twoBassAndChord.D,
-  //   // "#": playMap.twoBassAndChord.Dmaj7,
-  //   e: chord.D.Dm,
-  //   // E: playMap.twoBassAndChord.Dm7,
-  //   // d: playMap.twoBassAndChord.D7,
-  //   // c: "#key-D3,#key-A3",
-  //   // 4: playMap.twoBassAndChord.Eb,
-  //   // $: playMap.twoBassAndChord.Ebmaj7,
-  //   // r: playMap.twoBassAndChord.Ebm,
-  //   // R: playMap.twoBassAndChord.Ebm7,
-  //   // f: playMap.twoBassAndChord.Eb7,
-  //   // v: "#key-Eb3,#key-Bb3",
-  //   5: chord.E.E,
-  //   // "%": playMap.twoBassAndChord.Emaj7,
-  //   // t: playMap.twoBassAndChord.Em,
-  //   // T: playMap.twoBassAndChord.Em7,
-  //   // g: playMap.twoBassAndChord.E7,
-  //   // b: "#key-E3,#key-B3",
-  //   // 6: playMap.twoBassAndChord.F,
-  //   // "^": playMap.twoBassAndChord.Fmaj7,
-  //   // y: playMap.twoBassAndChord.Fm,
-  //   // Y: playMap.twoBassAndChord.Fm7,
-  //   // h: playMap.twoBassAndChord.F7,
-  //   // n: "#key-F3,#key-C4",
-  //   // 7: playMap.twoBassAndChord.Gb,
-  //   // "&": playMap.twoBassAndChord.Gbmaj7,
-  //   // u: playMap.twoBassAndChord.Gbm,
-  //   // U: playMap.twoBassAndChord.Gbm7,
-  //   // j: playMap.twoBassAndChord.Gb7,
-  //   // m: "#key-Gb3,#key-Db4",
-  //   8: chord.G.G,
-  //   // "*": playMap.twoBassAndChord.Gmaj7,
-  //   // i: playMap.twoBassAndChord.Gm,
-  //   // I: playMap.twoBassAndChord.Gm7,
-  //   // k: playMap.twoBassAndChord.G7,
-  //   // ",": "#key-G3,#key-D4",
-  //   // 9: playMap.twoBassAndChord.Ab,
-  //   // "(": playMap.twoBassAndChord.Abmaj7,
-  //   // o: playMap.twoBassAndChord.Abm,
-  //   // O: playMap.twoBassAndChord.Abm7,
-  //   // l: playMap.twoBassAndChord.Ab7,
-  //   // ".": "#key-Ab3,#key-Eb4",
-  //   // 0: playMap.twoBassAndChord.A,
-  //   // ")": playMap.twoBassAndChord.Amaj7,
-  //   // p: playMap.twoBassAndChord.Am,
-  //   // P: playMap.twoBassAndChord.Am7,
-  //   // ";": playMap.twoBassAndChord.A7,
-  //   // "/": "#key-A2,#key-E3",
-  //   // "-": playMap.twoBassAndChord.Bb,
-  //   // _: playMap.twoBassAndChord.Bbmaj7,
-  //   // "[": playMap.twoBassAndChord.Bbm,
-  //   // "{": playMap.twoBassAndChord.Bbm7,
-  //   // "'": playMap.twoBassAndChord.Bb7,
-  //   // ArrowLeft: "#key-Bb2,#key-F3",
-  //   // "=": playMap.twoBassAndChord.B,
-  //   // "+": playMap.twoBassAndChord.Bmaj7,
-  //   "]": chord.B.Bm,
-  //   // "}": playMap.twoBassAndChord.Bm7,
-  //   // "\\": playMap.twoBassAndChord.B7,
-  //   // "`": "#key-B2,#key-Gb3",
-  // };
-  // const keyPress = () => {
-  //   $(document).keydown((e) => {
-  //     if (debug) console.log(e.key);
-  //     if (e.key == " ") e.preventDefault();
-  //     var str = keymap[e.key];
-  //     if (str) {
-  //       if (str == "reverse" && lastChord != null) {
-  //         let ms = 0;
-  //         lastChord.reverse().forEach((it) => {
-  //           setTimeout(() => {
-  //             $(it).mousedown();
-  //           }, ms);
-  //           ms = ms + sustainMs;
-  //         });
-  //       } else {
-  //         const jqCode = [];
-  //         for (var i = 0; i < str.length; i++) {
-  //           jqCode.push("#fret-" + (4 - i) + "-" + str.charAt(i));
-  //         }
-  //         let ms = 0;
-  //         jqCode.forEach((it) => {
-  //           setTimeout(() => {
-  //             $(it).mousedown();
-  //           }, ms);
-  //           ms = ms + sustainMs;
-  //         });
-  //         lastChord = jqCode;
-  //       }
-  //     }
-  //   });
-  // };
+  var keymap = {
+    z: [4, 0],
+    x: [4, 1],
+    c: [4, 2],
+    v: [4, 3],
+    v: [4, 4],
+
+    a: [3, 0],
+    s: [3, 1],
+    d: [3, 2],
+    f: [3, 3],
+    g: [3, 4],
+
+    q: [2, 0],
+    w: [2, 1],
+    e: [2, 2],
+    r: [2, 3],
+    t: [2, 4],
+
+    1: [1, 0],
+    2: [1, 1],
+    3: [1, 2],
+    4: [1, 3],
+    5: [1, 4],
+  };
+  const keyPress = () => {
+    $(document).keydown((e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = keymap[e.key];
+      if (!note) return;
+      if (depressed[note[0]][note[1]]) {
+        return;
+      }
+      if (note) {
+        bassElectric.triggerAttack([fret[note[0]][note[1]]]);
+        fretAnimate(note, true);
+        depressed[note[0]][note[1]] = true;
+      }
+    });
+    $(document).keyup((e) => {
+      if (debug) console.log(e.key);
+      if (e.key == " ") e.preventDefault();
+      var note = keymap[e.key];
+      console.log(note);
+      console.log(depressed[note[0]][note[1]]);
+      if (!note) return;
+      if (note) {
+        console.log(note);
+        bassElectric.triggerRelease([fret[note[0]][note[1]]]);
+        fretAnimate(note, false);
+        depressed[note[0]][note[1]] = false;
+      }
+    });
+  };
+  keyPress();
   // var keyHint = () => {
   //   for (var key in keymap) {
   //     var str = keymap[key];

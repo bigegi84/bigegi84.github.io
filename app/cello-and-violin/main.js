@@ -46,21 +46,44 @@
       "B2",
     ],
     keymap: {
-      z: "C2",
-      x: "Db2",
-      c: "D2",
-      a: "Eb2",
-      s: "E2",
-      d: "F2",
-      q: "Gb2",
-      w: "G2",
-      e: "Ab2",
       1: "A2",
       2: "Bb2",
       3: "B2",
+      q: "Gb2",
+      w: "G2",
+      e: "Ab2",
+      a: "Eb2",
+      s: "E2",
+      d: "F2",
+      z: "C2",
+      x: "Db2",
+      c: "D2",
     },
     intervals: {},
     depressed: {},
+    keymapDraw: () => {
+      let html = '<div class="contaner">';
+      let i = 1;
+      for (var key in cello.keymap) {
+        if (i == 1) html += '<div style="display: flex;">';
+        html +=
+          '<div class="hint ' +
+          (cello.keymap[key].search("b") != -1 ? "hint-black" : "") +
+          '"><p>' +
+          key +
+          " (" +
+          cello.keymap[key] +
+          ")</p></div>";
+        i++;
+        if (i == 4) {
+          html += "</div>";
+          i = 1;
+        }
+      }
+      html += "</div>";
+      console.log(html);
+      $("#cello-keymap").html(html);
+    },
     draw: () => {
       let html = '<div class="piano-container"><div class="piano-keys">';
       cello.note.forEach((x) => {
@@ -136,6 +159,7 @@
   };
   cello.draw();
   cello.sound();
+  cello.keymapDraw();
   const violin = {
     animate: (note, press = true) => {
       if (press) {
@@ -193,30 +217,55 @@
       "B4",
     ],
     keymap: {
-      v: "C3",
-      b: "Db3",
-      n: "D3",
-      m: "Eb3",
-      ",": "E3",
-      ".": "F3",
-      f: "Gb3",
-      g: "G3",
-      h: "Ab3",
-      j: "A3",
-      k: "Bb3",
-      l: "B3",
-      r: "C4",
-      t: "Db4",
-      y: "D4",
-      u: "Eb4",
-      i: "E4",
-      o: "F4",
       4: "Gb4",
       5: "G4",
       6: "Ab4",
       7: "A4",
       8: "Bb4",
       9: "B4",
+      r: "C4",
+      t: "Db4",
+      y: "D4",
+      u: "Eb4",
+      i: "E4",
+      o: "F4",
+
+      f: "Gb3",
+      g: "G3",
+      h: "Ab3",
+      j: "A3",
+      k: "Bb3",
+      l: "B3",
+
+      v: "C3",
+      b: "Db3",
+      n: "D3",
+      m: "Eb3",
+      ",": "E3",
+      ".": "F3",
+    },
+    keymapDraw: () => {
+      let html = '<div class="contaner">';
+      let i = 1;
+      for (var key in violin.keymap) {
+        if (i == 1) html += '<div style="display: flex;">';
+        html +=
+          '<div class="hint ' +
+          (violin.keymap[key].search("b") != -1 ? "hint-black" : "") +
+          '"><p>' +
+          key +
+          " (" +
+          violin.keymap[key] +
+          ")</p></div>";
+        i++;
+        if (i == 7) {
+          html += "</div>";
+          i = 1;
+        }
+      }
+      html += "</div>";
+      console.log(html);
+      $("#violin-keymap").html(html);
     },
     intervals: {},
     depressed: {},
@@ -295,6 +344,7 @@
   };
   violin.draw();
   violin.sound();
+  violin.keymapDraw()
   $(document).keydown((e) => {
     cello.keydown(e);
     violin.keydown(e);

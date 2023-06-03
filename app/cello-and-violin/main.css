@@ -2,6 +2,26 @@ audio {
   display: none;
 }
 
+.hint {
+  text-align: center;
+  width: 50px;
+  font-size: small;
+  font-weight: bold;
+  height: 44px;
+  background-color: white;
+  z-index: 1;
+  border-radius: 1px;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+}
+
+.hint-black {
+  background: black;
+  color: white;
+}
+
 .piano-javascript {
   border: 3px solid #f88;
   display: block;

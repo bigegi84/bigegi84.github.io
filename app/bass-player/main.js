@@ -3,7 +3,7 @@
   let fadeout = true;
   let sustaining = true;
   let lastChord = null;
-  let sustainMs = 1500;
+  let sustainMs = 500;
   let depressed = {
     1: {},
     2: {},
@@ -165,7 +165,7 @@
     x: [4, 1],
     c: [4, 2],
     v: [4, 3],
-    v: [4, 4],
+    b: [4, 4],
 
     a: [3, 0],
     s: [3, 1],
@@ -215,30 +215,8 @@
       }
     });
   };
-  keyPress();
-  // var keyHint = () => {
-  //   for (var key in keymap) {
-  //     var str = keymap[key];
-  //     for (var chLine in chord) {
-  //       for (var ch in chord[chLine]) {
-  //         if (chord[chLine][ch] == str) {
-  //           if (debug) console.log("#chord-" + chLine + "-" + ch);
-  //           $("#chord-" + chLine + "-" + ch).html(ch + " <br>(" + key + ")");
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
-  const sustainInput = () => {
-    $("#sustain-ms").change((e) => {
-      if (debug) console.log(e.target.value);
-      if (e.target.value) sustainMs = parseInt(e.target.value);
-    });
-  };
   // main
   fretDraw();
   fretSound();
-  // keyPress();
-  // keyHint();
-  sustainInput();
+  keyPress();
 })();

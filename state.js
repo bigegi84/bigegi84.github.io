@@ -72,9 +72,18 @@ var state = {
     },
     {
       name: "Chord Player Ukulele",
-      description:
-        "Aplikasi web untuk memainkan chord ukulele.",
+      description: "Aplikasi web untuk memainkan chord ukulele.",
       link: "/app/chord-player-ukulele",
+    },
+    {
+      name: "Bass Player",
+      description: "Aplikasi web untuk memainkan bas.",
+      link: "/app/bass-player",
+    },
+    {
+      name: "Cello and Violin",
+      description: "Aplikasi web untuk memainkan chord ukulele.",
+      link: "/app/cello-and-violin",
     },
   ],
 };

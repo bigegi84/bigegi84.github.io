@@ -11,8 +11,7 @@
         rel="stylesheet"
         href="../../template/story/assets/css/noscript.css"
     /></noscript>
-    <link rel="stylesheet" href="piano.css" />
-    <title>bigegi84-Chord Player Piano</title>
+    <link rel="stylesheet" href="main.css" />
   </head>
 
   <body class="is-preload">
@@ -21,19 +20,23 @@
         class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right"
       >
         <div class="content">
-          <h2>bigegi84 - Chord Player Ukulele</h2>
+          <h2>bigegi84 - Bass Player</h2>
           <div class="major">
             <div>
               <p class="play-info" style="margin: 0">
-                <strong>Delay Genjreng: </strong>
-                <input id="input-delay" title="Delay" type="number" value="40" />
+                <strong>Sustain (ms): </strong>
+                <input
+                  id="sustain-ms"
+                  title="Delay"
+                  type="number"
+                  value="1500"
+                />
               </p>
               <p class="chord-info" style="margin: 0">
                 <strong>Ditekan:</strong>
               </p>
               <div>
-                <!-- <div id="chord" class="chord-container"></div> -->
-                <div id="ukulele"></div>
+                <div id="fret"></div>
               </div>
             </div>
           </div>
@@ -115,7 +118,7 @@
       $(document).ready(() => {
         helper.socialLink();
         var prefix = ".bigegi84-";
-        document.title = "bigegi84 - Chord Player Piano";
+        document.title = "bigegi84 - Bass Player";
         $(prefix + "icon").attr("href", "../../gold.ico");
         $(prefix + "copyright").html(
           "&copy; " +
@@ -127,6 +130,6 @@
         );
       });
     </script>
-    <script src="piano.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

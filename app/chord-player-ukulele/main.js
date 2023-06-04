@@ -2,6 +2,17 @@
   const debug = !true;
   let lastChord = null;
   const ukulele = {
+    theme: {
+      fret: {
+        backgroundColor: "#83764f",
+      },
+      chord: {
+        backgroundColor: "#a0d8b3",
+      },
+      chordMol: {
+        backgroundColor: "#008080",
+      },
+    },
     tone: new Tone.Sampler({
       urls: {
         A4: "A4.mp3",
@@ -94,7 +105,7 @@
         if (!press) {
           $("#" + id).animate(
             {
-              backgroundColor: "#deb887",
+              backgroundColor: ukulele.theme.fret.backgroundColor,
             },
             300,
             "easeOutExpo"
@@ -251,9 +262,14 @@
             0
           );
         if (!press) {
+          const info = id.replace("chord-", "").split("-")[0];
+          console.log(info);
           $("#" + id).animate(
             {
-              backgroundColor: "white",
+              backgroundColor:
+                info.search("b") == -1
+                  ? ukulele.theme.chord.backgroundColor
+                  : ukulele.theme.chordMol.backgroundColor,
             },
             300,
             "easeOutExpo"
@@ -342,7 +358,7 @@
           if (ukulele.mode.value == "solo") {
             const fretMap = ukulele.keymap.value[ukulele.mode.value][key];
             $("#fret-" + fretMap[0] + "-" + fretMap[1]).html(
-              ukulele.fret.value[fretMap[0]][fretMap[1]] + " <br>(" + key + ")"
+              ukulele.fret.value[fretMap[0]][fretMap[1]] + " (" + key + ")"
             );
           }
         }

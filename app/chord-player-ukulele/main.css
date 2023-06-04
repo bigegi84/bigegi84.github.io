@@ -86,7 +86,7 @@ audio {
   cursor: pointer;
   width: 50px;
   height: 32px;
-  background-color: #A0D8B3;
+  background-color: #a0d8b3;
   z-index: 1;
   line-height: 1;
   text-align: center;
@@ -109,6 +109,7 @@ audio {
 }
 .fret {
   /* border-radius: 2px; */
+  line-height: 1;
   font-weight: bold;
   border-color: #222;
   border-style: solid;
@@ -116,7 +117,8 @@ audio {
   cursor: pointer;
   width: 50px;
   height: 24px;
-  background-color: burlywood;
+  /* background-color: burlywood; */
+  background-color: #83764f;
   z-index: 1;
   display: flex;
   justify-content: center;

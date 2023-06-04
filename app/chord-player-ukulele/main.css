@@ -111,6 +111,7 @@ audio {
   /* border-radius: 2px; */
   line-height: 1;
   font-weight: bold;
+  font-size: small;
   border-color: #222;
   border-style: solid;
   border-width: 1px 1px 1px 1px;

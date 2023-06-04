@@ -3,14 +3,14 @@
   const cello = {
     animate: (note, press = true) => {
       if (press) {
-        $("#note-" + note).animate(
+        $("#note-" + note + ",#hint-" + note).animate(
           {
             backgroundColor: "#88FFAA",
           },
           0
         );
       } else {
-        $("#note-" + note).animate(
+        $("#note-" + note + ",#hint-" + note).animate(
           {
             backgroundColor: note.search("b") == -1 ? "white" : "black",
           },
@@ -67,7 +67,9 @@
       for (var key in cello.keymap) {
         if (i == 1) html += '<div style="display: flex;">';
         html +=
-          '<div class="hint ' +
+          '<div id="hint-' +
+          cello.keymap[key] +
+          '" class="hint ' +
           (cello.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
           key +
@@ -163,14 +165,14 @@
   const violin = {
     animate: (note, press = true) => {
       if (press) {
-        $("#violin-note-" + note).animate(
+        $("#violin-note-" + note + ",#hint-" + note).animate(
           {
             backgroundColor: "#88FFAA",
           },
           0
         );
       } else {
-        $("#violin-note-" + note).animate(
+        $("#violin-note-" + note + ",#hint-" + note).animate(
           {
             backgroundColor: note.search("b") == -1 ? "white" : "black",
           },
@@ -250,7 +252,9 @@
       for (var key in violin.keymap) {
         if (i == 1) html += '<div style="display: flex;">';
         html +=
-          '<div class="hint ' +
+          '<div id="hint-' +
+          violin.keymap[key] +
+          '" class="hint ' +
           (violin.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
           key +
@@ -344,7 +348,7 @@
   };
   violin.draw();
   violin.sound();
-  violin.keymapDraw()
+  violin.keymapDraw();
   $(document).keydown((e) => {
     cello.keydown(e);
     violin.keydown(e);

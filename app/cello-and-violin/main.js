@@ -10,9 +10,16 @@
           0
         );
       } else {
-        $("#note-" + note + ",#hint-" + note).animate(
+        $("#note-" + note).animate(
           {
             backgroundColor: note.search("b") == -1 ? "white" : "black",
+          },
+          300,
+          "easeOutExpo"
+        );
+        $("#hint-" + note).animate(
+          {
+            backgroundColor: note.search("b") == -1 ? "#D7C0AE" : "#967E76",
           },
           300,
           "easeOutExpo"
@@ -72,9 +79,9 @@
           '" class="hint ' +
           (cello.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
-          key +
-          " (" +
           cello.keymap[key] +
+          " (" +
+          key +
           ")</p></div>";
         i++;
         if (i == 4) {
@@ -172,9 +179,16 @@
           0
         );
       } else {
-        $("#violin-note-" + note + ",#hint-" + note).animate(
+        $("#violin-note-" + note).animate(
           {
             backgroundColor: note.search("b") == -1 ? "white" : "black",
+          },
+          300,
+          "easeOutExpo"
+        );
+        $("#hint-" + note).animate(
+          {
+            backgroundColor: note.search("b") == -1 ? "#D7C0AE" : "#967E76",
           },
           300,
           "easeOutExpo"
@@ -187,24 +201,22 @@
         A3: "A3.ogg",
         C4: "C4.ogg",
         E4: "E4.ogg",
+        G4: "G4.ogg",
+        A4: "A4.ogg",
+        C5: "C5.ogg",
+        E5: "E5.ogg",
+        G5: "G5.ogg",
+        A5: "A5.ogg",
+        C6: "C6.ogg",
+        E6: "E6.ogg",
+        G6: "G6.ogg",
+        A6: "A6.ogg",
       },
       release: 1,
       baseUrl: "../../asset/sound/violin/",
     }).toDestination(),
     sustain: 4000,
     note: [
-      "C3",
-      "Db3",
-      "D3",
-      "Eb3",
-      "E3",
-      "F3",
-      "Gb3",
-      "G3",
-      "Ab3",
-      "A3",
-      "Bb3",
-      "B3",
       "C4",
       "Db4",
       "D4",
@@ -217,34 +229,46 @@
       "A4",
       "Bb4",
       "B4",
+      "C5",
+      "Db5",
+      "D5",
+      "Eb5",
+      "E5",
+      "F5",
+      "Gb5",
+      "G5",
+      "Ab5",
+      "A5",
+      "Bb5",
+      "B5",
     ],
     keymap: {
-      4: "Gb4",
-      5: "G4",
-      6: "Ab4",
-      7: "A4",
-      8: "Bb4",
-      9: "B4",
-      r: "C4",
-      t: "Db4",
-      y: "D4",
-      u: "Eb4",
-      i: "E4",
-      o: "F4",
+      4: "Gb5",
+      5: "G5",
+      6: "Ab5",
+      7: "A5",
+      8: "Bb5",
+      9: "B5",
+      r: "C5",
+      t: "Db5",
+      y: "D5",
+      u: "Eb5",
+      i: "E5",
+      o: "F5",
 
-      f: "Gb3",
-      g: "G3",
-      h: "Ab3",
-      j: "A3",
-      k: "Bb3",
-      l: "B3",
+      f: "Gb4",
+      g: "G4",
+      h: "Ab4",
+      j: "A4",
+      k: "Bb4",
+      l: "B4",
 
-      v: "C3",
-      b: "Db3",
-      n: "D3",
-      m: "Eb3",
-      ",": "E3",
-      ".": "F3",
+      v: "C4",
+      b: "Db4",
+      n: "D4",
+      m: "Eb4",
+      ",": "E4",
+      ".": "F4",
     },
     keymapDraw: () => {
       let html = '<div class="contaner">';
@@ -257,9 +281,9 @@
           '" class="hint ' +
           (violin.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
-          key +
-          " (" +
           violin.keymap[key] +
+          " (" +
+          key +
           ")</p></div>";
         i++;
         if (i == 7) {

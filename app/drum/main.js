@@ -119,4 +119,88 @@
   drumDraw();
   handleKeymap();
   handleMouse();
+  const gamepadHandle = () => {
+    const { GamepadListener } = gamepad;
+    const outputs = document.getElementsByClassName("output");
+    const titles = document.getElementsByTagName("h3");
+
+    function output(index, message) {
+      const container = outputs[index];
+      container.innerText = message.toString() + "\n" + container.innerText;
+    }
+
+    const listener = new GamepadListener({
+      deadZone: 0.05,
+      precision: 3,
+    });
+
+    listener.on("gamepad:connected", (event) => {
+      // const { index, gamepad } = event.detail;
+      // const title = titles[index];
+      // if (typeof title.defaultText === "undefined") {
+      //   title.defaultText = title.innerText;
+      // }
+      // title.innerText = gamepad.id;
+      // output(index, `Connected: ${gamepad.id}`, event.detail);
+    });
+
+    listener.on("gamepad:disconnected", (event) => {
+      const { index } = event.detail;
+      const title = titles[index];
+    });
+
+    listener.on("gamepad:axis", (event) => {
+      const { index, axis, value } = event.detail;
+    });
+
+    const gamepadDepressed = {};
+    const gamepadKey = {
+      A: 0,
+      X: 2,
+      Y: 3,
+      Up: 12,
+      Left: 14,
+      Right: 15,
+      Down: 13,
+      RB: 5,
+    };
+    const gamepadMap = {
+      [gamepadKey.RB]: note.snare,
+      [gamepadKey.X]: note.snare,
+      [gamepadKey.A]: note.bass,
+      [gamepadKey.Up]: note.crash,
+      [gamepadKey.Right]: note.hihatOpen,
+      [gamepadKey.Down]: note.hihatClosed,
+      [gamepadKey.Left]: note.rideCrash,
+    };
+    listener.on("gamepad:button", (event) => {
+      const { index, button, value, pressed } = event.detail;
+      console.log(
+        index,
+        "Button [" +
+          button +
+          "] " +
+          (pressed ? "pressed" : "released") +
+          ": " +
+          value,
+        event.detail
+      );
+      const note = gamepadMap[button];
+      if (note) {
+        if (pressed) {
+          $("#sound-" + note)
+            .clone()[0]
+            .play();
+          gamepadDepressed[button] = true;
+          animate(note);
+        } else {
+          gamepadDepressed[button] = false;
+          animate(note, false);
+        }
+      }
+    });
+
+    listener.start();
+  };
+  gamepadHandle();
 })();

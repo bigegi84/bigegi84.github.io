@@ -22,9 +22,11 @@
     y: note.tomtomSmall[0],
     u: note.tomtomSmall[0],
 
+    2: note.snare[0],
     i: note.snare[0],
     o: note.snare[0],
     p: note.snare[0],
+    "[": note.snare[0],
 
     h: note.tomtomMedium[0],
     j: note.tomtomMedium[0],
@@ -32,6 +34,7 @@
     k: note.bass[0],
     l: note.bass[0],
     ";": note.bass[0],
+    "'": note.bass[0],
 
     a: note.hihatClosed[0],
     s: note.hihatClosed[0],

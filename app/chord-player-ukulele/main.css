@@ -50,9 +50,7 @@ audio {
 }
 
 .piano-white,
-.piano-black-raised,
-.chord,
-.fret {
+.piano-black-raised {
   border-radius: 2px;
   border-color: #222;
   border-style: solid;
@@ -60,7 +58,7 @@ audio {
   cursor: pointer;
 }
 
-.piano-white {
+/* .piano-white {
   width: 24px;
   height: 100px;
   background-color: white;
@@ -79,20 +77,25 @@ audio {
   position: relative;
   left: -10px;
   background-color: black;
-}
-
-.fret-line {
-  display: flex;
-  flex-direction: row;
-}
-.fret {
+} */
+.chord {
+  /* border-radius: 2px; */
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
   width: 50px;
-  height: 24px;
-  background-color: burlywood;
+  height: 32px;
+  background-color: #A0D8B3;
   z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  line-height: 1;
+  text-align: center;
+  font-size: small;
+  font-weight: bold;
+  z-index: 1;
+}
+.chord-mol {
+  background-color: teal;
 }
 .chord-container {
   display: flex;
@@ -104,18 +107,22 @@ audio {
   display: flex;
   flex-direction: column;
 }
-.chord {
-  
-  width: 50px;
-  height: 32px;
-  background-color: white;
-  z-index: 1;
-  line-height: 1;
-  text-align: center;
-  font-size: small;
+.fret {
+  /* border-radius: 2px; */
   font-weight: bold;
-  /* width: 20%;
-  height: 20%; */
-  background-color: white;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  width: 50px;
+  height: 24px;
+  background-color: burlywood;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fret-line {
+  display: flex;
+  flex-direction: row;
 }

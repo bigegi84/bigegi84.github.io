@@ -11,7 +11,7 @@
         rel="stylesheet"
         href="../../template/story/assets/css/noscript.css"
     /></noscript>
-    <link rel="stylesheet" href="piano.css" />
+    <link rel="stylesheet" href="main.css" />
     <title>bigegi84-Chord Player Piano</title>
   </head>
 
@@ -26,11 +26,28 @@
             <div>
               <p class="play-info" style="margin: 0">
                 <strong>Delay Genjreng: </strong>
-                <input id="input-delay" title="Delay" type="number" value="40" />
+                <input
+                  id="input-delay"
+                  title="Delay"
+                  type="number"
+                  value="40"
+                />
               </p>
               <p class="chord-info" style="margin: 0">
                 <strong>Ditekan:</strong>
               </p>
+              <div class="field third">
+                <input
+                  type="radio"
+                  id="mode-chord"
+                  name="mode"
+                  checked=""
+                  value="chord"
+                />
+                <label for="mode-chord">Chord</label>
+                <input type="radio" id="mode-solo" name="mode" value="solo" />
+                <label for="mode-solo">Solo</label>
+              </div>
               <div>
                 <div id="chord" class="chord-container"></div>
                 <div id="ukulele"></div>
@@ -127,6 +144,6 @@
         );
       });
     </script>
-    <script src="piano.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

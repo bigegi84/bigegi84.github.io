@@ -3,6 +3,7 @@
   var delayMs = 0;
   var animateMs = 1500;
   let depressed = {};
+  let activeKeymap = true;
   var sustaining = true;
   var sustainMs = 1500;
   var playType = {
@@ -171,11 +172,29 @@
       );
     }
   };
+  let interval = null;
+  const noteDuration = (start = true) => {
+    if (start) {
+      if (!interval) {
+        var startTime = Date.now();
+        interval = setInterval(() => {
+          var elapsedTime = Date.now() - startTime;
+          document.getElementById("timer").innerHTML = (
+            elapsedTime / 1000
+          ).toFixed(3);
+        }, 1);
+      }
+    } else {
+      clearInterval(interval);
+      interval = null;
+    }
+  };
   const noteMouseHandle = () => {
     $(".note").mousedown((e) => {
       const id = e.currentTarget.id;
       if (id) {
         tone.triggerAttack([id.replace("note-", "")]);
+        noteDuration(true);
         noteAnimate(id);
       }
     });
@@ -188,6 +207,7 @@
             Tone.now() + sustainMs / 1000
           );
         if (!sustaining) tone.triggerRelease([id.replace("note-", "")]);
+        noteDuration(false);
         noteAnimate(id, false);
       }
     });
@@ -454,6 +474,7 @@
   const keyPress = () => {
     $(document).keydown((e) => {
       // e.preventDefault();
+      if (!activeKeymap) return;
       if (depressed[e.key]) return;
       depressed[e.key] = true;
       var str = keymap[e.key];
@@ -532,22 +553,39 @@
   var chordInfo = (str) => {
     $(".chord-info").html("<strong>Ditekan : </strong>" + str);
   };
+  const searchChord = (chRaw) => {
+    const ch = chRaw.replace("#", "");
+    const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
+    console.log(chLine);
+    return "#chord-" + chLine + "-" + ch;
+  };
   $("#play").mousedown(() => {
+    const text = $("#sheet-text").val();
+    // console.log(text);
     let sec = 0;
-    song.ibuKitaKartini.forEach((it) => {
+    text.split(" ").forEach((it) => {
+      const note = it.split("-")[0];
+      const duration = parseFloat(it.split("-")[1]);
+      const code = note
+        .split(",")
+        .map((it) => {
+          if (it.search("#") == -1) return "#note-" + it;
+          if (it.search("#") != -1) return searchChord(it);
+        })
+        .join(",");
+      console.log(code);
       setTimeout(() => {
-        $("#note-" + it[0]).mousedown();
+        $(code).mousedown();
       }, sec * 1000);
       setTimeout(() => {
-        $("#note-" + it[0]).mouseup();
-      }, (sec + it[1]) * 1000);
-      sec += it[1];
+        $(code).mouseup();
+      }, (sec + duration) * 1000);
+      sec += duration;
     });
   });
-  let text = "";
-  song.ibuKitaKartini.forEach((it, i) => {
-    text += it[0] + "-" + it[1];
-    if (i < song.ibuKitaKartini.length - 1) text += " ";
+  $("#sheet-label").text("Mahalini - Sisa Rasa Rythm");
+  $("#sheet-text").text(song["Mahalini - Sisa Rasa"]);
+  $("#sheet-text").focusin(() => {
+    activeKeymap = false;
   });
-  $("#piano-roll").text(text);
 })();

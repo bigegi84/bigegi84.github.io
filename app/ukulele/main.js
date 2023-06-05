@@ -144,7 +144,7 @@
         Db: {
           Db: "1114",
           Dbm: "1101",
-          Dmaj7: "1113",
+          Dbmaj7: "1113",
           Dbm7: "4444",
           Db6: "1111",
           Db7: "1112",
@@ -318,7 +318,7 @@
           var chordHtml = '<div id="chord-line-' + x + '" class="chord-line">';
           for (var y in ukulele.chord.value[x]) {
             chordHtml +=
-              '<div id="chord-' +
+              '<button id="chord-' +
               x +
               "-" +
               y +
@@ -326,7 +326,7 @@
               (x.search("b") != -1 ? " chord-mol" : "") +
               '">' +
               y +
-              "</div>";
+              "</button>";
           }
           chordHtml += "</div>";
           html += chordHtml;

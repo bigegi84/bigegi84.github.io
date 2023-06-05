@@ -453,7 +453,7 @@
   let lastChord = null;
   const keyPress = () => {
     $(document).keydown((e) => {
-      e.preventDefault();
+      // e.preventDefault();
       if (depressed[e.key]) return;
       depressed[e.key] = true;
       var str = keymap[e.key];
@@ -532,4 +532,22 @@
   var chordInfo = (str) => {
     $(".chord-info").html("<strong>Ditekan : </strong>" + str);
   };
+  $("#play").mousedown(() => {
+    let sec = 0;
+    song.ibuKitaKartini.forEach((it) => {
+      setTimeout(() => {
+        $("#note-" + it[0]).mousedown();
+      }, sec * 1000);
+      setTimeout(() => {
+        $("#note-" + it[0]).mouseup();
+      }, (sec + it[1]) * 1000);
+      sec += it[1];
+    });
+  });
+  let text = "";
+  song.ibuKitaKartini.forEach((it, i) => {
+    text += it[0] + "-" + it[1];
+    if (i < song.ibuKitaKartini.length - 1) text += " ";
+  });
+  $("#piano-roll").text(text);
 })();

@@ -1,6 +1,6 @@
 (() => {
   var debug = true;
-  var delayMs = 40;
+  var delayMs = 0;
   var animateMs = 1500;
   let depressed = {};
   var sustaining = true;
@@ -345,7 +345,6 @@
           jqCode.push("#note-" + x);
         });
       });
-      $(jqCode.join(",")).mousedown();
       let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
@@ -365,7 +364,7 @@
           jqCode.push("#note-" + x);
         });
       });
-      // $(jqCode.join(",")).mouseup();
+      let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
           $(it).mouseup();
@@ -490,7 +489,7 @@
             jqCode.push("#note-" + x);
           });
         });
-        // $(jqCode.join(",")).mouseup();
+        let ms = 0;
         jqCode.forEach((it) => {
           setTimeout(() => {
             $(it).mouseup();

@@ -220,7 +220,15 @@
       var chordHtml = '<div id="chord-line-' + x + '" class="chord-group">';
       for (var y in chord[x]) {
         chordHtml +=
-          '<div id="chord-' + x + "-" + y + '" class="chord">' + y + "</div>";
+          '<div id="chord-' +
+          x +
+          "-" +
+          y +
+          '" class="chord' +
+          (x.search("b") != -1 ? " chord-mol" : "") +
+          '">' +
+          y +
+          "</div>";
       }
       chordHtml += "</div>";
       html += chordHtml;
@@ -423,7 +431,10 @@
       setTimeout(() => {
         $("#" + id).animate(
           {
-            backgroundColor: "white",
+            backgroundColor:
+              id.replace("chord-", "").split("-")[0].search("b") == -1
+                ? "#C2DEDC"
+                : "#116A7B",
           },
           300,
           "easeOutExpo"

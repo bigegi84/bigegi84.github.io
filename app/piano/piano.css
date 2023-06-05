@@ -107,8 +107,13 @@ audio {
   font-size: small;
   font-weight: bold;
   height: 44px;
-  background-color: white;
+  background-color: #C2DEDC;
   z-index: 1;
+}
+
+.chord-mol{
+  background-color: #116A7B;
+  color: white;
 }
 
 .chord-container {

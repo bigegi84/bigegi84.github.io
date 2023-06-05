@@ -65,15 +65,15 @@ var state = {
   },
   creativity: [
     {
-      name: "Chord Player Piano",
+      name: "Piano",
       description:
         "Aplikasi web untuk memainkan bass dan chord piano melalui shortcut keyboard.",
-      link: "/app/chord-player-piano",
+      link: "/app/piano",
     },
     {
-      name: "Chord Player Ukulele",
+      name: "Ukulele",
       description: "Aplikasi web untuk memainkan chord ukulele.",
-      link: "/app/chord-player-ukulele",
+      link: "/app/ukulele",
     },
     {
       name: "Bass Player",

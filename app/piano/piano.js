@@ -1,13 +1,19 @@
 (() => {
-  var debug = !true;
+  var debug = true;
   var delayMs = 15;
   var animateMs = 1500;
   let depressed = {};
-  var sustaining = false;
+  var sustaining = true;
+  var sustainMs = 1500;
   var playType = {
     name: "(Kiri) 2 Bas - (Kanan) Akor",
     code: "twoBassAndChord",
   };
+  const playInfo = () => {
+    let html = "<strong>Tipe Bermain:</strong>";
+    $(".play-info").html(html + " " + playType.name);
+  };
+  playInfo();
   const tone = new Tone.Sampler({
     urls: {
       C2: "C2.ogg",
@@ -156,15 +162,13 @@
         0
       );
     if (!press) {
-      setTimeout(() => {
-        $("#" + id).animate(
-          {
-            backgroundColor: id.search("b") == -1 ? "white" : "black",
-          },
-          300,
-          "easeOutExpo"
-        );
-      }, 0);
+      $("#" + id).animate(
+        {
+          backgroundColor: id.search("b") == -1 ? "white" : "black",
+        },
+        300,
+        "easeOutExpo"
+      );
     }
   };
   const noteMouseHandle = () => {
@@ -178,10 +182,13 @@
     $(".note").mouseup((e) => {
       const id = e.currentTarget.id;
       if (id) {
-        if (!sustaining) {
-          tone.triggerRelease([id.replace("note-", "")]);
-          noteAnimate(id, false);
-        }
+        if (sustaining)
+          tone.triggerRelease(
+            [id.replace("note-", "")],
+            Tone.now() + sustainMs / 1000
+          );
+        if (!sustaining) tone.triggerRelease([id.replace("note-", "")]);
+        noteAnimate(id, false);
       }
     });
   };
@@ -312,21 +319,25 @@
     $("#chord").html(html);
   };
   chordDraw();
+  const chordGetFormula = (id) => {
+    let formula = [
+      chord[id.replace("chord-", "").split("-")[0]][
+        id.replace("chord-", "").split("-")[1]
+      ],
+    ];
+    if (playType.code == "twoBassAndChord")
+      formula = [
+        chord[id.replace("chord-", "").split("-")[0]][
+          id.replace("chord-", "").split("-")[0] + "2Bass"
+        ],
+        ...formula,
+      ];
+    return formula;
+  };
   const chordSound = () => {
     $(".chord").mousedown((e) => {
       const id = e.target.id;
-      let formula = [
-        chord[id.replace("chord-", "").split("-")[0]][
-          id.replace("chord-", "").split("-")[1]
-        ],
-      ];
-      if (playType.code == "twoBassAndChord")
-        formula = [
-          chord[id.replace("chord-", "").split("-")[0]][
-            id.replace("chord-", "").split("-")[0] + "2Bass"
-          ],
-          ...formula,
-        ];
+      let formula = chordGetFormula(id);
       if (debug) console.log(formula);
       let jqCode = [];
       formula.forEach((f) => {
@@ -344,80 +355,93 @@
       chordAnimate(e.target.id);
       chordInfo(formula.join(" - "));
     });
+    $(".chord").mouseup((e) => {
+      const id = e.target.id;
+      let formula = chordGetFormula(id);
+      let jqCode = [];
+      formula.forEach((f) => {
+        f.split(",").forEach((x) => {
+          jqCode.push("#note-" + x);
+        });
+      });
+      $(jqCode.join(",")).mouseup();
+      chordAnimate(e.target.id, false);
+      chordInfo(formula.join(" - "));
+    });
   };
   chordSound();
   var keymap = {
-    1: chord.C.C,
-    "!": chord.C.Cmaj7,
-    q: chord.C.Cm,
-    Q: chord.C.Cm7,
-    a: chord.C.C7,
+    1: ["C", "C"],
+    "!": ["C", "Cmaj7"],
+    q: ["C", "Cm"],
+    Q: ["C", "Cm7"],
+    a: ["C", "C7"],
     z: "#key-C3,#key-G3",
-    2: chord.Db.Db,
-    "@": chord.Db.Dbmaj7,
-    w: chord.Db.Dbm,
-    W: chord.Db.Dbm7,
-    s: chord.Db.Db7,
+    2: ["Db", "Db"],
+    "@": ["Db", "Dbmaj7"],
+    w: ["Db", "Dbm"],
+    W: ["Db", "Dbm7"],
+    s: ["Db", "Db7"],
     x: "#key-Db3,#key-Ab3",
-    3: chord.D.D,
-    "#": chord.D.Dmaj7,
-    e: chord.D.Dm,
-    E: chord.D.Dm7,
-    d: chord.D.D7,
+    3: ["D", "D"],
+    "#": ["D", "Dmaj7"],
+    e: ["D", "Dm"],
+    E: ["D", "Dm7"],
+    d: ["D", "D7"],
     c: "#key-D3,#key-A3",
-    4: chord.Eb.Eb,
-    $: chord.Eb.Ebmaj7,
-    r: chord.Eb.Ebm,
-    R: chord.Eb.Ebm7,
-    f: chord.Eb.Eb7,
+    4: ["Eb", "Eb"],
+    $: ["Eb", "Ebmaj7"],
+    r: ["Eb", "Ebm"],
+    R: ["Eb", "Ebm7"],
+    f: ["Eb", "Eb7"],
     v: "#key-Eb3,#key-Bb3",
-    5: chord.E.E,
-    "%": chord.E.Emaj7,
-    t: chord.E.Em,
-    T: chord.E.Em7,
-    g: chord.E.E7,
+    5: ["E", "E"],
+    "%": ["E", "Emaj7"],
+    t: ["E", "Em"],
+    T: ["E", "Em7"],
+    g: ["E", "E7"],
     b: "#key-E3,#key-B3",
-    6: chord.F.F,
-    "^": chord.F.Fmaj7,
-    y: chord.F.Fm,
-    Y: chord.F.Fm7,
-    h: chord.F.F7,
+    6: ["F", "F"],
+    "^": ["F", "Fmaj7"],
+    y: ["F", "Fm"],
+    Y: ["F", "Fm7"],
+    h: ["F", "F7"],
     n: "#key-F3,#key-C4",
-    7: chord.Gb.Gb,
-    "&": chord.Gb.Gbmaj7,
-    u: chord.Gb.Gbm,
-    U: chord.Gb.Gbm7,
-    j: chord.Gb.Gb7,
+    7: ["Gb", "Gb"],
+    "&": ["Gb", "Gbmaj7"],
+    u: ["Gb", "Gbm"],
+    U: ["Gb", "Gbm7"],
+    j: ["Gb", "Gb7"],
     m: "#key-Gb3,#key-Db4",
-    8: chord.G.G,
-    "*": chord.G.Gmaj7,
-    i: chord.G.Gm,
-    I: chord.G.Gm7,
-    k: chord.G.G7,
+    8: ["G", "G"],
+    "*": ["G", "Gmaj7"],
+    i: ["G", "Gm"],
+    I: ["G", "Gm7"],
+    k: ["G", "G7"],
     ",": "#key-G3,#key-D4",
-    9: chord.Ab.Ab,
-    "(": chord.Ab.Abmaj7,
-    o: chord.Ab.Abm,
-    O: chord.Ab.Abm7,
-    l: chord.Ab.Ab7,
-    ".": "#key-Ab3,#key-Eb4",
-    0: chord.A.A,
-    ")": chord.A.Amaj7,
-    p: chord.A.Am,
-    P: chord.A.Am7,
-    ";": chord.A.A7,
+    9: ["Ab", "Ab"],
+    "(": ["Ab", "Abmaj7"],
+    o: ["Ab", "Abm"],
+    O: ["Ab", "Abm7"],
+    l: ["Ab", "Ab7"],
+    ",": "#key-Ab3,#key-Eb4",
+    0: ["A", "A"],
+    ")": ["A", "Amaj7"],
+    p: ["A", "Am"],
+    P: ["A", "Am7"],
+    ";": ["A", "A7"],
     "/": "#key-A2,#key-E3",
-    "-": chord.Bb.Bb,
-    _: chord.Bb.Bbmaj7,
-    "[": chord.Bb.Bbm,
-    "{": chord.Bb.Bbm7,
-    "'": chord.Bb.Bb7,
+    "-": ["Bb", "Bb"],
+    _: ["Bb", "Bbmaj7"],
+    "[": ["Bb", "Bbm"],
+    "{": ["Bb", "Bbm7"],
+    "'": ["Bb", "Bb7"],
     ArrowLeft: "#key-Bb2,#key-F3",
-    "=": chord.B.B,
-    "+": chord.B.Bmaj7,
-    "]": chord.B.Bm,
-    "}": chord.B.Bm7,
-    "\\": chord.B.B7,
+    "=": ["B", "B"],
+    "+": ["B", "Bmaj7"],
+    "]": ["B", "Bm"],
+    "}": ["B", "Bm7"],
+    "\\": ["B", "B7"],
     "`": "#key-B2,#key-Gb3",
   };
   let lastChord = null;
@@ -428,84 +452,69 @@
       depressed[e.key] = true;
       var str = keymap[e.key];
       if (str) {
-        if (str == "reverse" && lastChord != null) {
-          let ms = 0;
-          lastChord.reverse().forEach((it) => {
-            setTimeout(() => {
-              $(it).mousedown();
-            }, ms);
-            ms = ms + delayMs;
+        const chordId = "chord-" + str[0] + "-" + str[1];
+        let formula = chordGetFormula(chordId);
+        const jqCode = [];
+        formula.forEach((f) => {
+          f.split(",").forEach((x) => {
+            jqCode.push("#note-" + x);
           });
-        } else {
-          let formula = [str];
-          if (debug) console.log(formula);
-          if (playType.code == "twoBassAndChord") {
-            var chordLine;
-            for (var x in chord) {
-              for (var y in chord[x]) {
-                if (chord[x][y] == str) chordLine = x;
-              }
-            }
-            if (debug) console.log(chordLine);
-            formula = [chord[chordLine][chordLine + "2Bass"], ...formula];
-          }
-          if (debug) console.log(formula);
-          const jqCode = [];
-          formula.forEach((f) => {
-            f.split(",").forEach((x) => {
-              jqCode.push("#note-" + x);
-            });
-          });
-          let ms = 0;
-          jqCode.forEach((it) => {
-            setTimeout(() => {
-              $(it).mousedown();
-            }, ms);
-            ms = ms + delayMs;
-          });
-          lastChord = jqCode;
-        }
+        });
+        let ms = 0;
+        jqCode.forEach((it) => {
+          setTimeout(() => {
+            $(it).mousedown();
+          }, ms);
+          ms = ms + delayMs;
+        });
+        chordAnimate(chordId);
+        lastChord = jqCode;
       }
     });
     $(document).keyup((e) => {
       depressed[e.key] = false;
+      var str = keymap[e.key];
+      if (str) {
+        const chordId = "chord-" + str[0] + "-" + str[1];
+        let formula = chordGetFormula(chordId);
+        const jqCode = [];
+        formula.forEach((f) => {
+          f.split(",").forEach((x) => {
+            jqCode.push("#note-" + x);
+          });
+        });
+        $(jqCode.join(",")).mouseup();
+        chordAnimate(chordId, false);
+        chordInfo(formula.join(" - "));
+      }
     });
   };
   keyPress();
   var chordHint = () => {
     for (var key in keymap) {
       var str = keymap[key];
-      for (var chLine in chord) {
-        for (var ch in chord[chLine]) {
-          if (chord[chLine][ch] == str) {
-            if (debug) console.log("#chord-" + chLine + "-" + ch);
-            $("#chord-" + chLine + "-" + ch).html(ch + " <br>(" + key + ")");
-          }
-        }
-      }
+      $("#chord-" + str[0] + "-" + str[1]).html(str[1] + " <br>(" + key + ")");
     }
   };
   chordHint();
-  var chordAnimate = (id) => {
+  var chordAnimate = (id, press = true) => {
     $("#" + id).animate(
       {
         backgroundColor: "#88FFAA",
       },
       0
     );
-    if (sustaining) {
-      setTimeout(() => {
-        $("#" + id).animate(
-          {
-            backgroundColor:
-              id.replace("chord-", "").split("-")[0].search("b") == -1
-                ? "#C2DEDC"
-                : "#116A7B",
-          },
-          300,
-          "easeOutExpo"
-        );
-      }, animateMs);
+    if (!press) {
+      $("#" + id).animate(
+        {
+          backgroundColor:
+            id.replace("chord-", "").split("-")[0].search("b") == -1
+              ? "#C2DEDC"
+              : "#116A7B",
+        },
+        300,
+        "easeOutExpo"
+      );
     }
   };
   var chordInfo = (str) => {

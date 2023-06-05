@@ -1,6 +1,6 @@
 (() => {
   var debug = true;
-  var delayMs = 0;
+  var delayMs = 40;
   var animateMs = 1500;
   let depressed = {};
   var sustaining = true;
@@ -345,6 +345,7 @@
           jqCode.push("#note-" + x);
         });
       });
+      $(jqCode.join(",")).mousedown();
       let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
@@ -364,7 +365,13 @@
           jqCode.push("#note-" + x);
         });
       });
-      $(jqCode.join(",")).mouseup();
+      // $(jqCode.join(",")).mouseup();
+      jqCode.forEach((it) => {
+        setTimeout(() => {
+          $(it).mouseup();
+        }, ms);
+        ms = ms + delayMs;
+      });
       chordAnimate(e.target.id, false);
       chordInfo(formula.join(" - "));
     });
@@ -484,6 +491,12 @@
           });
         });
         $(jqCode.join(",")).mouseup();
+        jqCode.forEach((it) => {
+          setTimeout(() => {
+            $(it).mouseup();
+          }, ms);
+          ms = ms + delayMs;
+        });
         chordAnimate(chordId, false);
         chordInfo(formula.join(" - "));
       }

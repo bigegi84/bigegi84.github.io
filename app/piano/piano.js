@@ -1,6 +1,6 @@
 (() => {
   var debug = true;
-  var delayMs = 15;
+  var delayMs = 0;
   var animateMs = 1500;
   let depressed = {};
   var sustaining = true;
@@ -202,7 +202,7 @@
       Cm7: "C4,Eb4,G4,Bb4",
       C7b9: "C4,E4,G4,Bb4,Db5",
       Csus4: "C4,F4,G4",
-      C2Bass: "C3,G3",
+      CBass2: "C3,G3",
     },
     Db: {
       Db: "Db4,F4,Ab4",
@@ -210,7 +210,7 @@
       Db7: "Db4,F4,Ab4,B4",
       Dbm: "Db4,E4,Ab4",
       Dbm7: "Db4,E4,Ab4,B4",
-      Db2Bass: "Db3,Ab3",
+      DbBass2: "Db3,Ab3",
     },
     D: {
       D: "D4,Gb4,A4",
@@ -218,7 +218,7 @@
       D7: "D4,Gb4,A4,C5",
       Dm: "D4,F4,A4",
       Dm7: "D4,F4,A4,C5",
-      D2Bass: "D3,A3",
+      DBass2: "D3,A3",
     },
     Eb: {
       Eb: "Eb4,G4,Bb4",
@@ -228,7 +228,7 @@
       Ebm7: "Eb4,Gb4,Bb4,Db5",
       Eb6: "Eb4,G4,Bb4,C5",
       Eb7b9: "Eb4,G4,Bb4,Db5,E5",
-      Eb2Bass: "Eb3,Bb3",
+      EbBass2: "Eb3,Bb3",
     },
     E: {
       E: "E4,Ab4,B4",
@@ -236,7 +236,7 @@
       E7: "E4,Ab4,B4,D5",
       Em: "E4,G4,B4",
       Em7: "E4,G4,B4,D5",
-      E2Bass: "E3,B3",
+      EBass2: "E3,B3",
     },
     F: {
       F: "F4,A4,C5",
@@ -244,7 +244,7 @@
       F7: "F4,A4,C5,Eb5",
       Fm: "F4,Ab4,C5",
       Fm7: "F4,Ab4,C5,Eb5",
-      F2Bass: "F3,C4",
+      FBass2: "F3,C4",
     },
     Gb: {
       Gb: "Gb4,Bb4,Db5",
@@ -252,7 +252,7 @@
       Gb7: "Gb4,Bb4,Db5,E5",
       Gbm: "Gb4,A4,Db5",
       Gbm7: "Gb4,A4,Db5,E5",
-      Gb2Bass: "Gb3,Db4",
+      GbBass2: "Gb3,Db4",
     },
     G: {
       G: "G3,B3,D4",
@@ -261,7 +261,7 @@
       Gm: "G3,Bb3,D4",
       Gm7: "G3,Bb3,D4,F4",
       Gm7b5: "G3,Bb3,Db4,F4",
-      G2Bass: "G2,D3",
+      GBass2: "G2,D3",
     },
     Ab: {
       Ab: "Ab3,C4,Eb4",
@@ -270,7 +270,7 @@
       Abm: "Ab3,B3,Eb4",
       Abm7: "Ab3,B3,Eb4,Gb4",
       Abm9: "Ab3,B3,Eb4,Gb4,Bb4",
-      Ab2Bass: "Ab2,Eb3",
+      AbBass2: "Ab2,Eb3",
     },
     A: {
       A: "A3,Db4,E4",
@@ -278,7 +278,7 @@
       A7: "A3,Db4,E4,G4",
       Am: "A3,C4,E4",
       Am7: "A3,C4,E4,G4",
-      A2Bass: "A2,E3",
+      ABass2: "A2,E3",
     },
     Bb: {
       Bb: "Bb3,D4,F4",
@@ -286,7 +286,7 @@
       Bb7: "Bb3,D4,F4,Ab4",
       Bbm: "Bb3,Db4,F4",
       Bbm7: "Bb3,Db4,F4,Ab4",
-      Bb2Bass: "Bb2,F3",
+      BbBass2: "Bb2,F3",
     },
     B: {
       B: "B3,Eb4,Gb4",
@@ -294,7 +294,7 @@
       B7: "B3,Eb4,Gb4,A4",
       Bm: "B3,D4,Gb4",
       Bm7: "B3,D4,Gb4,A4",
-      B2Bass: "B2,Gb3",
+      BBass2: "B2,Gb3",
     },
   };
   const chordDraw = () => {
@@ -328,7 +328,7 @@
     if (playType.code == "twoBassAndChord")
       formula = [
         chord[id.replace("chord-", "").split("-")[0]][
-          id.replace("chord-", "").split("-")[0] + "2Bass"
+          id.replace("chord-", "").split("-")[0] + "Bass2"
         ],
         ...formula,
       ];
@@ -376,73 +376,73 @@
     q: ["C", "Cm"],
     Q: ["C", "Cm7"],
     a: ["C", "C7"],
-    z: "#key-C3,#key-G3",
+    z: ["C", "CBass2"],
     2: ["Db", "Db"],
     "@": ["Db", "Dbmaj7"],
     w: ["Db", "Dbm"],
     W: ["Db", "Dbm7"],
     s: ["Db", "Db7"],
-    x: "#key-Db3,#key-Ab3",
+    x: ["Db", "DbBass2"],
     3: ["D", "D"],
     "#": ["D", "Dmaj7"],
     e: ["D", "Dm"],
     E: ["D", "Dm7"],
     d: ["D", "D7"],
-    c: "#key-D3,#key-A3",
+    c: ["D", "DBass2"],
     4: ["Eb", "Eb"],
     $: ["Eb", "Ebmaj7"],
     r: ["Eb", "Ebm"],
     R: ["Eb", "Ebm7"],
     f: ["Eb", "Eb7"],
-    v: "#key-Eb3,#key-Bb3",
+    v: ["Eb", "EbBass2"],
     5: ["E", "E"],
     "%": ["E", "Emaj7"],
     t: ["E", "Em"],
     T: ["E", "Em7"],
     g: ["E", "E7"],
-    b: "#key-E3,#key-B3",
+    b: ["E", "EBass2"],
     6: ["F", "F"],
     "^": ["F", "Fmaj7"],
     y: ["F", "Fm"],
     Y: ["F", "Fm7"],
     h: ["F", "F7"],
-    n: "#key-F3,#key-C4",
+    n: ["F", "FBass2"],
     7: ["Gb", "Gb"],
     "&": ["Gb", "Gbmaj7"],
     u: ["Gb", "Gbm"],
     U: ["Gb", "Gbm7"],
     j: ["Gb", "Gb7"],
-    m: "#key-Gb3,#key-Db4",
+    m: ["Gb", "GbBass2"],
     8: ["G", "G"],
     "*": ["G", "Gmaj7"],
     i: ["G", "Gm"],
     I: ["G", "Gm7"],
     k: ["G", "G7"],
-    ",": "#key-G3,#key-D4",
+    ",": ["G", "GBass2"],
     9: ["Ab", "Ab"],
     "(": ["Ab", "Abmaj7"],
     o: ["Ab", "Abm"],
     O: ["Ab", "Abm7"],
     l: ["Ab", "Ab7"],
-    ",": "#key-Ab3,#key-Eb4",
+    ".": ["Ab", "AbBass2"],
     0: ["A", "A"],
     ")": ["A", "Amaj7"],
     p: ["A", "Am"],
     P: ["A", "Am7"],
     ";": ["A", "A7"],
-    "/": "#key-A2,#key-E3",
+    "/": ["A", "ABass2"],
     "-": ["Bb", "Bb"],
     _: ["Bb", "Bbmaj7"],
     "[": ["Bb", "Bbm"],
     "{": ["Bb", "Bbm7"],
     "'": ["Bb", "Bb7"],
-    ArrowLeft: "#key-Bb2,#key-F3",
+    ArrowLeft: ["Bb", "BbBass2"],
     "=": ["B", "B"],
     "+": ["B", "Bmaj7"],
     "]": ["B", "Bm"],
     "}": ["B", "Bm7"],
     "\\": ["B", "B7"],
-    "`": "#key-B2,#key-Gb3",
+    "`": ["B", "BBass2"],
   };
   let lastChord = null;
   const keyPress = () => {

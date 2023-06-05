@@ -2,12 +2,82 @@
   var debug = !true;
   var delayMs = 15;
   var animateMs = 1500;
-  let pressed = [];
-  var sustaining = true;
+  let depressed = {};
+  var sustaining = false;
   var playType = {
     name: "(Kiri) 2 Bas - (Kanan) Akor",
     code: "twoBassAndChord",
   };
+  const tone = new Tone.Sampler({
+    urls: {
+      C2: "C2.ogg",
+      Db2: "Db2.ogg",
+      D2: "D2.ogg",
+      Eb2: "Eb2.ogg",
+      E2: "E2.ogg",
+      F2: "F2.ogg",
+      Gb2: "Gb2.ogg",
+      G2: "G2.ogg",
+      Ab2: "Ab2.ogg",
+      A2: "A2.ogg",
+      Bb2: "Bb2.ogg",
+      B2: "B2.ogg",
+
+      C3: "C3.ogg",
+      Db3: "Db3.ogg",
+      D3: "D3.ogg",
+      Eb3: "Eb3.ogg",
+      E3: "E3.ogg",
+      F3: "F3.ogg",
+      Gb3: "Gb3.ogg",
+      G3: "G3.ogg",
+      Ab3: "Ab3.ogg",
+      A3: "A3.ogg",
+      Bb3: "Bb3.ogg",
+      B3: "B3.ogg",
+
+      C4: "C4.ogg",
+      Db4: "Db4.ogg",
+      D4: "D4.ogg",
+      Eb4: "Eb4.ogg",
+      E4: "E4.ogg",
+      F4: "F4.ogg",
+      Gb4: "Gb4.ogg",
+      G4: "G4.ogg",
+      Ab4: "Ab4.ogg",
+      A4: "A4.ogg",
+      Bb4: "Bb4.ogg",
+      B4: "B4.ogg",
+
+      C5: "C5.ogg",
+      Db5: "Db5.ogg",
+      D5: "D5.ogg",
+      Eb5: "Eb5.ogg",
+      E5: "E5.ogg",
+      F5: "F5.ogg",
+      Gb5: "Gb5.ogg",
+      G5: "G5.ogg",
+      Ab5: "Ab5.ogg",
+      A5: "A5.ogg",
+      Bb5: "Bb5.ogg",
+      B5: "B5.ogg",
+
+      C6: "C6.ogg",
+      Db6: "Db6.ogg",
+      D6: "D6.ogg",
+      Eb6: "Eb6.ogg",
+      E6: "E6.ogg",
+      F6: "F6.ogg",
+      Gb6: "Gb6.ogg",
+      G6: "G6.ogg",
+      Ab6: "Ab6.ogg",
+      A6: "A6.ogg",
+      Bb6: "Bb6.ogg",
+      B6: "B6.ogg",
+    },
+    release: 1,
+    baseUrl: "../../asset/sound/piano/",
+  }).toDestination();
   const note = [
     "G2",
     "Ab2",
@@ -51,7 +121,7 @@
     // "Bb5",
     // "B5",
   ];
-  const pianoDraw = () => {
+  const noteDraw = () => {
     let html = '<div class="piano-container"><div class="piano-keys">';
     note.forEach((x) => {
       if (x.search("b") == -1)
@@ -76,15 +146,16 @@
     html += "</div></div>";
     $("#piano").html(html);
   };
-  pianoDraw();
-  const pianoAnimate = (id) => {
-    $("#" + id).animate(
-      {
-        backgroundColor: "#88FFAA",
-      },
-      0
-    );
-    if (sustaining) {
+  noteDraw();
+  const noteAnimate = (id, press = true) => {
+    if (press)
+      $("#" + id).animate(
+        {
+          backgroundColor: "#88FFAA",
+        },
+        0
+      );
+    if (!press) {
       setTimeout(() => {
         $("#" + id).animate(
           {
@@ -93,23 +164,28 @@
           300,
           "easeOutExpo"
         );
-      }, 1500);
+      }, 0);
     }
   };
-  const pianoSound = () => {
+  const noteMouseHandle = () => {
     $(".note").mousedown((e) => {
       const id = e.currentTarget.id;
-      if (debug) console.log(e.currentTarget.id);
-      if (debug) console.log("#sound-" + id.replace("note-", ""));
       if (id) {
-        $("#sound-" + id.replace("note-", ""))
-          .clone()[0]
-          .play();
-        pianoAnimate(id);
+        tone.triggerAttack([id.replace("note-", "")]);
+        noteAnimate(id);
+      }
+    });
+    $(".note").mouseup((e) => {
+      const id = e.currentTarget.id;
+      if (id) {
+        if (!sustaining) {
+          tone.triggerRelease([id.replace("note-", "")]);
+          noteAnimate(id, false);
+        }
       }
     });
   };
-  pianoSound();
+  noteMouseHandle();
   const chord = {
     C: {
       C: "C4,E4,G4",
@@ -244,7 +320,6 @@
           id.replace("chord-", "").split("-")[1]
         ],
       ];
-      if (debug) console.log(formula);
       if (playType.code == "twoBassAndChord")
         formula = [
           chord[id.replace("chord-", "").split("-")[0]][
@@ -259,8 +334,6 @@
           jqCode.push("#note-" + x);
         });
       });
-      if (debug) console.log(jqCode);
-      // $(jqCode.join(",")).mousedown();
       let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
@@ -350,12 +423,10 @@
   let lastChord = null;
   const keyPress = () => {
     $(document).keydown((e) => {
-      if (pressed.indexOf(e.key) != -1) return;
-      pressed.push(e.key);
-      if (debug) console.log(e.key);
-      if (e.key == " ") e.preventDefault();
+      e.preventDefault();
+      if (depressed[e.key]) return;
+      depressed[e.key] = true;
       var str = keymap[e.key];
-      if (debug) console.log(str);
       if (str) {
         if (str == "reverse" && lastChord != null) {
           let ms = 0;
@@ -385,8 +456,6 @@
               jqCode.push("#note-" + x);
             });
           });
-          if (debug) console.log(jqCode);
-          // $(jqCode.join(",")).mousedown();
           let ms = 0;
           jqCode.forEach((it) => {
             setTimeout(() => {
@@ -399,10 +468,7 @@
       }
     });
     $(document).keyup((e) => {
-      const i = pressed.indexOf(e.key);
-      if (i != -1) {
-        pressed.splice(i, 1);
-      }
+      depressed[e.key] = false;
     });
   };
   keyPress();

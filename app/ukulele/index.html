@@ -21,32 +21,57 @@
         class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right"
       >
         <div class="content">
-          <h2>bigegi84 - Chord Player Ukulele</h2>
+          <h2>bigegi84 - Ukulele</h2>
           <div class="major">
             <div>
-              <p class="play-info" style="margin: 0">
-                <strong>Delay Genjreng: </strong>
-                <input
-                  id="input-delay"
-                  title="Delay"
-                  type="number"
-                  value="40"
-                />
-              </p>
-              <p class="chord-info" style="margin: 0">
-                <strong>Ditekan:</strong>
-              </p>
-              <div class="field third">
-                <input
-                  type="radio"
-                  id="mode-chord"
-                  name="mode"
-                  checked=""
-                  value="chord"
-                />
-                <label for="mode-chord">Chord</label>
-                <input type="radio" id="mode-solo" name="mode" value="solo" />
-                <label for="mode-solo">Solo</label>
+              <div
+                style="
+                  display: flex;
+                  margin-bottom: 10px;
+                  flex-direction: row;
+                  justify-content: space-between;
+                "
+              >
+                <div id="info-container">
+                  <div>
+                    <strong>Ditekan:</strong>
+                    <p id="play-info" class="play-info" style="margin: 0"></p>
+                  </div>
+                </div>
+                <div class="config-container">
+                  <div style="display: flex; flex-direction: column">
+                    <p class="play-info" style="margin: 0">
+                      <strong>Delay Genjreng: </strong>
+                    </p>
+                    <input
+                      id="input-delay"
+                      title="Delay"
+                      type="number"
+                      value="40"
+                    />
+                  </div>
+                  <div
+                    class="field third"
+                    style="display: flex; flex-direction: column"
+                  >
+                    <strong>Mode: </strong>
+                    <input
+                      type="radio"
+                      id="mode-chord"
+                      name="mode"
+                      checked=""
+                      value="chord"
+                    />
+                    <label for="mode-chord">Chord</label>
+                    <input
+                      type="radio"
+                      id="mode-solo"
+                      name="mode"
+                      value="solo"
+                    />
+                    <label for="mode-solo">Solo</label>
+                  </div>
+                </div>
               </div>
               <div>
                 <div id="chord" class="chord-container"></div>

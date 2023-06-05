@@ -2,6 +2,8 @@
   const debug = !true;
   let lastChord = null;
   const ukulele = {
+    sustaining: true,
+    sustainMs: 1500,
     theme: {
       fret: {
         backgroundColor: "#83764f",
@@ -103,13 +105,9 @@
             0
           );
         if (!press) {
-          $("#" + id).animate(
-            {
-              backgroundColor: ukulele.theme.fret.backgroundColor,
-            },
-            300,
-            "easeOutExpo"
-          );
+          $("#" + id).animate({
+            backgroundColor: ukulele.theme.fret.backgroundColor,
+          });
         }
       },
       render: () => {
@@ -136,111 +134,111 @@
       value: {
         C: {
           C: "0003",
-          Cmaj7: "0002",
-          C7: "0001",
           Cm: "0333",
+          Cmaj7: "0002",
           Cm7: "3333",
           C6: "0000",
+          C7: "0001",
           C9: "0201",
         },
         Db: {
           Db: "1114",
-          Dmaj7: "1113",
-          Db7: "1112",
           Dbm: "1101",
+          Dmaj7: "1113",
           Dbm7: "4444",
           Db6: "1111",
+          Db7: "1112",
           Db9: "1312",
         },
         D: {
           D: "2225",
-          Dmaj7: "1113",
-          D7: "2223",
           Dm: "2210",
+          Dmaj7: "1113",
           Dm7: "2213",
           D6: "2222",
+          D7: "2223",
           D9: "2423",
         },
         Eb: {
           Eb: "3331",
-          Ebmaj7: "3335",
-          Eb7: "3334",
           Ebm: "3321",
+          Ebmaj7: "3335",
           Ebm7: "3324",
           Eb6: "3333",
+          Eb7: "3334",
           Eb9: "0111",
         },
         E: {
           E: "4442",
-          Emaj7: "1302",
-          E7: "1202",
           Em: "0432",
+          Emaj7: "1302",
           Em7: "0202",
           E6: "1020",
+          E7: "1202",
           E9: "1222",
         },
         F: {
           F: "2010",
-          Fmaj7: "2413",
-          F7: "2310",
           Fm: "1013",
+          Fmaj7: "2413",
           Fm7: "1313",
           F6: "2213",
+          F7: "2310",
           F9: "2333",
         },
         Gb: {
           Gb: "3121",
-          Gbmaj7: "0111",
-          Gb7: "3424",
           Gbm: "2120",
+          Gbmaj7: "0111",
           Gbm7: "2424",
           Gb6: "3324",
+          Gb7: "3424",
           Gb9: "1101",
         },
         G: {
           G: "0232",
-          Gmaj7: "0222",
-          G7: "0212",
           Gm: "0231",
+          Gmaj7: "0222",
           Gm7: "0211",
           G6: "0202",
+          G7: "0212",
           G9: "2212",
         },
         Ab: {
           Ab: "5343",
-          Abmaj7: "1333",
-          Ab7: "1323",
           Abm: "1342",
+          Abmaj7: "1333",
           Abm7: "0322",
           Ab6: "1313",
+          Ab7: "1323",
           Ab9: "3323",
           Abm9: "3342",
         },
         A: {
           A: "2100",
-          Amaj7: "1100",
-          A7: "0100",
           Am: "2000",
+          Amaj7: "1100",
           Am7: "0433",
           A6: "2424",
+          A7: "0100",
           A9: "0102",
         },
         Bb: {
           Bb: "3211",
-          Bbmaj7: "3210",
-          Bb7: "1211",
           Bbm: "3111",
+          Bbmaj7: "3210",
           Bbm7: "1111",
           Bb6: "0211",
+          Bb7: "1211",
           Bb9: "1213",
         },
         B: {
           B: "4322",
-          Bmaj7: "3322",
-          B7: "2322",
           Bm: "4222",
+          Bmaj7: "3322",
           Bm7: "2222",
           B6: "1322",
+          B7: "2322",
           B9: "2324",
         },
       },
@@ -263,7 +261,6 @@
           );
         if (!press) {
           const info = id.replace("chord-", "").split("-")[0];
-          console.log(info);
           $("#" + id).animate(
             {
               backgroundColor:
@@ -271,7 +268,7 @@
                   ? ukulele.theme.chord.backgroundColor
                   : ukulele.theme.chordMol.backgroundColor,
             },
-            300,
+            0,
             "easeOutExpo"
           );
         }
@@ -342,6 +339,64 @@
       value: {
         chord: {
           1: ["C", "C"],
+          q: ["C", "Cm"],
+          a: ["C", "Cmaj7"],
+          z: ["C", "Cm7"],
+
+          2: ["Db", "Db"],
+          w: ["Db", "Dbm"],
+          s: ["Db", "Dbmaj7"],
+          x: ["Db", "Dbm7"],
+
+          3: ["D", "D"],
+          e: ["D", "Dm"],
+          d: ["D", "Dmaj7"],
+          c: ["D", "Dm7"],
+
+          4: ["Eb", "Eb"],
+          r: ["Eb", "Ebm"],
+          f: ["Eb", "Ebmaj7"],
+          v: ["Eb", "Ebm7"],
+
+          5: ["E", "E"],
+          t: ["E", "Em"],
+          g: ["E", "Emaj7"],
+          b: ["E", "Em7"],
+
+          6: ["F", "F"],
+          y: ["F", "Fm"],
+          h: ["F", "Fmaj7"],
+          n: ["F", "Fm7"],
+
+          7: ["Gb", "Gb"],
+          u: ["Gb", "Gbm"],
+          j: ["Gb", "Gbmaj7"],
+          m: ["Gb", "Gbm7"],
+
+          8: ["G", "G"],
+          i: ["G", "Gm"],
+          k: ["G", "Gmaj7"],
+          ",": ["G", "Gm7"],
+
+          9: ["Ab", "Ab"],
+          o: ["Ab", "Abm"],
+          l: ["Ab", "Abmaj7"],
+          ".": ["Ab", "Abm7"],
+
+          0: ["A", "A"],
+          p: ["A", "Am"],
+          ";": ["A", "Amaj7"],
+          "/": ["A", "Am7"],
+
+          "-": ["Bb", "Bb"],
+          "[": ["Bb", "Bbm"],
+          "'": ["Bb", "Bbmaj7"],
+          ArrowLeft: ["Bb", "Bbm7"],
+
+          "=": ["B", "B"],
+          "]": ["B", "Bm"],
+          "\\": ["B", "Bmaj7"],
+          ArrowUp: ["B", "Bm7"],
         },
         solo: {
           1: [1, 0],
@@ -400,7 +455,7 @@
           if (ukulele.mode.value == "chord") {
             const str = ukulele.keymap.value[ukulele.mode.value][key];
             $("#chord-" + str[0] + "-" + str[1]).html(
-              str[1] + " <br>(" + key + ")"
+              str[1] + " <br>(" + key.replace("Arrow", "") + ")"
             );
           }
           if (ukulele.mode.value == "solo") {
@@ -430,11 +485,9 @@
               } else {
                 const jqCode = [];
                 const formula = ukulele.chord.value[str[0]][str[1]];
-                console.log(formula);
                 for (var i = 0; i < formula.length; i++) {
                   jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
                 }
-                console.log(jqCode);
                 let ms = 0;
                 jqCode.forEach((it) => {
                   setTimeout(() => {
@@ -444,6 +497,7 @@
                 });
                 lastChord = jqCode;
                 ukulele.chord.animate("chord-" + str[0] + "-" + str[1], true);
+                ukulele.info.play.render(formula);
               }
             }
             if (ukulele.mode.value == "solo") {
@@ -500,9 +554,22 @@
           ukulele.fret.value[id.replace("fret-", "").split("-")[0]][
             id.replace("fret-", "").split("-")[1]
           ];
-        ukulele.tone.triggerRelease([note]);
+        if (ukulele.sustaining)
+          ukulele.tone.triggerRelease(
+            [note],
+            Tone.now() + ukulele.sustainMs / 1000
+          );
+        if (!ukulele.sustaining) ukulele.tone.triggerRelease([note]);
         ukulele.fret.animate(id, false);
       });
+    },
+    info: {
+      play: {
+        id: "#play-info",
+        render: (formula) => {
+          $(ukulele.info.play.id).text(formula);
+        },
+      },
     },
     main: () => {
       ukulele.mode.handleChange();

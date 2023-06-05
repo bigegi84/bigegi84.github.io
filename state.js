@@ -76,9 +76,9 @@ var state = {
       link: "/app/ukulele",
     },
     {
-      name: "Bass Player",
+      name: "Bass",
       description: "Aplikasi web untuk memainkan bas.",
-      link: "/app/bass-player",
+      link: "/app/bass",
     },
     {
       name: "Cello and Violin",

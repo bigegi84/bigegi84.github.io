@@ -1,15 +1,10 @@
 (() => {
   const debug = !true;
   let fadeout = true;
-  let sustaining = true;
   let lastChord = null;
-  let sustainMs = 500;
-  let depressed = {
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-  };
+  let sustaining = true;
+  let sustainMs = 1500;
+  let depressed = {};
   const bassElectric = new Tone.Sampler({
     urls: {
       Db1: "Db1.ogg",
@@ -137,15 +132,9 @@
       const fretLine = id.replace("fret-", "").split("-")[0];
       const fretNumber = id.replace("fret-", "").split("-")[1];
       const note = fret[fretLine][fretNumber];
-      console.log(fretLine);
-      console.log(fretNumber);
-      if (depressed[note]) {
-        return;
-      }
       if (id) {
         bassElectric.triggerAttack([note]);
         fretAnimate([fretLine, fretNumber], true);
-        depressed[fretLine][fretNumber] = true;
       }
     });
     $(".fret").mouseup((e) => {
@@ -154,9 +143,14 @@
       const fretNumber = id.replace("fret-", "").split("-")[1];
       const note = fret[fretLine][fretNumber];
       if (note) {
-        bassElectric.triggerRelease([note]);
+        if (sustaining) {
+          console.log("aneh");
+          bassElectric.triggerRelease([note], Tone.now() + sustainMs / 1000);
+        }
+        if (!sustaining) {
+          bassElectric.triggerRelease([note]);
+        }
         fretAnimate([fretLine, fretNumber], false);
-        depressed[fretLine][fretNumber] = false;
       }
     });
   };
@@ -166,57 +160,92 @@
     c: [4, 2],
     v: [4, 3],
     b: [4, 4],
+    n: [4, 5],
+    m: [4, 6],
+    ",": [4, 7],
+    ".": [4, 8],
+    "//": [4, 9],
 
     a: [3, 0],
     s: [3, 1],
     d: [3, 2],
     f: [3, 3],
     g: [3, 4],
+    h: [3, 5],
+    j: [3, 6],
+    k: [3, 7],
+    l: [3, 8],
+    ";": [3, 9],
+    "'": [3, 10],
 
     q: [2, 0],
     w: [2, 1],
     e: [2, 2],
     r: [2, 3],
     t: [2, 4],
+    y: [2, 5],
+    u: [2, 6],
+    i: [2, 7],
+    o: [2, 8],
+    p: [2, 9],
+    "[": [2, 10],
+    "]": [2, 11],
+    "\\": [2, 12],
+    "`": [2, 13],
 
     1: [1, 0],
     2: [1, 1],
     3: [1, 2],
     4: [1, 3],
     5: [1, 4],
+    6: [1, 5],
+    7: [1, 6],
+    8: [1, 7],
+    9: [1, 8],
+    0: [1, 9],
+    "-": [1, 10],
+    "=": [1, 11],
   };
   const keyPress = () => {
     $(document).keydown((e) => {
-      if (debug) console.log(e.key);
-      if (e.key == " ") e.preventDefault();
+      e.preventDefault();
       var note = keymap[e.key];
       if (!note) return;
-      if (depressed[note[0]][note[1]]) {
+      if (depressed[e.key]) {
         return;
       }
       if (note) {
         bassElectric.triggerAttack([fret[note[0]][note[1]]]);
         fretAnimate(note, true);
-        depressed[note[0]][note[1]] = true;
+        depressed[e.key] = true;
       }
     });
     $(document).keyup((e) => {
-      if (debug) console.log(e.key);
-      if (e.key == " ") e.preventDefault();
+      e.preventDefault();
       var note = keymap[e.key];
-      console.log(note);
-      console.log(depressed[note[0]][note[1]]);
       if (!note) return;
       if (note) {
-        console.log(note);
-        bassElectric.triggerRelease([fret[note[0]][note[1]]]);
+        if (sustaining)
+          bassElectric.triggerRelease(
+            [fret[note[0]][note[1]]],
+            Tone.now() + sustainMs / 1000
+          );
+        if (!sustaining) bassElectric.triggerRelease([fret[note[0]][note[1]]]);
         fretAnimate(note, false);
-        depressed[note[0]][note[1]] = false;
+        depressed[e.key] = false;
       }
     });
+  };
+  var hint = () => {
+    for (var key in keymap) {
+      var str = keymap[key];
+      var note = fret[str[0]][str[1]];
+      $("#fret-" + str[0] + "-" + str[1]).html(note + " (" + key + ")");
+    }
   };
   // main
   fretDraw();
   fretSound();
   keyPress();
+  hint();
 })();

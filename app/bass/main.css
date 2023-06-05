@@ -53,7 +53,7 @@ audio {
 .piano-black-raised,
 .chord,
 .fret {
-  border-radius: 2px;
+  border-radius: 1px;
   border-color: #222;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
@@ -86,6 +86,7 @@ audio {
   flex-direction: row;
 }
 .fret {
+  font-size: small;
   font-weight: bold;
   width: 50px;
   height: 24px;

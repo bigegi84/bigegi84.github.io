@@ -358,7 +358,6 @@
     $(".chord").mousedown((e) => {
       const id = e.target.id;
       let formula = chordGetFormula(id);
-      if (debug) console.log(formula);
       let jqCode = [];
       formula.forEach((f) => {
         f.split(",").forEach((x) => {
@@ -556,12 +555,10 @@
   const searchChord = (chRaw) => {
     const ch = chRaw.replace("#", "");
     const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
-    console.log(chLine);
     return "#chord-" + chLine + "-" + ch;
   };
   $("#play").mousedown(() => {
     const text = $("#sheet-text").val();
-    // console.log(text);
     let sec = 0;
     text.split(" ").forEach((it) => {
       const note = it.split("-")[0];
@@ -573,7 +570,6 @@
           if (it.search("#") != -1) return searchChord(it);
         })
         .join(",");
-      console.log(code);
       setTimeout(() => {
         $(code).mousedown();
       }, sec * 1000);

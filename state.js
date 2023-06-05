@@ -67,7 +67,7 @@ var state = {
     {
       name: "Piano",
       description:
-        "Aplikasi web untuk memainkan bass dan chord piano melalui shortcut keyboard.",
+        "Aplikasi web untuk memainkan piano.",
       link: "/app/piano",
     },
     {
@@ -82,8 +82,12 @@ var state = {
     },
     {
       name: "Cello and Violin",
-      description: "Aplikasi web untuk memainkan chord ukulele.",
+      description: "Aplikasi web untuk memainkan celo dan biola.",
       link: "/app/cello-and-violin",
+    }, {
+      name: "Drum",
+      description: "Aplikasi web untuk memainkan drum.",
+      link: "/app/drum",
     },
   ],
 };

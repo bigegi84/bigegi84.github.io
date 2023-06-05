@@ -72,7 +72,7 @@ var state = {
     },
     {
       name: "Ukulele",
-      description: "Aplikasi web untuk memainkan chord ukulele.",
+      description: "Aplikasi web untuk memainkan ukulele.",
       link: "/app/ukulele",
     },
     {

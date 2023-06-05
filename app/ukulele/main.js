@@ -343,6 +343,11 @@
           a: ["C", "Cmaj7"],
           z: ["C", "Cm7"],
 
+          "!": ["C", "C6"],
+          Q: ["C", "C7"],
+          A: ["C", "C9"],
+          // Z: ["C", "Cm7"],
+
           2: ["Db", "Db"],
           w: ["Db", "Dbm"],
           s: ["Db", "Dbmaj7"],
@@ -517,7 +522,6 @@
                 jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
               }
               let ms = 0;
-              // $(jqCode.join(",")).mouseup();
               jqCode.forEach((it) => {
                 setTimeout(() => {
                   $(it).mouseup();

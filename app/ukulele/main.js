@@ -517,7 +517,13 @@
                 jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
               }
               let ms = 0;
-              $(jqCode.join(",")).mouseup();
+              // $(jqCode.join(",")).mouseup();
+              jqCode.forEach((it) => {
+                setTimeout(() => {
+                  $(it).mouseup();
+                }, ms);
+                ms = ms + ukulele.chord.delay.value.delayMs;
+              });
               ukulele.chord.animate("chord-" + str[0] + "-" + str[1], false);
             }
             if (ukulele.mode.value == "solo") {

@@ -490,7 +490,7 @@
             jqCode.push("#note-" + x);
           });
         });
-        $(jqCode.join(",")).mouseup();
+        // $(jqCode.join(",")).mouseup();
         jqCode.forEach((it) => {
           setTimeout(() => {
             $(it).mouseup();

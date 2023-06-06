@@ -2,8 +2,41 @@
   const debug = !true;
   let lastChord = null;
   const ukulele = {
-    sustaining: true,
-    sustainMs: 1500,
+    bounce: {
+      bouncing: false,
+      handle: (jqCode) => {
+        if (ukulele.bounce.bouncing) {
+          let ms = 0;
+          jqCode.reverse().forEach((it) => {
+            setTimeout(() => {
+              $(it).mousedown();
+            }, ms);
+            ms = ms + ukulele.chord.delay.value.delayMs;
+          });
+          ms = 0;
+          jqCode.reverse().forEach((it) => {
+            setTimeout(() => {
+              $(it).mouseup();
+            }, ms);
+            ms = ms + ukulele.chord.delay.value.delayMs;
+          });
+        }
+      },
+      handleChange: () => {
+        $("#bouncing").change((e) => {
+          ukulele.bounce.bouncing = e.target.checked;
+        });
+      },
+    },
+    sustain: {
+      sustaining: true,
+      ms: 1500,
+      handleChange: () => {
+        $("#sustaining").change((e) => {
+          ukulele.sustain.sustaining = e.target.checked;
+        });
+      },
+    },
     theme: {
       fret: {
         backgroundColor: "#83764f",
@@ -110,6 +143,31 @@
           });
         }
       },
+      handleMouse: () => {
+        $(".fret").mousedown((e) => {
+          const id = e.target.id;
+          const note =
+            ukulele.fret.value[id.replace("fret-", "").split("-")[0]][
+              id.replace("fret-", "").split("-")[1]
+            ];
+          ukulele.tone.triggerAttack([note]);
+          ukulele.fret.animate(id, true);
+        });
+        $(".fret").mouseup((e) => {
+          const id = e.target.id;
+          const note =
+            ukulele.fret.value[id.replace("fret-", "").split("-")[0]][
+              id.replace("fret-", "").split("-")[1]
+            ];
+          if (ukulele.sustain.sustaining)
+            ukulele.tone.triggerRelease(
+              [note],
+              Tone.now() + ukulele.sustain.ms / 1000
+            );
+          if (!ukulele.sustain.sustaining) ukulele.tone.triggerRelease([note]);
+          ukulele.fret.animate(id, false);
+        });
+      },
       render: () => {
         let html = "";
         for (var x in ukulele.fret.value) {
@@ -128,6 +186,7 @@
           html += fretHtml;
         }
         $("#ukulele").html(html);
+        ukulele.fret.handleMouse();
       },
     },
     chord: {
@@ -243,7 +302,7 @@
         },
       },
       delay: {
-        value: { delayMs: 40 },
+        value: { delayMs: 10 },
         handleChange: () => {
           $("#input-delay").change((e) => {
             if (e.target.value)
@@ -261,16 +320,12 @@
           );
         if (!press) {
           const info = id.replace("chord-", "").split("-")[0];
-          $("#" + id).animate(
-            {
-              backgroundColor:
-                info.search("b") == -1
-                  ? ukulele.theme.chord.backgroundColor
-                  : ukulele.theme.chordMol.backgroundColor,
-            },
-            0,
-            "easeOutExpo"
-          );
+          $("#" + id).animate({
+            backgroundColor:
+              info.search("b") == -1
+                ? ukulele.theme.chord.backgroundColor
+                : ukulele.theme.chordMol.backgroundColor,
+          });
         }
       },
       getFormula: (id) => {
@@ -305,7 +360,9 @@
           }
           let ms = 0;
           jqCode.forEach((it) => {
-            $(it).mouseup();
+            setTimeout(() => {
+              $(it).mouseup();
+            }, ms);
             ms = ms + ukulele.chord.delay.value.delayMs;
           });
           ukulele.chord.animate(id, false);
@@ -332,6 +389,7 @@
           html += chordHtml;
         }
         $("#chord").html(html);
+        ukulele.chord.handleMouse();
       },
     },
     keymap: {
@@ -515,13 +573,13 @@
           if (ukulele.mode.value == "chord") {
             const str = ukulele.keymap.value[ukulele.mode.value][key];
             $("#chord-" + str[0] + "-" + str[1]).html(
-              str[1] + " <br>(" + key.replace("Arrow", "") + ")"
+              str[1] + " <br>" + key.replace("Arrow", "") + ""
             );
           }
           if (ukulele.mode.value == "solo") {
             const fretMap = ukulele.keymap.value[ukulele.mode.value][key];
             $("#fret-" + fretMap[0] + "-" + fretMap[1]).html(
-              ukulele.fret.value[fretMap[0]][fretMap[1]] + " (" + key + ")"
+              ukulele.fret.value[fretMap[0]][fretMap[1]] + " " + key + ""
             );
           }
         }
@@ -583,6 +641,7 @@
                 }, ms);
                 ms = ms + ukulele.chord.delay.value.delayMs;
               });
+              ukulele.bounce.handle(jqCode);
               ukulele.chord.animate("chord-" + str[0] + "-" + str[1], false);
             }
             if (ukulele.mode.value == "solo") {
@@ -598,35 +657,11 @@
       handleChange: () => {
         $('input[name="mode"]').change((e) => {
           ukulele.mode.value = e.target.value;
+          ukulele.chord.render();
+          ukulele.fret.render();
           ukulele.keymap.renderHint();
-          ukulele.keymap.handle();
         });
       },
-    },
-    handleMouse: () => {
-      $(".fret").mousedown((e) => {
-        const id = e.target.id;
-        const note =
-          ukulele.fret.value[id.replace("fret-", "").split("-")[0]][
-            id.replace("fret-", "").split("-")[1]
-          ];
-        ukulele.tone.triggerAttack([note]);
-        ukulele.fret.animate(id, true);
-      });
-      $(".fret").mouseup((e) => {
-        const id = e.target.id;
-        const note =
-          ukulele.fret.value[id.replace("fret-", "").split("-")[0]][
-            id.replace("fret-", "").split("-")[1]
-          ];
-        if (ukulele.sustaining)
-          ukulele.tone.triggerRelease(
-            [note],
-            Tone.now() + ukulele.sustainMs / 1000
-          );
-        if (!ukulele.sustaining) ukulele.tone.triggerRelease([note]);
-        ukulele.fret.animate(id, false);
-      });
     },
     info: {
       play: {
@@ -639,12 +674,14 @@
     main: () => {
       ukulele.mode.handleChange();
       ukulele.fret.render();
-      ukulele.handleMouse();
+      ukulele.fret.handleMouse();
       ukulele.chord.render();
       ukulele.chord.handleMouse();
       ukulele.keymap.renderHint();
       ukulele.keymap.handle();
       ukulele.chord.delay.handleChange();
+      ukulele.bounce.handleChange();
+      ukulele.sustain.handleChange();
     },
   };
   ukulele.main();

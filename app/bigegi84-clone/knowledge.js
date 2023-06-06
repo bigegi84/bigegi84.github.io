@@ -105,6 +105,11 @@ const knowledge = {
     lang: "lang",
     bini: "bini",
     "gemi?": "gemi?",
+    kuliah: "kuliah",
+    Universitas: "Universitas",
+    Jenderal: "Jenderal",
+    Soedirman: "Soedirman",
+    "dulu?": "dulu?",
   },
   sentence: {
     nama: {
@@ -155,6 +160,12 @@ const knowledge = {
       suka: {
         ngoding: { "@": "suka banget" },
         "ngoding?": { "@": "suka banget" },
+      },
+      kuliah: {
+        dimana: {
+          "@": "Universitas Jenderal Soedirman",
+          "dulu?": { "@": "Universitas Jenderal Soedirman" },
+        },
       },
     },
     woy: { "@": "oy" },

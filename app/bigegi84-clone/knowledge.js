@@ -47,6 +47,8 @@ const knowledge = {
     username: "username",
     ig: "ig",
     lu: "lu",
+    woy: "woy",
+    oy: "oy",
   },
   sentence: {
     nama: {
@@ -85,5 +87,7 @@ const knowledge = {
     },
     username: { ig: { lu: { apa: { "@": "bigegi84" } } } },
     ig: { lu: { apa: { "@": "bigegi84" } } },
+    lu: { siapa: { "@": "bigegi84" } },
+    woy: { "@": "oy" },
   },
 };

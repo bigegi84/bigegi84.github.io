@@ -136,7 +136,8 @@
     // "B5",
   ];
   const noteDraw = () => {
-    let html = '<div class="piano-container"><span class="piano-brand">bigegi84</span><div class="piano-keys">';
+    let html =
+      '<div class="piano-container"><span class="piano-brand">bigegi84</span><div class="piano-keys">';
     note.forEach((x) => {
       if (x.search("b") == -1)
         html +=
@@ -323,8 +324,10 @@
       Bmaj7: "B3,Eb4,Gb4,Bb4",
       B7: "B3,Eb4,Gb4,A4",
       Bm: "B3,D4,Gb4",
+      BmOverD: "D4,Gb4,B4",
       Bm7: "B3,D4,Gb4,A4",
       BBass2: "B2,Gb3",
+      BmOverDBass2: "D3,B3",
     },
   };
   const chordDraw = () => {
@@ -340,7 +343,7 @@
           '" class="chord' +
           (x.search("b") != -1 ? " chord-mol" : "") +
           '">' +
-          y +
+          y.replace("Over", "/") +
           "</div>";
       }
       chordHtml += "</div>";
@@ -350,18 +353,14 @@
   };
   chordDraw();
   const chordGetFormula = (id) => {
-    let formula = [
-      chord[id.replace("chord-", "").split("-")[0]][
-        id.replace("chord-", "").split("-")[1]
-      ],
-    ];
-    if (playType.code == "twoBassAndChord")
-      formula = [
-        chord[id.replace("chord-", "").split("-")[0]][
-          id.replace("chord-", "").split("-")[0] + "Bass2"
-        ],
-        ...formula,
-      ];
+    const chLine = id.replace("chord-", "").split("-")[0];
+    const ch = id.replace("chord-", "").split("-")[1];
+    let formula = [chord[chLine][ch]];
+    if (playType.code == "twoBassAndChord" && ch.search("Bass2") == -1) {
+      let bass = chLine + "Bass2";
+      if (ch.search("Over") != -1) bass = ch + "Bass2";
+      formula = [chord[chLine][bass], ...formula];
+    }
     return formula;
   };
   const chordSound = () => {
@@ -565,7 +564,7 @@
     $(".chord-info").html(str);
   };
   const searchChord = (chRaw) => {
-    const ch = chRaw.replace("#", "");
+    const ch = chRaw.replace("#", "").replace("/", "Over");
     const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
     return "#chord-" + chLine + "-" + ch;
   };

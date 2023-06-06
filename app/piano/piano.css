@@ -3,6 +3,7 @@ audio {
 }
 
 .chord {
+  -webkit-user-select: none;
   border-radius: 0px;
   border-color: #222;
   border-style: solid;
@@ -57,7 +58,7 @@ audio {
 .piano {
   padding: 5px;
   margin: 0 auto;
-  width: 550px;
+  width: 526px;
 }
 
 .piano-brand {
@@ -109,6 +110,8 @@ audio {
 }
 
 .note-info-white {
+  user-select: none;
+  -webkit-user-select: none;
   position: absolute;
   font-size: small;
   font-weight: bold;
@@ -120,13 +123,15 @@ audio {
 }
 
 .note-info-black {
+  user-select: none;
+  -webkit-user-select: none;
   position: absolute;
   font-size: xx-small;
   font-weight: bold;
   color: white;
   margin: 0;
   bottom: 0%;
-  left: 2%;
+  left: 0%;
 }
 
 .piano-white,

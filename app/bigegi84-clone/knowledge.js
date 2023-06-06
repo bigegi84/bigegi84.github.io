@@ -132,7 +132,6 @@ const knowledge = {
     datar: "datar",
     katanya: "katanya",
     namanya: "namanya",
-    WIguna: "WIguna",
     nikah: "nikah",
     dong: "dong",
     sekolah: "sekolah",
@@ -147,6 +146,10 @@ const knowledge = {
     buku: "buku",
     book: "book",
     eat: "eat",
+    lampu: "lampu",
+    light: "light",
+    air: "air",
+    water: "water",
   },
   sentence: {
     nama: {
@@ -249,13 +252,15 @@ const knowledge = {
     cewe: { yang: { lu: { suka: { siapa: { "@": "Ririn" } } } } },
     presiden: { lu: { siapa: { "@": "kalo sekarang sih Jokowi" } } },
     bumi: { bulat: { atau: { datar: { "@": "bulat katanya sih" } } } },
-    anak: { lu: { namanya: { siapa: { "@": "Gemilang Syailendra WIguna" } } } },
+    anak: { lu: { namanya: { siapa: { "@": "Gemilang Syailendra Wiguna" } } } },
     satu: { tambah: { satu: { berapa: { "@": "dua" } } } },
     bahasa: {
       inggrisnya: {
         mobil: { "@": "car" },
         buku: { "@": "book" },
         makan: { "@": "eat" },
+        lampu: { "@": "light" },
+        air: { "@": "water" },
       },
     },
   },

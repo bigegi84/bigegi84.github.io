@@ -19,9 +19,9 @@
           return (
             "<p>" +
             it +
-            '</p><input id="teach-input-' +
+            '</p><textarea id="teach-input-' +
             i +
-            '" type="text"/><button id="teach-btn-' +
+            '"></textarea><button id="teach-btn-' +
             i +
             '" class="teach-btn">Ajarkan</button>'
           );

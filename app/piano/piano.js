@@ -580,13 +580,22 @@
         sec += duration;
       });
     });
-    $("#sheet-label").text("Mahalini - Sisa Rasa Rythm");
-    $("#sheet-text").text(song["Mahalini - Sisa Rasa"]);
+    $("#sheet-label").text("Mahalini - Sisa Rasa Ritme");
+    $("#sheet-text").text(song["Mahalini - Sisa Rasa Ritme"]);
     $("#sheet-text").focusin(() => {
       activeKeymap = false;
     });
     $("#sheet-text").focusout(() => {
       activeKeymap = true;
+    });
+    let htmlOption = "";
+    for (const key in song)
+      htmlOption += '<option value="' + key + '">' + key + "</option>";
+    console.log(htmlOption);
+    $("#sheet-select").html(htmlOption);
+    $("#sheet-select").change((e) => {
+      $("#sheet-label").text(e.target.value);
+      $("#sheet-text").text(song[e.target.value]);
     });
   };
   sheet();

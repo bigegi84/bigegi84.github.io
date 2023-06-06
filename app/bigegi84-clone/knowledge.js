@@ -135,6 +135,8 @@ const knowledge = {
     WIguna: "WIguna",
     nikah: "nikah",
     dong: "dong",
+    sekolah: "sekolah",
+    dulu: "dulu",
   },
   sentence: {
     nama: {
@@ -195,6 +197,9 @@ const knowledge = {
       kerja: { dimana: { "@": "AGIT, anak perusahaannya astra" } },
       cupu: { ya: { "@": "engga dong, gua jago" } },
       udah: { nikah: { belum: { "@": "udah dong" } } },
+      sekolah: {
+        dimana: { "@": "udah kerja", dulu: { "@": "SMA Negeri 5 Bogor" } },
+      },
     },
     woy: { "@": "oy" },
     hi: { "@": "hi" },

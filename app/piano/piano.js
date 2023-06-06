@@ -472,8 +472,8 @@
   let lastChord = null;
   const keyPress = () => {
     $(document).keydown((e) => {
-      // e.preventDefault();
       if (!activeKeymap) return;
+      e.preventDefault();
       if (depressed[e.key]) return;
       depressed[e.key] = true;
       var str = keymap[e.key];
@@ -557,31 +557,37 @@
     const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
     return "#chord-" + chLine + "-" + ch;
   };
-  $("#play").mousedown(() => {
-    const text = $("#sheet-text").val();
-    let sec = 0;
-    text.split(" ").forEach((it) => {
-      const note = it.split("-")[0];
-      const duration = parseFloat(it.split("-")[1]);
-      const code = note
-        .split(",")
-        .map((it) => {
-          if (it.search("#") == -1) return "#note-" + it;
-          if (it.search("#") != -1) return searchChord(it);
-        })
-        .join(",");
-      setTimeout(() => {
-        $(code).mousedown();
-      }, sec * 1000);
-      setTimeout(() => {
-        $(code).mouseup();
-      }, (sec + duration) * 1000);
-      sec += duration;
+  const sheet = () => {
+    $("#play").mousedown(() => {
+      const text = $("#sheet-text").val();
+      let sec = 0;
+      text.split(" ").forEach((it) => {
+        const note = it.split("-")[0];
+        const duration = parseFloat(it.split("-")[1]);
+        const code = note
+          .split(",")
+          .map((it) => {
+            if (it.search("#") == -1) return "#note-" + it;
+            if (it.search("#") != -1) return searchChord(it);
+          })
+          .join(",");
+        setTimeout(() => {
+          $(code).mousedown();
+        }, sec * 1000);
+        setTimeout(() => {
+          $(code).mouseup();
+        }, (sec + duration) * 1000);
+        sec += duration;
+      });
     });
-  });
-  $("#sheet-label").text("Mahalini - Sisa Rasa Rythm");
-  $("#sheet-text").text(song["Mahalini - Sisa Rasa"]);
-  $("#sheet-text").focusin(() => {
-    activeKeymap = false;
-  });
+    $("#sheet-label").text("Mahalini - Sisa Rasa Rythm");
+    $("#sheet-text").text(song["Mahalini - Sisa Rasa"]);
+    $("#sheet-text").focusin(() => {
+      activeKeymap = false;
+    });
+    $("#sheet-text").focusout(() => {
+      activeKeymap = true;
+    });
+  };
+  sheet();
 })();

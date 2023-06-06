@@ -2,6 +2,13 @@ audio {
   display: none;
 }
 
+.sheet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .piano-javascript {
   border: 3px solid #f88;
   display: block;
@@ -107,12 +114,12 @@ audio {
   font-size: small;
   font-weight: bold;
   height: 44px;
-  background-color: #C2DEDC;
+  background-color: #c2dedc;
   z-index: 1;
 }
 
-.chord-mol{
-  background-color: #116A7B;
+.chord-mol {
+  background-color: #116a7b;
   color: white;
 }
 

@@ -41,6 +41,7 @@ audio {
   flex-wrap: nowrap;
   gap: 10px;
   flex-direction: row;
+  margin: 0;
 }
 
 .sheet-container {

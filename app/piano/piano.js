@@ -136,7 +136,7 @@
     // "B5",
   ];
   const noteDraw = () => {
-    let html = '<div class="piano-container"><div class="piano-keys">';
+    let html = '<div class="piano-container"><span class="piano-brand">bigegi84</span><div class="piano-keys">';
     note.forEach((x) => {
       if (x.search("b") == -1)
         html +=

@@ -60,6 +60,14 @@ audio {
   width: 550px;
 }
 
+.piano-brand {
+  color: white;
+  font-style: italic;
+  font-weight: bold;
+  font-size: smaller;
+  margin-left: 12px;
+}
+
 .piano-container,
 .piano-javascript {
   border-radius: 5px;
@@ -68,11 +76,14 @@ audio {
 }
 
 .piano-container {
-  text-align: center;
+  background: #116a7b;
+  /* text-align: center; */
+  border-radius: 4px;
+  padding: 1px 1px 5px 1px;
 }
 
 .piano-keys {
-  width: 102%;
+  width: 100%;
   word-spacing: 0;
   letter-spacing: 0;
   font-size: 0;
@@ -131,7 +142,7 @@ audio {
   width: 24px;
   height: 100px;
   /* background-color: white; */
-  background-color: #CDC2AE;
+  background-color: #cdc2ae;
   z-index: 1;
 }
 
@@ -147,7 +158,7 @@ audio {
   position: relative;
   left: -10px;
   /* background-color: black; */
-  background-color: #116A7B;
+  background-color: #116a7b;
 }
 
 @media only screen and (min-width: 600px) {

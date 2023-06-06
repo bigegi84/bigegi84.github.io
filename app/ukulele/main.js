@@ -396,6 +396,8 @@
       depressed: {},
       value: {
         chord: {
+          " ": "reverse",
+
           1: ["C", "C"],
           q: ["C", "Cm"],
           a: ["C", "Cmaj7"],
@@ -629,20 +631,31 @@
           const str = ukulele.keymap.value[ukulele.mode.value][e.key];
           if (str) {
             if (ukulele.mode.value == "chord") {
-              const jqCode = [];
-              const formula = ukulele.chord.value[str[0]][str[1]];
-              for (var i = 0; i < formula.length; i++) {
-                jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
+              if (str == "reverse" && lastChord != null) {
+                let ms = 0;
+                lastChord.reverse().forEach((it) => {
+                  setTimeout(() => {
+                    $(it).mouseup();
+                  }, ms);
+                  ms = ms + ukulele.chord.delay.value.delayMs;
+                });
+                ukulele.chord.animate("chord-" + str[0] + "-" + str[1], false);
+              } else {
+                const jqCode = [];
+                const formula = ukulele.chord.value[str[0]][str[1]];
+                for (var i = 0; i < formula.length; i++) {
+                  jqCode.push("#fret-" + (4 - i) + "-" + formula.charAt(i));
+                }
+                let ms = 0;
+                jqCode.forEach((it) => {
+                  setTimeout(() => {
+                    $(it).mouseup();
+                  }, ms);
+                  ms = ms + ukulele.chord.delay.value.delayMs;
+                });
+                ukulele.bounce.handle(jqCode);
+                ukulele.chord.animate("chord-" + str[0] + "-" + str[1], false);
               }
-              let ms = 0;
-              jqCode.forEach((it) => {
-                setTimeout(() => {
-                  $(it).mouseup();
-                }, ms);
-                ms = ms + ukulele.chord.delay.value.delayMs;
-              });
-              ukulele.bounce.handle(jqCode);
-              ukulele.chord.animate("chord-" + str[0] + "-" + str[1], false);
             }
             if (ukulele.mode.value == "solo") {
               ukulele.tone.triggerRelease([ukulele.fret.value[str[0]][str[1]]]);

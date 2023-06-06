@@ -176,9 +176,11 @@ audio {
     flex-direction: column;
     justify-content: center;
   }
-
   .chord-group {
     display: flex;
     flex-direction: row;
+  }
+  .piano {
+    width: 271px;
   }
 }

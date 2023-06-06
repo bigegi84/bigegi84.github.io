@@ -57,7 +57,9 @@
   };
   const saveWordKnowledge = (text) => {
     text.split(" ").forEach((it) => {
-      if (!knowledge.word[it]) knowledge.word[it] = it;
+      console.log(knowledge.word.indexOf(it));
+      console.log(it);
+      if (knowledge.word.indexOf(it) == -1) knowledge.word.push(it);
     });
   };
   $("#send").click(() => {

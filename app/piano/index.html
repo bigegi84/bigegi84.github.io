@@ -25,32 +25,41 @@
         <div class="content">
           <h2 id="title">bigegi84 - Chord Player Piano</h2>
           <div class="major">
-            <div class="sheet-container">
-              <div class="field">
-                <label for="sheet-select">Lembar</label>
-                <select name="sheet-select" id="sheet-select">
-                  <option value="example">example</option>
-                </select>
-              </div>
-              <div class="field">
-                <label id="sheet-label" for="sheet-text">test</label>
-                <textarea id="sheet-text" name="sheet-text" rows="4" cols="50">
-                </textarea>
-              </div>
-              <button id="play">Mainkan</button>
-            </div>
-            <div>
-              <p class="play-info" style="margin: 0">
-                <strong>Tipe Bermain:</strong>
-              </p>
-              <p class="chord-info" style="margin: 0">
-                <strong>Ditekan:</strong>
-              </p>
+            <div id="top" class="row">
               <div>
-                <div id="chord" class="chord-container"></div>
-                <div id="piano" class="piano"></div>
+                <p class="play-info" style="margin: 0">
+                  <strong>Tipe Bermain:</strong>
+                </p>
+                Ditekan:
+                <strong class="chord-info"></strong><br />
+                Ditekan (ms):
                 <strong id="timer"></strong>
               </div>
+              <div class="sheet-container">
+                <div class="field">
+                  <label for="sheet-select">Lembar</label>
+                  <select name="sheet-select" id="sheet-select">
+                    <option value="example">example</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label id="sheet-label" for="sheet-text">test</label>
+                  <textarea
+                    id="sheet-text"
+                    name="sheet-text"
+                    rows="4"
+                    cols="50"
+                  >
+                  </textarea>
+                </div>
+                <button id="play">Mainkan</button>
+              </div>
+            </div>
+            <div id="middle" class="row">
+              <div id="piano" class="piano"></div>
+            </div>
+            <div id="bottom">
+              <div id="chord" class="chord-container"></div>
             </div>
           </div>
           <br />

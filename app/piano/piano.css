@@ -2,6 +2,46 @@ audio {
   display: none;
 }
 
+.chord {
+  border-radius: 0px;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1;
+  font-size: small;
+  font-weight: bold;
+  width: 50px;
+  height: 30px;
+  background-color: #c2dedc;
+  z-index: 1;
+  margin: 1px;
+}
+
+.chord-mol {
+  background-color: #116a7b;
+  color: white;
+}
+
+.chord-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.chord-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  flex-direction: row;
+}
+
 .sheet-container {
   display: flex;
   flex-direction: column;
@@ -78,8 +118,7 @@ audio {
 }
 
 .piano-white,
-.piano-black-raised,
-.chord {
+.piano-black-raised {
   border-radius: 2px;
   border-color: #222;
   border-style: solid;
@@ -106,32 +145,6 @@ audio {
   position: relative;
   left: -10px;
   background-color: black;
-}
-
-.chord {
-  text-align: center;
-  width: 50px;
-  font-size: small;
-  font-weight: bold;
-  height: 44px;
-  background-color: #c2dedc;
-  z-index: 1;
-}
-
-.chord-mol {
-  background-color: #116a7b;
-  color: white;
-}
-
-.chord-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.chord-group {
-  display: flex;
-  flex-direction: column;
 }
 
 @media only screen and (min-width: 600px) {

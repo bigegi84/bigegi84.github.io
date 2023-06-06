@@ -525,7 +525,9 @@
   var chordHint = () => {
     for (var key in keymap) {
       var str = keymap[key];
-      $("#chord-" + str[0] + "-" + str[1]).html(str[1] + " <br>(" + key + ")");
+      $("#chord-" + str[0] + "-" + str[1]).html(
+        str[1] + " <br>" + key.replace("Arrow", "") + ""
+      );
     }
   };
   chordHint();
@@ -550,7 +552,7 @@
     }
   };
   var chordInfo = (str) => {
-    $(".chord-info").html("<strong>Ditekan : </strong>" + str);
+    $(".chord-info").html(str);
   };
   const searchChord = (chRaw) => {
     const ch = chRaw.replace("#", "");

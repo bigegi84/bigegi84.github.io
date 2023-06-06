@@ -6,6 +6,13 @@
   let activeKeymap = true;
   var sustaining = true;
   var sustainMs = 1500;
+  const theme = {
+    pianoWhite: {
+      backgroundColor: "#CDC2AE",
+      textColor: "white",
+    },
+    pianoBlack: { backgroundColor: "#116A7B", textColor: "white" },
+  };
   var playType = {
     name: "(Kiri) 2 Bas - (Kanan) Akor",
     code: "twoBassAndChord",
@@ -165,7 +172,10 @@
     if (!press) {
       $("#" + id).animate(
         {
-          backgroundColor: id.search("b") == -1 ? "white" : "black",
+          backgroundColor:
+            id.search("b") == -1
+              ? theme.pianoWhite.backgroundColor
+              : theme.pianoBlack.backgroundColor,
         },
         300,
         "easeOutExpo"
@@ -593,7 +603,6 @@
     let htmlOption = "";
     for (const key in song)
       htmlOption += '<option value="' + key + '">' + key + "</option>";
-    console.log(htmlOption);
     $("#sheet-select").html(htmlOption);
     $("#sheet-select").change((e) => {
       $("#sheet-label").text(e.target.value);
@@ -601,4 +610,10 @@
     });
   };
   sheet();
+  const handleSustain = () => {
+    $("#sustain").change((e) => {
+      sustaining = e.target.checked;
+    });
+  };
+  handleSustain();
 })();

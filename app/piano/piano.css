@@ -101,7 +101,8 @@ audio {
   position: absolute;
   font-size: small;
   font-weight: bold;
-  color: black;
+  /* color: black; */
+  color: white;
   margin: 0;
   bottom: 0%;
   left: 25%;
@@ -129,7 +130,8 @@ audio {
 .piano-white {
   width: 24px;
   height: 100px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #CDC2AE;
   z-index: 1;
 }
 
@@ -144,7 +146,8 @@ audio {
   height: 70px;
   position: relative;
   left: -10px;
-  background-color: black;
+  /* background-color: black; */
+  background-color: #116A7B;
 }
 
 @media only screen and (min-width: 600px) {

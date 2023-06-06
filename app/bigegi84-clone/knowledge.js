@@ -137,6 +137,16 @@ const knowledge = {
     dong: "dong",
     sekolah: "sekolah",
     dulu: "dulu",
+    satu: "satu",
+    tambah: "tambah",
+    dua: "dua",
+    bahasa: "bahasa",
+    inggrisnya: "inggrisnya",
+    mobil: "mobil",
+    car: "car",
+    buku: "buku",
+    book: "book",
+    eat: "eat",
   },
   sentence: {
     nama: {
@@ -240,5 +250,13 @@ const knowledge = {
     presiden: { lu: { siapa: { "@": "kalo sekarang sih Jokowi" } } },
     bumi: { bulat: { atau: { datar: { "@": "bulat katanya sih" } } } },
     anak: { lu: { namanya: { siapa: { "@": "Gemilang Syailendra WIguna" } } } },
+    satu: { tambah: { satu: { berapa: { "@": "dua" } } } },
+    bahasa: {
+      inggrisnya: {
+        mobil: { "@": "car" },
+        buku: { "@": "book" },
+        makan: { "@": "eat" },
+      },
+    },
   },
 };

@@ -55,12 +55,14 @@
       saveWordKnowledge(value);
     });
   };
+  const wordCount = () => {
+    $("#word-count").text(knowledge.word.length);
+  };
   const saveWordKnowledge = (text) => {
     text.split(" ").forEach((it) => {
-      console.log(knowledge.word.indexOf(it));
-      console.log(it);
       if (knowledge.word.indexOf(it) == -1) knowledge.word.push(it);
     });
+    wordCount();
   };
   $("#send").click(() => {
     const text = $("#text").val();
@@ -82,4 +84,8 @@
     dlAnchorElem.setAttribute("download", "knowledge.json");
     dlAnchorElem.click();
   });
+  const main = () => {
+    wordCount();
+  };
+  main();
 })();

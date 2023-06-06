@@ -58,7 +58,7 @@ audio {
 .piano {
   padding: 5px;
   margin: 0 auto;
-  width: 526px;
+  width: 733px;
 }
 
 .piano-brand {
@@ -80,7 +80,7 @@ audio {
   background: #116a7b;
   /* text-align: center; */
   border-radius: 4px;
-  padding: 1px 1px 5px 1px;
+  padding: 5px 10px 10px 10px;
 }
 
 .piano-keys {
@@ -123,15 +123,14 @@ audio {
 }
 
 .note-info-black {
-  user-select: none;
   -webkit-user-select: none;
-  position: absolute;
   font-size: xx-small;
   font-weight: bold;
   color: white;
-  margin: 0;
-  bottom: 0%;
-  left: 0%;
+  margin: 2px;
+  font-size: xx-small;
+  font-weight: bold;
+  color: white;
 }
 
 .piano-white,
@@ -144,7 +143,7 @@ audio {
 }
 
 .piano-white {
-  width: 24px;
+  width: 33px;
   height: 100px;
   /* background-color: white; */
   background-color: #cdc2ae;
@@ -158,7 +157,7 @@ audio {
 }
 
 .piano-black-raised {
-  width: 16px;
+  width: 22px;
   height: 70px;
   position: relative;
   left: -10px;

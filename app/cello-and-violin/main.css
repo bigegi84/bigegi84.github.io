@@ -142,6 +142,7 @@ audio {
 }
 
 .note-info-white {
+  -webkit-user-select: none;
   line-height: 1;
   position: absolute;
   font-size: small;
@@ -153,6 +154,7 @@ audio {
 }
 
 .note-info-black {
+  -webkit-user-select: none;
   line-height: 1;
   /* position: absolute; */
   font-size: xx-small;

@@ -100,7 +100,6 @@
         }
       }
       html += "</div>";
-      console.log(html);
       $("#cello-keymap").html(html);
     },
     draw: () => {
@@ -152,7 +151,6 @@
       });
     },
     keydown: (e) => {
-      if (debug) console.log(e.key);
       if (e.key == " ") e.preventDefault();
       var note = cello.keymap[e.key];
       if (!note) return;
@@ -166,7 +164,6 @@
       }
     },
     keyup: (e) => {
-      if (debug) console.log(e.key);
       if (e.key == " ") e.preventDefault();
       var note = cello.keymap[e.key];
       if (note) {
@@ -176,9 +173,6 @@
       }
     },
   };
-  cello.draw();
-  cello.sound();
-  cello.keymapDraw();
   const violin = {
     animate: (note, press = true) => {
       if (press) {
@@ -305,7 +299,6 @@
         }
       }
       html += "</div>";
-      console.log(html);
       $("#violin-keymap").html(html);
     },
     intervals: {},
@@ -339,7 +332,6 @@
       $(".violin-note").mousedown((e) => {
         const id = e.currentTarget.id;
         const note = id.replace("violin-note-", "");
-        if (debug) console.log(e.currentTarget.id);
         if (violin.depressed[note]) {
           return;
         }
@@ -360,7 +352,6 @@
       });
     },
     keydown: (e) => {
-      if (debug) console.log(e.key);
       if (e.key == " ") e.preventDefault();
       var note = violin.keymap[e.key];
       if (violin.depressed[note]) {
@@ -373,7 +364,6 @@
       }
     },
     keyup: (e) => {
-      if (debug) console.log(e.key);
       if (e.key == " ") e.preventDefault();
       var note = violin.keymap[e.key];
       if (note) {
@@ -383,146 +373,92 @@
       }
     },
   };
-  violin.draw();
-  violin.sound();
-  violin.keymapDraw();
-  $(document).keydown((e) => {
-    cello.keydown(e);
-    violin.keydown(e);
-  });
-  $(document).keyup((e) => {
-    cello.keyup(e);
-    violin.keyup(e);
-  });
-  // var keymap = {
-  //   " ": "reverse",
-  //   1: chord.C.C,
-  //   "!": chord.C.Cmaj7,
-  //   // q: playMap.twoBassAndChord.Cm,
-  //   // Q: playMap.twoBassAndChord.Cm7,
-  //   a: chord.C.C7,
-  //   // z: "#key-C3,#key-G3",
-  //   // 2: playMap.twoBassAndChord.Db,
-  //   // "@": playMap.twoBassAndChord.Dbmaj7,
-  //   // w: playMap.twoBassAndChord.Dbm,
-  //   // W: playMap.twoBassAndChord.Dbm7,
-  //   // s: playMap.twoBassAndChord.Db7,
-  //   // x: "#key-Db3,#key-Ab3",
-  //   // 3: playMap.twoBassAndChord.D,
-  //   // "#": playMap.twoBassAndChord.Dmaj7,
-  //   e: chord.D.Dm,
-  //   // E: playMap.twoBassAndChord.Dm7,
-  //   // d: playMap.twoBassAndChord.D7,
-  //   // c: "#key-D3,#key-A3",
-  //   // 4: playMap.twoBassAndChord.Eb,
-  //   // $: playMap.twoBassAndChord.Ebmaj7,
-  //   // r: playMap.twoBassAndChord.Ebm,
-  //   // R: playMap.twoBassAndChord.Ebm7,
-  //   // f: playMap.twoBassAndChord.Eb7,
-  //   // v: "#key-Eb3,#key-Bb3",
-  //   5: chord.E.E,
-  //   // "%": playMap.twoBassAndChord.Emaj7,
-  //   // t: playMap.twoBassAndChord.Em,
-  //   // T: playMap.twoBassAndChord.Em7,
-  //   // g: playMap.twoBassAndChord.E7,
-  //   // b: "#key-E3,#key-B3",
-  //   // 6: playMap.twoBassAndChord.F,
-  //   // "^": playMap.twoBassAndChord.Fmaj7,
-  //   // y: playMap.twoBassAndChord.Fm,
-  //   // Y: playMap.twoBassAndChord.Fm7,
-  //   // h: playMap.twoBassAndChord.F7,
-  //   // n: "#key-F3,#key-C4",
-  //   // 7: playMap.twoBassAndChord.Gb,
-  //   // "&": playMap.twoBassAndChord.Gbmaj7,
-  //   // u: playMap.twoBassAndChord.Gbm,
-  //   // U: playMap.twoBassAndChord.Gbm7,
-  //   // j: playMap.twoBassAndChord.Gb7,
-  //   // m: "#key-Gb3,#key-Db4",
-  //   8: chord.G.G,
-  //   // "*": playMap.twoBassAndChord.Gmaj7,
-  //   // i: playMap.twoBassAndChord.Gm,
-  //   // I: playMap.twoBassAndChord.Gm7,
-  //   // k: playMap.twoBassAndChord.G7,
-  //   // ",": "#key-G3,#key-D4",
-  //   // 9: playMap.twoBassAndChord.Ab,
-  //   // "(": playMap.twoBassAndChord.Abmaj7,
-  //   // o: playMap.twoBassAndChord.Abm,
-  //   // O: playMap.twoBassAndChord.Abm7,
-  //   // l: playMap.twoBassAndChord.Ab7,
-  //   // ".": "#key-Ab3,#key-Eb4",
-  //   // 0: playMap.twoBassAndChord.A,
-  //   // ")": playMap.twoBassAndChord.Amaj7,
-  //   // p: playMap.twoBassAndChord.Am,
-  //   // P: playMap.twoBassAndChord.Am7,
-  //   // ";": playMap.twoBassAndChord.A7,
-  //   // "/": "#key-A2,#key-E3",
-  //   // "-": playMap.twoBassAndChord.Bb,
-  //   // _: playMap.twoBassAndChord.Bbmaj7,
-  //   // "[": playMap.twoBassAndChord.Bbm,
-  //   // "{": playMap.twoBassAndChord.Bbm7,
-  //   // "'": playMap.twoBassAndChord.Bb7,
-  //   // ArrowLeft: "#key-Bb2,#key-F3",
-  //   // "=": playMap.twoBassAndChord.B,
-  //   // "+": playMap.twoBassAndChord.Bmaj7,
-  //   "]": chord.B.Bm,
-  //   // "}": playMap.twoBassAndChord.Bm7,
-  //   // "\\": playMap.twoBassAndChord.B7,
-  //   // "`": "#key-B2,#key-Gb3",
-  // };
-  // const keyPress = () => {
-  //   $(document).keydown((e) => {
-  //     if (debug) console.log(e.key);
-  //     if (e.key == " ") e.preventDefault();
-  //     var str = keymap[e.key];
-  //     if (str) {
-  //       if (str == "reverse" && lastChord != null) {
-  //         let ms = 0;
-  //         lastChord.reverse().forEach((it) => {
-  //           setTimeout(() => {
-  //             $(it).mousedown();
-  //           }, ms);
-  //           ms = ms + sustainMs;
-  //         });
-  //       } else {
-  //         const jqCode = [];
-  //         for (var i = 0; i < str.length; i++) {
-  //           jqCode.push("#fret-" + (4 - i) + "-" + str.charAt(i));
-  //         }
-  //         let ms = 0;
-  //         jqCode.forEach((it) => {
-  //           setTimeout(() => {
-  //             $(it).mousedown();
-  //           }, ms);
-  //           ms = ms + sustainMs;
-  //         });
-  //         lastChord = jqCode;
-  //       }
-  //     }
-  //   });
-  // };
-  // var keyHint = () => {
-  //   for (var key in keymap) {
-  //     var str = keymap[key];
-  //     for (var chLine in chord) {
-  //       for (var ch in chord[chLine]) {
-  //         if (chord[chLine][ch] == str) {
-  //           if (debug) console.log("#chord-" + chLine + "-" + ch);
-  //           $("#chord-" + chLine + "-" + ch).html(ch + " <br>(" + key + ")");
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
+  const keymapHandle = () => {
+    $(document).keydown((e) => {
+      cello.keydown(e);
+      violin.keydown(e);
+    });
+    $(document).keyup((e) => {
+      cello.keyup(e);
+      violin.keyup(e);
+    });
+  };
   const sustainInput = () => {
     $("#sustain-ms").change((e) => {
-      if (debug) console.log(e.target.value);
       if (e.target.value) sustainMs = parseInt(e.target.value);
     });
   };
-  // main
-  // fretDraw();
-  // fretSound();
-  // keyPress();
-  // keyHint();
-  sustainInput();
+
+  let playTimeout = [];
+  const playStop = () => {
+    playTimeout.forEach((it) => clearTimeout(it));
+    $(".note,.violin-note").mouseup();
+    playTimeout = [];
+  };
+  const playSheet = (id) => {
+    const text = $(id).val();
+    let sec = 0;
+    text.split(" ").forEach((it) => {
+      const note = it.split("-")[0];
+      const duration = parseFloat(it.split("-")[1]);
+      const code = note
+        .split(",")
+        .map((it) => {
+          if (id == "#sheet-text-left") return "#note-" + it;
+          if (id == "#sheet-text-right") return "#violin-note-" + it;
+        })
+        .join(",");
+      const timeoutA = setTimeout(() => {
+        $(code).mousedown();
+      }, sec * 1000);
+      const timeoutB = setTimeout(() => {
+        $(code).mouseup();
+      }, (sec + duration) * 1000);
+      sec += duration;
+      playTimeout.push(timeoutA);
+      playTimeout.push(timeoutB);
+    });
+  };
+  const sheet = () => {
+    $("#play").mousedown((e) => {
+      if ($("#play").text() == "Mainkan") {
+        playSheet("#sheet-text-left");
+        playSheet("#sheet-text-right");
+        $("#play").text("Berhenti");
+      } else {
+        playStop();
+        $("#play").text("Mainkan");
+      }
+    });
+    $("#sheet-label-left").text("Kiri");
+    $("#sheet-label-right").text("Kanan");
+    $("#sheet-text-left").text(song["Mahalini - Sisa Rasa Ritme"][0]);
+    $("#sheet-text-right").text(song["Mahalini - Sisa Rasa Ritme"][1]);
+    $("#sheet-text-left,#sheet-text-right").focusin(() => {
+      activeKeymap = false;
+    });
+    $("#sheet-text-left,#sheet-text-right").focusout(() => {
+      activeKeymap = true;
+    });
+    let htmlOption = "";
+    for (const key in song)
+      htmlOption += '<option value="' + key + '">' + key + "</option>";
+    $("#sheet-select").html(htmlOption);
+    $("#sheet-select").change((e) => {
+      $("#sheet-text-left").text(song[e.target.value][0]);
+      $("#sheet-text-left").text(song[e.target.value][1]);
+    });
+  };
+  const main = () => {
+    cello.draw();
+    cello.sound();
+    cello.keymapDraw();
+    violin.draw();
+    violin.sound();
+    violin.keymapDraw();
+    keymapHandle();
+    sustainInput();
+    sheet();
+  };
+  main();
 })();

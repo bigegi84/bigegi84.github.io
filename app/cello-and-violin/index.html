@@ -22,20 +22,59 @@
         <div class="content">
           <h2>bigegi84 - Cello And Violin</h2>
           <div class="major">
-            <div style="display: flex;justify-content: space-around;">
-              <div>
-                <div id="cello-keymap"></div>
+            <div class="column-a">
+              <div class="column-a">
+                <div class="field">
+                  <label for="sheet-select">Lembar</label>
+                  <select name="sheet-select" id="sheet-select">
+                    <option value="example">example</option>
+                  </select>
+                </div>
+                <div class="row-a">
+                  <div class="field">
+                    <label id="sheet-label-left" for="sheet-text-left"
+                      >test</label
+                    >
+                    <textarea
+                      id="sheet-text-left"
+                      name="sheet-text-left"
+                      rows="4"
+                      cols="50"
+                    >
+                    </textarea>
+                  </div>
+                  <div class="field">
+                    <label id="sheet-label-right" for="sheet-text-right"
+                      >test</label
+                    >
+                    <textarea
+                      id="sheet-text-right"
+                      name="sheet-text-right"
+                      rows="4"
+                      cols="50"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+                <button id="play">Mainkan</button>
               </div>
               <div>
-                <div id="violin-keymap"></div>
-              </div>
-            </div>
-            <div style="display: flex;justify-content: space-around;">
-              <div>
-                <div id="cello"></div>
-              </div>
-              <div>
-                <div id="violin"></div>
+                <div style="display: flex; justify-content: space-around">
+                  <div>
+                    <div id="cello-keymap"></div>
+                  </div>
+                  <div>
+                    <div id="violin-keymap"></div>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-around">
+                  <div>
+                    <div id="cello"></div>
+                  </div>
+                  <div>
+                    <div id="violin"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -129,6 +168,7 @@
         );
       });
     </script>
+    <script src="song.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

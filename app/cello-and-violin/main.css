@@ -1,6 +1,16 @@
 audio {
   display: none;
 }
+.column-a {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.row-a {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .hint {
   text-align: center;

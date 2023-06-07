@@ -8,7 +8,7 @@ audio {
   font-size: small;
   font-weight: bold;
   height: 44px;
-  background-color: #D7C0AE;
+  background-color: #d7c0ae;
   z-index: 1;
   border-radius: 1px;
   border-color: #222;
@@ -18,7 +18,7 @@ audio {
 }
 
 .hint-black {
-  background: #967E76;
+  background: #967e76;
   color: white;
 }
 
@@ -83,7 +83,8 @@ audio {
 .piano-white {
   width: 24px;
   height: 100px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #606c5d;
   z-index: 1;
 }
 
@@ -98,7 +99,8 @@ audio {
   height: 70px;
   position: relative;
   left: -10px;
-  background-color: black;
+  /* background-color: black; */
+  background-color: #213555;
 }
 
 .fret-line {
@@ -144,7 +146,7 @@ audio {
   position: absolute;
   font-size: small;
   font-weight: bold;
-  color: black;
+  color: white;
   margin: 0;
   bottom: 0%;
   left: 25%;
@@ -152,11 +154,9 @@ audio {
 
 .note-info-black {
   line-height: 1;
-  position: absolute;
+  /* position: absolute; */
   font-size: xx-small;
   font-weight: bold;
   color: white;
-  margin: 0;
-  bottom: 0%;
-  left: 2%;
+  margin: 0px;
 }

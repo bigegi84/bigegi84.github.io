@@ -1,4 +1,11 @@
 (() => {
+  const theme = {
+    pianoWhite: {
+      backgroundColor: "#606C5D",
+      textColor: "white",
+    },
+    pianoBlack: { backgroundColor: "#213555", textColor: "white" },
+  };
   const debug = true;
   const cello = {
     animate: (note, press = true) => {
@@ -12,7 +19,10 @@
       } else {
         $("#note-" + note).animate(
           {
-            backgroundColor: note.search("b") == -1 ? "white" : "black",
+            backgroundColor:
+              note.search("b") == -1
+                ? theme.pianoWhite.backgroundColor
+                : theme.pianoBlack.backgroundColor,
           },
           300,
           "easeOutExpo"
@@ -181,7 +191,10 @@
       } else {
         $("#violin-note-" + note).animate(
           {
-            backgroundColor: note.search("b") == -1 ? "white" : "black",
+            backgroundColor:
+              note.search("b") == -1
+                ? theme.pianoWhite.backgroundColor
+                : theme.pianoBlack.backgroundColor,
           },
           300,
           "easeOutExpo"

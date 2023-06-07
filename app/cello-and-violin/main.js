@@ -90,9 +90,9 @@
           (cello.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
           cello.keymap[key] +
-          " (" +
+          " " +
           key +
-          ")</p></div>";
+          "</p></div>";
         i++;
         if (i == 4) {
           html += "</div>";
@@ -295,9 +295,9 @@
           (violin.keymap[key].search("b") != -1 ? "hint-black" : "") +
           '"><p>' +
           violin.keymap[key] +
-          " (" +
+          " " +
           key +
-          ")</p></div>";
+          "</p></div>";
         i++;
         if (i == 7) {
           html += "</div>";

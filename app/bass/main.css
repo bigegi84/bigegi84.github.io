@@ -86,7 +86,8 @@ audio {
   flex-direction: row;
 }
 .fret {
-  font-size: small;
+  -webkit-user-select: none;
+  font-size: x-small;
   font-weight: bold;
   width: 50px;
   height: 24px;

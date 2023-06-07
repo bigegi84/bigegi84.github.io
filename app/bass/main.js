@@ -240,7 +240,7 @@
     for (var key in keymap) {
       var str = keymap[key];
       var note = fret[str[0]][str[1]];
-      $("#fret-" + str[0] + "-" + str[1]).html(note + " (" + key + ")");
+      $("#fret-" + str[0] + "-" + str[1]).html(note + " " + key + "");
     }
   };
   // main

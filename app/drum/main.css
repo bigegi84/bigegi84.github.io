@@ -6,6 +6,7 @@ audio {
   display: flex;
 }
 .note {
+  -webkit-user-select: none;
   text-align: center;
   width: 55px;
   height: 55px;

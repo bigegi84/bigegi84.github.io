@@ -2,9 +2,16 @@
   const debug = !true;
   let fadeout = true;
   let lastChord = null;
-  let sustaining = true;
-  let sustainMs = 1500;
   let depressed = {};
+  const sustain = {
+    sustaining: true,
+    ms: 1500,
+    handleChange: () => {
+      $("#sustaining").change((e) => {
+        sustain.sustaining = e.target.checked;
+      });
+    },
+  };
   const bassElectric = new Tone.Sampler({
     urls: {
       Db1: "Db1.ogg",
@@ -117,15 +124,10 @@
         0
       );
     else
-      $("#fret-" + fret[0] + "-" + fret[1]).animate(
-        {
-          backgroundColor: "#deb887",
-        },
-        300,
-        "easeOutExpo"
-      );
+      $("#fret-" + fret[0] + "-" + fret[1]).animate({
+        backgroundColor: "#deb887",
+      });
   };
-
   const fretSound = () => {
     $(".fret").mousedown((e) => {
       const id = e.currentTarget.id;
@@ -143,11 +145,10 @@
       const fretNumber = id.replace("fret-", "").split("-")[1];
       const note = fret[fretLine][fretNumber];
       if (note) {
-        if (sustaining) {
-          console.log("aneh");
-          bassElectric.triggerRelease([note], Tone.now() + sustainMs / 1000);
+        if (sustain.sustaining) {
+          bassElectric.triggerRelease([note], Tone.now() + sustain.ms / 1000);
         }
-        if (!sustaining) {
+        if (!sustain.sustaining) {
           bassElectric.triggerRelease([note]);
         }
         fretAnimate([fretLine, fretNumber], false);
@@ -225,12 +226,13 @@
       var note = keymap[e.key];
       if (!note) return;
       if (note) {
-        if (sustaining)
+        if (sustain.sustaining)
           bassElectric.triggerRelease(
             [fret[note[0]][note[1]]],
-            Tone.now() + sustainMs / 1000
+            Tone.now() + sustain.ms / 1000
           );
-        if (!sustaining) bassElectric.triggerRelease([fret[note[0]][note[1]]]);
+        if (!sustain.sustaining)
+          bassElectric.triggerRelease([fret[note[0]][note[1]]]);
         fretAnimate(note, false);
         depressed[e.key] = false;
       }
@@ -248,4 +250,5 @@
   fretSound();
   keyPress();
   hint();
+  sustain.handleChange();
 })();

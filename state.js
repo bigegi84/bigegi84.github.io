@@ -1,4 +1,36 @@
 var state = {
+  creation: [
+    {
+      name: "Piano",
+      description: "Aplikasi web untuk memainkan piano.",
+      link: "/app/piano",
+    },
+    {
+      name: "Ukulele",
+      description: "Aplikasi web untuk memainkan ukulele.",
+      link: "/app/ukulele",
+    },
+    {
+      name: "Bass",
+      description: "Aplikasi web untuk memainkan bas.",
+      link: "/app/bass",
+    },
+    {
+      name: "Cello and Violin",
+      description: "Aplikasi web untuk memainkan celo dan biola.",
+      link: "/app/cello-and-violin",
+    },
+    {
+      name: "Drum",
+      description: "Aplikasi web untuk memainkan drum.",
+      link: "/app/drum",
+    },
+    {
+      name: "Klon bigegi84",
+      description: "Aplikasi untuk mengklon pengetahuan bigegi84.",
+      link: "/app/clone",
+    },
+  ],
   fullName: "Gilang Pratama Wiguna",
   degree: { id: "S.Kom" },
   phone: "+6288975329400",
@@ -63,31 +95,4 @@ var state = {
     paypal: "https://paypal.me/bigegi84",
     saweria: "https://saweria.co/bigegi84",
   },
-  creativity: [
-    {
-      name: "Piano",
-      description:
-        "Aplikasi web untuk memainkan piano.",
-      link: "/app/piano",
-    },
-    {
-      name: "Ukulele",
-      description: "Aplikasi web untuk memainkan ukulele.",
-      link: "/app/ukulele",
-    },
-    {
-      name: "Bass",
-      description: "Aplikasi web untuk memainkan bas.",
-      link: "/app/bass",
-    },
-    {
-      name: "Cello and Violin",
-      description: "Aplikasi web untuk memainkan celo dan biola.",
-      link: "/app/cello-and-violin",
-    }, {
-      name: "Drum",
-      description: "Aplikasi web untuk memainkan drum.",
-      link: "/app/drum",
-    },
-  ],
 };

@@ -60,9 +60,9 @@ $(document).ready(() => {
   $(prefix + "portofolioContent").html("Segera Hadir");
   $(prefix + "portofolioMore").hide();
 
-  $(prefix + "creativityTitle").text("Kreativitas");
+  $(prefix + "creativityTitle").text("Kreasi");
   var creativityContentHtml = "";
-  state.creativity.forEach((d) => {
+  state.creation.forEach((d) => {
     creativityContentHtml +=
       '<a href="' +
       d.link +

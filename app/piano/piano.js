@@ -609,6 +609,8 @@
   let playTimeout = [];
   const playStop = () => {
     playTimeout.forEach((it) => clearTimeout(it));
+    $(".chord").mouseup();
+    $(".note").mouseup();
     playTimeout = [];
   };
   const playSheet = (id) => {

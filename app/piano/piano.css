@@ -13,7 +13,7 @@ audio {
   line-height: 1;
   font-size: small;
   font-weight: bold;
-  width: 50px;
+  width: 65px;
   height: 30px;
   background-color: #c2dedc;
   z-index: 1;
@@ -188,5 +188,10 @@ audio {
   }
   .piano {
     width: 271px;
+  }
+}
+@media screen and (max-width: 1680px) {
+  .banner.style1 .content {
+    padding: 5rem 0rem 3rem 0rem;
   }
 }

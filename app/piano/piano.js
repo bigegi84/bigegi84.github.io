@@ -606,35 +606,54 @@
     const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
     return "#chord-" + chLine + "-" + ch;
   };
-  const sheet = () => {
-    $("#play").mousedown(() => {
-      const text = $("#sheet-text").val();
-      let sec = 0;
-      text.split(" ").forEach((it) => {
-        const note = it.split("-")[0];
-        const duration = parseFloat(it.split("-")[1]);
-        const code = note
-          .split(",")
-          .map((it) => {
-            if (it.search("#") == -1) return "#note-" + it;
-            if (it.search("#") != -1) return searchChord(it);
-          })
-          .join(",");
-        setTimeout(() => {
-          $(code).mousedown();
-        }, sec * 1000);
-        setTimeout(() => {
-          $(code).mouseup();
-        }, (sec + duration) * 1000);
-        sec += duration;
-      });
+  let playTimeout = [];
+  const playStop = () => {
+    playTimeout.forEach((it) => clearTimeout(it));
+    playTimeout = [];
+  };
+  const playSheet = (id) => {
+    const text = $(id).val();
+    let sec = 0;
+    text.split(" ").forEach((it) => {
+      const note = it.split("-")[0];
+      const duration = parseFloat(it.split("-")[1]);
+      const code = note
+        .split(",")
+        .map((it) => {
+          if (it.search("#") == -1) return "#note-" + it;
+          if (it.search("#") != -1) return searchChord(it);
+        })
+        .join(",");
+      const timeoutA = setTimeout(() => {
+        $(code).mousedown();
+      }, sec * 1000);
+      const timeoutB = setTimeout(() => {
+        $(code).mouseup();
+      }, (sec + duration) * 1000);
+      sec += duration;
+      playTimeout.push(timeoutA);
+      playTimeout.push(timeoutB);
     });
-    $("#sheet-label").text("Mahalini - Sisa Rasa Ritme");
-    $("#sheet-text").text(song["Mahalini - Sisa Rasa Ritme"]);
-    $("#sheet-text").focusin(() => {
+  };
+  const sheet = () => {
+    $("#play").mousedown((e) => {
+      if ($("#play").text() == "Mainkan") {
+        playSheet("#sheet-text-left");
+        playSheet("#sheet-text-right");
+        $("#play").text("Berhenti");
+      } else {
+        playStop();
+        $("#play").text("Mainkan");
+      }
+    });
+    $("#sheet-label-left").text("Kiri");
+    $("#sheet-label-right").text("Kanan");
+    $("#sheet-text-left").text(song["Mahalini - Sisa Rasa Ritme"][0]);
+    $("#sheet-text-right").text(song["Mahalini - Sisa Rasa Ritme"][1]);
+    $("#sheet-text-left,#sheet-text-right").focusin(() => {
       activeKeymap = false;
     });
-    $("#sheet-text").focusout(() => {
+    $("#sheet-text-left,#sheet-text-right").focusout(() => {
       activeKeymap = true;
     });
     let htmlOption = "";
@@ -642,8 +661,8 @@
       htmlOption += '<option value="' + key + '">' + key + "</option>";
     $("#sheet-select").html(htmlOption);
     $("#sheet-select").change((e) => {
-      $("#sheet-label").text(e.target.value);
-      $("#sheet-text").text(song[e.target.value]);
+      $("#sheet-text-left").text(song[e.target.value][0]);
+      $("#sheet-text-left").text(song[e.target.value][1]);
     });
   };
   sheet();

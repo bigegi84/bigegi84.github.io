@@ -8,7 +8,7 @@
         if (find != -1) {
           const [x, y] = brain[find];
           if (splitted.length != 1) obj = y;
-          if (splitted.length == 1) obj = brain[find][2];
+          if (splitted.length == 1) obj = brain[find][1];
         }
       } else {
         if (obj) {
@@ -61,7 +61,8 @@
           obj = brain[brain.length - 1];
           location.push(brain.length - 1);
         }
-      } else {
+      }
+      if (i != 0) {
         const find = obj.findIndex(([word]) => word == it);
         if (find != -1) {
           const [x, y] = brain[find];
@@ -73,6 +74,7 @@
           location.push(obj.length - 1);
         }
       }
+      console.log(brain);
     });
     return location;
   };

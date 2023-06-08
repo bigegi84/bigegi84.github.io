@@ -9,15 +9,14 @@
   <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
   <noscript>
     <link rel="stylesheet" href="../../template/story/assets/css/noscript.css" /></noscript>
-  <link rel="stylesheet" href="piano.css" />
+  <link rel="stylesheet" href="Piano.style.css" />
   <title>bigegi84-Chord Player Piano</title>
 </head>
 
 <body class="is-preload">
-  <!-- Wrapper -->
   <div id="wrapper" class="divided">
-    <!-- One -->
-    <section
+    <div id="root"></div>
+    <!-- <section
       class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
       <div class="content">
         <h2 id="title">bigegi84 - Chord Player Piano</h2>
@@ -77,9 +76,8 @@
       <div class="image">
         <img src="../../template/story/images/banner.jpg" alt="" />
       </div>
-    </section>
-
-    <!-- Footer -->
+    </section> -->
+    
     <footer class="wrapper style1 align-center">
       <div class="inner">
         <ul class="icons">
@@ -106,8 +104,14 @@
       </div>
     </footer>
   </div>
-
-  <!-- Scripts -->
+  <!-- lib -->
+  <script src="../../lib/react-17.0.1.development.js"></script>
+  <script src="../../lib/react-dom-17.0.1.development.js"></script>
+  <script src="../../lib/react-router-dom-5.0.0.js"></script>
+  <script src="../../lib/mobx-6.0.4.umd.production.min.js"></script>
+  <script src="../../lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
+  <script src="../../lib/mobx-react-7.0.5.umd.production.min.js"></script>
+  <script src="../../lib/babel-6.26.0.js"></script>
   <script src="../../lib/jquery-1.7.2.min.js"></script>
   <script src="../../lib/tone-14.8.49.js"></script>
   <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
@@ -125,7 +129,7 @@
       helper.socialLink();
       var prefix = ".bigegi84-";
       document.title = "bigegi84 - Piano";
-      $("#title").text("bigegi84 - Piano");
+      // $("#title").text("bigegi84 - Piano");
       $(prefix + "icon").attr("href", "../../gold.ico");
       $(prefix + "copyright").html(
         "&copy; " +
@@ -138,7 +142,17 @@
     });
   </script>
   <script src="song.js"></script>
-  <script src="piano.js"></script>
+  <!-- <script src="main.js"></script> -->
+  <!-- react -->
+  <script type="text/babel" src="Piano.state.js"></script>
+  <script type="text/babel" src="Piano.store.js"></script>
+  <script type="text/babel" src="Piano.Sustain.action.js"></script>
+  <script type="text/babel" src="Piano.Sustain.js"></script>
+  <script type="text/babel" src="Piano.Note.js"></script>
+  <script type="text/babel" src="Piano.Chord.js"></script>
+  <script type="text/babel" src="Piano.Sheet.js"></script>
+  <script type="text/babel" src="Piano.js"></script>
+  <script type="text/babel" src="App.js"></script>
 </body>
 
 </html>

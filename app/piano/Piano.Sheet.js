@@ -105,11 +105,11 @@ const PianoSheet = {
     const currentSong = PianoSheet.store.song[selected];
     return PianoSheet.store.song[selected].map(([name, value], ia) => {
       return (
-        <div key={ia}>
+        <div key={ia} className="column-a">
           <strong>{name}</strong>
           {value.map(([part, pValue], ib) => {
             return (
-              <div key={ib} className="field">
+              <div key={ib} className="field column-a">
                 <input
                   type="text"
                   value={currentSong[ia][1][ib][0]}
@@ -117,32 +117,35 @@ const PianoSheet = {
                   onFocus={() => (PianoStore.keymapActive = false)}
                 />
                 <textarea
-                  rows="4"
+                  rows="2"
                   cols="50"
                   value={currentSong[ia][1][ib][1]}
                   onChange={(e) => (currentSong[ia][1][ib][1] = e.target.value)}
                   onFocus={() => (PianoStore.keymapActive = false)}
                 />
-                <i
-                  className={
-                    "fas" + (PianoSheet.store.playing ? " fa-stop" : " fa-play")
-                  }
-                  onClick={() => {
-                    if (!PianoSheet.store.playing) {
-                      PianoSheet.store.playing = true;
-                      PianoSheet.playText(currentSong[ia][1][ib][1]);
-                    } else {
-                      PianoSheet.store.playing = false;
-                      PianoSheet.action.stop();
+                <div className="row-a">
+                  <i
+                    className={
+                      "fas" +
+                      (PianoSheet.store.playing ? " fa-stop" : " fa-play")
                     }
-                  }}
-                />
-                <i
-                  className="fas fa-plus"
-                  onClick={() => {
-                    currentSong[ia][1].push(["", ""]);
-                  }}
-                />
+                    onClick={() => {
+                      if (!PianoSheet.store.playing) {
+                        PianoSheet.store.playing = true;
+                        PianoSheet.playText(currentSong[ia][1][ib][1]);
+                      } else {
+                        PianoSheet.store.playing = false;
+                        PianoSheet.action.stop();
+                      }
+                    }}
+                  />
+                  <i
+                    className="fas fa-plus"
+                    onClick={() => {
+                      currentSong[ia][1].push(["", ""]);
+                    }}
+                  />
+                </div>
               </div>
             );
           })}
@@ -157,7 +160,7 @@ const PianoSheet = {
       PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
     });
     return (
-      <div className="sheet-container">
+      <div className="column-a">
         <div className="field">
           <label htmlFor="sheet-select">Lembar</label>
           <select
@@ -168,7 +171,11 @@ const PianoSheet = {
             {PianoSheet.option()}
           </select>
         </div>
-        <mobxReact.Observer>{() => PianoSheet.sheetList()}</mobxReact.Observer>
+        <div className="row-a">
+          <mobxReact.Observer>
+            {() => PianoSheet.sheetList()}
+          </mobxReact.Observer>
+        </div>
         <a id="downloadA" style={{ display: "none" }}></a>
         <button
           onClick={() => {

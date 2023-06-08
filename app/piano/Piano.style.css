@@ -36,6 +36,18 @@ audio {
   flex-direction: column;
 }
 
+.column-a {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row-a {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .row {
   display: flex;
   flex-wrap: nowrap;

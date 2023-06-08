@@ -63,7 +63,7 @@ const Piano = () => {
       <div className="content">
         <h2 id="title">bigegi84 - Chord Player Piano</h2>
         <div className="major">
-          <div id="top" className="row">
+          <div id="top" className="column-a">
             <div>
               <p className="play-info" style={{ margin: 0 }}>
                 <strong>Tipe Bermain:</strong>
@@ -101,9 +101,9 @@ const Piano = () => {
           </li>
         </ul>
       </div>
-      <div className="image">
+      {/* <div className="image">
         <img src="../../template/story/images/banner.jpg" alt="" />
-      </div>
+      </div> */}
     </section>
   );
 };

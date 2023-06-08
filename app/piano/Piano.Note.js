@@ -54,7 +54,7 @@ const NoteList = PianoState.note.map((it, i) => {
         <div
           id={"note-" + it}
           className={"note piano-black-raised piano-" + it}
-          onMouseDown={() => -pianoNote.handleMouseDown(it)}
+          onMouseDown={() => _pianoNote.handleMouseDown(it)}
           onMouseUp={() => _pianoNote.handleMouseUp(it)}
         >
           <p className="note-info-black">{it}</p>

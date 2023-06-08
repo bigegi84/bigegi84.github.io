@@ -26,8 +26,8 @@ var state = {
       link: "/app/drum",
     },
     {
-      name: "Klon bigegi84",
-      description: "Aplikasi untuk mengklon pengetahuan bigegi84.",
+      name: "Klon",
+      description: "Aplikasi untuk mengklon pengetahuan.",
       link: "/app/clone",
     },
   ],

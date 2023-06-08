@@ -73,9 +73,9 @@ const Piano = () => {
               <br />
               Ditekan (ms):
               <strong id="timer"></strong>
-              <PianoSustain />
+              <PianoSustain.view />
             </div>
-            <PianoSheet />
+            <PianoSheet.view />
           </div>
           <div id="middle" className="row">
             <PianoNote />

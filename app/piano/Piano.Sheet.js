@@ -4,7 +4,7 @@ const searchChord = (chRaw) => {
   return "chord-" + chLine + "-" + ch;
 };
 let playTimeout = [];
-const _pianoSheet = {
+const PianoSheet = {
   store: mobx.observable({
     selected: "Mahalini - Sisa Rasa Ritme",
     playing: false,
@@ -13,7 +13,7 @@ const _pianoSheet = {
   option: () => {
     let i = 0;
     const list = [];
-    for (const key in _pianoSheet.store.song) {
+    for (const key in PianoSheet.store.song) {
       list.push(
         <option key={i} value={key}>
           {key}
@@ -25,12 +25,12 @@ const _pianoSheet = {
   },
   handleChange: (e) => {
     const selected = e.target.value;
-    _pianoSheet.store.leftText = _pianoSheet.store.song[selected][0];
-    _pianoSheet.store.rightText = _pianoSheet.store.song[selected][1];
+    PianoSheet.store.leftText = PianoSheet.store.song[selected][0];
+    PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
   },
   playOne: (which) => {
     let sec = 0;
-    const text = _pianoSheet.store[which];
+    const text = PianoSheet.store[which];
     text.split(" ").forEach((it) => {
       const note = it.split("-")[0];
       const duration = parseFloat(it.split("-")[1]);
@@ -55,6 +55,7 @@ const _pianoSheet = {
     });
   },
   playText: (text) => {
+    console.log(text);
     let sec = 0;
     text.split(" ").forEach((it) => {
       const note = it.split("-")[0];
@@ -80,8 +81,16 @@ const _pianoSheet = {
     });
   },
   handlePlay: () => {
-    // _pianoSheet.playOne("leftText");
-    _pianoSheet.playOne("rightText");
+    const selected = PianoSheet.store.selected;
+    const currentSong = PianoSheet.store.song[selected];
+    PianoSheet.store.song[selected].map(([name, value], ia) => {
+      const text = value
+        .map(([part, pValue], ib) => {
+          return pValue;
+        })
+        .join(" ");
+      PianoSheet.playText(text);
+    });
   },
   action: {
     stop: () => {
@@ -91,98 +100,96 @@ const _pianoSheet = {
       playTimeout = [];
     },
   },
-};
-
-const SheetList = () => {
-  const selected = _pianoSheet.store.selected;
-  const currentSong = _pianoSheet.store.song[selected];
-  return _pianoSheet.store.song[selected].map(([name, value], ia) => {
-    return (
-      <div key={ia}>
-        <strong>{name}</strong>
-        {value.map(([part, pValue], ib) => {
-          return (
-            <div key={ib} className="field">
-              <input
-                type="text"
-                value={currentSong[ia][1][ib][0]}
-                onChange={(e) => (currentSong[ia][1][ib][0] = e.target.value)}
-                onFocus={() => (PianoStore.keymapActive = false)}
-              />
-              <textarea
-                rows="4"
-                cols="50"
-                value={currentSong[ia][1][ib][1]}
-                onChange={(e) => (currentSong[ia][1][ib][1] = e.target.value)}
-                onFocus={() => (PianoStore.keymapActive = false)}
-              />
-              <i
-                className={
-                  "fas" + (_pianoSheet.store.playing ? " fa-stop" : " fa-play")
-                }
-                onClick={() => {
-                  if (!_pianoSheet.store.playing) {
-                    _pianoSheet.store.playing = true;
-                    _pianoSheet.playText(currentSong[ia][1][ib][1]);
-                  } else {
-                    _pianoSheet.store.playing = false;
-                    _pianoSheet.action.stop();
+  sheetList: () => {
+    const selected = PianoSheet.store.selected;
+    const currentSong = PianoSheet.store.song[selected];
+    return PianoSheet.store.song[selected].map(([name, value], ia) => {
+      return (
+        <div key={ia}>
+          <strong>{name}</strong>
+          {value.map(([part, pValue], ib) => {
+            return (
+              <div key={ib} className="field">
+                <input
+                  type="text"
+                  value={currentSong[ia][1][ib][0]}
+                  onChange={(e) => (currentSong[ia][1][ib][0] = e.target.value)}
+                  onFocus={() => (PianoStore.keymapActive = false)}
+                />
+                <textarea
+                  rows="4"
+                  cols="50"
+                  value={currentSong[ia][1][ib][1]}
+                  onChange={(e) => (currentSong[ia][1][ib][1] = e.target.value)}
+                  onFocus={() => (PianoStore.keymapActive = false)}
+                />
+                <i
+                  className={
+                    "fas" + (PianoSheet.store.playing ? " fa-stop" : " fa-play")
                   }
-                }}
-              />
-              <i
-                className="fas fa-plus"
-                onClick={() => {
-                  currentSong[ia][1].push(["", ""]);
-                }}
-              />
-            </div>
-          );
-        })}
+                  onClick={() => {
+                    if (!PianoSheet.store.playing) {
+                      PianoSheet.store.playing = true;
+                      PianoSheet.playText(currentSong[ia][1][ib][1]);
+                    } else {
+                      PianoSheet.store.playing = false;
+                      PianoSheet.action.stop();
+                    }
+                  }}
+                />
+                <i
+                  className="fas fa-plus"
+                  onClick={() => {
+                    currentSong[ia][1].push(["", ""]);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      );
+    });
+  },
+  view: () => {
+    React.useEffect(() => {
+      const selected = PianoSheet.store.selected;
+      PianoSheet.store.leftText = PianoSheet.store.song[selected][0];
+      PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
+    });
+    return (
+      <div className="sheet-container">
+        <div className="field">
+          <label htmlFor="sheet-select">Lembar</label>
+          <select
+            onChange={(e) => PianoSheet.handleChange(e)}
+            name="sheet-select"
+            id="sheet-select"
+          >
+            {PianoSheet.option()}
+          </select>
+        </div>
+        <mobxReact.Observer>{() => PianoSheet.sheetList()}</mobxReact.Observer>
+        <a id="downloadA" style={{ display: "none" }}></a>
+        <button
+          onClick={() => {
+            const selected = PianoSheet.store.selected;
+            const dataStr =
+              "data:text/json;charset=utf-8," +
+              encodeURIComponent(
+                JSON.stringify(PianoSheet.store.song[selected])
+              );
+            const dlAnchorElem = document.getElementById("downloadA");
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", selected + ".json");
+            dlAnchorElem.click();
+          }}
+        >
+          Export
+        </button>
+        <button onClick={() => PianoSheet.handlePlay()} id="play">
+          Mainkan
+        </button>
       </div>
     );
-  });
-};
-
-const PianoSheet = () => {
-  React.useEffect(() => {
-    const selected = _pianoSheet.store.selected;
-    _pianoSheet.store.leftText = _pianoSheet.store.song[selected][0];
-    _pianoSheet.store.rightText = _pianoSheet.store.song[selected][1];
-  });
-  return (
-    <div className="sheet-container">
-      <div className="field">
-        <label htmlFor="sheet-select">Lembar</label>
-        <select
-          onChange={(e) => _pianoSheet.handleChange(e)}
-          name="sheet-select"
-          id="sheet-select"
-        >
-          {_pianoSheet.option()}
-        </select>
-      </div>
-      <mobxReact.Observer>{() => SheetList()}</mobxReact.Observer>
-      <a id="downloadA" style={{ display: "none" }}></a>
-      <button
-        onClick={() => {
-          const selected = _pianoSheet.store.selected;
-          const dataStr =
-            "data:text/json;charset=utf-8," +
-            encodeURIComponent(
-              JSON.stringify(_pianoSheet.store.song[selected])
-            );
-          const dlAnchorElem = document.getElementById("downloadA");
-          dlAnchorElem.setAttribute("href", dataStr);
-          dlAnchorElem.setAttribute("download", selected + ".json");
-          dlAnchorElem.click();
-        }}
-      >
-        Export
-      </button>
-      <button onClick={() => _pianoSheet.handlePlay()} id="play">
-        Mainkan
-      </button>
-    </div>
-  );
+  },
 };

@@ -1,8 +1,7 @@
 const PianoKeymap = {
-  active: true,
   depressed: {},
   handleKeyDown: (e) => {
-    if (!PianoKeymap.active) return;
+    if (!PianoStore.keymapActive) return;
     e.preventDefault();
     if (PianoKeymap.depressed[e.key]) return;
     PianoKeymap.depressed[e.key] = true;

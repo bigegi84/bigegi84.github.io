@@ -167,28 +167,33 @@ const PianoSheet = {
     });
   },
   view: () => {
-    React.useEffect(() => {
-      const selected = PianoSheet.store.selected;
-      PianoSheet.store.leftText = PianoSheet.store.song[selected][0];
-      PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
-    });
+    const [sheetShow, setSheetShow] = React.useState(true);
     return (
       <div className="column-a">
-        <div className="field">
-          <label htmlFor="sheet-select">Lembar</label>
-          <select
-            onChange={(e) => PianoSheet.handleChange(e)}
-            name="sheet-select"
-            id="sheet-select"
-          >
-            {PianoSheet.option()}
-          </select>
-        </div>
         <div className="row-a">
-          <mobxReact.Observer>
-            {() => PianoSheet.sheetList()}
-          </mobxReact.Observer>
+          <strong style={{ alignSelf: "center" }}>Lembar</strong>
+          <div className="circle-a" onClick={() => setSheetShow(!sheetShow)}>
+            <i className={"fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")} />
+          </div>
         </div>
+        {sheetShow ? (
+          <div>
+            <div className="field">
+              <select
+                onChange={(e) => PianoSheet.handleChange(e)}
+                name="sheet-select"
+                id="sheet-select"
+              >
+                {PianoSheet.option()}
+              </select>
+            </div>
+            <div className="row-a">
+              <mobxReact.Observer>
+                {() => PianoSheet.sheetList()}
+              </mobxReact.Observer>
+            </div>
+          </div>
+        ) : null}
         <a id="downloadA" style={{ display: "none" }}></a>
         <button
           onClick={() => {
@@ -209,6 +214,7 @@ const PianoSheet = {
         <mobxReact.Observer>
           {() => (
             <button
+              className="button small"
               onClick={() => {
                 if (!PianoSheet.store.playing) {
                   PianoSheet.store.playing = true;

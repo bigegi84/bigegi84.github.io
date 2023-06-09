@@ -36,7 +36,7 @@ const song = {
         [
           "Chorus 4",
           "#Gb-1 #Gb-1 #Gb-1 #Gb-1 #Bbm-1 #Bbm-1 #Bbm-1 #Bbm-1 #E-1 #E-1 #Eb-1 #Eb-1 #Abm-1 #Abm-1 #Abm-1 #Abm-1 #Bm-1 #Bm-1 #Bm-1 #Bm-1 #Gb-1 #Gb-1 #Ebm-1 #Ebm-1 #Abm-1 #Abm-1 #Db-1 #Db-1 #Ebm-1 #Ebm-1 #Ab-1 #Ab-1 #Ab-1 #Ab-1 #Abm-2 #Db-2 #Gb-2",
-          false,
+          true,
         ],
       ],
     ],
@@ -70,13 +70,13 @@ const song = {
         ],
         [
           "Bridge 1",
-          "Gb5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Db5-1 Db6-1 Db6-0.5 B5-0.25 Bb5-0.5 Db6-0.75 B5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Bb5-1.5 Ab5-0.25 Bb5-0.25 B5-0.75 Bb5-0.125 B5-0.125 Bb5-0.5 Ab5-0.5 Gb5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Db5-0.5 Eb5-0.5 F5-0.5 Gb5-0.5",
+          "Gb5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Db5-1 Db6-1 Db6-0.5 B5-0.25 Bb5-0.5 Db6-0.75 B5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Bb5-1.5 Ab5-0.25 Bb5-0.25 B5-0.75 Bb5-0.125 B5-0.125 Bb5-0.5 Ab5-0.5 Gb5-2 Bb5-0.5 Ab5-0.25 Gb5-0.5 Ab5-0.75 Db5-0.5 Eb5-0.5 F5-0.5 Gb5-2.5 A5-0.75 A5-0.5 A5-0.75 D6-1 D6-0.5 Db6-4",
           true,
         ],
         [
           "Chorus 4",
           "Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Db5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Bb5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Db6-0.75 B5-0.5 Bb5-0.25 Ab5-0.5 Bb5-0.75 B5-3.5 Ab5-0.25 Bb5-0.25 B5-0.5 B5-0.25 B5-0.5 Db6-0.75 B5-1.5 Gb5-0.25 Ab5-0.25 Bb5-0.75 B5-0.5 Bb5-0.75 Gb5-1.5 Gb5-0.25 F5-0.25 Eb5-0.5 Bb5-0.25 Bb5-0.75 Eb5-0.5 Db5-0.75 Bb5-0.5 Ab5-0.75 Gb5-4",
-          false,
+          true,
         ],
       ],
     ],

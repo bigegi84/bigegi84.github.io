@@ -461,4 +461,15 @@
     sheet();
   };
   main();
+  $("#download").click(() => {
+    const textLeft = $("#sheet-text-left").val();
+    const textRight = $("#sheet-text-right").val();
+    const dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify([textLeft, textRight]));
+    const dlAnchorElem = document.getElementById("downloadA");
+    dlAnchorElem.setAttribute("href", dataStr);
+    dlAnchorElem.setAttribute("download", "music.json");
+    dlAnchorElem.click();
+  });
 })();

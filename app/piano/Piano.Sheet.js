@@ -173,11 +173,15 @@ const PianoSheet = {
         <div className="row-a">
           <strong style={{ alignSelf: "center" }}>Lembar</strong>
           <div className="circle-a" onClick={() => setSheetShow(!sheetShow)}>
-            <i className={"fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")} />
+            <i
+              className={
+                "fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")
+              }
+            />
           </div>
         </div>
         {sheetShow ? (
-          <div>
+          <div className="column-a">
             <div className="field">
               <select
                 onChange={(e) => PianoSheet.handleChange(e)}

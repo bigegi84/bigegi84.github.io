@@ -8,6 +8,7 @@ const PianoSheet = {
   store: mobx.observable({
     selected: "Mahalini - Sisa Rasa Ritme",
     playing: false,
+    playText: "Mainkan",
     song,
   }),
   option: () => {
@@ -55,7 +56,6 @@ const PianoSheet = {
     });
   },
   playText: (text) => {
-    console.log(text);
     let sec = 0;
     text.split(" ").forEach((it) => {
       const note = it.split("-")[0];
@@ -83,13 +83,13 @@ const PianoSheet = {
   handlePlay: () => {
     const selected = PianoSheet.store.selected;
     const currentSong = PianoSheet.store.song[selected];
-    PianoSheet.store.song[selected].map(([name, value], ia) => {
-      const text = value
-        .map(([part, pValue], ib) => {
-          return pValue;
-        })
-        .join(" ");
-      PianoSheet.playText(text);
+    currentSong.map(([name, value], ia) => {
+      let text = [];
+      value.forEach(([part, pValue, enable], ib) => {
+        if (enable) text.push(pValue);
+      });
+      console.log(text);
+      PianoSheet.playText(text.join(" "));
     });
   },
   action: {
@@ -124,6 +124,20 @@ const PianoSheet = {
                   onFocus={() => (PianoStore.keymapActive = false)}
                 />
                 <div className="row-a">
+                  <i
+                    className={
+                      "fas" +
+                      (!currentSong[ia][1][ib][2] ? " fa-ban" : " fa-music")
+                    }
+                    onClick={() => {
+                      const enable = currentSong[ia][1][ib][2];
+                      if (enable) {
+                        currentSong[ia][1][ib][2] = false;
+                      } else {
+                        currentSong[ia][1][ib][2] = true;
+                      }
+                    }}
+                  />
                   <i
                     className={
                       "fas" +
@@ -193,7 +207,12 @@ const PianoSheet = {
         >
           Export
         </button>
-        <button onClick={() => PianoSheet.handlePlay()} id="play">
+        <button
+          onClick={() => {
+            PianoSheet.handlePlay();
+          }}
+          id="play"
+        >
           Mainkan
         </button>
       </div>

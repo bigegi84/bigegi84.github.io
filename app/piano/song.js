@@ -6,27 +6,27 @@ const song = {
         [
           "Verse 1",
           "#Gb-2 #Gb-2 #Bbm-2 #Bbm-2 #Dbm-2 #Eb-2 #Abm-2 #Abm-2 #Bm-2 #Bm-2 #Gb-2 #Ebm-2 #Abm-2 #Ab-2 #Db-2 #Db-2",
-          false,
+          true,
         ],
         [
           "Verse 2",
           "#Gb-2 #Gb-2 #Bbm-2 #Bbm-2 #Dbm-2 #Eb-2 #Abm-2 #Abm-2 #Bm-2 #Bm-2 #Gb-2 #Ebm-2 #Abm-2 #Ab-2 #Db-2 #Db-2",
-          false,
+          true,
         ],
         [
           "Chorus 1",
           "#Gb-2 #Gb-2 #Bbm-2 #Bbm-2 #E-2 #Eb-2 #Abm-2 #Abm-2 #Bm-2 #Bm-2 #Gb-2 #Ebm-2 #Abm-2 #Db-2 #Gb-1 #Gb-0.25 #B-0.75 #Gb-2",
-          false,
+          true,
         ],
         [
           "Verse 3",
           "#Gb-2 #Gb-2 #Bbm-2 #Bbm-2 #Dbm-2 #Eb-2 #Abm-2 #Abm-2 #Bm-2 #Bm-2 #Gb-2 #Ebm-2 #Abm-2 #Ab-2 #Db-2 #Db-2",
-          false,
+          true,
         ],
         [
           "Chorus 3",
           "#Gb-2 #Gb-2 #Bbm-2 #Bbm-2 #E-2 #Eb-2 #Abm-2 #Abm-2 #Bm-2 #Bm-2 #Gb-2 #Ebm-2 #Abm-2 #Db-2",
-          false,
+          true,
         ],
         [
           "Bridge 1",
@@ -46,27 +46,27 @@ const song = {
         [
           "Verse 1",
           "Db5-0.5 B4-0.25 Bb4-0.5 B4-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 B4-0.25 Bb4-0.5 Eb5-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 Db5-0.25 Db5-0.5 Eb5-0.75 Db5-0.5 B4-0.25 B4-0.5 Bb4-0.5 B4-3.75 Ab4-0.25 Bb4-0.25 B4-0.5 B4-0.25 B4-0.5 Db5-0.5 B4-1.75 Gb4-0.25 Ab4-0.25 Bb4-0.75 B4-0.5 Bb4-0.75 Gb4-1.5 Gb4-0.25 Ab4-0.25 Bb4-0.5 Ab4-0.25 Ab4-0.5 Gb4-0.75 Eb5-0.5 Ab4-0.25 Ab4-0.5 Gb4-0.75 Ab4-4",
-          false,
+          true,
         ],
         [
           "Verse 2",
           "Db5-0.5 B4-0.25 Bb4-0.5 B4-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 B4-0.25 Bb4-0.5 Eb5-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 Db5-0.25 Db5-0.5 Eb5-0.75 Db5-0.5 B4-0.25 B4-0.5 Bb4-0.5 B4-3.75 Ab4-0.25 Bb4-0.25 B4-0.5 B4-0.25 B4-0.5 Db5-0.5 B4-1.75 Gb4-0.25 Ab4-0.25 Bb4-0.75 B4-0.5 Bb4-0.75 Gb4-1.5 Gb4-0.25 Ab4-0.25 Bb4-0.5 Ab4-0.25 Ab4-0.5 Gb4-0.75 Eb5-0.5 Eb5-0.25 F5-0.5 Gb5-0.75 Ab5-3.5",
-          false,
+          true,
         ],
         [
           "Chorus 1",
           "Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Db5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Bb5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Db6-0.75 B5-0.5 Bb5-0.25 Ab5-0.5 Bb5-0.75 B5-3.5 Ab5-0.25 Bb5-0.25 B5-0.5 B5-0.25 B5-0.5 Db6-0.75 B5-1.5 Gb5-0.25 Ab5-0.25 Bb5-0.75 B5-0.5 Bb5-0.75 Gb5-1.5 Gb5-0.25 F5-0.25 Eb5-0.5 Bb5-0.25 Bb5-0.75 Eb5-0.5 Db5-0.75 Bb5-0.5 Ab5-0.75 Gb5-4",
-          false,
+          true,
         ],
         [
           "Verse 3",
           "Db5-0.5 B4-0.25 Bb4-0.5 B4-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 B4-0.25 Bb4-0.5 Eb5-0.5 Db5-1.75 Bb4-0.25 B4-0.25 Db5-0.5 Db5-0.25 Db5-0.5 Eb5-0.75 Db5-0.5 B4-0.25 B4-0.5 Bb4-0.5 B4-3.75 Ab4-0.25 Bb4-0.25 B4-0.5 B4-0.25 B4-0.5 Db5-0.5 B4-1.75 Gb4-0.25 Ab4-0.25 Bb4-0.75 B4-0.5 Bb4-0.75 Gb4-1.5 Gb4-0.25 Ab4-0.25 Bb4-0.5 Ab4-0.25 Ab4-0.5 Gb4-0.75 Eb5-0.5 Ab4-0.25 Ab4-0.5 Gb4-0.75 Ab4-3.5 Db5-0.25 Gb5-0.25",
-          false,
+          true,
         ],
         [
           "Chorus 3",
           "Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Db5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Bb5-0.75 Bb5-1.5 Db5-0.25 Gb5-0.25 Ab5-0.5 Ab5-0.25 Ab5-0.5 Db6-0.75 B5-0.5 Bb5-0.25 Ab5-0.5 Bb5-0.75 B5-3.5 Ab5-0.25 Bb5-0.25 B5-0.5 B5-0.25 B5-0.5 Db6-0.75 B5-1.5 Gb5-0.25 Ab5-0.25 Bb5-0.75 B5-0.5 Bb5-0.75 Gb5-1.5 Gb5-0.25 F5-0.25 Eb5-0.5 Bb5-0.25 Bb5-0.75 Eb5-0.5 Db5-0.75 Bb5-0.5 Ab5-0.75",
-          false,
+          true,
         ],
         [
           "Bridge 1",

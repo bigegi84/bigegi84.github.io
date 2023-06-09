@@ -8,8 +8,8 @@ audio {
 .note {
   -webkit-user-select: none;
   text-align: center;
-  width: 55px;
-  height: 55px;
+  width: 65px;
+  height: 65px;
   font-weight: bold;
   font-size: small;
   border: 1px solid black;

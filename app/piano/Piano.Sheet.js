@@ -8,6 +8,7 @@ const PianoSheet = {
   store: mobx.observable({
     selected: "Mahalini - Sisa Rasa Ritme",
     playing: false,
+    playText: "Mainkan",
     song,
   }),
   option: () => {
@@ -55,7 +56,6 @@ const PianoSheet = {
     });
   },
   playText: (text) => {
-    console.log(text);
     let sec = 0;
     text.split(" ").forEach((it) => {
       const note = it.split("-")[0];
@@ -83,13 +83,12 @@ const PianoSheet = {
   handlePlay: () => {
     const selected = PianoSheet.store.selected;
     const currentSong = PianoSheet.store.song[selected];
-    PianoSheet.store.song[selected].map(([name, value], ia) => {
-      const text = value
-        .map(([part, pValue], ib) => {
-          return pValue;
-        })
-        .join(" ");
-      PianoSheet.playText(text);
+    currentSong.map(([name, value], ia) => {
+      let text = [];
+      value.forEach(([part, pValue, enable], ib) => {
+        if (enable) text.push(pValue);
+      });
+      PianoSheet.playText(text.join(" "));
     });
   },
   action: {
@@ -127,6 +126,20 @@ const PianoSheet = {
                   <i
                     className={
                       "fas" +
+                      (!currentSong[ia][1][ib][2] ? " fa-ban" : " fa-music")
+                    }
+                    onClick={() => {
+                      const enable = currentSong[ia][1][ib][2];
+                      if (enable) {
+                        currentSong[ia][1][ib][2] = false;
+                      } else {
+                        currentSong[ia][1][ib][2] = true;
+                      }
+                    }}
+                  />
+                  <i
+                    className={
+                      "fas" +
                       (PianoSheet.store.playing ? " fa-stop" : " fa-play")
                     }
                     onClick={() => {
@@ -154,28 +167,37 @@ const PianoSheet = {
     });
   },
   view: () => {
-    React.useEffect(() => {
-      const selected = PianoSheet.store.selected;
-      PianoSheet.store.leftText = PianoSheet.store.song[selected][0];
-      PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
-    });
+    const [sheetShow, setSheetShow] = React.useState(true);
     return (
       <div className="column-a">
-        <div className="field">
-          <label htmlFor="sheet-select">Lembar</label>
-          <select
-            onChange={(e) => PianoSheet.handleChange(e)}
-            name="sheet-select"
-            id="sheet-select"
-          >
-            {PianoSheet.option()}
-          </select>
-        </div>
         <div className="row-a">
-          <mobxReact.Observer>
-            {() => PianoSheet.sheetList()}
-          </mobxReact.Observer>
+          <strong style={{ alignSelf: "center" }}>Lembar</strong>
+          <div className="circle-a" onClick={() => setSheetShow(!sheetShow)}>
+            <i
+              className={
+                "fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")
+              }
+            />
+          </div>
         </div>
+        {sheetShow ? (
+          <div className="column-a">
+            <div className="field">
+              <select
+                onChange={(e) => PianoSheet.handleChange(e)}
+                name="sheet-select"
+                id="sheet-select"
+              >
+                {PianoSheet.option()}
+              </select>
+            </div>
+            <div className="row-a">
+              <mobxReact.Observer>
+                {() => PianoSheet.sheetList()}
+              </mobxReact.Observer>
+            </div>
+          </div>
+        ) : null}
         <a id="downloadA" style={{ display: "none" }}></a>
         <button
           onClick={() => {
@@ -193,9 +215,27 @@ const PianoSheet = {
         >
           Export
         </button>
-        <button onClick={() => PianoSheet.handlePlay()} id="play">
-          Mainkan
-        </button>
+        <mobxReact.Observer>
+          {() => (
+            <button
+              className="button small"
+              onClick={() => {
+                if (!PianoSheet.store.playing) {
+                  PianoSheet.store.playing = true;
+                  PianoSheet.store.playText = "Berhenti";
+                  PianoSheet.handlePlay();
+                } else {
+                  PianoSheet.store.playing = false;
+                  PianoSheet.store.playText = "Mainkan";
+                  PianoSheet.action.stop();
+                }
+              }}
+              id="play"
+            >
+              {PianoSheet.store.playText}
+            </button>
+          )}
+        </mobxReact.Observer>
       </div>
     );
   },

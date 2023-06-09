@@ -21,7 +21,6 @@ const noteAnimate = (note, press = true) => {
 };
 const _pianoNote = {
   handleMouseDown: (note) => {
-    console.log(note);
     PianoState.tone.triggerAttack([note]);
     noteAnimate(note, true);
   },

@@ -53,6 +53,7 @@ const PianoKeymap = {
 };
 
 const Piano = () => {
+  const [infoShow, setInfoShow] = React.useState(false);
   return (
     <section
       tabIndex={0}
@@ -64,17 +65,35 @@ const Piano = () => {
         <h2 id="title">bigegi84 - Chord Player Piano</h2>
         <div className="major">
           <div id="top" className="column-a">
-            <div>
-              <p className="play-info" style={{ margin: 0 }}>
-                <strong>Tipe Bermain:</strong>
-              </p>
-              Ditekan:
-              <strong className="chord-info"></strong>
-              <br />
-              Ditekan (ms):
-              <strong id="timer"></strong>
-              <PianoSustain.view />
+            <div className="column-a">
+              <div className="row-a">
+                <strong style={{ alignSelf: "center" }}>Pengaturan</strong>
+                <div
+                  className="circle-a"
+                  onClick={() => setInfoShow(!infoShow)}
+                >
+                  <i
+                    className={
+                      "fas" + (infoShow ? " fa-angle-up" : " fa-angle-down")
+                    }
+                  />
+                </div>
+              </div>
+              {infoShow ? (
+                <div className="column-a">
+                  <p className="play-info" style={{ margin: 0 }}>
+                    <strong>Tipe Bermain:</strong>
+                  </p>
+                  Ditekan:
+                  <strong className="chord-info"></strong>
+                  <br />
+                  Ditekan (ms):
+                  <strong id="timer"></strong>
+                  <PianoSustain.view />
+                </div>
+              ) : null}
             </div>
+
             <PianoSheet.view />
           </div>
           <div id="middle" className="row">

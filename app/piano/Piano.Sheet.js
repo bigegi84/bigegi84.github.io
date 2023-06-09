@@ -88,7 +88,6 @@ const PianoSheet = {
       value.forEach(([part, pValue, enable], ib) => {
         if (enable) text.push(pValue);
       });
-      console.log(text);
       PianoSheet.playText(text.join(" "));
     });
   },
@@ -207,14 +206,26 @@ const PianoSheet = {
         >
           Export
         </button>
-        <button
-          onClick={() => {
-            PianoSheet.handlePlay();
-          }}
-          id="play"
-        >
-          Mainkan
-        </button>
+        <mobxReact.Observer>
+          {() => (
+            <button
+              onClick={() => {
+                if (!PianoSheet.store.playing) {
+                  PianoSheet.store.playing = true;
+                  PianoSheet.store.playText = "Berhenti";
+                  PianoSheet.handlePlay();
+                } else {
+                  PianoSheet.store.playing = false;
+                  PianoSheet.store.playText = "Mainkan";
+                  PianoSheet.action.stop();
+                }
+              }}
+              id="play"
+            >
+              {PianoSheet.store.playText}
+            </button>
+          )}
+        </mobxReact.Observer>
       </div>
     );
   },

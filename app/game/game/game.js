@@ -118,8 +118,11 @@ const game = {
   view: () => {
     game.action.changeMap(["bigegi84house"]);
     return (
-      <div id="screen" className="game-column-a">
-        {game.action.draw()}
+      <div className="column-a">
+        <gameSprite.view />
+        <div id="screen" className="game-column-a">
+          {game.action.draw()}
+        </div>
       </div>
     );
   },

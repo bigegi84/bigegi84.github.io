@@ -21,16 +21,17 @@ const drumSheet = {
     }
     return list;
   },
-  handleChange: (e) => {
-    const selected = e.target.value;
-    drumSheet.store.leftText = drumSheet.store.song[selected][0];
-    drumSheet.store.rightText = drumSheet.store.song[selected][1];
-  },
   action: {
+    change: (e) => {
+      drumSheet.store.selected = e.target.value;
+    },
     play: () => {
       const selected = drumSheet.store.selected;
       const [bpm, text] = drumSheet.store.song[selected];
-      drumSheet.action.playText([bpm, text]);
+      const sheet = text.map((it) => it[1]).join(" ");
+      document.getElementById("sound-sheet").play();
+      document.getElementById("sound-sheet").volume = 0.2;
+      drumSheet.action.playText([bpm, sheet]);
     },
     playText: ([bpm, text]) => {
       const playTimeout = drumSheet.state.playTimeout;
@@ -40,18 +41,31 @@ const drumSheet = {
       text.split(" ").forEach((it) => {
         const [note, duration] = it.split("-");
         const timeoutA = setTimeout(() => {
-          drumNote.action.soundPlay([note]);
+          if (note != "break") drumNote.action.soundPlay([note]);
         }, sec * ms);
         sec += parseFloat(duration);
         playTimeout.push(timeoutA);
       });
     },
     stop: () => {
+      document.getElementById("sound-sheet").pause();
+      document.getElementById("sound-sheet").currentTime = 0;
       let playTimeout = drumSheet.state.playTimeout;
       playTimeout.forEach((it) => clearTimeout(it));
       // $(".chord").mouseup();
       // $(".note").mouseup();
       playTimeout = [];
+    },
+    upload: (e) => {
+      var sound = document.getElementById("sound-sheet");
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        sound.src = this.result;
+        sound.controls = true;
+        console.log("file ready");
+        // sound.play();
+      };
+      reader.readAsDataURL(e.target.files[0]);
     },
   },
   form: () => {
@@ -60,6 +74,8 @@ const drumSheet = {
     const [bpm, text] = drumSheet.store.song[selected];
     const iBpm = 0;
     const iText = 1;
+    const iName = 0;
+    const iValue = 1;
     return (
       <div className="column-a">
         <div className="field column-a">
@@ -70,13 +86,25 @@ const drumSheet = {
             onChange={(e) => (currentSong[iBpm] = parseFloat(e.target.value))}
             // onFocus={() => (PinoStore.keymapActive = false)}
           />
-          <textarea
-            rows="2"
-            cols="50"
-            value={currentSong[iText]}
-            onChange={(e) => (currentSong[iText] = e.target.value)}
-            //   onFocus={() => (PinoStore.keymapActive = false)}
-          />
+          {text.map(([], i) => (
+            <div key={i}>
+              <input
+                type="text"
+                value={currentSong[iText][i][iName]}
+                onChange={(e) =>
+                  (currentSong[iText][i][iName] = e.target.value)
+                }
+              />
+              <textarea
+                rows="2"
+                cols="50"
+                value={currentSong[iText][i][iValue]}
+                onChange={(e) =>
+                  (currentSong[iText][i][iValue] = e.target.value)
+                }
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -95,7 +123,7 @@ const drumSheet = {
           <div className="column-a">
             <div className="field">
               <select
-                onChange={(e) => drumSheet.handleChange(e)}
+                onChange={(e) => drumSheet.action.change(e)}
                 name="sheet-select"
                 id="sheet-select"
               >
@@ -143,6 +171,19 @@ const drumSheet = {
             >
               {drumSheet.store.playText}
             </button>
+          )}
+        </mobxReact.Observer>
+        <mobxReact.Observer>
+          {() => (
+            <div>
+              <audio id="sound-sheet"></audio>
+              <input
+                type="file"
+                id="musicFile"
+                onChange={(e) => drumSheet.action.upload(e)}
+                accept="audio/*"
+              />
+            </div>
           )}
         </mobxReact.Observer>
       </div>

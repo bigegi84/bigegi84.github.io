@@ -81,6 +81,28 @@ const song = {
       ],
     ],
   ],
+  "Queen - Love Of My Life": [
+    [
+      "Left",
+      [
+        [
+          "Intro 1",
+          "#C-4 #F-4 #C-4 #F-4 #Gm-1 #F-1 #C-1 #Dm-1 #C-1 #C-1 #F-1 #Bb-1 #F-1 #Bb-1 #Bb-1 #F-1 #Gm-1 #F-1 #Bb-1 #F-1 #G-1 #Dm-1 #G-1 #G7-1",
+          true,
+        ],
+        [
+          "Verse 1",
+          "#C-4 #F-4 #C-4 #F-4 #Gm-1 #F-1 #C-1 #Dm-1 #C-1 #C-1 #F-1 #Bb-1 #F-1 #Bb-1 #Bb-1 #F-1 #Gm-1 #F-1 #Bb-1 #F-1 #G-1 #Dm-1 #G-1 #G7-1",
+          true,
+        ],
+        [
+          "Chorus 1",
+          "#Dm-0.90 #Dm-0.90 #Dm-0.90 #Dm-0.90 #Am-0.90 #Am-0.90 #Am-0.90 #Am-0.90 #Bb-0.90 #Bb-0.90 #Bb-0.90 #Bb-0.90 #F-0.90 #F-0.90 #F-0.90 #A-0.90 #Dm-0.90 #Dm-0.90 #Dm-0.90 #Dm-0.90 #Am-0.90 #Am-0.90 #Am-0.90 #Am-0.90 #D-1.80 #D-1.80 #Gm-1.80 #Gm-1.80 #C-1.80 #C-1.80 #F-1.80",
+        ],
+      ],
+    ],
+    ["Right", [["Verse 1", "", true]]],
+  ],
   "Wage Rudolf Supratman - Ibu Kita Kartini Melodi": [
     "",
     "C4-0.75 D4-0.25 E4-0.5 F4-0.5 G4-0.75 E4-0.25 C4-1 A4-0.75 C5-0.25 B4-0.5 A4-0.5 G4-2 F4-0.75 A4-0.25 G4-0.5 F4-0.5 E4-1 C4-1",

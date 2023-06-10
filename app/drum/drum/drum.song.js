@@ -13,7 +13,12 @@ const drumSong = {
     [
       [
         "Intro 1",
-        "break-38 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1",
+        "break-38 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-1 ho-1 b,ho-1 ho-1 s,ho-1 ho-1 b,ho-1 b,ho-1 s,ho-0.5 s-0.5 s,ho-0.75",
+      ],
+      [
+        "Verse 1",
+        "b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1 b,hc-1 b,hc-1 s,hc-1 hc-1",
+        false,
       ],
     ],
   ],

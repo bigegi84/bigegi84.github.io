@@ -76,6 +76,7 @@ const drumSheet = {
     const iText = 1;
     const iName = 0;
     const iValue = 1;
+    const iEnable = 2;
     return (
       <div className="column-a">
         <div className="field column-a">
@@ -87,7 +88,7 @@ const drumSheet = {
             // onFocus={() => (PinoStore.keymapActive = false)}
           />
           {text.map(([], i) => (
-            <div key={i}>
+            <div key={i} className="column-a">
               <input
                 type="text"
                 value={currentSong[iText][i][iName]}
@@ -103,6 +104,42 @@ const drumSheet = {
                   (currentSong[iText][i][iValue] = e.target.value)
                 }
               />
+              <div className="row-a">
+                <i
+                  className={
+                    "fas" +
+                    (!currentSong[iText][i][iEnable] ? " fa-ban" : " fa-music")
+                  }
+                  onClick={() => {
+                    const enable = currentSong[iText][i][iEnable];
+                    if (enable) {
+                      currentSong[iText][i][iEnable] = false;
+                    } else {
+                      currentSong[iText][i][iEnable] = true;
+                    }
+                  }}
+                />
+                <i
+                  className={
+                    "fas" + (drumSheet.store.playing ? " fa-stop" : " fa-play")
+                  }
+                  onClick={() => {
+                    if (!drumSheet.store.playing) {
+                      drumSheet.store.playing = true;
+                      drumSheet.playText(currentSong[iText][i][iValue]);
+                    } else {
+                      drumSheet.store.playing = false;
+                      drumSheet.action.stop();
+                    }
+                  }}
+                />
+                <i
+                  className="fas fa-plus"
+                  onClick={() => {
+                    currentSong[iText].push(["", "", false]);
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -113,7 +150,7 @@ const drumSheet = {
     const [show, setShow] = React.useState(false);
     return (
       <div className="column-a">
-        <div className="row-a">
+        <div className="column-a">
           <strong style={{ alignSelf: "center" }}>Lembar</strong>
           <div className="circle-a" onClick={() => setShow(!show)}>
             <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
@@ -130,7 +167,7 @@ const drumSheet = {
                 {drumSheet.option()}
               </select>
             </div>
-            <div className="row-a">
+            <div className="column-a">
               <mobxReact.Observer>{() => drumSheet.form()}</mobxReact.Observer>
             </div>
           </div>
@@ -145,8 +182,8 @@ const drumSheet = {
                 JSON.stringify(drumSheet.store.song[selected])
               );
             const dlAnchorElem = document.getElementById("downloadA");
-            dlAnchorElem.setAttriute("href", dataStr);
-            dlAnchorElem.setAttriute("download", selected + ".json");
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", selected + ".json");
             dlAnchorElem.click();
           }}
         >

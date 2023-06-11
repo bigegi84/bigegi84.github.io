@@ -2,6 +2,9 @@ const pixelArtImage = {
   state: {
     color: bigegi84color,
     canvas: [5, 5, 20],
+  },
+  store: mobx.observable({
+    textShow: false,
     image: [
       [
         "Color 1",
@@ -84,12 +87,29 @@ const pixelArtImage = {
         ],
       ],
     ],
-  },
+  }),
   action: {
+    colorAll: () => {
+      const [, , scale] = pixelArtImage.state.canvas;
+      return pixelArtImage.state.color.map((it, i) => (
+        <svg
+          key={i}
+          id={"color-" + i}
+          xmlns="http://www.w3.org/2000/svg"
+          width={1 * scale}
+          height={1 * scale}
+          style={{ border: "1px solid black" }}
+          alt="coba"
+        >
+          <title>{i}</title>
+          <rect x={0} y={0} width={scale} height={scale} style={{ fill: it }} />
+        </svg>
+      ));
+    },
     draw: ([iImg, margin = 2]) => {
       const [x, y, scale] = pixelArtImage.state.canvas;
       const color = pixelArtImage.state.color;
-      const [text, image] = pixelArtImage.state.image[iImg];
+      const [text, image] = pixelArtImage.store.image[iImg];
       const svgChild = [];
       for (let iy = 0; iy < x; iy++) {
         for (let ix = 0; ix < y; ix++) {
@@ -120,56 +140,151 @@ const pixelArtImage = {
       );
     },
     drawAll: () => {
-      return pixelArtImage.state.image.map((it, i) => {
+      return pixelArtImage.store.image.map((it, i) => {
         return (
           <div key={i} className={"column-a"} style={{ alignItems: "center" }}>
             {pixelArtImage.action.draw([i])}
             <strong>{it[0]}</strong>
-            <button
-              onClick={() => {
-                var svgData = document.getElementById("svg-" + i);
-                var serializer = new XMLSerializer();
-                var source = serializer.serializeToString(svgData);
-                if (
-                  !source.match(
-                    /^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/
-                  )
-                ) {
-                  source = source.replace(
-                    /^<svg/,
-                    '<svg xmlns="http://www.w3.org/2000/svg"'
-                  );
-                }
-                if (
-                  !source.match(
-                    /^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/
-                  )
-                ) {
-                  source = source.replace(
-                    /^<svg/,
-                    '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
-                  );
-                }
-                source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
-                var url =
-                  "data:image/svg+xml;charset=utf-8," +
-                  encodeURIComponent(source);
-                var downloadLink = document.createElement("a");
-                downloadLink.href = url;
-                downloadLink.download = "newesttree.svg";
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-              }}
-            >
-              simpan
-            </button>
+            {pixelArtImage.store.textShow ? (
+              <div className="column-a">
+                <textarea
+                  value={pixelArtImage.action.toText(it[1])}
+                  onChange={(e) => {
+                    // console.log([
+                    //   pixelArtImage.store.image[i][0],
+                    //   pixelArtImage.action.toArray(e.target.value),
+                    // ]);
+                    pixelArtImage.store.image[i][1] =
+                      pixelArtImage.action.toArray(e.target.value);
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    var svgData = document.getElementById("svg-" + i);
+                    var serializer = new XMLSerializer();
+                    var source = serializer.serializeToString(svgData);
+                    if (
+                      !source.match(
+                        /^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/
+                      )
+                    ) {
+                      source = source.replace(
+                        /^<svg/,
+                        '<svg xmlns="http://www.w3.org/2000/svg"'
+                      );
+                    }
+                    if (
+                      !source.match(
+                        /^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/
+                      )
+                    ) {
+                      source = source.replace(
+                        /^<svg/,
+                        '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+                      );
+                    }
+                    source =
+                      '<?xml version="1.0" standalone="no"?>\r\n' + source;
+                    var url =
+                      "data:image/svg+xml;charset=utf-8," +
+                      encodeURIComponent(source);
+                    var downloadLink = document.createElement("a");
+                    downloadLink.href = url;
+                    downloadLink.download = it[0] + ".svg";
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                  }}
+                >
+                  simpan
+                </button>
+              </div>
+            ) : null}
           </div>
         );
       });
     },
+    toText: (arr) => arr.map((x) => x.join(" ")).join("\n"),
+    toArray: (txt) => txt.split("\n").map((x) => x.split(" ")),
   },
   view: () => {
-    return <div className="row-a">{pixelArtImage.action.drawAll()}</div>;
+    return (
+      <div className="column-a">
+        <div className="row-a">
+          <mobxReact.Observer>
+            {() => (
+              <div
+                className="circle-a"
+                onClick={() =>
+                  (pixelArtImage.store.textShow = !pixelArtImage.store.textShow)
+                }
+              >
+                <i
+                  className={
+                    "fas" +
+                    (pixelArtImage.store.textShow
+                      ? " fa-angle-up"
+                      : " fa-angle-down")
+                  }
+                />
+              </div>
+            )}
+          </mobxReact.Observer>
+          <mobxReact.Observer>
+            {() => (
+              <div
+                className="circle-a"
+                onClick={() => {
+                  const image = pixelArtImage.store.image;
+                  image.push([
+                    "new",
+                    [
+                      [0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0],
+                    ],
+                  ]);
+                }}
+              >
+                <i className={"fas" + " fa-plus"} />
+              </div>
+            )}
+          </mobxReact.Observer>
+          <mobxReact.Observer>
+            {() => (
+              <div
+                className="circle-a"
+                onClick={() => {
+                  const dataStr =
+                    "data:text/json;charset=utf-8," +
+                    encodeURIComponent(
+                      JSON.stringify(pixelArtImage.store.image)
+                    );
+                  const dlAnchorElem = document.getElementById("downloadA");
+                  dlAnchorElem.setAttribute("href", dataStr);
+                  dlAnchorElem.setAttribute("download", "image.json");
+                  dlAnchorElem.click();
+                }}
+              >
+                <a id="downloadA" style={{ display: "none" }}></a>
+                <i className={"fas" + " fa-file-export"} />
+              </div>
+            )}
+          </mobxReact.Observer>
+        </div>
+        <div className="row-a">
+          <div className="row-a">
+            <mobxReact.Observer>
+              {() => pixelArtImage.action.colorAll()}
+            </mobxReact.Observer>
+          </div>
+          <mobxReact.Observer>
+            {() => pixelArtImage.action.drawAll()}
+          </mobxReact.Observer>
+        </div>
+      </div>
+    );
   },
 };

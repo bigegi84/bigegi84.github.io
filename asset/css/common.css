@@ -9,6 +9,12 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+.row-b {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
 .circle-a {
   text-align: center;
   border-radius: 2.75em;

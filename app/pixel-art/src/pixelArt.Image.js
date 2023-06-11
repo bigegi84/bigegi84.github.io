@@ -86,7 +86,7 @@ const pixelArtImage = {
     ],
   },
   action: {
-    draw: ([iImg]) => {
+    draw: ([iImg, margin = 2]) => {
       const [x, y, scale] = pixelArtImage.state.canvas;
       const color = pixelArtImage.state.color;
       const [text, image] = pixelArtImage.state.image[iImg];
@@ -95,7 +95,6 @@ const pixelArtImage = {
         for (let ix = 0; ix < y; ix++) {
           if (image[iy] != null && image[ix][iy] != null) {
             const iColor = image[ix][iy];
-            console.log(iColor);
             svgChild.push(
               <rect
                 key={iy + " " + ix}
@@ -111,6 +110,7 @@ const pixelArtImage = {
       }
       return (
         <svg
+          id={"svg-" + iImg}
           xmlns="http://www.w3.org/2000/svg"
           width={x * scale}
           height={y * scale}
@@ -120,12 +120,53 @@ const pixelArtImage = {
       );
     },
     drawAll: () => {
-      return pixelArtImage.state.image.map((it, i) => (
-        <div key={i} className={"column-a"} style={{ alignItems: "center" }}>
-          {pixelArtImage.action.draw([i])}
-          <strong>{it[0]}</strong>
-        </div>
-      ));
+      return pixelArtImage.state.image.map((it, i) => {
+        return (
+          <div key={i} className={"column-a"} style={{ alignItems: "center" }}>
+            {pixelArtImage.action.draw([i])}
+            <strong>{it[0]}</strong>
+            <button
+              onClick={() => {
+                var svgData = document.getElementById("svg-" + i);
+                var serializer = new XMLSerializer();
+                var source = serializer.serializeToString(svgData);
+                if (
+                  !source.match(
+                    /^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/
+                  )
+                ) {
+                  source = source.replace(
+                    /^<svg/,
+                    '<svg xmlns="http://www.w3.org/2000/svg"'
+                  );
+                }
+                if (
+                  !source.match(
+                    /^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/
+                  )
+                ) {
+                  source = source.replace(
+                    /^<svg/,
+                    '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+                  );
+                }
+                source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+                var url =
+                  "data:image/svg+xml;charset=utf-8," +
+                  encodeURIComponent(source);
+                var downloadLink = document.createElement("a");
+                downloadLink.href = url;
+                downloadLink.download = "newesttree.svg";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+              }}
+            >
+              simpan
+            </button>
+          </div>
+        );
+      });
     },
   },
   view: () => {

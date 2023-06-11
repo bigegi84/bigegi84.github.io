@@ -39,7 +39,6 @@ const Piano = () => {
                 </div>
               ) : null}
             </div>
-
             <PianoSheet.view />
           </div>
           <div id="middle" className="column-a">

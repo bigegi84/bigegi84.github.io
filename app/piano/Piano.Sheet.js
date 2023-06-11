@@ -26,8 +26,7 @@ const PianoSheet = {
   },
   handleChange: (e) => {
     const selected = e.target.value;
-    PianoSheet.store.leftText = PianoSheet.store.song[selected][0];
-    PianoSheet.store.rightText = PianoSheet.store.song[selected][1];
+    PianoSheet.store.selected = selected;
   },
   playOne: (which) => {
     let sec = 0;

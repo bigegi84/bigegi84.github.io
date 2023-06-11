@@ -81,6 +81,24 @@ const song = {
       ],
     ],
   ],
+  "Nega - Haunted Jealousy": [
+    [
+      "Left",
+      [
+        [
+          "Verse 1",
+          "#Bm-2.4 #A-2.4 #G-2.4 #Gb-2.4 #Bm-2.4 #A-2.4 #G-2.4 #Gb-2.4 #Bm-2.4 #A-2.4 #G-2.4 #Gb-2.4 #Bm-2.4 #A-2.4 #G-2.4 #Gb-2.4",
+          true,
+        ],
+        [
+          "Breakdown 1",
+          "#Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.45 #C-0.6 #D-0.6 #Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.45 #C-0.6 #D-0.6",
+          true,
+        ],
+      ],
+    ],
+    ["Right", [["Verse 1", "", true]]],
+  ],
   "Queen - Love Of My Life": [
     [
       "Left",

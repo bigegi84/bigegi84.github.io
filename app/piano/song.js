@@ -1,4 +1,78 @@
 const song = {
+  "bigegi84 - Omong Kosong": [
+    [
+      "Left",
+      [
+        [
+          "Verse 1",
+          "#G-1.5 #G-1.5 #Bm-1.5 #Bm-1.5 #C-1.5 #C-1.5 #C-1.5 #C-1.5",
+          true,
+        ],
+        ["Verse 2", "#G-1.5 #G-1.5 #Bm-1.5 #Bm-1.5 #C-1.5 #C-1.5", true],
+        [
+          "Pre Chorus 1",
+          "#C-1.5 #Bm-1.5 #Am-1.5 #Am-1.5 #Bm-1.5 #Bm-1.5 #C-1.5 #C-1.5",
+          true,
+        ],
+        [
+          "Pre Chorus 2",
+          "#C-1.5 #Bm-1.5 #Am-1.5 #Am-1.5 #Bm-1.5 #Bm-1.5 #C-1.5 #C-1.5 #D-1.5 #D-1.5",
+          true,
+        ],
+        [
+          "Chorus 1",
+          "#G-1.5 #G-1.5 #D-1.5 #D-0.5625 #Ebm-0.9375 #Em-1.5 #Em-1.5 #Dm-1.5 #G-1.5 #C-1.5 #C-1.5 #Bm-1.5 #Bm-1.5 #Am-1.5 #Am-1.5 #D-1.5 #D-1.5",
+          true,
+        ],
+        [
+          "Chorus 2",
+          "#G-1.5 #G-1.5 #D-1.5 #D-0.5625 #Ebm-0.9375 #Em-1.5 #Em-1.5 #Dm-1.5 #G-1.5 #C-1.5 #C-1.5 #Bm-1.5 #Bm-1.5 #Am-1.5 #Am-1.5 #D-1.5 #D-1.5",
+          true,
+        ],
+        [
+          "Chorus 3",
+          "#E-0.5625 #E-0.5625 #E-0.5625 #E-1.6375 #A-1.5 #A-1.5 #E-1.5 #E-0.5625 #Fm-0.9375 #Gbm-1.5 #Gbm-1.5 #Em-1.5 #A-1.5 #D-1.5 #D-1.5 #Dbm-1.5 #Dbm-1.5 #Bm-1.5 #Bm-1.5 #E-1.5 #E-1.5",
+          true,
+        ],
+        [
+          "Chorus 4",
+          "#A-1.5 #A-1.5 #E-1.5 #E-0.5625 #Fm-0.9375 #Gbm-1.5 #Gbm-1.5 #Em-1.5 #A-1.5 #D-1.5 #D-1.5 #Dbm-1.5 #Dbm-1.5 #Bm-1.5 #Bm-1.5 #E-1.5 #E-1.5 #E-3 #A-3",
+          true,
+        ],
+      ],
+    ],
+    ["Right", [["Verse 1", "", true]]],
+  ],
+  "bigegi84 - Welcome To Jangkrik City": [
+    [
+      "Left",
+      [
+        ["Verse 1", "#G-2 #G-2 #Bm-2 #Bm-2 #Am-2 #Am-2 #Cm-2 #D-2", true],
+        ["Verse 2", "#G-2 #G-2 #Bm-2 #Bm-2 #Am-2 #Am-2 #Cm-2 #D-2", true],
+        [
+          "Pre Chorus 1",
+          "#Bm-1 #Bm-1 #Bm-1 #Bm-1 #Em-1 #Em-1 #Em-1 #Em-1 #Am-1 #Am-1 #Am-1 #Am-1 #Cm-1 #Cm-1 #D-1 #D-1",
+          true,
+        ],
+        [
+          "Chorus 1",
+          "#C-1 #C-1 #Cm-1 #Cm-1 #Bm-1 #Bm-1 #Em-1 #Em-1 #Am-1 #Am-1 #D-1 #D-1 #G-1 #G-1 #G7-1 #G7-1 #C-1 #C-1 #Cm-1 #Cm-1 #Bm-1 #Bm-1 #Em-1 #Em-1 #Am-1 #Am-1 #D-1 #D-1 #G-1 #G-1 #G7-1 #G7-1",
+          true,
+        ],
+        [
+          "Chorus 2",
+          "#C-1 #C-1 #Cm-1 #Cm-1 #Bm-1 #Bm-1 #Em-1 #Em-1 #Am-1 #Am-1 #D-1 #D-1 #G-1 #G-1 #G7-1 #G7-1 #C-1 #C-1 #Cm-1 #Cm-1 #Bm-1 #Bm-1 #Em-1 #Em-1 #Am-1 #Am-1 #D-1 #D-1",
+          true,
+        ],
+        [
+          "Chorus 3",
+          "#G-1 #G-1 #Bm-1 #Bbm-1 #Am-1 #Am-1 #D-1 #D-1 #Em-1 #Em-1 #D-1 #Bm-1 #Am-2 #D-2 #G-4",
+          true,
+        ],
+      ],
+    ],
+    ["Right", [["Verse 1", "", true]]],
+  ],
   "Mahalini - Sisa Rasa Ritme": [
     [
       "Left",
@@ -92,7 +166,7 @@ const song = {
         ],
         [
           "Breakdown 1",
-          "#Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.45 #C-0.6 #D-0.6 #Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.45 #C-0.6 #D-0.6",
+          "#Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.3 #C-0.6 #D-0.6 #Bm-1.2 #C-1.2 #Bm-0.45 #Bm-0.45 #Bm-0.3 #C-0.6 #D-0.6",
           true,
         ],
       ],

@@ -6,7 +6,7 @@ const searchChord = (chRaw) => {
 let playTimeout = [];
 const PianoSheet = {
   store: mobx.observable({
-    selected: "Mahalini - Sisa Rasa Ritme",
+    selected: "bigegi84 - Omong Kosong",
     playing: false,
     playText: "Mainkan",
     song,

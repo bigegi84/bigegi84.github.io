@@ -8,7 +8,7 @@ const PianoStore = mobx.observable({
   },
   delayMs: 0,
   depressed: {},
-  sustaining: false,
+  sustaining: true,
   sustainMs: 1500,
   playType: {
     name: "(Kiri) 2 Bas - (Kanan) Akor",

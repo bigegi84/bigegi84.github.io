@@ -1,0 +1,10 @@
+.game-column-a {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.game-row-a {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}

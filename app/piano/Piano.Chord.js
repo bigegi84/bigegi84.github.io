@@ -119,7 +119,9 @@ const PianoChord = {
     return (
       <div className="column-a">
         <div className="row-a">
-          <strong style={{ alignSelf: "center" }}>Chord</strong>
+          <strong style={{ alignSelf: "center" }}>
+            {PianoLocalization.chord["id"]}
+          </strong>
           <div className="circle-a" onClick={() => setShow(!show)}>
             <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
           </div>

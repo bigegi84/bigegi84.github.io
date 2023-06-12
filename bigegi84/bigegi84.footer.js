@@ -1,4 +1,11 @@
 const bigegi84footer = {
+  action: {
+    renderAllIcon: bigegi84icon.map((it, i) => (
+      <div key={i} className="circle-a">
+        <i className={"fa-solid fa-" + it}></i>
+      </div>
+    )),
+  },
   view: () => {
     return (
       <footer className="wrapper style1 align-center">
@@ -17,6 +24,9 @@ const bigegi84footer = {
             {new Date().getFullYear()}
           </p>
         </div>
+        {/* <div className="row-a" style={{ margin: "3em" }}>
+          {bigegi84footer.action.renderAllIcon}
+        </div> */}
       </footer>
     );
   },

@@ -170,10 +170,6 @@ const pixelArtImage = {
                 <textarea
                   value={pixelArtImage.action.toText(it[1])}
                   onChange={(e) => {
-                    // console.log([
-                    //   pixelArtImage.store.image[i][0],
-                    //   pixelArtImage.action.toArray(e.target.value),
-                    // ]);
                     pixelArtImage.store.image[i][1] =
                       pixelArtImage.action.toArray(e.target.value);
                   }}
@@ -297,7 +293,11 @@ const pixelArtImage = {
         <div className="row-a">
           <div className="row-a">
             <mobxReact.Observer>
-              {() => pixelArtImage.action.colorAll()}
+              {() =>
+                pixelArtImage.store.textShow
+                  ? pixelArtImage.action.colorAll()
+                  : null
+              }
             </mobxReact.Observer>
           </div>
           <mobxReact.Observer>

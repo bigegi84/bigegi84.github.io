@@ -20,7 +20,6 @@ const bigegi84footer = {
           <ul className="icons">
             {bigegi84state.link.map(([name, link, icon], i) => (
               <li key={i}>
-                {/* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2); */}
                 <a
                   target="_blank"
                   href={link}

@@ -188,11 +188,11 @@ audio {
   background-color: #116a7b;
 }
 
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
   .image {
     width: 30% !important;
   }
-}
+} */
 @media only screen and (min-width: 322px) and (max-width: 599px) {
   .image {
     display: none;

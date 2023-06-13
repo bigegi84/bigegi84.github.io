@@ -18,6 +18,7 @@ const app = {
     </ul> */}
 
       <Route path="/" exact component={bigegi84.view} />
+      <Route path="/piano" component={Piano} />
       {/* <Route path="/new" component={New} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/login" component={Login} />

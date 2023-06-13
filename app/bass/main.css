@@ -91,12 +91,13 @@ audio {
   flex-direction: row;
 }
 .fret {
+  line-height: 1;
   color: white;
   -webkit-user-select: none;
   font-size: x-small;
   font-weight: bolder;
   width: 50px;
-  height: 24px;
+  height: 26px;
   background-color: burlywood;
   z-index: 1;
   display: flex;

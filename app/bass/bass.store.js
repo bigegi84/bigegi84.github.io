@@ -13,5 +13,5 @@ const bassStore = mobx.observable({
     code: "twoBassAndChord",
   },
   keymapActive: true,
-  sustain: { active: true, sustainMs: 1500 },
+  sustain: { active: true, ms: 1500 },
 });

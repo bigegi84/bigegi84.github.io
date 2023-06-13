@@ -1,4 +1,5 @@
 const bassState = {
+  depressed: {},
   fret: {
     1: {
       0: "G2",

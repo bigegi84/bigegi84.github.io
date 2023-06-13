@@ -1,4 +1,4 @@
-const PianoSustain = {
+const pianoSustain = {
   view: () => {
     return (
       <div className="field half">
@@ -9,9 +9,9 @@ const PianoSustain = {
                 type="checkbox"
                 id="sustain"
                 name="sustain"
-                checked={PianoStore.sustaining}
+                checked={pianoStore.sustaining}
                 onChange={(e) => {
-                  PianoStore.sustaining = e.target.checked;
+                  pianoStore.sustaining = e.target.checked;
                 }}
               />
             );

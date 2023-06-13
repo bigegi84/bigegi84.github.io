@@ -1,3 +1,3 @@
-const PianoLocalization = {
+const pianoLocalization = {
   chord: { id: "Akor" },
 };

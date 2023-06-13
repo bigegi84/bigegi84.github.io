@@ -4,22 +4,22 @@ const searchChord = (chRaw) => {
   return "chord-" + chLine + "-" + ch;
 };
 let playTimeout = [];
-const PianoSheet = {
+const pianoSheet = {
   store: mobx.observable({
     selected: "bigegi84 - Omong Kosong",
     playing: false,
     playText: "Mainkan",
-    song,
+    song: pianoSong,
   }),
   action: {
     change: (e) => {
       const selected = e.target.value;
-      PianoSheet.store.selected = selected;
+      pianoSheet.store.selected = selected;
     },
     option: () => {
       let i = 0;
       const list = [];
-      for (const key in PianoSheet.store.song) {
+      for (const key in pianoSheet.store.song) {
         list.push(
           <option key={i} value={key}>
             {key}
@@ -30,14 +30,14 @@ const PianoSheet = {
       return list;
     },
     play: () => {
-      const selected = PianoSheet.store.selected;
-      const currentSong = PianoSheet.store.song[selected];
+      const selected = pianoSheet.store.selected;
+      const currentSong = pianoSheet.store.song[selected];
       currentSong.map(([name, value], ia) => {
         let text = [];
         value.forEach(([part, pValue, enable], ib) => {
           if (enable) text.push(pValue);
         });
-        PianoSheet.action.playText(text.join(" "));
+        pianoSheet.action.playText(text.join(" "));
       });
     },
     playText: (text) => {
@@ -53,12 +53,12 @@ const PianoSheet = {
           })
           .join(",");
         const timeoutA = setTimeout(() => {
-          if (it.search("#") == -1) PianoNote.action.mouseDown(code);
-          if (it.search("#") != -1) PianoChord.action.mouseDown(code);
+          if (it.search("#") == -1) pianoNote.action.mouseDown(code);
+          if (it.search("#") != -1) pianoChord.action.mouseDown(code);
         }, sec * 1000);
         const timeoutB = setTimeout(() => {
-          if (it.search("#") == -1) PianoNote.action.mouseUp(code);
-          if (it.search("#") != -1) PianoChord.action.mouseUp(code);
+          if (it.search("#") == -1) pianoNote.action.mouseUp(code);
+          if (it.search("#") != -1) pianoChord.action.mouseUp(code);
         }, (sec + duration) * 1000);
         sec += duration;
         playTimeout.push(timeoutA);
@@ -66,9 +66,9 @@ const PianoSheet = {
       });
     },
     sheetList: () => {
-      const selected = PianoSheet.store.selected;
-      const currentSong = PianoSheet.store.song[selected];
-      return PianoSheet.store.song[selected].map(([name, value], ia) => {
+      const selected = pianoSheet.store.selected;
+      const currentSong = pianoSheet.store.song[selected];
+      return pianoSheet.store.song[selected].map(([name, value], ia) => {
         return (
           <div key={ia} className="column-a">
             <strong>{name}</strong>
@@ -81,7 +81,7 @@ const PianoSheet = {
                     onChange={(e) =>
                       (currentSong[ia][1][ib][0] = e.target.value)
                     }
-                    onFocus={() => (PianoStore.keymapActive = false)}
+                    onFocus={() => (pianoStore.keymapActive = false)}
                   />
                   <textarea
                     rows="2"
@@ -90,7 +90,7 @@ const PianoSheet = {
                     onChange={(e) =>
                       (currentSong[ia][1][ib][1] = e.target.value)
                     }
-                    onFocus={() => (PianoStore.keymapActive = false)}
+                    onFocus={() => (pianoStore.keymapActive = false)}
                   />
                   <div className="row-a">
                     <i
@@ -110,15 +110,15 @@ const PianoSheet = {
                     <i
                       className={
                         "fas" +
-                        (PianoSheet.store.playing ? " fa-stop" : " fa-play")
+                        (pianoSheet.store.playing ? " fa-stop" : " fa-play")
                       }
                       onClick={() => {
-                        if (!PianoSheet.store.playing) {
-                          PianoSheet.store.playing = true;
-                          PianoSheet.playText(currentSong[ia][1][ib][1]);
+                        if (!pianoSheet.store.playing) {
+                          pianoSheet.store.playing = true;
+                          pianoSheet.playText(currentSong[ia][1][ib][1]);
                         } else {
-                          PianoSheet.store.playing = false;
-                          PianoSheet.action.stop();
+                          pianoSheet.store.playing = false;
+                          pianoSheet.action.stop();
                         }
                       }}
                     />
@@ -138,9 +138,9 @@ const PianoSheet = {
     },
     stop: () => {
       playTimeout.forEach((it) => clearTimeout(it));
-      PianoNote.action.soundClear();
-      PianoNote.action.animateClear();
-      PianoChord.action.animateClear();
+      pianoNote.action.soundClear();
+      pianoNote.action.animateClear();
+      pianoChord.action.animateClear();
       playTimeout = [];
     },
   },
@@ -163,16 +163,16 @@ const PianoSheet = {
           <div className="column-a">
             <div className="field">
               <select
-                onChange={(e) => PianoSheet.action.change(e)}
+                onChange={(e) => pianoSheet.action.change(e)}
                 name="sheet-select"
                 id="sheet-select"
               >
-                {PianoSheet.action.option()}
+                {pianoSheet.action.option()}
               </select>
             </div>
             <div className="row-a">
               <mobxReact.Observer>
-                {() => PianoSheet.action.sheetList()}
+                {() => pianoSheet.action.sheetList()}
               </mobxReact.Observer>
             </div>
           </div>
@@ -190,11 +190,11 @@ const PianoSheet = {
             <a id="downloadA" style={{ display: "none" }}></a>
             <button
               onClick={() => {
-                const selected = PianoSheet.store.selected;
+                const selected = pianoSheet.store.selected;
                 const dataStr =
                   "data:text/json;charset=utf-8," +
                   encodeURIComponent(
-                    JSON.stringify(PianoSheet.store.song[selected])
+                    JSON.stringify(pianoSheet.store.song[selected])
                   );
                 const dlAnchorElem = document.getElementById("downloadA");
                 dlAnchorElem.setAttribute("href", dataStr);
@@ -209,19 +209,19 @@ const PianoSheet = {
                 <button
                   className="button small"
                   onClick={() => {
-                    if (!PianoSheet.store.playing) {
-                      PianoSheet.store.playing = true;
-                      PianoSheet.store.playText = "Berhenti";
-                      PianoSheet.action.play();
+                    if (!pianoSheet.store.playing) {
+                      pianoSheet.store.playing = true;
+                      pianoSheet.store.playText = "Berhenti";
+                      pianoSheet.action.play();
                     } else {
-                      PianoSheet.store.playing = false;
-                      PianoSheet.store.playText = "Mainkan";
-                      PianoSheet.action.stop();
+                      pianoSheet.store.playing = false;
+                      pianoSheet.store.playText = "Mainkan";
+                      pianoSheet.action.stop();
                     }
                   }}
                   id="play"
                 >
-                  {PianoSheet.store.playText}
+                  {pianoSheet.store.playText}
                 </button>
               )}
             </mobxReact.Observer>

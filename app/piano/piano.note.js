@@ -1,4 +1,4 @@
-const PianoNote = {
+const pianoNote = {
   action: {
     animate: (note, press = true) => {
       if (press)
@@ -12,8 +12,8 @@ const PianoNote = {
         $("#note-" + note).animate({
           backgroundColor:
             note.search("b") == -1
-              ? PianoStore.theme.pianoWhite.backgroundColor
-              : PianoStore.theme.pianoBlack.backgroundColor,
+              ? pianoStore.theme.pianoWhite.backgroundColor
+              : pianoStore.theme.pianoBlack.backgroundColor,
         });
       }
     },
@@ -23,35 +23,35 @@ const PianoNote = {
         $("#" + obj.id).animate({
           backgroundColor:
             note.search("b") == -1
-              ? PianoStore.theme.pianoWhite.backgroundColor
-              : PianoStore.theme.pianoBlack.backgroundColor,
+              ? pianoStore.theme.pianoWhite.backgroundColor
+              : pianoStore.theme.pianoBlack.backgroundColor,
         });
       });
     },
     mouseDown: (note) => {
       if (note != null && note != "") {
-        PianoState.tone.triggerAttack([note]);
-        PianoNote.action.animate(note, true);
+        pianoState.tone.triggerAttack([note]);
+        pianoNote.action.animate(note, true);
       }
     },
     mouseUp: (note) => {
-      if (PianoStore.sustaining)
-        PianoState.tone.triggerRelease(
+      if (pianoStore.sustaining)
+        pianoState.tone.triggerRelease(
           [note],
-          Tone.now() + PianoStore.sustainMs / 1000
+          Tone.now() + pianoStore.sustainMs / 1000
         );
-      if (!PianoStore.sustaining) PianoState.tone.triggerRelease([note]);
-      PianoNote.action.animate(note, false);
+      if (!pianoStore.sustaining) pianoState.tone.triggerRelease([note]);
+      pianoNote.action.animate(note, false);
     },
-    noteList: PianoState.note.map((it, i) => {
+    noteList: pianoState.note.map((it, i) => {
       if (it.search("b") == -1) {
         return (
           <div
             key={i}
             id={"note-" + it}
             className={"note piano-white piano-" + it}
-            onMouseDown={() => PianoNote.action.mouseDown(it)}
-            onMouseUp={() => PianoNote.action.mouseUp(it)}
+            onMouseDown={() => pianoNote.action.mouseDown(it)}
+            onMouseUp={() => pianoNote.action.mouseUp(it)}
           >
             <p className="note-info-white">{it}</p>
           </div>
@@ -62,8 +62,8 @@ const PianoNote = {
             <div
               id={"note-" + it}
               className={"note piano-black-raised piano-" + it}
-              onMouseDown={() => PianoNote.action.mouseDown(it)}
-              onMouseUp={() => PianoNote.action.mouseUp(it)}
+              onMouseDown={() => pianoNote.action.mouseDown(it)}
+              onMouseUp={() => pianoNote.action.mouseUp(it)}
             >
               <p className="note-info-black">{it}</p>
             </div>
@@ -72,7 +72,7 @@ const PianoNote = {
       }
     }),
     soundClear: () => {
-      PianoState.tone.triggerRelease(PianoState.note);
+      pianoState.tone.triggerRelease(pianoState.note);
     },
   },
   view: () => {
@@ -89,7 +89,7 @@ const PianoNote = {
           <div className="piano">
             <div className="piano-container">
               <span className="piano-brand">bigegi84</span>
-              <div className="piano-keys">{PianoNote.action.noteList}</div>
+              <div className="piano-keys">{pianoNote.action.noteList}</div>
             </div>
           </div>
         ) : null}

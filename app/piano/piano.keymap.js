@@ -1,14 +1,14 @@
-const PianoKeymap = {
+const pianoKeymap = {
   depressed: {},
   handleKeyDown: (e) => {
-    if (!PianoStore.keymapActive) return;
+    if (!pianoStore.keymapActive) return;
     e.preventDefault();
-    if (PianoKeymap.depressed[e.key]) return;
-    PianoKeymap.depressed[e.key] = true;
-    var str = PianoState.keymap[e.key];
+    if (pianoKeymap.depressed[e.key]) return;
+    pianoKeymap.depressed[e.key] = true;
+    var str = pianoState.keymap[e.key];
     if (str) {
       const chordId = "chord-" + str[0] + "-" + str[1];
-      let formula = PianoChord.action.formula(chordId);
+      let formula = pianoChord.action.formula(chordId);
       const jqCode = [];
       formula.forEach((f) => {
         f.split(",").forEach((x) => {
@@ -18,21 +18,21 @@ const PianoKeymap = {
       let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
-          PianoNote.action.mouseDown(it);
+          pianoNote.action.mouseDown(it);
         }, ms);
-        ms = ms + PianoStore.delayMs;
+        ms = ms + pianoStore.delayMs;
       });
-      PianoChord.action.animate(chordId);
+      pianoChord.action.animate(chordId);
       // chordAnimate(chordId);
       // lastChord = jqCode;
     }
   },
   handleKeyUp: (e) => {
-    PianoKeymap.depressed[e.key] = false;
-    var str = PianoState.keymap[e.key];
+    pianoKeymap.depressed[e.key] = false;
+    var str = pianoState.keymap[e.key];
     if (str) {
       const chordId = "chord-" + str[0] + "-" + str[1];
-      let formula = PianoChord.action.formula(chordId);
+      let formula = pianoChord.action.formula(chordId);
       const jqCode = [];
       formula.forEach((f) => {
         f.split(",").forEach((x) => {
@@ -42,11 +42,11 @@ const PianoKeymap = {
       let ms = 0;
       jqCode.forEach((it) => {
         setTimeout(() => {
-          PianoNote.action.mouseUp(it);
+          pianoNote.action.mouseUp(it);
         }, ms);
-        ms = ms + PianoStore.delayMs;
+        ms = ms + pianoStore.delayMs;
       });
-      PianoChord.action.animate(chordId, false);
+      pianoChord.action.animate(chordId, false);
       // chordInfo(formula.join(" - "));
     }
   },

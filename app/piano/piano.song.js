@@ -1,4 +1,4 @@
-const song = {
+const pianoSong = {
   "bigegi84 - Omong Kosong": [
     [
       "Left",

@@ -1,4 +1,4 @@
-const PianoState = {
+const pianoState = {
   tone: new Tone.Sampler({
     urls: {
       C2: "C2.ogg",

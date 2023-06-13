@@ -1,4 +1,4 @@
-const PianoStore = mobx.observable({
+const pianoStore = mobx.observable({
   theme: {
     pianoWhite: {
       backgroundColor: "#CDC2AE",

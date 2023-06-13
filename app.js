@@ -27,5 +27,6 @@ const app = {
 };
 
 $(document).ready(() => {
+  document.title = bigegi84state.fullName + ", " + bigegi84state.degree["id"];
   ReactDOM.render(<app.view />, document.getElementById("root"));
 });

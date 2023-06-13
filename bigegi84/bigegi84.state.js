@@ -39,8 +39,9 @@ const bigegi84state = {
   fullName: "Gilang Pratama Wiguna",
   degree: { id: "S.Kom." },
   phone: "+6288975329400",
-  education: {
-    bachelor: {
+  education: [
+    {
+      type: "Sarjana S1",
       university: "Universitas Jenderal Soedirman",
       major: "Teknik Informatika",
       direction: "Rekayasa Perangkat Lunak",
@@ -48,7 +49,7 @@ const bigegi84state = {
       yearFrom: 2012,
       yearTo: 2016,
     },
-  },
+  ],
   email: "gilangpw84@gmail.com",
   experience: [
     {

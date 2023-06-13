@@ -4,11 +4,12 @@ const bigegi84title = {
       <section className="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
         <div className="content">
           <h2
+            className="text-gold-b"
             style={{
-              background:
-                bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
-              color: bigegi84store.theme[bigegi84store.theme.value].textColor,
-              fontWeight: "bolder",
+              // background:
+              //   bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
+              // color: bigegi84store.theme[bigegi84store.theme.value].textColor,
+              // fontWeight: "bolder",
             }}
           >
             {bigegi84state.fullName}, {bigegi84state.degree["id"]}

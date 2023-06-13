@@ -118,7 +118,11 @@ const pixelArtImage = {
           xmlns="http://www.w3.org/2000/svg"
           width={1 * scale}
           height={1 * scale}
-          style={{ border: "1px solid black" }}
+          style={{
+            border:
+              "1px solid " +
+              bigegi84store.theme[bigegi84store.theme.value].textColor,
+          }}
           alt="coba"
         >
           <title>{i}</title>
@@ -164,7 +168,13 @@ const pixelArtImage = {
         return (
           <div key={i} className={"column-a"} style={{ alignItems: "center" }}>
             {pixelArtImage.action.draw([i])}
-            <strong>{it[0]}</strong>
+            <strong
+              style={{
+                color: bigegi84store.theme[bigegi84store.theme.value].textColor,
+              }}
+            >
+              {it[0]}
+            </strong>
             {pixelArtImage.store.textShow ? (
               <div className="column-a">
                 <textarea
@@ -225,12 +235,26 @@ const pixelArtImage = {
   },
   view: () => {
     return (
-      <div className="column-a">
+      <div className="column-a" style={{ padding: "3em" }}>
+        <h2
+          style={{
+            background:
+              bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
+            color: bigegi84store.theme[bigegi84store.theme.value].textColor,
+          }}
+        >
+          bigegi84 - Pixel Art
+        </h2>
         <div className="row-a">
           <mobxReact.Observer>
             {() => (
               <div
                 className="circle-a"
+                style={{
+                  boxShadow:
+                    "inset 0 0 0 1px " +
+                    bigegi84store.theme[bigegi84store.theme.value].textColor,
+                }}
                 onClick={() =>
                   (pixelArtImage.store.textShow = !pixelArtImage.store.textShow)
                 }
@@ -250,6 +274,11 @@ const pixelArtImage = {
             {() => (
               <div
                 className="circle-a"
+                style={{
+                  boxShadow:
+                    "inset 0 0 0 1px " +
+                    bigegi84store.theme[bigegi84store.theme.value].textColor,
+                }}
                 onClick={() => {
                   const image = pixelArtImage.store.image;
                   image.unshift([
@@ -272,6 +301,11 @@ const pixelArtImage = {
             {() => (
               <div
                 className="circle-a"
+                style={{
+                  boxShadow:
+                    "inset 0 0 0 1px " +
+                    bigegi84store.theme[bigegi84store.theme.value].textColor,
+                }}
                 onClick={() => {
                   const dataStr =
                     "data:text/json;charset=utf-8," +

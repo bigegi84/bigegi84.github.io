@@ -44,6 +44,7 @@ const ukuleleFret = {
             id={"ukulele-fret-" + x + "-" + y}
             className="ukulele-fret"
             onMouseDown={(e) => ukuleleFret.action.mouse.down(e)}
+            onMouseOut={(e) => ukuleleFret.action.mouse.up(e)}
             onMouseUp={(e) => ukuleleFret.action.mouse.up(e)}
           >
             {ukuleleState.fret[x][y]}

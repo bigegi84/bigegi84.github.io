@@ -42,11 +42,7 @@ const bigegi84footer = {
               </li>
             ))}
           </ul>
-          <p
-            style={{
-              color: bigegi84store.theme[bigegi84store.theme.value].textColor,
-            }}
-          >
+          <p className="text-gold-a">
             &copy; {bigegi84state.fullName}, {bigegi84state.degree.id}{" "}
             {new Date().getFullYear()}
           </p>

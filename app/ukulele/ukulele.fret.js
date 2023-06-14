@@ -1,12 +1,12 @@
 const ukuleleFret = {
   action: {
-    animate: (id, press = true) => {
+    animate: ([x, y], press = true) => {
       if (press)
-        $("#" + id).animate({
+        $("#ukulele-fret-" + x + "-" + y).animate({
           backgroundColor: "#88FFAA",
         });
       if (!press) {
-        $("#" + id).animate({
+        $("#ukulele-fret-" + x + "-" + y).animate({
           backgroundColor: ukuleleStore.theme.fret.backgroundColor,
         });
       }
@@ -17,7 +17,7 @@ const ukuleleFret = {
         const [x, y] = id.replace("ukulele-fret-", "").split("-");
         const note = ukuleleState.fret[x][y];
         ukuleleState.tone.triggerAttack([note]);
-        ukuleleFret.action.animate(id, true);
+        ukuleleFret.action.animate([x, y], true);
       },
       up: (e) => {
         const id = e.currentTarget.id;
@@ -29,7 +29,7 @@ const ukuleleFret = {
             ? Tone.now() + ukuleleStore.sustain.ms / 1000
             : Tone.now()
         );
-        ukuleleFret.action.animate(id, false);
+        ukuleleFret.action.animate([x, y], false);
       },
     },
   },

@@ -1,4 +1,7 @@
-const ukuleleStore = {
+const ukuleleStore = mobx.observable({
+  chord: { delay: { ms: 10 } },
+  mode: ["Chord", "us"],
+  sustain: { active: true, ms: 1500 },
   theme: {
     fret: {
       backgroundColor: "#83764f",
@@ -10,5 +13,4 @@ const ukuleleStore = {
       backgroundColor: "#008080",
     },
   },
-  sustain: { active: true, ms: 1500 },
-};
+});

@@ -54,9 +54,9 @@ const ukuleleChord = {
     },
     rederChord: () => {
       const view = [];
-      for (var x in ukuleleState.chord) {
+      for (const x in ukuleleState.chord) {
         const yHtml = [];
-        for (var y in ukuleleState.chord[x]) {
+        for (const y in ukuleleState.chord[x]) {
           yHtml.push(
             <div
               key={y}
@@ -69,7 +69,13 @@ const ukuleleChord = {
               onMouseUp={(e) => ukuleleChord.action.mouse.up(e)}
             >
               {y}
-              {ukuleleChord.action.findKey([x, y])}
+              <mobxReact.Observer>
+                {() =>
+                  ukuleleStore.mode[0] == "Chord"
+                    ? ukuleleChord.action.findKey([x, y])
+                    : null
+                }
+              </mobxReact.Observer>
             </div>
           );
         }

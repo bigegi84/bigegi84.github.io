@@ -1,6 +1,51 @@
 const ukuleleConfig = {
   action: {
     render: {
+      mode: () => {
+        return (
+          <div>
+            <mobxReact.Observer>
+              {() => (
+                <div className="field third column-a">
+                  <strong style={bigegi84theme.style}>Mode: </strong>
+                  <div>
+                    <input
+                      type="radio"
+                      id="ukulele-mode-chord"
+                      name="mode"
+                      checked={ukuleleStore.mode[0] == "Chord"}
+                      onChange={() => (ukuleleStore.mode[0] = "Chord")}
+                      value="Chord"
+                      style={bigegi84theme.style}
+                    />
+                    <label
+                      htmlFor="ukulele-mode-chord"
+                      style={bigegi84theme.style}
+                    >
+                      Chord
+                    </label>
+                    <input
+                      type="radio"
+                      id="ukulele-mode-solo"
+                      name="mode"
+                      value="Solo"
+                      checked={ukuleleStore.mode[0] == "Solo"}
+                      onChange={() => (ukuleleStore.mode[0] = "Solo")}
+                      style={bigegi84theme.style}
+                    />
+                    <label
+                      htmlFor="ukulele-mode-solo"
+                      style={bigegi84theme.style}
+                    >
+                      Solo
+                    </label>
+                  </div>
+                </div>
+              )}
+            </mobxReact.Observer>
+          </div>
+        );
+      },
       sustain: () => {
         return (
           <div>
@@ -50,7 +95,8 @@ const ukuleleConfig = {
           </div>
         </div>
         {show ? (
-          <div>
+          <div className="column-a">
+            <ukuleleConfig.action.render.mode />
             <ukuleleConfig.action.render.sustain />
           </div>
         ) : null}

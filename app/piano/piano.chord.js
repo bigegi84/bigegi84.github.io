@@ -71,8 +71,8 @@ const pianoChord = {
       return formula;
     },
     hint: ([line, ch]) => {
-      for (const key in pianoState.keymap) {
-        const [x, y] = pianoState.keymap[key];
+      for (const key in pianoState.keymap[pianoState.keymap.value]) {
+        const [x, y] = pianoState.keymap[pianoState.keymap.value][key];
         if (line == x && ch == y) return key.replace("Arrow", "");
       }
       return "";

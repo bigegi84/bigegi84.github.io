@@ -33,7 +33,7 @@ const bigegi84state = {
     {
       name: "Pixel Art",
       description: "Galeri Seni Piksel.",
-      link: "/app/pixel-art",
+      link: "#/pixel-art",
     },
   ],
   fullName: "Gilang Pratama Wiguna",

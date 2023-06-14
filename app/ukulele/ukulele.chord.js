@@ -44,46 +44,12 @@ const ukuleleChord = {
       down: (e) => {
         const id = e.currentTarget.id;
         const [x, y] = id.replace("ukulele-chord-", "").split("-");
-        const chord = ukuleleState.chord[x][y];
-        const formula = [];
-        for (var i = 0; i < chord.length; i++) {
-          formula.push([4 - i, chord.charAt(i)]);
-        }
-        let ms = 0;
-        formula.forEach(([nx, ny]) => {
-          setTimeout(() => {
-            const note = ukuleleState.fret[nx][ny];
-            ukuleleState.tone.triggerAttack([note]);
-            ukuleleFret.action.animate([nx, ny]);
-          }, ms);
-          ms = ms + ukuleleStore.chord.delay.ms;
-        });
-        ukuleleChord.action.animate([x, y], true);
-        // lastChord = formula;
+        ukuleleChord.action.sound.play([x, y]);
       },
       up: (e) => {
         const id = e.currentTarget.id;
         const [x, y] = id.replace("ukulele-chord-", "").split("-");
-        const chord = ukuleleState.chord[x][y];
-        const formula = [];
-        for (var i = 0; i < chord.length; i++) {
-          formula.push([4 - i, chord.charAt(i)]);
-        }
-        let ms = 0;
-        formula.forEach(([nx, ny]) => {
-          setTimeout(() => {
-            const note = ukuleleState.fret[nx][ny];
-            ukuleleState.tone.triggerRelease(
-              [note],
-              ukuleleStore.sustain.active
-                ? Tone.now() + ukuleleStore.sustain.ms / 1000
-                : Tone.now()
-            );
-            ukuleleFret.action.animate([nx, ny], false);
-          }, ms);
-          ms = ms + ukuleleStore.chord.delay.ms;
-        });
-        ukuleleChord.action.animate([x, y], false);
+        ukuleleChord.action.sound.stop([x, y]);
       },
     },
     rederChord: () => {

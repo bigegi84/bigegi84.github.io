@@ -1,1 +1,18 @@
 @import url(../app/ukulele/ukulele.css);
+
+input[type="checkbox"]:checked + .checkbox-white::before {
+  border-color: white;
+}
+input[type="checkbox"] + .checkbox-white::before {
+  border-color: white;
+}
+/* 
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+  content: none;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+  content: none;
+} */

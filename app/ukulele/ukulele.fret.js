@@ -11,17 +11,37 @@ const ukuleleFret = {
         });
       }
     },
-    mouse: {
+    key: {
       down: (e) => {
         const id = e.currentTarget.id;
         const [x, y] = id.replace("ukulele-fret-", "").split("-");
-        const note = ukuleleState.fret[x][y];
-        ukuleleState.tone.triggerAttack([note]);
-        ukuleleFret.action.animate([x, y], true);
+        ukuleleFret.action.sound.play([x, y]);
       },
       up: (e) => {
         const id = e.currentTarget.id;
         const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        ukuleleFret.action.sound.stop([x, y]);
+      },
+    },
+    mouse: {
+      down: (e) => {
+        const id = e.currentTarget.id;
+        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        ukuleleFret.action.sound.play([x, y]);
+      },
+      up: (e) => {
+        const id = e.currentTarget.id;
+        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        ukuleleFret.action.sound.stop([x, y]);
+      },
+    },
+    sound: {
+      play: ([x, y]) => {
+        const note = ukuleleState.fret[x][y];
+        ukuleleState.tone.triggerAttack([note]);
+        ukuleleFret.action.animate([x, y], true);
+      },
+      stop: ([x, y]) => {
         const note = ukuleleState.fret[x][y];
         ukuleleState.tone.triggerRelease(
           [note],

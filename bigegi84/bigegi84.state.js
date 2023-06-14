@@ -8,7 +8,7 @@ const bigegi84state = {
     {
       name: "Ukulele",
       description: "Aplikasi web untuk memainkan ukulele.",
-      link: "/app/ukulele",
+      link: "#/ukulele",
     },
     {
       name: "Bass",

@@ -141,6 +141,7 @@ const pianoSheet = {
       pianoNote.action.soundClear();
       pianoNote.action.animateClear();
       pianoChord.action.animateClear();
+      pianoStore.info.pressed = [];
       playTimeout = [];
     },
   },

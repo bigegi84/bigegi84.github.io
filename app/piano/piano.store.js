@@ -6,6 +6,9 @@ const pianoStore = mobx.observable({
     },
     pianoBlack: { backgroundColor: "#116A7B", textColor: "white" },
   },
+  info: {
+    pressed: [],
+  },
   delayMs: 0,
   depressed: {},
   sustaining: true,

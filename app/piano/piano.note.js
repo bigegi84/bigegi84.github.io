@@ -32,16 +32,18 @@ const pianoNote = {
       if (note != null && note != "") {
         pianoState.tone.triggerAttack([note]);
         pianoNote.action.animate(note, true);
+        pianoStore.info.pressed.push(note);
       }
     },
     mouseUp: (note) => {
-      if (pianoStore.sustaining)
-        pianoState.tone.triggerRelease(
-          [note],
-          Tone.now() + pianoStore.sustainMs / 1000
-        );
-      if (!pianoStore.sustaining) pianoState.tone.triggerRelease([note]);
+      pianoState.tone.triggerRelease(
+        [note],
+        pianoStore.sustaining
+          ? Tone.now() + pianoStore.sustainMs / 1000
+          : Tone.now()
+      );
       pianoNote.action.animate(note, false);
+      pianoStore.info.pressed.pop(note);
     },
     noteList: pianoState.note.map((it, i) => {
       if (it.search("b") == -1) {
@@ -89,6 +91,13 @@ const pianoNote = {
           <div className="piano">
             <div className="piano-container">
               <span className="piano-brand">bigegi84</span>
+              <mobxReact.Observer>
+                {() => (
+                  <span className="piano-brand">
+                    {pianoStore.info.pressed.join(" ")}
+                  </span>
+                )}
+              </mobxReact.Observer>
               <div className="piano-keys">{pianoNote.action.noteList}</div>
             </div>
           </div>

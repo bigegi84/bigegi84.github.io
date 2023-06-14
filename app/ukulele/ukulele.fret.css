@@ -1,6 +1,6 @@
 .ukulele-fret {
+  -webkit-user-select: none;
   color: white;
-  /* border-radius: 2px; */
   line-height: 1;
   font-weight: bold;
   font-size: small;
@@ -10,7 +10,6 @@
   cursor: pointer;
   width: 50px;
   height: 24px;
-  /* background-color: burlywood; */
   background-color: #83764f;
   z-index: 1;
   display: flex;

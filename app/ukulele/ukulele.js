@@ -6,6 +6,7 @@ const ukulele = {
           <h1 style={bigegi84theme.style}>bigegi84 - Ukulele</h1>
           <ukuleleInfo.view />
           <ukuleleFret.view />
+          <ukuleleChord.view />
         </div>
         <bigegi84footer.view />
       </div>

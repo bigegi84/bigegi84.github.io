@@ -42,6 +42,11 @@
           component={() => app.action.withFooter(ukulele.view)}
         />
         <Route
+          path="/guitar"
+          exact
+          component={() => app.action.withFooter(guitar.view)}
+        />
+        <Route
           path="/drum"
           exact
           component={() => app.action.withFooter(drum.view)}

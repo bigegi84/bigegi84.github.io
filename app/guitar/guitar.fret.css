@@ -1,0 +1,22 @@
+.ukulele-fret {
+  -webkit-user-select: none;
+  color: white;
+  line-height: 1;
+  font-weight: bold;
+  font-size: small;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  width: 50px;
+  height: 24px;
+  background-color: #83764f;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ukulele-fret-line {
+  display: flex;
+  flex-direction: row;
+}

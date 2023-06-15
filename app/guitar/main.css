@@ -1,0 +1,67 @@
+.chord:hover {
+  box-shadow: none;
+  color: yellow !important;
+}
+
+.chord {
+  /* pointer-events: none; */
+  border-radius: 0px;
+  text-transform: none;
+  padding: 0;
+  letter-spacing: normal;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  width: 50px;
+  height: 35px;
+  background-color: #a0d8b3;
+  z-index: 1;
+  line-height: 1.25;
+  text-align: center;
+  font-size: x-small;
+  font-weight: bold;
+  z-index: 1;
+}
+.chord-mol {
+  color: white !important;
+  background-color: teal;
+}
+.chord-container {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  margin-bottom: 2%;
+}
+.chord-line {
+  display: flex;
+  flex-direction: column;
+}
+.config-container {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.fret {
+  color: white;
+  /* border-radius: 2px; */
+  line-height: 1;
+  font-weight: bold;
+  font-size: small;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  width: 50px;
+  height: 24px;
+  /* background-color: burlywood; */
+  background-color: #83764f;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fret-line {
+  display: flex;
+  flex-direction: row;
+}

@@ -34,62 +34,55 @@ const drumNote = {
       }
     },
     mouse: {
-      down: ([code]) => {
-        drumNote.action.soundPlay([code]);
-        drumNote.action.animate([code], true);
+      down: ([x, y]) => {
+        drumNote.action.soundPlay([[x, y]]);
+        drumNote.action.animate([[x, y]], true);
       },
-      up: ([code]) => {
-        drumNote.action.animate([code], false);
+      up: ([x, y]) => {
+        drumNote.action.animate([[x, y]], false);
       },
     },
     soundPlay: (code) => {
-      const promiseList = code.map(
-        (it) =>
-          new Promise(() => {
-            $("#drum-sound-" + it)
+      Promise.all(
+        code.map(([x, y]) => {
+          const [key, , child] = drumState.note[x];
+          const [cKey, ,] = child[y];
+          return new Promise(() => {
+            $("#drum-sound-" + key + "-" + cKey)
               .clone()[0]
               .play();
-          })
+          });
+        })
       );
-      Promise.all(promiseList);
     },
   },
-  noteList: () => {
-    return drumState.note.map(([key, name, child], i) => (
-      <div key={i}>
-        {child.map(([cKey, cName, cUrl], cI) => (
-          <div
-            key={i}
-            id={"drum-note-" + key + "-" + cKey}
-            className="drum-note"
-            onMouseDown={() => drumNote.action.mouse.down([code])}
-            onMouseOut={() => drumNote.action.mouse.up([code])}
-            onMouseUp={() => drumNote.action.mouse.up([code])}
+  noteList: () =>
+    drumState.note.map(([key, name, child], i) => (
+      <div key={i} className="column-a">
+        <div className="row-a">
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
           >
-            {title}
-            <br />"{code}"
-          </div>
-        ))}
-      </div>
-    ));
-
-    const list = note.map(([code, title], i) => {
-      return (
-        <div
-          key={i}
-          id={"drum-note-" + code}
-          className="drum-note"
-          onMouseDown={() => drumNote.action.mouse.down([code])}
-          onMouseOut={() => drumNote.action.mouse.up([code])}
-          onMouseUp={() => drumNote.action.mouse.up([code])}
-        >
-          {title}
-          <br />"{code}"
+            {name}
+          </strong>
         </div>
-      );
-    });
-    return <div className="row-a">{list}</div>;
-  },
+        <div className="row-a">
+          {child.map(([cKey, cName], cI) => (
+            <div
+              key={cI}
+              id={"drum-note-" + key + "-" + cKey}
+              className="drum-note"
+              onMouseDown={() => drumNote.action.mouse.down([i, cI])}
+              onMouseOut={() => drumNote.action.mouse.up([i, cI])}
+              onMouseUp={() => drumNote.action.mouse.up([i, cI])}
+            >
+              {cName}
+              <br />"{cKey}"
+            </div>
+          ))}
+        </div>
+      </div>
+    )),
   view: () => {
     const [show, setShow] = React.useState(false);
     return (

@@ -1,9 +1,9 @@
 const drumAudio = {
   view: () => (
     <div id="audio">
-      {drumState.note.map(([key, name, child], i) => (
+      {drumState.note.map(([key, , child], i) => (
         <div key={i}>
-          {child.map(([cKey, cName, cUrl], cI) => (
+          {child.map(([cKey, , cUrl], cI) => (
             <audio
               key={cI}
               id={"drum-sound-" + key + "-" + cKey}

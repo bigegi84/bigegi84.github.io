@@ -65,6 +65,8 @@ const drumState = {
           "Hihat Closed",
           "../../../asset/sound/drum/trap/_dre-s-closed-hi-hat-5.mp3",
         ],
+        ["tk", "Kick", "../../../asset/sound/drum/trap/_Trap_Kick.mp3"],
+        ["ts", "Snare", "../../../asset/sound/drum/trap/_Waka_Snare_1_4.mp3"],
       ],
     ],
   ],

@@ -21,7 +21,7 @@ const drumNote = {
     soundPlay: ([code]) => {
       const promiseList = code.split(",").map((it) => {
         return new Promise(() => {
-          $("#sound-" + it)
+          $("#drum-sound-" + it)
             .clone()[0]
             .play();
         });
@@ -35,8 +35,8 @@ const drumNote = {
       return (
         <div
           key={i}
-          id={"note-" + code}
-          className="note"
+          id={"drum-note-" + code}
+          className="drum-note"
           onMouseDown={() => drumNote.action.mouseDown([code])}
         >
           {title}

@@ -1,0 +1,18 @@
+audio {
+  display: none;
+}
+
+.drum-line {
+  display: flex;
+}
+.drum-note {
+  -webkit-user-select: none;
+  text-align: center;
+  width: 65px;
+  height: 65px;
+  font-weight: bold;
+  font-size: small;
+  border: 1px solid black;
+  background-color: #526d82;
+  color: white;
+}

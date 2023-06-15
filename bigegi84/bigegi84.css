@@ -1,5 +1,6 @@
 @import url(../app/piano/piano.css);
 @import url(../app/ukulele/ukulele.css);
+@import url(../app/drum/drum/drum.css);
 
 input[type="checkbox"]:checked + .checkbox-white::before {
   border-color: white;

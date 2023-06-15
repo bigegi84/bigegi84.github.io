@@ -2,52 +2,52 @@ const drumAudio = {
   view: () => (
     <div id="audio">
       <audio
-        id="sound-b"
+        id="drum-sound-b"
         src="../../../asset/sound/drum/bass-5a.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-s"
+        id="drum-sound-s"
         src="../../../asset/sound/drum/snare-5a.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-hc"
+        id="drum-sound-hc"
         src="../../../asset/sound/drum/hihat-closed-b1.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-ho"
+        id="drum-sound-ho"
         src="../../../asset/sound/drum/hihat-open-b1.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-c"
+        id="drum-sound-c"
         src="../../../asset/sound/drum/crash.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-rc"
+        id="drum-sound-rc"
         src="../../../asset/sound/drum/ride-crash.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-st"
+        id="drum-sound-st"
         src="../../../asset/sound/drum/stick.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-ts"
+        id="drum-sound-ts"
         src="../../../asset/sound/drum/tomtom-small-5a.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-tm"
+        id="drum-sound-tm"
         src="../../../asset/sound/drum/tomtom-medium-5a.ogg"
         preload="auto"
       ></audio>
       <audio
-        id="sound-tf"
+        id="drum-sound-tf"
         src="../../../asset/sound/drum/tomtom-floor-5a.ogg"
         preload="auto"
       ></audio>

@@ -41,10 +41,17 @@ const drumSheet = {
       text.split(" ").forEach((it) => {
         const [note, duration] = it.split("-");
         const timeoutA = setTimeout(() => {
-          if (note != "break") drumNote.action.soundPlay([note]);
+          if (note != "break") {
+            drumNote.action.soundPlay(note.split(","));
+            drumNote.action.animate(note.split(","), true);
+          }
         }, sec * ms);
+        const timeoutB = setTimeout(() => {
+          if (note != "break") drumNote.action.animate(note.split(","), false);
+        }, (sec + 0.1) * ms);
         sec += parseFloat(duration);
         playTimeout.push(timeoutA);
+        playTimeout.push(timeoutB);
       });
     },
     stop: () => {

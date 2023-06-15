@@ -37,14 +37,35 @@ const drumState = {
     },
   },
   note: [
-    ["b", "Bass"],
-    ["s", "Snare"],
-    ["hc", "Hihat Closed"],
-    ["ho", "Hihat Open"],
-    ["c", "Crash"],
-    ["rc", "Ride Crash"],
-    ["ts", "Tomtom Small"],
-    ["tm", "Tomtom Medium"],
-    ["tf", "Tomtom Floor"],
+    [
+      "drum",
+      "Drum",
+      [
+        ["b", "Bass", "../../../asset/sound/drum/bass-5a.ogg"],
+        ["s", "Snare", "../../../asset/sound/drum/snare-5a.ogg"],
+        ["hc", "Hihat Closed", "../../../asset/sound/drum/hihat-closed-b1.ogg"],
+        ["ho", "Hihat Open", "../../../asset/sound/drum/hihat-open-b1.ogg"],
+        ["c", "Crash", "../../../asset/sound/drum/crash.ogg"],
+        ["rc", "Ride Crash", "../../../asset/sound/drum/ride-crash.ogg"],
+        ["ts", "Tomtom Small", "../../../asset/sound/drum/tomtom-small-5a.ogg"],
+        [
+          "tm",
+          "Tomtom Medium",
+          "../../../asset/sound/drum/tomtom-medium-5a.ogg",
+        ],
+        ["tf", "Tomtom Floor", "../../../asset/sound/drum/tomtom-floor-5a.ogg"],
+      ],
+    ],
+    [
+      "trap",
+      "Trap",
+      [
+        [
+          "thc",
+          "Hihat Closed",
+          "../../../asset/sound/drum/trap/_dre-s-closed-hi-hat-5.mp3",
+        ],
+      ],
+    ],
   ],
 };

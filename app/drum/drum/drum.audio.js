@@ -1,54 +1,21 @@
 const drumAudio = {
   view: () => (
     <div id="audio">
-      <audio
-        id="drum-sound-b"
-        src="../../../asset/sound/drum/bass-5a.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-s"
-        src="../../../asset/sound/drum/snare-5a.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-hc"
-        src="../../../asset/sound/drum/hihat-closed-b1.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-ho"
-        src="../../../asset/sound/drum/hihat-open-b1.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-c"
-        src="../../../asset/sound/drum/crash.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-rc"
-        src="../../../asset/sound/drum/ride-crash.ogg"
-        preload="auto"
-      ></audio>
+      {drumState.note.map(([key, name, child], i) => (
+        <div key={i}>
+          {child.map(([cKey, cName, cUrl], cI) => (
+            <audio
+              key={cI}
+              id={"drum-sound-" + key + "-" + cKey}
+              src={cUrl}
+              preload="auto"
+            />
+          ))}
+        </div>
+      ))}
       <audio
         id="drum-sound-st"
         src="../../../asset/sound/drum/stick.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-ts"
-        src="../../../asset/sound/drum/tomtom-small-5a.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-tm"
-        src="../../../asset/sound/drum/tomtom-medium-5a.ogg"
-        preload="auto"
-      ></audio>
-      <audio
-        id="drum-sound-tf"
-        src="../../../asset/sound/drum/tomtom-floor-5a.ogg"
         preload="auto"
       ></audio>
     </div>

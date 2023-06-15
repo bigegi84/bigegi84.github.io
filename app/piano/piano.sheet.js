@@ -1,7 +1,7 @@
 const searchChord = (chRaw) => {
   const ch = chRaw.replace("#", "").replace("/", "Over");
   const chLine = ch.charAt(1) == "b" ? ch.substring(0, 2) : ch.charAt(0);
-  return "chord-" + chLine + "-" + ch;
+  return "piano-chord-" + chLine + "-" + ch;
 };
 let playTimeout = [];
 const pianoSheet = {

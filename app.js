@@ -25,11 +25,7 @@
       </li>
     </ul> */}
 
-        <Route
-          path="/"
-          exact
-          component={() => app.action.withFooter(bigegi84.view)}
-        />
+        <Route path="/" exact component={bigegi84.view} />
         <Route
           path="/piano"
           exact

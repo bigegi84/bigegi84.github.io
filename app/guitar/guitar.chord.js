@@ -30,14 +30,25 @@ const guitarChord = {
     },
     key: {
       down: (e) => {
+        if (e.key == " ") e.preventDefault();
         const [mode, type] = guitarStore.mode;
-        const [x, y] = guitarState.keymap.Chord[type][e.key];
-        guitarChord.action.sound.play([x, y]);
+        const code = guitarState.keymap.Chord[type][e.key];
+        if (code == "lastChord") {
+          guitarChord.action.sound.play(guitarState.lastChord);
+        } else {
+          const [x, y] = guitarState.keymap.Chord[type][e.key];
+          guitarChord.action.sound.play([x, y]);
+        }
       },
       up: (e) => {
         const [mode, type] = guitarStore.mode;
-        const [x, y] = guitarState.keymap.Chord[type][e.key];
-        guitarChord.action.sound.stop([x, y]);
+        const code = guitarState.keymap.Chord[type][e.key];
+        if (code == "lastChord") {
+          guitarChord.action.sound.stop(guitarState.lastChord);
+        } else {
+          const [x, y] = guitarState.keymap.Chord[type][e.key];
+          guitarChord.action.sound.stop([x, y]);
+        }
       },
     },
     mouse: {
@@ -89,6 +100,7 @@ const guitarChord = {
     },
     sound: {
       play: ([x, y]) => {
+        guitarState.lastChord = [x, y];
         const chord = guitarState.chord[x][y];
         const formula = [];
         for (var i = 0; i < chord.length; i++) {

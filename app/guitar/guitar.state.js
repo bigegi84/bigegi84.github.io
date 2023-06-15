@@ -1,4 +1,5 @@
 const guitarState = {
+  lastChord: null,
   chord: {
     C: {
       CPower: "x35xxx",
@@ -11,6 +12,7 @@ const guitarState = {
       C9: "0201",
     },
     Db: {
+      DbPower: "x46xxx",
       Db: "1114",
       Dbm: "1101",
       Dbmaj7: "1113",
@@ -39,7 +41,7 @@ const guitarState = {
       Eb9: "0111",
     },
     E: {
-      EPower: "x79xxx",
+      EPower: "02xxxx",
       E: "4442",
       Em: "0432",
       Emaj7: "1302",
@@ -58,6 +60,7 @@ const guitarState = {
       F9: "2333",
     },
     Gb: {
+      GbPower: "24xxxx",
       Gb: "3121",
       Gbm: "2120",
       Gbmaj7: "0111",
@@ -67,6 +70,7 @@ const guitarState = {
       Gb9: "1101",
     },
     G: {
+      GPower: "35xxxx",
       G: "0232",
       Gm: "0231",
       Gmaj7: "0222",
@@ -86,6 +90,7 @@ const guitarState = {
       Abm9: "3342",
     },
     A: {
+      APower: "57xxxx",
       A: "2100",
       Am: "2000",
       Amaj7: "1100",
@@ -209,6 +214,129 @@ const guitarState = {
   },
   keymap: {
     Chord: {
+      jp: {
+        " ": "lastChord",
+
+        1: ["C", "CPower"],
+        q: ["C", "Cm"],
+        a: ["C", "Cmaj7"],
+        z: ["C", "Cm7"],
+
+        "!": ["C", "C6"],
+        Q: ["C", "C7"],
+        A: ["C", "C9"],
+        // Z: ["C", "Cm7"],
+
+        2: ["Db", "DbPower"],
+        w: ["Db", "Dbm"],
+        s: ["Db", "Dbmaj7"],
+        x: ["Db", "Dbm7"],
+
+        "@": ["Db", "Db6"],
+        W: ["Db", "Db7"],
+        S: ["Db", "Db9"],
+        // X: ["Db", "Dbm7"],
+
+        3: ["D", "DPower"],
+        e: ["D", "Dm"],
+        d: ["D", "Dmaj7"],
+        c: ["D", "Dm7"],
+
+        "#": ["D", "D6"],
+        E: ["D", "D7"],
+        D: ["D", "D9"],
+        // C: ["D", "Dm7"],
+
+        4: ["Eb", "Eb"],
+        r: ["Eb", "Ebm"],
+        f: ["Eb", "Ebmaj7"],
+        v: ["Eb", "Ebm7"],
+
+        $: ["Eb", "Eb6"],
+        R: ["Eb", "Eb7"],
+        F: ["Eb", "Eb9"],
+        // V: ["Eb", "Ebm7"],
+
+        5: ["E", "EPower"],
+        t: ["E", "Em"],
+        g: ["E", "Emaj7"],
+        b: ["E", "Em7"],
+
+        "%": ["E", "E6"],
+        T: ["E", "E7"],
+        G: ["E", "E9"],
+        // B: ["E", "Em7"],
+
+        6: ["F", "F"],
+        y: ["F", "Fm"],
+        h: ["F", "Fmaj7"],
+        n: ["F", "Fm7"],
+
+        "^": ["F", "F6"],
+        Y: ["F", "F7"],
+        H: ["F", "F9"],
+        // N: ["F", "Fm7"],
+
+        7: ["Gb", "GbPower"],
+        u: ["Gb", "Gbm"],
+        j: ["Gb", "Gbmaj7"],
+        m: ["Gb", "Gbm7"],
+
+        "&": ["Gb", "Gb6"],
+        U: ["Gb", "Gb7"],
+        J: ["Gb", "Gb9"],
+        // M: ["Gb", "Gbm7"],
+
+        8: ["G", "GPower"],
+        i: ["G", "Gm"],
+        k: ["G", "Gmaj7"],
+        ",": ["G", "Gm7"],
+
+        "*": ["G", "G6"],
+        I: ["G", "G7"],
+        K: ["G", "G9"],
+        // "<": ["G", "Gm7"],
+
+        9: ["Ab", "Ab"],
+        o: ["Ab", "Abm"],
+        l: ["Ab", "Abmaj7"],
+        ".": ["Ab", "Abm7"],
+
+        "(": ["Ab", "Ab6"],
+        O: ["Ab", "Ab7"],
+        L: ["Ab", "Ab9"],
+        ">": ["Ab", "Abm9"],
+
+        0: ["A", "APower"],
+        p: ["A", "Am"],
+        ";": ["A", "Amaj7"],
+        "/": ["A", "Am7"],
+
+        ")": ["A", "A6"],
+        P: ["A", "A7"],
+        ":": ["A", "A9"],
+        // "?": ["A", "Am7"],
+
+        "-": ["Bb", "Bb"],
+        "[": ["Bb", "Bbm"],
+        "'": ["Bb", "Bbmaj7"],
+        ArrowLeft: ["Bb", "Bbm7"],
+
+        _: ["Bb", "Bb6"],
+        "{": ["Bb", "Bb7"],
+        '"': ["Bb", "Bb8"],
+        // ArrowLeft: ["Bb", "Bbm7"],
+
+        "^": ["B", "BPower"],
+        "]": ["B", "Bm"],
+        "\\": ["B", "Bmaj7"],
+        ArrowUp: ["B", "Bm7"],
+
+        "+": ["B", "B6"],
+        "}": ["B", "B7"],
+        "|": ["B", "B9"],
+        // ArrowUp: ["B", "Bm7"],
+      },
       us: {
         " ": "reverse",
 

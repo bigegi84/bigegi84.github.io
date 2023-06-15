@@ -1,7 +1,7 @@
 const guitarStore = mobx.observable({
   chord: { delay: { ms: 10 } },
-  mode: ["Chord", "us"],
-  sustain: { active: true, ms: 1500 },
+  mode: ["Chord", "jp"],
+  sustain: { active: true, ms: 1000 },
   theme: {
     fret: {
       backgroundColor: "#83764f",

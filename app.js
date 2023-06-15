@@ -3,7 +3,14 @@
   const Route = ReactRouterDOM.Route;
 
   const app = {
-    // view: () => <bigegi84.view />,
+    action: {
+      withFooter: (Children) => (
+        <div style={bigegi84theme.style}>
+          <Children />
+          <bigegi84footer.view />
+        </div>
+      ),
+    },
     view: () => (
       <ReactRouterDOM.HashRouter>
         {/* <ul>
@@ -18,10 +25,26 @@
       </li>
     </ul> */}
 
-        <Route path="/" exact component={bigegi84.view} />
-        <Route path="/piano" exact component={piano.view} />
-        <Route path="/pixel-art" exact component={pixelArt.view} />
-        <Route path="/ukulele" exact component={ukulele.view} />
+        <Route
+          path="/"
+          exact
+          component={() => app.action.withFooter(bigegi84.view)}
+        />
+        <Route
+          path="/piano"
+          exact
+          component={() => app.action.withFooter(piano.view)}
+        />
+        <Route
+          path="/pixel-art"
+          exact
+          component={() => app.action.withFooter(pixelArt.view)}
+        />
+        <Route
+          path="/ukulele"
+          exact
+          component={() => app.action.withFooter(ukulele.view)}
+        />
         {/* <Route path="/new" component={New} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/login" component={Login} />

@@ -1,24 +1,24 @@
 const pianoChord = {
   action: {
     animate: (id, press = true) => {
-      const x = id.replace("chord-", "").split("-")[0];
-      const y = id.replace("chord-", "").split("-")[1];
+      const x = id.replace("piano-chord-", "").split("-")[0];
+      const y = id.replace("piano-chord-", "").split("-")[1];
       if (press)
-        $("#chord-" + x + "-" + y).animate(
+        $("#piano-chord-" + x + "-" + y).animate(
           {
             backgroundColor: "#88FFAA",
           },
           0
         );
       if (!press) {
-        $("#chord-" + x + "-" + y).animate({
+        $("#piano-chord-" + x + "-" + y).animate({
           backgroundColor: x.search("b") == -1 ? "#C2DEDC" : "#116A7B",
         });
       }
     },
     animateClear: () => {
-      $(".chord").each((i, obj) => {
-        const [line, chord] = obj.id.replace("chord-", "").split("-");
+      $(".piano-chord").each((i, obj) => {
+        const [line, chord] = obj.id.replace("piano-chord-", "").split("-");
         $("#" + obj.id).animate({
           backgroundColor: line.search("b") == -1 ? "#C2DEDC" : "#116A7B",
         });
@@ -28,15 +28,17 @@ const pianoChord = {
       const chord = pianoState.chord;
       const view = [];
       let ix = 0;
-      for (var x in chord) {
+      for (const x in chord) {
         const list = [];
         let iy = 0;
-        for (var y in chord[x]) {
+        for (const y in chord[x]) {
           list.push(
             <div
               key={iy}
-              id={"chord-" + x + "-" + y}
-              className={"chord" + (x.search("b") != -1 ? " chord-mol" : "")}
+              id={"piano-chord-" + x + "-" + y}
+              className={
+                "piano-chord" + (x.search("b") != -1 ? " piano-chord-mol" : "")
+              }
               onMouseDown={(e) => pianoChord.action.mouseDown(e.target.id)}
               onMouseUp={(e) => pianoChord.action.mouseUp(e.target.id)}
             >
@@ -48,7 +50,7 @@ const pianoChord = {
           iy++;
         }
         view.push(
-          <div key={ix} id={"chord-line-" + x} className="chord-group">
+          <div key={ix} id={"piano-chord-line-" + x} className="piano-chord-group">
             {list}
           </div>
         );
@@ -57,8 +59,8 @@ const pianoChord = {
       return view;
     },
     formula: (id) => {
-      const x = id.replace("chord-", "").split("-")[0];
-      const y = id.replace("chord-", "").split("-")[1];
+      const x = id.replace("piano-chord-", "").split("-")[0];
+      const y = id.replace("piano-chord-", "").split("-")[1];
       let formula = [pianoState.chord[x][y]];
       if (
         pianoStore.playType.code == "twoBassAndChord" &&
@@ -119,15 +121,21 @@ const pianoChord = {
     return (
       <div className="column-a">
         <div className="row-a">
-          <strong style={{ alignSelf: "center" }}>
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
+          >
             {pianoLocalization.chord["id"]}
           </strong>
-          <div className="circle-a" onClick={() => setShow(!show)}>
+          <div
+            style={bigegi84theme.styleCircle}
+            className="circle-a"
+            onClick={() => setShow(!show)}
+          >
             <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
           </div>
         </div>
         {show ? (
-          <div id="chord" className="chord-container">
+          <div id="piano-chord" className="row-a">
             {pianoChord.action.chordList()}
           </div>
         ) : null}

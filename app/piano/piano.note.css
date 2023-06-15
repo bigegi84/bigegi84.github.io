@@ -1,0 +1,109 @@
+.piano {
+  padding: 5px;
+  margin: 0 auto;
+  width: 733px;
+}
+
+.piano-brand {
+  color: white;
+  font-style: italic;
+  font-weight: bold;
+  font-size: smaller;
+  margin-left: 12px;
+}
+
+.piano-container,
+.piano-javascript {
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.piano-container {
+  background: #116a7b;
+  /* text-align: center; */
+  border-radius: 4px;
+  padding: 5px 10px 10px 10px;
+}
+
+.piano-keys {
+  width: 100%;
+  word-spacing: 0;
+  letter-spacing: 0;
+  font-size: 0;
+}
+
+.piano-pedal {
+  margin: 10px;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.piano-sustain {
+  color: black;
+}
+
+.piano-white,
+.piano-black {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  direction: ltr;
+  margin: 0;
+  padding: 0;
+}
+
+.piano-note-info-white {
+  user-select: none;
+  -webkit-user-select: none;
+  position: absolute;
+  font-size: small;
+  font-weight: bold;
+  /* color: black; */
+  color: white;
+  margin: 0;
+  bottom: 0%;
+  left: 25%;
+}
+
+.piano-note-info-black {
+  -webkit-user-select: none;
+  font-size: xx-small;
+  font-weight: bold;
+  color: white;
+  margin: 2px;
+  font-size: xx-small;
+  font-weight: bold;
+  color: white;
+}
+
+.piano-white,
+.piano-black-raised {
+  border-radius: 2px;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+}
+
+.piano-white {
+  width: 33px;
+  height: 100px;
+  /* background-color: white; */
+  background-color: #cdc2ae;
+  z-index: 1;
+}
+
+.piano-black {
+  width: 0px;
+  height: 100px;
+  z-index: 2;
+}
+
+.piano-black-raised {
+  width: 22px;
+  height: 70px;
+  position: relative;
+  left: -10px;
+  /* background-color: black; */
+  background-color: #116a7b;
+}

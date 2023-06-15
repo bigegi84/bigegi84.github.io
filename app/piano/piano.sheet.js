@@ -151,8 +151,16 @@ const pianoSheet = {
     return (
       <div className="column-a">
         <div className="row-a">
-          <strong style={{ alignSelf: "center" }}>Lembar</strong>
-          <div className="circle-a" onClick={() => setSheetShow(!sheetShow)}>
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
+          >
+            Lembar
+          </strong>
+          <div
+            style={bigegi84theme.styleCircle}
+            className="circle-a"
+            onClick={() => setSheetShow(!sheetShow)}
+          >
             <i
               className={
                 "fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")
@@ -179,8 +187,16 @@ const pianoSheet = {
           </div>
         ) : null}
         <div className="row-a">
-          <strong style={{ alignSelf: "center" }}>Menu</strong>
-          <div className="circle-a" onClick={() => setMenuShow(!menuShow)}>
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
+          >
+            Menu
+          </strong>
+          <div
+            style={bigegi84theme.styleCircle}
+            className="circle-a"
+            onClick={() => setMenuShow(!menuShow)}
+          >
             <i
               className={"fas" + (menuShow ? " fa-angle-up" : " fa-angle-down")}
             />

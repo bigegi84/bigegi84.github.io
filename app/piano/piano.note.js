@@ -2,14 +2,14 @@ const pianoNote = {
   action: {
     animate: (note, press = true) => {
       if (press)
-        $("#note-" + note).animate(
+        $("#piano-note-" + note).animate(
           {
             backgroundColor: "#88FFAA",
           },
           0
         );
       if (!press) {
-        $("#note-" + note).animate({
+        $("#piano-note-" + note).animate({
           backgroundColor:
             note.search("b") == -1
               ? pianoStore.theme.pianoWhite.backgroundColor
@@ -18,8 +18,8 @@ const pianoNote = {
       }
     },
     animateClear: () => {
-      $(".note").each((i, obj) => {
-        const note = obj.id.replace("note-", "");
+      $(".piano-note").each((i, obj) => {
+        const note = obj.id.replace("piano-note-", "");
         $("#" + obj.id).animate({
           backgroundColor:
             note.search("b") == -1
@@ -50,24 +50,24 @@ const pianoNote = {
         return (
           <div
             key={i}
-            id={"note-" + it}
+            id={"piano-note-" + it}
             className={"note piano-white piano-" + it}
             onMouseDown={() => pianoNote.action.mouseDown(it)}
             onMouseUp={() => pianoNote.action.mouseUp(it)}
           >
-            <p className="note-info-white">{it}</p>
+            <p className="piano-note-info-white">{it}</p>
           </div>
         );
       } else {
         return (
           <div key={i} className="piano-black">
             <div
-              id={"note-" + it}
+              id={"piano-note-" + it}
               className={"note piano-black-raised piano-" + it}
               onMouseDown={() => pianoNote.action.mouseDown(it)}
               onMouseUp={() => pianoNote.action.mouseUp(it)}
             >
-              <p className="note-info-black">{it}</p>
+              <p className="piano-note-info-black">{it}</p>
             </div>
           </div>
         );
@@ -82,8 +82,16 @@ const pianoNote = {
     return (
       <div className="column-a">
         <div className="row-a">
-          <strong style={{ alignSelf: "center" }}>Piano</strong>
-          <div className="circle-a" onClick={() => setShow(!show)}>
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
+          >
+            Piano
+          </strong>
+          <div
+            style={bigegi84theme.styleCircle}
+            className="circle-a"
+            onClick={() => setShow(!show)}
+          >
             <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
           </div>
         </div>

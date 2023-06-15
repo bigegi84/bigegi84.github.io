@@ -17,19 +17,17 @@ const ukulele = {
   view: () => {
     return (
       <div
-        style={bigegi84theme.style}
+        style={{ padding: "3em" }}
+        className="column-a"
         tabIndex={0}
         onKeyDown={(e) => ukulele.action.key.down(e)}
         onKeyUp={(e) => ukulele.action.key.up(e)}
       >
-        <div style={{ padding: "3em" }} className="column-a">
-          <h1 style={bigegi84theme.style}>bigegi84 - Ukulele</h1>
-          <ukuleleInfo.view />
-          <ukuleleConfig.view />
-          <ukuleleFret.view />
-          <ukuleleChord.view />
-        </div>
-        <bigegi84footer.view />
+        <h1 style={bigegi84theme.style}>bigegi84 - Ukulele</h1>
+        <ukuleleInfo.view />
+        <ukuleleConfig.view />
+        <ukuleleFret.view />
+        <ukuleleChord.view />
       </div>
     );
   },

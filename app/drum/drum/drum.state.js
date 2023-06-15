@@ -69,5 +69,21 @@ const drumState = {
         ["ts", "Snare", "../../../asset/sound/drum/trap/_Waka_Snare_1_4.mp3"],
       ],
     ],
+    [
+      "kocak",
+      "Kocak",
+      [
+        [
+          "kkn",
+          "Kamu Nanya",
+          "../../../asset/sound/drum/kocak/sound_effect_kamu_nanya.mp3",
+        ],
+        [
+          "khqe",
+          "HQ Explosion",
+          "../../../asset/sound/drum/kocak/hq-explosion.mp3",
+        ],
+      ],
+    ],
   ],
 };

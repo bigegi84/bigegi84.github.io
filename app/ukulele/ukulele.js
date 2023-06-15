@@ -10,7 +10,7 @@ const ukulele = {
       up: (e) => {
         ukuleleState.depressed[e.key] = false;
         if (ukuleleStore.mode[0] == "Chord") ukuleleChord.action.key.up(e);
-        if (ukuleleStore.mode[0] == "Solo") ukuleleFret.action.key.down(e);
+        if (ukuleleStore.mode[0] == "Solo") ukuleleFret.action.key.up(e);
       },
     },
   },

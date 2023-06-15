@@ -24,13 +24,13 @@ const ukuleleFret = {
     },
     key: {
       down: (e) => {
-        const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        const [mode, type] = ukuleleStore.mode;
+        const [x, y] = ukuleleState.keymap.Solo[type][e.key];
         ukuleleFret.action.sound.play([x, y]);
       },
       up: (e) => {
-        const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        const [mode, type] = ukuleleStore.mode;
+        const [x, y] = ukuleleState.keymap.Solo[type][e.key];
         ukuleleFret.action.sound.stop([x, y]);
       },
     },

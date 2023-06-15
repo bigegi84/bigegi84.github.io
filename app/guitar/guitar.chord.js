@@ -2,14 +2,14 @@ const guitarChord = {
   action: {
     animate: ([x, y], press = true) => {
       if (press)
-        $("#ukulele-chord-" + x + "-" + y).animate(
+        $("#guitar-chord-" + x + "-" + y).animate(
           {
             backgroundColor: "#88FFAA",
           },
           0
         );
       if (!press) {
-        $("#ukulele-chord-" + x + "-" + y).animate({
+        $("#guitar-chord-" + x + "-" + y).animate({
           backgroundColor:
             x.search("b") == -1
               ? guitarStore.theme.chord.backgroundColor
@@ -43,12 +43,12 @@ const guitarChord = {
     mouse: {
       down: (e) => {
         const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-chord-", "").split("-");
+        const [x, y] = id.replace("guitar-chord-", "").split("-");
         guitarChord.action.sound.play([x, y]);
       },
       up: (e) => {
         const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-chord-", "").split("-");
+        const [x, y] = id.replace("guitar-chord-", "").split("-");
         guitarChord.action.sound.stop([x, y]);
       },
     },
@@ -60,9 +60,9 @@ const guitarChord = {
           yHtml.push(
             <div
               key={y}
-              id={"ukulele-chord-" + x + "-" + y}
+              id={"guitar-chord-" + x + "-" + y}
               className={
-                y.search("b") == -1 ? "ukulele-chord" : "ukulele-chord-mol"
+                y.search("b") == -1 ? "guitar-chord" : "guitar-chord-mol"
               }
               onMouseDown={(e) => guitarChord.action.mouse.down(e)}
               onMouseOut={(e) => guitarChord.action.mouse.up(e)}
@@ -80,7 +80,7 @@ const guitarChord = {
           );
         }
         view.push(
-          <div key={x} id={"ukulele-chord-line-" + x} className="column-a">
+          <div key={x} id={"guitar-chord-line-" + x} className="column-a">
             {yHtml}
           </div>
         );

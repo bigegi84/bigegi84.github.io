@@ -2,11 +2,11 @@ const guitarFret = {
   action: {
     animate: ([x, y], press = true) => {
       if (press)
-        $("#ukulele-fret-" + x + "-" + y).animate({
+        $("#guitar-fret-" + x + "-" + y).animate({
           backgroundColor: "#88FFAA",
         });
       if (!press) {
-        $("#ukulele-fret-" + x + "-" + y).animate({
+        $("#guitar-fret-" + x + "-" + y).animate({
           backgroundColor: guitarStore.theme.fret.backgroundColor,
         });
       }
@@ -37,12 +37,12 @@ const guitarFret = {
     mouse: {
       down: (e) => {
         const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        const [x, y] = id.replace("guitar-fret-", "").split("-");
         guitarFret.action.sound.play([x, y]);
       },
       up: (e) => {
         const id = e.currentTarget.id;
-        const [x, y] = id.replace("ukulele-fret-", "").split("-");
+        const [x, y] = id.replace("guitar-fret-", "").split("-");
         guitarFret.action.sound.stop([x, y]);
       },
     },
@@ -55,8 +55,8 @@ const guitarFret = {
             yHtml.push(
               <div
                 key={y}
-                id={"ukulele-fret-" + x + "-" + y}
-                className="ukulele-fret"
+                id={"guitar-fret-" + x + "-" + y}
+                className="guitar-fret"
                 onMouseDown={(e) => guitarFret.action.mouse.down(e)}
                 onMouseOut={(e) => guitarFret.action.mouse.up(e)}
                 onMouseUp={(e) => guitarFret.action.mouse.up(e)}
@@ -73,11 +73,7 @@ const guitarFret = {
             );
           }
           fretView.push(
-            <div
-              key={x}
-              id="ukulele-fret-' + x + '"
-              className="ukulele-fret-line"
-            >
+            <div key={x} id={"guitar-fret-" + x} className="guitar-fret-line">
               {yHtml}
             </div>
           );

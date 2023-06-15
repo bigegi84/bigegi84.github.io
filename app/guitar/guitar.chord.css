@@ -1,4 +1,4 @@
-.ukulele-chord {
+.guitar-chord {
   border-radius: 0px;
   color: black;
   text-transform: none;
@@ -15,7 +15,7 @@
   -webkit-user-select: none;
   text-align: center;
 }
-.ukulele-chord-mol {
+.guitar-chord-mol {
   cursor: pointer;
   text-align: center;
   -webkit-user-select: none;
@@ -23,12 +23,12 @@
   background-color: teal;
   line-height: 1.25;
 }
-.ukulele-chord-container {
+.guitar-chord-container {
   display: flex;
   flex-direction: row;
   margin-bottom: 2%;
 }
-.ukulele-chord-line {
+.guitar-chord-line {
   display: flex;
   flex-direction: column;
 }

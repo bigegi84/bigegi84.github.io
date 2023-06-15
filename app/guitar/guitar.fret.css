@@ -1,4 +1,4 @@
-.ukulele-fret {
+.guitar-fret {
   -webkit-user-select: none;
   color: white;
   line-height: 1;
@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
 }
-.ukulele-fret-line {
+.guitar-fret-line {
   display: flex;
   flex-direction: row;
 }

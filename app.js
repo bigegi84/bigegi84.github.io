@@ -45,6 +45,11 @@
           exact
           component={() => app.action.withFooter(ukulele.view)}
         />
+        <Route
+          path="/drum"
+          exact
+          component={() => app.action.withFooter(drum.view)}
+        />
         {/* <Route path="/new" component={New} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/login" component={Login} />

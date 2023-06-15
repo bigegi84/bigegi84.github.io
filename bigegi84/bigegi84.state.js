@@ -23,7 +23,7 @@ const bigegi84state = {
     {
       name: "Drum",
       description: "Aplikasi web untuk memainkan drum.",
-      link: "/app/drum",
+      link: "#/drum",
     },
     {
       name: "Klon",

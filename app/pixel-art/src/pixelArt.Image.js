@@ -7,13 +7,33 @@ const pixelArtImage = {
     textShow: false,
     image: [
       [
-        "Ninja",
+        "Piramid Gold",
+        [
+          ["", "", "85", "", ""],
+          ["", "85", "85", "85", ""],
+          ["85", "85", "74", "85", "85"],
+          ["85", "74", "74", "74", "85"],
+          ["85", "85", "85", "85", "85"],
+        ],
+      ],
+      [
+        "Ninja A",
         [
           ["8", "8", "8", "8", "8"],
           ["9", "10", "9", "10", "9"],
           ["11", "8", "8", "8", "11"],
           ["8", "8", "8", "8", "8"],
-          ["1", "11", "1", "11", "1"],
+          ["", "11", "", "11", ""],
+        ],
+      ],
+      [
+        "Ninja B",
+        [
+          ["25", "25", "25", "25", "25"],
+          ["25", "21", "25", "21", "25"],
+          ["20", "25", "25", "25", "20"],
+          ["25", "25", "25", "25", "25"],
+          ["", "20", "", "20"],
         ],
       ],
       [
@@ -39,71 +59,71 @@ const pixelArtImage = {
       [
         "bigegi84-b",
         [
-          [6, 7, 2, 3, 1],
-          [14, 1, 1, 1, 9],
-          [10, 11, 12, 13, 1],
-          [7, 1, 1, 1, 19],
-          [20, 21, 22, 23, 1],
+          ["6", "7", "2", "3", ""],
+          ["14", "", "", "", "9"],
+          ["10", "11", "12", "13", ""],
+          ["7", "", "", "", "19"],
+          ["20", "21", "22", "23", ""],
         ],
       ],
       [
         "bigegi84-8",
         [
-          [1, 7, 2, 3, 1],
-          [14, 1, 1, 1, 9],
-          [1, 11, 12, 13, 1],
-          [7, 1, 1, 1, 19],
-          [1, 21, 22, 23, 1],
+          ["", "7", "2", "3", ""],
+          ["14", "", "", "", "9"],
+          ["", "11", "12", "13", ""],
+          ["7", "", "", "", "19"],
+          ["", "21", "22", "23", ""],
         ],
       ],
       [
         "bigegi84-4",
         [
-          [6, 1, 1, 1, 7],
-          [14, 1, 1, 1, 9],
-          [1, 11, 12, 13, 21],
-          [1, 1, 1, 1, 19],
-          [1, 1, 1, 1, 23],
+          ["6", "", "", "", "7"],
+          ["14", "", "", "", "9"],
+          ["", "11", "12", "13", "21"],
+          ["", "", "", "", "19"],
+          ["", "", "", "", "23"],
         ],
       ],
       [
         "Pikachu",
         [
-          [21, 1, 1, 1, 21],
-          [25, 21, 25, 21, 25],
-          [1, 20, 25, 20, 1],
-          [25, 25, 25, 25, 25],
-          [1, 25, 1, 25, 1],
+          ["21", "", "", "", "21"],
+          ["25", "21", "25", "21", "25"],
+          ["", "20", "25", "20", ""],
+          ["25", "25", "25", "25", "25"],
+          ["", "25", "", "25", ""],
         ],
       ],
       [
         "Kucing Oren",
         [
-          [20, 1, 20, 1, 40],
-          [19, 20, 19, 1, 20],
-          [20, 20, 20, 20, 20],
-          [20, 20, 20, 20, 20],
-          [20, 1, 20, 1, 20],
+          ["20", "", "20", "", "40"],
+          ["19", "20", "19", "", "20"],
+          ["20", "20", "20", "20", "20"],
+          ["20", "20", "20", "20", "20"],
+          ["20", "", "20", "", "20"],
         ],
       ],
       [
         "Pedang",
         [
-          [1, 1, 1, 40, 40],
-          [1, 1, 40, 40, 40],
-          [14, 14, 40, 40, 1],
-          [1, 47, 14, 1, 1],
-          [47, 1, 14, 1, 1],
+          ["", "", "", "40", "40"],
+          ["", "", "40", "40", "40"],
+          ["14", "14", "40", "40", ""],
+          ["", "47", "14", "", ""],
+          ["47", "", "14", "", ""],
         ],
       ],
       [
         "Kirby",
         [
-          ["1", "3", "3", "3", "1"],
+          ["", "3", "3", "3", ""],
           ["3", "6", "3", "6", "3"],
           ["3", "7", "3", "7", "3"],
-          ["1", "3", "3", "3", "1"],
-          ["5", "5", "1", "5", "5"],
+          ["", "3", "3", "3", ""],
+          ["5", "5", "", "5", "5"],
         ],
       ],
     ],
@@ -184,44 +204,7 @@ const pixelArtImage = {
                       pixelArtImage.action.toArray(e.target.value);
                   }}
                 />
-                <button
-                  onClick={() => {
-                    var svgData = document.getElementById("svg-" + i);
-                    var serializer = new XMLSerializer();
-                    var source = serializer.serializeToString(svgData);
-                    if (
-                      !source.match(
-                        /^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/
-                      )
-                    ) {
-                      source = source.replace(
-                        /^<svg/,
-                        '<svg xmlns="http://www.w3.org/2000/svg"'
-                      );
-                    }
-                    if (
-                      !source.match(
-                        /^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/
-                      )
-                    ) {
-                      source = source.replace(
-                        /^<svg/,
-                        '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
-                      );
-                    }
-                    source =
-                      '<?xml version="1.0" standalone="no"?>\r\n' + source;
-                    var url =
-                      "data:image/svg+xml;charset=utf-8," +
-                      encodeURIComponent(source);
-                    var downloadLink = document.createElement("a");
-                    downloadLink.href = url;
-                    downloadLink.download = it[0] + ".svg";
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-                  }}
-                >
+                <button onClick={() => pixelArtImage.action.export.png([i])}>
                   simpan
                 </button>
               </div>
@@ -229,6 +212,76 @@ const pixelArtImage = {
           </div>
         );
       });
+    },
+    export: {
+      svg: ([i]) => {
+        var svgData = document.getElementById("svg-" + i);
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(svgData);
+        if (
+          !source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)
+        ) {
+          source = source.replace(
+            /^<svg/,
+            '<svg xmlns="http://www.w3.org/2000/svg"'
+          );
+        }
+        if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
+          source = source.replace(
+            /^<svg/,
+            '<svg xmlns:xlink="http://www.w3.org/1999/xlink"'
+          );
+        }
+        source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+        var url =
+          "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
+        var downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = it[0] + ".svg";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      },
+      png: ([i]) => {
+        const img = new Image();
+        const serializer = new XMLSerializer();
+        const svgStr = serializer.serializeToString(
+          document.getElementById("svg-" + i)
+        );
+
+        img.src = "data:image/svg+xml;base64," + window.btoa(svgStr);
+
+        // You could also use the actual string without base64 encoding it:
+        //img.src = "data:image/svg+xml;utf8," + svgStr;
+        img.onload = () => {
+          var canvas = document.createElement("canvas");
+
+          var w = 400;
+          var h = 400;
+
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "black";
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, w / 5, w / 5, w - (h / 5) * 2, h - (h / 5) * 2);
+
+          var imgURL = canvas.toDataURL("image/png");
+
+          var dlLink = document.createElement("a");
+          dlLink.download = "image";
+          dlLink.href = imgURL;
+          dlLink.dataset.downloadurl = [
+            "image/png",
+            dlLink.download,
+            dlLink.href,
+          ].join(":");
+
+          document.body.appendChild(dlLink);
+          dlLink.click();
+          document.body.removeChild(dlLink);
+        };
+      },
     },
     toText: (arr) => arr.map((x) => x.join(" ")).join("\n"),
     toArray: (txt) => txt.split("\n").map((x) => x.split(" ")),

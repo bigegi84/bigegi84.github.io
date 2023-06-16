@@ -16,7 +16,11 @@ const drumNote = {
   },
   action: {
     animate: (note, press = true) => {
-      const map = note.map((e) => "#drum-note-" + e);
+      const map = note.map(([x, y]) => {
+        const [key, , child] = drumState.note[x];
+        const [cKey, ,] = child[y];
+        return `#drum-note-${key}-${cKey}`;
+      });
       if (press) {
         $(map.join(",")).animate(
           {

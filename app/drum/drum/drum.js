@@ -5,15 +5,27 @@ const drum = {
         if (drumState.depressed[e.key]) return;
         drumState.depressed[e.key] = true;
         const note = drumState.keymap[drumState.keymap.value][e.key];
-        if (note) {
-          drumNote.action.soundPlay([note]);
-          drumNote.action.animate([note], true);
+        let find = false;
+        drumState.note.forEach(([, , child], i) => {
+          child.forEach(([cKey, ,], cI) => {
+            if (cKey == note) find = [i, cI];
+          });
+        });
+        if (find) {
+          drumNote.action.soundPlay([find]);
+          drumNote.action.animate([find], true);
         }
       },
       up: (e) => {
         drumState.depressed[e.key] = false;
         const note = drumState.keymap[drumState.keymap.value][e.key];
-        if (note) drumNote.action.animate([note], false);
+        let find = false;
+        drumState.note.forEach(([, , child], i) => {
+          child.forEach(([cKey, ,], cI) => {
+            if (cKey == note) find = [i, cI];
+          });
+        });
+        if (find) drumNote.action.animate([find], false);
       },
     },
   },

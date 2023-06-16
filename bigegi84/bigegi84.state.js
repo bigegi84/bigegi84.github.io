@@ -6,6 +6,11 @@ const bigegi84state = {
       link: "#/piano",
     },
     {
+      name: "Gitar",
+      description: "Aplikasi web untuk memainkan gitar.",
+      link: "#/guitar",
+    },
+    {
       name: "Ukulele",
       description: "Aplikasi web untuk memainkan ukulele.",
       link: "#/ukulele",

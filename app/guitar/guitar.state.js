@@ -3,7 +3,7 @@ const guitarState = {
   chord: {
     C: {
       CPower: "x35xxx",
-      C: "0003",
+      C: "332010",
       Cm: "0333",
       Cmaj7: "0002",
       Cm7: "3333",
@@ -23,7 +23,7 @@ const guitarState = {
     },
     D: {
       DPower: "x57xxx",
-      D: "2225",
+      D: "xx0232",
       Dm: "2210",
       Dmaj7: "1113",
       Dm7: "2213",
@@ -32,6 +32,7 @@ const guitarState = {
       D9: "2423",
     },
     Eb: {
+      EbPower: "x68xxx",
       Eb: "3331",
       Ebm: "3321",
       Ebmaj7: "3335",
@@ -42,8 +43,8 @@ const guitarState = {
     },
     E: {
       EPower: "02xxxx",
-      E: "4442",
-      Em: "0432",
+      E: "022100",
+      Em: "022000",
       Emaj7: "1302",
       Em7: "0202",
       E6: "1020",
@@ -51,6 +52,7 @@ const guitarState = {
       E9: "1222",
     },
     F: {
+      FPower:"13xxxx",
       F: "2010",
       Fm: "1013",
       Fmaj7: "2413",
@@ -62,7 +64,7 @@ const guitarState = {
     Gb: {
       GbPower: "24xxxx",
       Gb: "3121",
-      Gbm: "2120",
+      Gbm: "244222",
       Gbmaj7: "0111",
       Gbm7: "2424",
       Gb6: "3324",
@@ -71,7 +73,7 @@ const guitarState = {
     },
     G: {
       GPower: "35xxxx",
-      G: "0232",
+      G: "320003",
       Gm: "0231",
       Gmaj7: "0222",
       Gm7: "0211",
@@ -80,6 +82,7 @@ const guitarState = {
       G9: "2212",
     },
     Ab: {
+      AbPower: "46xxxx",
       Ab: "5343",
       Abm: "1342",
       Abmaj7: "1333",
@@ -91,8 +94,8 @@ const guitarState = {
     },
     A: {
       APower: "57xxxx",
-      A: "2100",
-      Am: "2000",
+      A: "x02220",
+      Am: "x02210",
       Amaj7: "1100",
       Am7: "0433",
       A6: "2424",
@@ -100,8 +103,9 @@ const guitarState = {
       A9: "0102",
     },
     Bb: {
+      BbPower: "x13xxx",
       Bb: "3211",
-      Bbm: "3111",
+      Bbm: "x13321",
       Bbmaj7: "3210",
       Bbm7: "1111",
       Bb6: "0211",
@@ -111,7 +115,7 @@ const guitarState = {
     B: {
       BPower: "x24xxx",
       B: "4322",
-      Bm: "4222",
+      Bm: "x24432",
       Bmaj7: "3322",
       Bm7: "2222",
       B6: "1322",
@@ -516,6 +520,7 @@ const guitarState = {
     },
   },
   tone: {
+    value: "nylon",
     distortion: new Tone.Sampler({
       urls: {
         E3: "E3.mp3",
@@ -524,6 +529,45 @@ const guitarState = {
       },
       release: 1,
       baseUrl: "../../asset/sound/guitar/distortion/",
+    }).toDestination(),
+    nylon: new Tone.Sampler({
+      urls: {
+        B1: "B1.mp3",
+
+        D2: "D2.mp3",
+        E2: "E2.mp3",
+        Gb2: "Gb2.mp3",
+        Ab2: "Ab2.mp3",
+        A2: "A2.mp3",
+        B2: "B2.mp3",
+
+        Db3: "Db3.mp3",
+        D3: "D3.mp3",
+        E3: "E3.mp3",
+        Gb3: "Gb3.mp3",
+        G3: "G3.mp3",
+        A3: "A3.mp3",
+        B3: "B3.mp3",
+
+        Db4: "Db4.mp3",
+        Eb4: "Eb4.mp3",
+        E4: "E4.mp3",
+        Gb4: "Gb4.mp3",
+        Ab4: "Ab4.mp3",
+        A4: "A4.mp3",
+        B4: "B4.mp3",
+
+        Db5: "Db5.mp3",
+        // D5: "D5.mp3",
+        E5: "E5.mp3",
+        Gb5: "Gb5.mp3",
+        G5: "G5.mp3",
+        Ab5: "Ab5.mp3",
+        A5: "A5.mp3",
+        Bb5: "Bb5.mp3",
+      },
+      release: 1,
+      baseUrl: "../../asset/sound/guitar/nylon/",
     }).toDestination(),
   },
 };

@@ -84,12 +84,12 @@ const guitarFret = {
     sound: {
       play: ([x, y]) => {
         const note = guitarState.fret[x][y];
-        guitarState.tone.distortion.triggerAttack([note]);
+        guitarState.tone[guitarState.tone.value].triggerAttack([note]);
         guitarFret.action.animate([x, y], true);
       },
       stop: ([x, y]) => {
         const note = guitarState.fret[x][y];
-        guitarState.tone.distortion.triggerRelease(
+        guitarState.tone[guitarState.tone.value].triggerRelease(
           [note],
           guitarStore.sustain.active
             ? Tone.now() + guitarStore.sustain.ms / 1000

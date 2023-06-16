@@ -111,7 +111,7 @@ const guitarChord = {
         formula.forEach(([nx, ny]) => {
           setTimeout(() => {
             const note = guitarState.fret[nx][ny];
-            guitarState.tone.distortion.triggerAttack([note]);
+            guitarState.tone[guitarState.tone.value].triggerAttack([note]);
             guitarFret.action.animate([nx, ny]);
           }, ms);
           ms = ms + guitarStore.chord.delay.ms;
@@ -128,7 +128,7 @@ const guitarChord = {
         formula.forEach(([nx, ny]) => {
           setTimeout(() => {
             const note = guitarState.fret[nx][ny];
-            guitarState.tone.distortion.triggerRelease(
+            guitarState.tone[guitarState.tone.value].triggerRelease(
               [note],
               guitarStore.sustain.active
                 ? Tone.now() + guitarStore.sustain.ms / 1000

@@ -6,6 +6,7 @@ const bigegi84title = {
           <h2
             className="text-gold-a"
             style={{
+              letterSpacing: "0px",
               // background:
               //   bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
               // color: bigegi84store.theme[bigegi84store.theme.value].textColor,

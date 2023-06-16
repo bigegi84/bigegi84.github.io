@@ -198,7 +198,7 @@ audio {
     display: none;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 480px) {
   .chord-container {
     display: flex;
     flex-direction: column;

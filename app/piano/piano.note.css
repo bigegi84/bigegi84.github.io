@@ -1,3 +1,9 @@
+@media only screen and (max-width: 600px) {
+  .piano {
+    max-width: 271px;
+  }
+}
+
 .piano {
   padding: 5px;
   margin: 0;

@@ -50,7 +50,11 @@ const pianoChord = {
           iy++;
         }
         view.push(
-          <div key={ix} id={"piano-chord-line-" + x} className="piano-chord-group">
+          <div
+            key={ix}
+            id={"piano-chord-line-" + x}
+            className="piano-chord-group"
+          >
             {list}
           </div>
         );
@@ -59,8 +63,7 @@ const pianoChord = {
       return view;
     },
     formula: (id) => {
-      const x = id.replace("piano-chord-", "").split("-")[0];
-      const y = id.replace("piano-chord-", "").split("-")[1];
+      const [x, y] = id.replace("piano-chord-", "").split("-");
       let formula = [pianoState.chord[x][y]];
       if (
         pianoStore.playType.code == "twoBassAndChord" &&

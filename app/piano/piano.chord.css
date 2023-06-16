@@ -1,9 +1,11 @@
 .piano-chord {
   -webkit-user-select: none;
+  background-color: #c2dedc;
   border-radius: 0px;
   border-color: #222;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
+  color: black;
   cursor: pointer;
   text-align: center;
   line-height: 1;
@@ -11,7 +13,6 @@
   font-weight: bold;
   width: 65px;
   height: 30px;
-  background-color: #c2dedc;
   z-index: 1;
   margin: 1px;
 }

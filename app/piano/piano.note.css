@@ -1,6 +1,6 @@
 .piano {
   padding: 5px;
-  margin: 0 auto;
+  margin: 0;
   width: 733px;
 }
 
@@ -58,7 +58,6 @@
   position: absolute;
   font-size: small;
   font-weight: bold;
-  /* color: black; */
   color: white;
   margin: 0;
   bottom: 0%;

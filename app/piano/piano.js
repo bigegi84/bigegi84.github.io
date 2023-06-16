@@ -2,7 +2,13 @@ const piano = {
   view: () => {
     const [infoShow, setInfoShow] = React.useState(false);
     return (
-      <div className="conlumn-a" style={{ padding: "3em" }}>
+      <div
+        className="conlumn-a"
+        style={{ padding: "3em" }}
+        tabIndex={0}
+        onKeyDown={(e) => pianoKeymap.action.key.down(e)}
+        onKeyUp={(e) => pianoKeymap.action.key.up(e)}
+      >
         <h2 id="title" style={bigegi84theme.style}>
           bigegi84 - Piano
         </h2>
@@ -32,10 +38,6 @@ const piano = {
                   <p className="play-info" style={{ margin: 0 }}>
                     <strong>Tipe Bermain:</strong>
                   </p>
-                  Ditekan:
-                  <strong className="chord-info"></strong>
-                  <br />
-                  Ditekan (ms):
                   <strong id="timer"></strong>
                   <pianoSustain.view />
                 </div>

@@ -18,4 +18,5 @@ const pianoStore = mobx.observable({
     code: "twoBassAndChord",
   },
   keymapActive: true,
+  keymap: "jp",
 });

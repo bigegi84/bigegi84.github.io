@@ -39,12 +39,16 @@ const pianoChord = {
               className={
                 "piano-chord" + (x.search("b") != -1 ? " piano-chord-mol" : "")
               }
-              onMouseDown={(e) => pianoChord.action.mouseDown(e.target.id)}
-              onMouseUp={(e) => pianoChord.action.mouseUp(e.target.id)}
+              onMouseDown={(e) =>
+                pianoChord.action.mouseDown(e.currentTarget.id)
+              }
+              onMouseUp={(e) => pianoChord.action.mouseUp(e.currentTarget.id)}
             >
               {y.replace("Over", "/")}
               <br />
-              {pianoChord.action.hint([x, y])}
+              <mobxReact.Observer>
+                {() => <div>{pianoChord.action.hint([x, y])}</div>}
+              </mobxReact.Observer>
             </div>
           );
           iy++;
@@ -76,8 +80,8 @@ const pianoChord = {
       return formula;
     },
     hint: ([line, ch]) => {
-      for (const key in pianoState.keymap[pianoState.keymap.value]) {
-        const [x, y] = pianoState.keymap[pianoState.keymap.value][key];
+      for (const key in pianoState.keymap[pianoStore.keymap]) {
+        const [x, y] = pianoState.keymap[pianoStore.keymap][key];
         if (line == x && ch == y) return key.replace("Arrow", "");
       }
       return "";

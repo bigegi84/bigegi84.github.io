@@ -7,7 +7,7 @@ const pianoKeymap = {
         e.preventDefault();
         if (pianoKeymap.depressed[e.key]) return;
         pianoKeymap.depressed[e.key] = true;
-        const str = pianoState.keymap[pianoState.keymap.value][e.key];
+        const str = pianoState.keymap[pianoStore.keymap][e.key];
         if (str) {
           const chordId = "piano-chord-" + str[0] + "-" + str[1];
           let formula = pianoChord.action.formula(chordId);
@@ -31,7 +31,7 @@ const pianoKeymap = {
       },
       up: (e) => {
         pianoKeymap.depressed[e.key] = false;
-        var str = pianoState.keymap[pianoState.keymap.value][e.key];
+        var str = pianoState.keymap[pianoStore.keymap][e.key];
         if (str) {
           const chordId = "piano-chord-" + str[0] + "-" + str[1];
           let formula = pianoChord.action.formula(chordId);

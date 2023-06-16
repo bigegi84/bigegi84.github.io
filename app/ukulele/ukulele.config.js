@@ -16,11 +16,10 @@ const ukuleleConfig = {
                       checked={ukuleleStore.mode[0] == "Chord"}
                       onChange={() => (ukuleleStore.mode[0] = "Chord")}
                       value="Chord"
-                      style={bigegi84theme.style}
                     />
                     <label
                       htmlFor="ukulele-mode-chord"
-                      style={bigegi84theme.style}
+                      className={bigegi84theme.class.input}
                     >
                       Chord
                     </label>
@@ -31,11 +30,10 @@ const ukuleleConfig = {
                       value="Solo"
                       checked={ukuleleStore.mode[0] == "Solo"}
                       onChange={() => (ukuleleStore.mode[0] = "Solo")}
-                      style={bigegi84theme.style}
                     />
                     <label
                       htmlFor="ukulele-mode-solo"
-                      style={bigegi84theme.style}
+                      className={bigegi84theme.class.input}
                     >
                       Solo
                     </label>
@@ -63,8 +61,7 @@ const ukuleleConfig = {
                   />
                   <label
                     htmlFor="ukulele-sustain-active"
-                    style={bigegi84theme.style}
-                    className={"checkbox-white"}
+                    className={bigegi84theme.class.input}
                   >
                     Sustain
                   </label>

@@ -18,7 +18,7 @@ const ukulele = {
     return (
       <div
         style={{ padding: "3em" }}
-        className="column-a"
+        className={"column-a"}
         tabIndex={0}
         onKeyDown={(e) => ukulele.action.key.down(e)}
         onKeyUp={(e) => ukulele.action.key.up(e)}

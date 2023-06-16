@@ -82,6 +82,7 @@ const pianoSheet = {
                       (currentSong[ia][1][ib][0] = e.target.value)
                     }
                     onFocus={() => (pianoStore.keymapActive = false)}
+                    className={bigegi84theme.class.inputText}
                   />
                   <textarea
                     rows="2"
@@ -91,6 +92,7 @@ const pianoSheet = {
                       (currentSong[ia][1][ib][1] = e.target.value)
                     }
                     onFocus={() => (pianoStore.keymapActive = false)}
+                    className={bigegi84theme.class.inputText}
                   />
                   <div className="row-a">
                     <i
@@ -175,6 +177,7 @@ const pianoSheet = {
                 onChange={(e) => pianoSheet.action.change(e)}
                 name="sheet-select"
                 id="sheet-select"
+                className={bigegi84theme.class.inputText}
               >
                 {pianoSheet.action.option()}
               </select>
@@ -206,6 +209,7 @@ const pianoSheet = {
           <div className="row-a">
             <a id="downloadA" style={{ display: "none" }}></a>
             <button
+              className={"button small " + bigegi84theme.class.button}
               onClick={() => {
                 const selected = pianoSheet.store.selected;
                 const dataStr =
@@ -224,7 +228,7 @@ const pianoSheet = {
             <mobxReact.Observer>
               {() => (
                 <button
-                  className="button small"
+                  className={"button small " + bigegi84theme.class.button}
                   onClick={() => {
                     if (!pianoSheet.store.playing) {
                       pianoSheet.store.playing = true;

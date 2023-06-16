@@ -35,9 +35,13 @@ const piano = {
               </div>
               {infoShow ? (
                 <div className="column-a">
-                  <p className="play-info" style={{ margin: 0 }}>
-                    <strong>Tipe Bermain:</strong>
-                  </p>
+                  <strong className={bigegi84theme.class.basic}>
+                    Tipe Bermain:
+                  </strong>
+                  <p
+                    style={{ margin: 0 }}
+                    className={bigegi84theme.class.basic}
+                  ></p>
                   <strong id="timer"></strong>
                   <pianoSustain.view />
                 </div>

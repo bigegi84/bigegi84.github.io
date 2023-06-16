@@ -1,14 +1,16 @@
+@import url(../asset/css/common.css);
+@import url(../asset/css/theme/black.gold.css);
 @import url(../app/piano/piano.css);
 @import url(../app/ukulele/ukulele.css);
 @import url(../app/drum/drum/drum.css);
 @import url(../app/guitar/guitar.css);
 
-input[type="checkbox"]:checked + .checkbox-white::before {
+/* input[type="checkbox"]:checked + .checkbox-white::before {
   border-color: white;
 }
 input[type="checkbox"] + .checkbox-white::before {
   border-color: white;
-}
+} */
 /* 
 input[type="checkbox"] + label:before,
 input[type="radio"] + label:before {

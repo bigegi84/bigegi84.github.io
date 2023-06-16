@@ -1,4 +1,11 @@
 const bigegi84theme = {
+  class: {
+    basic: "black-gold",
+    button: "black-gold-button",
+    h: "black-gold-h",
+    input: "black-gold black-gold-input",
+    inputText: "black-gold-input-text",
+  },
   style: {
     background: bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
     color: bigegi84store.theme[bigegi84store.theme.value].textColor,

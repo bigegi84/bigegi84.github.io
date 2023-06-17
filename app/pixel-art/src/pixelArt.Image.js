@@ -13,7 +13,7 @@ const pixelArtImage = {
           ["", "85", "85", "85", ""],
           ["85", "85", "74", "85", "85"],
           ["85", "74", "74", "74", "85"],
-          ["85", "85", "85", "85", "85"],
+          ["74", "74", "74", "74", "74"],
         ],
       ],
       [
@@ -204,7 +204,7 @@ const pixelArtImage = {
                       pixelArtImage.action.toArray(e.target.value);
                   }}
                 />
-                <button onClick={() => pixelArtImage.action.export.png([i])}>
+                <button onClick={() => pixelArtImage.action.export.svg([i])}>
                   simpan
                 </button>
               </div>
@@ -237,7 +237,7 @@ const pixelArtImage = {
           "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
         var downloadLink = document.createElement("a");
         downloadLink.href = url;
-        downloadLink.download = it[0] + ".svg";
+        downloadLink.download = "image.svg";
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -256,8 +256,8 @@ const pixelArtImage = {
         img.onload = () => {
           var canvas = document.createElement("canvas");
 
-          var w = 400;
-          var h = 400;
+          var w = 200;
+          var h = 200;
 
           canvas.width = w;
           canvas.height = h;

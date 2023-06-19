@@ -6,9 +6,14 @@ const bigegi84state = {
       link: "#/bass",
     },
     {
-      name: "Piano",
-      description: "Aplikasi web untuk memainkan piano.",
-      link: "#/piano",
+      name: "Drum",
+      description: "Aplikasi web untuk memainkan drum.",
+      link: "#/drum",
+    },
+    {
+      name: "Duet",
+      description: "Aplikasi web untuk memainkan duet instrumen.",
+      link: "#/duet",
     },
     {
       name: "Gitar",
@@ -16,20 +21,9 @@ const bigegi84state = {
       link: "#/guitar",
     },
     {
-      name: "Ukulele",
-      description: "Aplikasi web untuk memainkan ukulele.",
-      link: "#/ukulele",
-    },
-
-    {
-      name: "Cello and Violin",
-      description: "Aplikasi web untuk memainkan celo dan biola.",
-      link: "/app/cello-and-violin",
-    },
-    {
-      name: "Drum",
-      description: "Aplikasi web untuk memainkan drum.",
-      link: "#/drum",
+      name: "Piano",
+      description: "Aplikasi web untuk memainkan piano.",
+      link: "#/piano",
     },
     {
       name: "Klon",
@@ -40,6 +34,11 @@ const bigegi84state = {
       name: "Pixel Art",
       description: "Galeri Seni Piksel.",
       link: "#/pixel-art",
+    },
+    {
+      name: "Ukulele",
+      description: "Aplikasi web untuk memainkan ukulele.",
+      link: "#/ukulele",
     },
   ],
   fullName: "Gilang Pratama Wiguna",

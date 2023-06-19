@@ -572,4 +572,4 @@
     });
     return game.play();
   });
-}).call(this);
+}.call(this));

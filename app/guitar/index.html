@@ -1,140 +1,186 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
+    <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="../../template/story/assets/css/noscript.css"
+    /></noscript>
+    <link rel="stylesheet" href="ukulele.css" />
+    <title>bigegi84-Chord Player Piano</title>
+  </head>
 
-<head>
-  <title></title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
-  <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
-  <noscript>
-    <link rel="stylesheet" href="../../template/story/assets/css/noscript.css" /></noscript>
-  <link rel="stylesheet" href="ukulele.css" />
-  <title>bigegi84-Chord Player Piano</title>
-</head>
-
-<body class="is-preload">
-  <div id="root"></div>
-  <div id="wrapper" class="divided">
-    <section
-      class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
-      <div class="content">
-        <h2>bigegi84 - Ukulele</h2>
-        <div class="major">
-          <div>
-            <div style="
+  <body class="is-preload">
+    <div id="root"></div>
+    <div id="wrapper" class="divided">
+      <section
+        class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right"
+      >
+        <div class="content">
+          <h2>bigegi84 - Ukulele</h2>
+          <div class="major">
+            <div>
+              <div
+                style="
                   display: flex;
                   margin-bottom: 10px;
                   flex-direction: row;
                   justify-content: space-between;
-                ">
-              <div id="info-container">
-                <div>
-                  <strong>Ditekan:</strong>
-                  <p id="play-info" class="play-info" style="margin: 0"></p>
+                "
+              >
+                <div id="info-container">
+                  <div>
+                    <strong>Ditekan:</strong>
+                    <p id="play-info" class="play-info" style="margin: 0"></p>
+                  </div>
+                </div>
+                <div class="config-container">
+                  <div style="display: flex; flex-direction: column">
+                    <p class="play-info" style="margin: 0">
+                      <strong>Delay Genjreng: </strong>
+                    </p>
+                    <input
+                      id="input-delay"
+                      title="Delay"
+                      type="number"
+                      value="10"
+                    />
+                  </div>
+                  <div
+                    class="field third"
+                    style="display: flex; flex-direction: column"
+                  >
+                    <strong>Mode: </strong>
+                    <input
+                      type="radio"
+                      id="mode-chord"
+                      name="mode"
+                      checked=""
+                      value="chord"
+                    />
+                    <label for="mode-chord">Chord</label>
+                    <input
+                      type="radio"
+                      id="mode-solo"
+                      name="mode"
+                      value="solo"
+                    />
+                    <label for="mode-solo">Solo</label>
+                  </div>
+                  <div class="field half">
+                    <input
+                      type="checkbox"
+                      id="sustaining"
+                      name="sustaining"
+                      checked=""
+                    />
+                    <label for="sustaining">Sustaining</label>
+                  </div>
+                  <div class="field half">
+                    <input type="checkbox" id="bouncing" name="bouncing" />
+                    <label for="bouncing">Bouncing</label>
+                  </div>
                 </div>
               </div>
-              <div class="config-container">
-                <div style="display: flex; flex-direction: column">
-                  <p class="play-info" style="margin: 0">
-                    <strong>Delay Genjreng: </strong>
-                  </p>
-                  <input id="input-delay" title="Delay" type="number" value="10" />
-                </div>
-                <div class="field third" style="display: flex; flex-direction: column">
-                  <strong>Mode: </strong>
-                  <input type="radio" id="mode-chord" name="mode" checked="" value="chord" />
-                  <label for="mode-chord">Chord</label>
-                  <input type="radio" id="mode-solo" name="mode" value="solo" />
-                  <label for="mode-solo">Solo</label>
-                </div>
-                <div class="field half">
-                  <input type="checkbox" id="sustaining" name="sustaining" checked="" />
-                  <label for="sustaining">Sustaining</label>
-                </div>
-                <div class="field half">
-                  <input type="checkbox" id="bouncing" name="bouncing" />
-                  <label for="bouncing">Bouncing</label>
-                </div>
+              <div>
+                <div id="chord" class="chord-container"></div>
+                <div id="ukulele"></div>
               </div>
-            </div>
-            <div>
-              <div id="chord" class="chord-container"></div>
-              <div id="ukulele"></div>
             </div>
           </div>
+          <br />
+          <p class="major"><strong>Dukungan</strong></p>
+          <ul class="actions stacked">
+            <li>
+              <a href="#first" class="bigegi84-saweria button big wide"
+                >Get Started</a
+              >
+            </li>
+            <li>
+              <a href="#first" class="bigegi84-paypal button big wide"
+                >Get Started</a
+              >
+            </li>
+          </ul>
         </div>
-        <br />
-        <p class="major"><strong>Dukungan</strong></p>
-        <ul class="actions stacked">
-          <li>
-            <a href="#first" class="bigegi84-saweria button big wide">Get Started</a>
-          </li>
-          <li>
-            <a href="#first" class="bigegi84-paypal button big wide">Get Started</a>
-          </li>
-        </ul>
-      </div>
-      <div class="image" style="width: 30%">
-        <img src="../../template/story/images/banner.jpg" alt="" />
-      </div>
-    </section>
+        <div class="image" style="width: 30%">
+          <img src="../../template/story/images/banner.jpg" alt="" />
+        </div>
+      </section>
 
-    <!-- Footer -->
-    <footer class="wrapper style1 align-center">
-      <div class="inner">
-        <ul class="icons">
-          <li>
-            <a href="#" class="bigegi84-twitter icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
-          </li>
-          <li>
-            <a href="#" class="bigegi84-facebook icon brands style2 fa-facebook-f"><span
-                class="label">Facebook</span></a>
-          </li>
-          <li>
-            <a href="#" class="bigegi84-instagram icon brands style2 fa-instagram"><span
-                class="label">Instagram</span></a>
-          </li>
-          <li>
-            <a href="#" class="bigegi84-linkedin icon brands style2 fa-linkedin-in"><span
-                class="label">LinkedIn</span></a>
-          </li>
-          <li>
-            <a href="#" class="bigegi84-email icon style2 fa-envelope"><span class="label">Email</span></a>
-          </li>
-        </ul>
-        <p class="bigegi84-copyright"></p>
+      <!-- Footer -->
+      <footer class="wrapper style1 align-center">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a href="#" class="bigegi84-twitter icon brands style2 fa-twitter"
+                ><span class="label">Twitter</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="bigegi84-facebook icon brands style2 fa-facebook-f"
+                ><span class="label">Facebook</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="bigegi84-instagram icon brands style2 fa-instagram"
+                ><span class="label">Instagram</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="bigegi84-linkedin icon brands style2 fa-linkedin-in"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="bigegi84-email icon style2 fa-envelope"
+                ><span class="label">Email</span></a
+              >
+            </li>
+          </ul>
+          <p class="bigegi84-copyright"></p>
+        </div>
+      </footer>
+    </div>
+    <div>
+      <!-- scripts -->
+      <script src="../../lib/jquery-1.7.2.min.js"></script>
+      <script src="../../lib/tone-14.8.49.js"></script>
+      <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
+      <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
+      <script src="../../lib/jquery-ui-1.8.20.custom.min.js"></script>
+      <script src="../../template/story/assets/js/browser.min.js"></script>
+      <script src="../../template/story/assets/js/breakpoints.min.js"></script>
+      <script src="../../template/story/assets/js/util.js"></script>
+      <script src="../../template/story/assets/js/main.js"></script>
+      <div>
+        <script src="../../lib/react-17.0.1.development.js"></script>
+        <script src="../../lib/react-dom-17.0.1.development.js"></script>
+        <script src="../../lib/react-router-dom-5.0.0.js"></script>
+        <script src="../../lib/mobx-6.0.4.umd.production.min.js"></script>
+        <script src="../../lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
+        <script src="../../lib/mobx-react-7.0.5.umd.production.min.js"></script>
+        <script src="../../lib/babel-6.26.0.js"></script>
       </div>
-    </footer>
-  </div>
-  <div>
-    <!-- scripts -->
-    <script src="../../lib/jquery-1.7.2.min.js"></script>
-    <script src="../../lib/tone-14.8.49.js"></script>
-    <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
-    <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
-    <script src="../../lib/jquery-ui-1.8.20.custom.min.js"></script>
-    <script src="../../template/story/assets/js/browser.min.js"></script>
-    <script src="../../template/story/assets/js/breakpoints.min.js"></script>
-    <script src="../../template/story/assets/js/util.js"></script>
-    <script src="../../template/story/assets/js/main.js"></script>
-    <div>
-      <script src="../../lib/react-17.0.1.development.js"></script>
-      <script src="../../lib/react-dom-17.0.1.development.js"></script>
-      <script src="../../lib/react-router-dom-5.0.0.js"></script>
-      <script src="../../lib/mobx-6.0.4.umd.production.min.js"></script>
-      <script src="../../lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
-      <script src="../../lib/mobx-react-7.0.5.umd.production.min.js"></script>
-      <script src="../../lib/babel-6.26.0.js"></script>
-    </div>
-    <div>
-      <script type="text/babel" src="ukulele.state.js"></script>
-      <script type="text/babel" src="ukulele.fret.js"></script>
-      <script type="text/babel" src="ukulele.js"></script>
-      <script type="text/babel" src="app.js"></script>
-    </div>
-    <!-- logic -->
-    <!-- <script src="../../state.js"></script>
+      <div>
+        <script type="text/babel" src="ukulele.state.js"></script>
+        <script type="text/babel" src="ukulele.fret.js"></script>
+        <script type="text/babel" src="ukulele.js"></script>
+        <script type="text/babel" src="app.js"></script>
+      </div>
+      <!-- logic -->
+      <!-- <script src="../../state.js"></script>
     <script src="../../helper.js"></script>
     <script>
       $(document).ready(() => {
@@ -153,7 +199,6 @@
       });
     </script>
     <script src="main.js"></script> -->
-  </div>
-</body>
-
+    </div>
+  </body>
 </html>

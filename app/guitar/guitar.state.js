@@ -52,7 +52,7 @@ const guitarState = {
       E9: "1222",
     },
     F: {
-      FPower:"13xxxx",
+      FPower: "13xxxx",
       F: "2010",
       Fm: "1013",
       Fmaj7: "2413",

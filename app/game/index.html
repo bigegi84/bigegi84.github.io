@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
+    <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="../../template/story/assets/css/noscript.css"
+    /></noscript>
+    <!-- css -->
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="../../asset/css/common.css" />
+    <title>bigegi84-Chord Player Piano</title>
+  </head>
 
-<head>
-  <title></title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
-  <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
-  <noscript>
-    <link rel="stylesheet" href="../../template/story/assets/css/noscript.css" /></noscript>
-  <!-- css -->
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="../../asset/css/common.css" />
-  <title>bigegi84-Chord Player Piano</title>
-</head>
-
-<body class="is-preload">
-  <div id="root"></div>
-  <div id="script">
-    <!-- scripts -->
-    <!-- react -->
-    <script src="../../lib/react-17.0.1.development.js"></script>
-    <script src="../../lib/react-dom-17.0.1.development.js"></script>
-    <script src="../../lib/react-router-dom-5.0.0.js"></script>
-    <script src="../../lib/mobx-6.0.4.umd.production.min.js"></script>
-    <script src="../../lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
-    <script src="../../lib/mobx-react-7.0.5.umd.production.min.js"></script>
-    <script src="../../lib/babel-6.26.0.js"></script>
-    <!-- other -->
-    <script src="../../lib/jquery-1.7.2.min.js"></script>
-    <script src="../../lib/tone-14.8.49.js"></script>
-    <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
-    <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
-    <script src="../../lib/jquery-ui-1.8.20.custom.min.js"></script>
-    <script src="../../lib/gamepad.js"></script>
-    <script src="../../template/story/assets/js/browser.min.js"></script>
-    <script src="../../template/story/assets/js/breakpoints.min.js"></script>
-    <script src="../../template/story/assets/js/util.js"></script>
-    <script src="../../template/story/assets/js/main.js"></script>
-    <!-- logic -->
-    <script src="../../state.js"></script>
-    <script src="../../helper.js"></script>
-    <script>
-      $(document).ready(() => {
-        helper.socialLink();
-        var prefix = ".bigegi84-";
-        document.title = "bigegi84 - Drum";
-        $(prefix + "icon").attr("href", "../../gold.ico");
-        $(prefix + "copyright").html(
-          "&copy; " +
-          state.fullName +
-          ", " +
-          state.degree["id"] +
-          " " +
-          new Date().getFullYear()
-        );
-      });
-    </script>
-    <!-- <script src="main.js"></script> -->
-    <!-- react app -->
-    <script type="text/babel" src="../../bigegi84/bigegi84.color.js"></script>
-    <script type="text/babel" src="game/game.sprite.js"></script>
-    <script type="text/babel" src="game/game.js"></script>
-    <script type="text/babel" src="app.js"></script>
-  </div>
-</body>
-
+  <body class="is-preload">
+    <div id="root"></div>
+    <div id="script">
+      <!-- scripts -->
+      <!-- react -->
+      <script src="../../lib/react-17.0.1.development.js"></script>
+      <script src="../../lib/react-dom-17.0.1.development.js"></script>
+      <script src="../../lib/react-router-dom-5.0.0.js"></script>
+      <script src="../../lib/mobx-6.0.4.umd.production.min.js"></script>
+      <script src="../../lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
+      <script src="../../lib/mobx-react-7.0.5.umd.production.min.js"></script>
+      <script src="../../lib/babel-6.26.0.js"></script>
+      <!-- other -->
+      <script src="../../lib/jquery-1.7.2.min.js"></script>
+      <script src="../../lib/tone-14.8.49.js"></script>
+      <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
+      <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
+      <script src="../../lib/jquery-ui-1.8.20.custom.min.js"></script>
+      <script src="../../lib/gamepad.js"></script>
+      <script src="../../template/story/assets/js/browser.min.js"></script>
+      <script src="../../template/story/assets/js/breakpoints.min.js"></script>
+      <script src="../../template/story/assets/js/util.js"></script>
+      <script src="../../template/story/assets/js/main.js"></script>
+      <!-- logic -->
+      <script src="../../state.js"></script>
+      <script src="../../helper.js"></script>
+      <script>
+        $(document).ready(() => {
+          helper.socialLink();
+          var prefix = ".bigegi84-";
+          document.title = "bigegi84 - Drum";
+          $(prefix + "icon").attr("href", "../../gold.ico");
+          $(prefix + "copyright").html(
+            "&copy; " +
+              state.fullName +
+              ", " +
+              state.degree["id"] +
+              " " +
+              new Date().getFullYear()
+          );
+        });
+      </script>
+      <!-- <script src="main.js"></script> -->
+      <!-- react app -->
+      <script type="text/babel" src="../../bigegi84/bigegi84.color.js"></script>
+      <script type="text/babel" src="game/game.sprite.js"></script>
+      <script type="text/babel" src="game/game.js"></script>
+      <script type="text/babel" src="app.js"></script>
+    </div>
+  </body>
 </html>

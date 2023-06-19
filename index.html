@@ -1,139 +1,156 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title></title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" type="image/ico" href="asset/icon/ico.svg" />
-  <link rel="stylesheet" href="template/story/assets/css/main.css" />
-  <!-- piano -->
-  <!-- <link rel="stylesheet" href="app/piano/Piano.style.css" /> -->
-  <noscript>
-    <link rel="stylesheet" href="template/story/assets/css/noscript.css" /></noscript>
-  <link rel="stylesheet" href="asset/css/font-awesome-all-6.4.0.css" />
-  <link rel="stylesheet" href="bigegi84/bigegi84.css" />
-</head>
-
-<body class="is-preload">
-  <div id="root"></div>
-  <div>
-    <!-- jquery -->
-    <div>
-      <script src="lib/canvg-1.5.3.js"></script>
-      <script src="lib/jquery-3.6.0.js"></script>
-      <script src="lib/jquery-ui-1.13.2.js"></script>
-      <script src="template/story/assets/js/jquery.scrollex.min.js"></script>
-      <script src="template/story/assets/js/jquery.scrolly.min.js"></script>
-    </div>
-    <!-- tone -->
-    <div>
-      <script src="lib/tone-14.8.49.js"></script>
-    </div>
-    <!-- script -->
-    <div>
-      <script src="template/story/assets/js/browser.min.js"></script>
-      <script src="template/story/assets/js/breakpoints.min.js"></script>
-      <script src="template/story/assets/js/util.js"></script>
-      <script src="template/story/assets/js/main.js"></script>
-    </div>
-    <!-- react -->
-    <div>
-      <script src="lib/react-17.0.1.development.js"></script>
-      <script src="lib/react-dom-17.0.1.development.js"></script>
-      <script src="lib/react-router-dom-5.0.0.js"></script>
-      <script src="lib/mobx-6.0.4.umd.production.min.js"></script>
-      <script src="lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
-      <script src="lib/mobx-react-7.0.5.umd.production.min.js"></script>
-      <script src="lib/babel-6.26.0.js"></script>
-    </div>
-    <!-- localization -->
-    <div>
-      <script type="text/babel" src="bigegi84/bigegi84.localization.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.color.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.state.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.store.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.theme.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.title.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.education.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.experience.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.portofolio.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.creation.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.skill.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.footer.js"></script>
-      <script src="bigegi84/bigegi84.icon.js"></script>
-      <script type="text/babel" src="bigegi84/bigegi84.js"></script>
-    </div>
-    <!-- bass -->
-    <div>
-      <script type="text/babel" src="app/bass/bass.state.js"></script>
-      <script type="text/babel" src="app/bass/bass.store.js"></script>
-      <script type="text/babel" src="app/bass/bass.sustain.js"></script>
-      <script type="text/babel" src="app/bass/bass.fret.js"></script>
-      <script type="text/babel" src="app/bass/bass.js"></script>
-    </div>
-    <!-- clone -->
-    <div>
-      <script type="text/babel" src="app/clone/brain.bigegi84.js"></script>
-      <script type="text/babel" src="app/clone/clone.state.js"></script>
-      <script type="text/babel" src="app/clone/clone.store.js"></script>
-      <script type="text/babel" src="app/clone/clone.action.js"></script>
-      <script type="text/babel" src="app/clone/clone.info.js"></script>
-      <script type="text/babel" src="app/clone/clone.chat.js"></script>
-      <script type="text/babel" src="app/clone/clone.noAnswer.js"></script>
-      <script type="text/babel" src="app/clone/clone.js"></script>
-    </div>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/ico" href="asset/icon/ico.svg" />
+    <link rel="stylesheet" href="template/story/assets/css/main.css" />
     <!-- piano -->
-    <div>
-      <script src="app/piano/piano.song.js"></script>
-      <script type="text/babel" src="app/piano/piano.localization.js"></script>
-      <script type="text/babel" src="app/piano/piano.state.js"></script>
-      <script type="text/babel" src="app/piano/piano.store.js"></script>
-      <script type="text/babel" src="app/piano/piano.sustain.action.js"></script>
-      <script type="text/babel" src="app/piano/piano.sustain.js"></script>
-      <script type="text/babel" src="app/piano/piano.note.js"></script>
-      <script type="text/babel" src="app/piano/piano.chord.js"></script>
-      <script type="text/babel" src="app/piano/piano.sheet.js"></script>
-      <script type="text/babel" src="app/piano/piano.config.js"></script>
-      <script type="text/babel" src="app/piano/piano.keymap.js"></script>
-      <script type="text/babel" src="app/piano/piano.js"></script>
-    </div>
-    <!-- ukulele -->
-    <div>
-      <script type="text/babel" src="app/ukulele/ukulele.state.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.store.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.info.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.config.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.fret.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.chord.js"></script>
-      <script type="text/babel" src="app/ukulele/ukulele.js"></script>
-    </div>
-    <!-- drum -->
-    <div>
-      <script type="text/babel" src="app/drum/drum/drum.audio.js"></script>
-      <script type="text/babel" src="app/drum/drum/drum.state.js"></script>
-      <script type="text/babel" src="app/drum/drum/drum.song.js"></script>
-      <script type="text/babel" src="app/drum/drum/drum.note.js"></script>
-      <script type="text/babel" src="app/drum/drum/drum.sheet.js"></script>
-      <script type="text/babel" src="app/drum/drum/drum.js"></script>
-    </div>
-    <!-- guitar -->
-    <div>
-      <script type="text/babel" src="app/guitar/guitar.state.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.store.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.info.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.config.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.fret.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.chord.js"></script>
-      <script type="text/babel" src="app/guitar/guitar.js"></script>
-    </div>
-    <!-- pixel-art -->
-    <div id="pixelArt">
-      <script type="text/babel" src="app/pixel-art/src/pixelArt.Image.js"></script>
-      <script type="text/babel" src="app/pixel-art/src/pixelArt.js"></script>
-    </div>
-    <script type="text/babel" src="app.js"></script>
-  </div>
-</body>
+    <!-- <link rel="stylesheet" href="app/piano/Piano.style.css" /> -->
+    <noscript>
+      <link rel="stylesheet" href="template/story/assets/css/noscript.css"
+    /></noscript>
+    <link rel="stylesheet" href="asset/css/font-awesome-all-6.4.0.css" />
+    <link rel="stylesheet" href="bigegi84/bigegi84.css" />
+  </head>
 
+  <body class="is-preload">
+    <div id="root"></div>
+    <div>
+      <!-- jquery -->
+      <div>
+        <script src="lib/canvg-1.5.3.js"></script>
+        <script src="lib/jquery-3.6.0.js"></script>
+        <script src="lib/jquery-ui-1.13.2.js"></script>
+        <script src="template/story/assets/js/jquery.scrollex.min.js"></script>
+        <script src="template/story/assets/js/jquery.scrolly.min.js"></script>
+      </div>
+      <!-- tone -->
+      <div>
+        <script src="lib/tone-14.8.49.js"></script>
+      </div>
+      <!-- script -->
+      <div>
+        <script src="template/story/assets/js/browser.min.js"></script>
+        <script src="template/story/assets/js/breakpoints.min.js"></script>
+        <script src="template/story/assets/js/util.js"></script>
+        <script src="template/story/assets/js/main.js"></script>
+      </div>
+      <!-- react -->
+      <div>
+        <script src="lib/react-17.0.1.development.js"></script>
+        <script src="lib/react-dom-17.0.1.development.js"></script>
+        <script src="lib/react-router-dom-5.0.0.js"></script>
+        <script src="lib/mobx-6.0.4.umd.production.min.js"></script>
+        <script src="lib/mobx-react-lite-3.1.6.umd.production.min.js"></script>
+        <script src="lib/mobx-react-7.0.5.umd.production.min.js"></script>
+        <script src="lib/babel-6.26.0.js"></script>
+      </div>
+      <!-- localization -->
+      <div>
+        <script
+          type="text/babel"
+          src="bigegi84/bigegi84.localization.js"
+        ></script>
+        <script type="text/babel" src="bigegi84/bigegi84.color.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.state.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.store.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.theme.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.title.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.education.js"></script>
+        <script
+          type="text/babel"
+          src="bigegi84/bigegi84.experience.js"
+        ></script>
+        <script
+          type="text/babel"
+          src="bigegi84/bigegi84.portofolio.js"
+        ></script>
+        <script type="text/babel" src="bigegi84/bigegi84.creation.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.skill.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.footer.js"></script>
+        <script src="bigegi84/bigegi84.icon.js"></script>
+        <script type="text/babel" src="bigegi84/bigegi84.js"></script>
+      </div>
+      <!-- bass -->
+      <div>
+        <script type="text/babel" src="app/bass/bass.state.js"></script>
+        <script type="text/babel" src="app/bass/bass.store.js"></script>
+        <script type="text/babel" src="app/bass/bass.sustain.js"></script>
+        <script type="text/babel" src="app/bass/bass.fret.js"></script>
+        <script type="text/babel" src="app/bass/bass.js"></script>
+      </div>
+      <!-- clone -->
+      <div>
+        <script type="text/babel" src="app/clone/brain.bigegi84.js"></script>
+        <script type="text/babel" src="app/clone/clone.state.js"></script>
+        <script type="text/babel" src="app/clone/clone.store.js"></script>
+        <script type="text/babel" src="app/clone/clone.action.js"></script>
+        <script type="text/babel" src="app/clone/clone.info.js"></script>
+        <script type="text/babel" src="app/clone/clone.chat.js"></script>
+        <script type="text/babel" src="app/clone/clone.noAnswer.js"></script>
+        <script type="text/babel" src="app/clone/clone.js"></script>
+      </div>
+      <!-- piano -->
+      <div>
+        <script src="app/piano/piano.song.js"></script>
+        <script
+          type="text/babel"
+          src="app/piano/piano.localization.js"
+        ></script>
+        <script type="text/babel" src="app/piano/piano.state.js"></script>
+        <script type="text/babel" src="app/piano/piano.store.js"></script>
+        <script
+          type="text/babel"
+          src="app/piano/piano.sustain.action.js"
+        ></script>
+        <script type="text/babel" src="app/piano/piano.sustain.js"></script>
+        <script type="text/babel" src="app/piano/piano.note.js"></script>
+        <script type="text/babel" src="app/piano/piano.chord.js"></script>
+        <script type="text/babel" src="app/piano/piano.sheet.js"></script>
+        <script type="text/babel" src="app/piano/piano.config.js"></script>
+        <script type="text/babel" src="app/piano/piano.keymap.js"></script>
+        <script type="text/babel" src="app/piano/piano.js"></script>
+      </div>
+      <!-- ukulele -->
+      <div>
+        <script type="text/babel" src="app/ukulele/ukulele.state.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.store.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.info.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.config.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.fret.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.chord.js"></script>
+        <script type="text/babel" src="app/ukulele/ukulele.js"></script>
+      </div>
+      <!-- drum -->
+      <div>
+        <script type="text/babel" src="app/drum/drum/drum.audio.js"></script>
+        <script type="text/babel" src="app/drum/drum/drum.state.js"></script>
+        <script type="text/babel" src="app/drum/drum/drum.song.js"></script>
+        <script type="text/babel" src="app/drum/drum/drum.note.js"></script>
+        <script type="text/babel" src="app/drum/drum/drum.sheet.js"></script>
+        <script type="text/babel" src="app/drum/drum/drum.js"></script>
+      </div>
+      <!-- guitar -->
+      <div>
+        <script type="text/babel" src="app/guitar/guitar.state.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.store.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.info.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.config.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.fret.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.chord.js"></script>
+        <script type="text/babel" src="app/guitar/guitar.js"></script>
+      </div>
+      <!-- pixel-art -->
+      <div id="pixelArt">
+        <script
+          type="text/babel"
+          src="app/pixel-art/src/pixelArt.Image.js"
+        ></script>
+        <script type="text/babel" src="app/pixel-art/src/pixelArt.js"></script>
+      </div>
+      <script type="text/babel" src="app.js"></script>
+    </div>
+  </body>
 </html>

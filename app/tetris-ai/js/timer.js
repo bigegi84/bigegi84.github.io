@@ -1,47 +1,47 @@
 function Timer(callback, delay) {
-    var lastUpdate = null;
-    var isRunning = false;
+  var lastUpdate = null;
+  var isRunning = false;
 
-    var loop = function(){
-        requestAnimationFrame(function(){
-            var now = Date.now();
-            if(!isRunning){
-                lastUpdate = now;
-                loop();
-            }else{
-                var elapsed = now - lastUpdate;
-                if(lastUpdate === null || elapsed > delay){
-                    callback();
-                    lastUpdate = now - (elapsed % delay);
-                }
-                loop();
-            }
-        });
-    };
-
-    this.start = function() {
-        if(isRunning){
-            return;
+  var loop = function () {
+    requestAnimationFrame(function () {
+      var now = Date.now();
+      if (!isRunning) {
+        lastUpdate = now;
+        loop();
+      } else {
+        var elapsed = now - lastUpdate;
+        if (lastUpdate === null || elapsed > delay) {
+          callback();
+          lastUpdate = now - (elapsed % delay);
         }
-        lastUpdate = Date.now();
-        isRunning = true;
-    }
+        loop();
+      }
+    });
+  };
 
-    this.stop = function() {
-        isRunning = false;
+  this.start = function () {
+    if (isRunning) {
+      return;
     }
+    lastUpdate = Date.now();
+    isRunning = true;
+  };
 
-    this.reset = function(newDelay) {
-        lastUpdate = Date.now();
-        this.start();
-    }
+  this.stop = function () {
+    isRunning = false;
+  };
 
-    this.resetForward = function(newDelay){
-        callback();
-        delay = newDelay;
-        lastUpdate = Date.now();
-        this.start();
-    }
+  this.reset = function (newDelay) {
+    lastUpdate = Date.now();
+    this.start();
+  };
 
-    loop();
+  this.resetForward = function (newDelay) {
+    callback();
+    delay = newDelay;
+    lastUpdate = Date.now();
+    this.start();
+  };
+
+  loop();
 }

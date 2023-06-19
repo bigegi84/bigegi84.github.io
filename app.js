@@ -32,6 +32,11 @@
           component={() => app.action.withFooter(bass.view)}
         />
         <Route
+          path="/clone"
+          exact
+          component={() => app.action.withFooter(clone.view)}
+        />
+        <Route
           path="/piano"
           exact
           component={() => app.action.withFooter(piano.view)}

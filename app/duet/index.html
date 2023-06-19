@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
+  <link rel="stylesheet" href="../../template/story/assets/css/main.css" />
+  <noscript>
+    <link rel="stylesheet" href="../../template/story/assets/css/noscript.css" /></noscript>
+  <link rel="stylesheet" href="main.css" />
+</head>
+
+<body class="is-preload">
+  <div id="wrapper" class="divided">
+    <section
+      class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+      <div class="content">
+        <h2>bigegi84 - Cello And Violin</h2>
+        <div class="major">
+          <div class="column-a">
+            <div class="column-a">
+              <div class="field">
+                <label for="sheet-select">Lembar</label>
+                <select name="sheet-select" id="sheet-select">
+                  <option value="example">example</option>
+                </select>
+              </div>
+              <div class="row-a">
+                <div class="field">
+                  <label id="sheet-label-left" for="sheet-text-left">test</label>
+                  <textarea id="sheet-text-left" name="sheet-text-left" rows="4" cols="50">
+                    </textarea>
+                </div>
+                <div class="field">
+                  <label id="sheet-label-right" for="sheet-text-right">test</label>
+                  <textarea id="sheet-text-right" name="sheet-text-right" rows="4" cols="50">
+                    </textarea>
+                </div>
+              </div>
+              <button id="play">Mainkan</button>
+              <a id="downloadA" style="display:none"></a>
+              <button id="download">
+                Export
+              </button>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-around">
+                <div>
+                  <div id="cello-keymap"></div>
+                </div>
+                <div>
+                  <div id="violin-keymap"></div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-around">
+                <div>
+                  <div id="cello"></div>
+                </div>
+                <div>
+                  <div id="violin"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <p class="major"><strong>Dukungan</strong></p>
+        <ul class="actions stacked">
+          <li>
+            <a href="#first" class="bigegi84-saweria button big wide">Get Started</a>
+          </li>
+          <li>
+            <a href="#first" class="bigegi84-paypal button big wide">Get Started</a>
+          </li>
+        </ul>
+      </div>
+      <div class="image" style="width: 30%">
+        <img src="../../template/story/images/banner.jpg" alt="" />
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="wrapper style1 align-center">
+      <div class="inner">
+        <ul class="icons">
+          <li>
+            <a href="#" class="bigegi84-twitter icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
+          </li>
+          <li>
+            <a href="#" class="bigegi84-facebook icon brands style2 fa-facebook-f"><span
+                class="label">Facebook</span></a>
+          </li>
+          <li>
+            <a href="#" class="bigegi84-instagram icon brands style2 fa-instagram"><span
+                class="label">Instagram</span></a>
+          </li>
+          <li>
+            <a href="#" class="bigegi84-linkedin icon brands style2 fa-linkedin-in"><span
+                class="label">LinkedIn</span></a>
+          </li>
+          <li>
+            <a href="#" class="bigegi84-email icon style2 fa-envelope"><span class="label">Email</span></a>
+          </li>
+        </ul>
+        <p class="bigegi84-copyright"></p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../lib/jquery-1.7.2.min.js"></script>
+  <script src="../../lib/tone-14.8.49.js"></script>
+  <script src="../../template/story/assets/js/jquery.scrollex.min.js"></script>
+  <script src="../../template/story/assets/js/jquery.scrolly.min.js"></script>
+  <script src="../../lib/jquery-ui-1.8.20.custom.min.js"></script>
+  <script src="../../template/story/assets/js/browser.min.js"></script>
+  <script src="../../template/story/assets/js/breakpoints.min.js"></script>
+  <script src="../../template/story/assets/js/util.js"></script>
+  <script src="../../template/story/assets/js/main.js"></script>
+  <!-- logic -->
+  <script src="../../state.js"></script>
+  <script src="../../helper.js"></script>
+  <script>
+    $(document).ready(() => {
+      helper.socialLink();
+      var prefix = ".bigegi84-";
+      document.title = "bigegi84 - Cello And Violin";
+      $(prefix + "icon").attr("href", "../../gold.ico");
+      $(prefix + "copyright").html(
+        "&copy; " +
+        state.fullName +
+        ", " +
+        state.degree["id"] +
+        " " +
+        new Date().getFullYear()
+      );
+    });
+  </script>
+  <script src="song.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

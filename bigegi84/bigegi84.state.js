@@ -1,6 +1,11 @@
 const bigegi84state = {
   creation: [
     {
+      name: "Bass",
+      description: "Aplikasi web untuk memainkan bas.",
+      link: "#/bass",
+    },
+    {
       name: "Piano",
       description: "Aplikasi web untuk memainkan piano.",
       link: "#/piano",
@@ -15,11 +20,7 @@ const bigegi84state = {
       description: "Aplikasi web untuk memainkan ukulele.",
       link: "#/ukulele",
     },
-    {
-      name: "Bass",
-      description: "Aplikasi web untuk memainkan bas.",
-      link: "#/bass",
-    },
+
     {
       name: "Cello and Violin",
       description: "Aplikasi web untuk memainkan celo dan biola.",
@@ -33,7 +34,7 @@ const bigegi84state = {
     {
       name: "Klon",
       description: "Aplikasi untuk mengklon pengetahuan.",
-      link: "/app/clone",
+      link: "#/clone",
     },
     {
       name: "Pixel Art",

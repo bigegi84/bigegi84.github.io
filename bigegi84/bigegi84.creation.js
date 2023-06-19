@@ -38,14 +38,6 @@ const bigegi84creation = {
               {description}
             </p>
           ))}
-          <p></p>
-          <ul className="actions stacked">
-            <li>
-              <a href="#" className="bigegi84-creativityMore button">
-                Learn More
-              </a>
-            </li>
-          </ul>
         </div>
         <div className="image">
           <img src="template/story/images/spotlight02.jpg" alt="" />

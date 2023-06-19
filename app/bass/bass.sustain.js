@@ -15,7 +15,9 @@ const bassSustain = {
             />
           )}
         </mobxReact.Observer>
-        <label htmlFor="bass-sustaining">Sustain</label>
+        <label htmlFor="bass-sustaining" className={bigegi84theme.class.input}>
+          Sustain
+        </label>
       </div>
     );
   },

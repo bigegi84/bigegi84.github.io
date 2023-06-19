@@ -37,7 +37,9 @@ const bassFret = {
         const note = bassState.fret[x][y];
         bassState.tone.triggerRelease(
           [note],
-          bassStore.sustain.active ? Tone.now() + bassStore.sustain.ms / 1000 : Tone.now()
+          bassStore.sustain.active
+            ? Tone.now() + bassStore.sustain.ms / 1000
+            : Tone.now()
         );
         bassFret.action.animate([x, y], false);
       },
@@ -53,7 +55,7 @@ const bassFret = {
           <div
             key={y}
             id={"fret-" + x + "-" + y}
-            className="fret"
+            className="bass-fret"
             onMouseDown={(e) => bassFret.action.mouse.down(e)}
             onMouseUp={(e) => bassFret.action.mouse.up(e)}
           >
@@ -64,7 +66,7 @@ const bassFret = {
         );
       }
       view.push(
-        <div key={x} id={"fret-" + x} className="fret-line">
+        <div key={x} id={"fret-" + x} className="bass-fret-line">
           {fretLine}
         </div>
       );

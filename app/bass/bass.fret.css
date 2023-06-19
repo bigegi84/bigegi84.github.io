@@ -1,0 +1,23 @@
+.bass-fret-line {
+  display: flex;
+  flex-direction: row;
+}
+.bass-fret {
+  border-radius: 1px;
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  cursor: pointer;
+  line-height: 1;
+  color: white;
+  -webkit-user-select: none;
+  font-size: x-small;
+  font-weight: bolder;
+  width: 50px;
+  height: 26px;
+  background-color: burlywood;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

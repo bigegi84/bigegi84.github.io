@@ -18,7 +18,7 @@ const bigegi84state = {
     {
       name: "Bass",
       description: "Aplikasi web untuk memainkan bas.",
-      link: "/app/bass",
+      link: "#/bass",
     },
     {
       name: "Cello and Violin",

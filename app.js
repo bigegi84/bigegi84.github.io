@@ -27,6 +27,11 @@
 
         <Route path="/" exact component={bigegi84.view} />
         <Route
+          path="/bass"
+          exact
+          component={() => app.action.withFooter(bass.view)}
+        />
+        <Route
           path="/piano"
           exact
           component={() => app.action.withFooter(piano.view)}

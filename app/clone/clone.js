@@ -7,8 +7,8 @@ const clone = {
       <div className="column-a" style={{ padding: "3em" }}>
         <h1 style={bigegi84theme.style}>bigegi84 - Clone</h1>
         <div className="row-a">
-          <cloneInfo.view />
           <cloneChat.view />
+          <cloneInfo.view />
         </div>
         <cloneNoAnswer.view />
       </div>

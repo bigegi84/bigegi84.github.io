@@ -23,7 +23,13 @@ const brainBigegi84 = [
     ],
   ],
   ["itu", [["itu", [["apa", [], [5, 0, 0, 0]]]]]],
-  ["apa", [["itu", [["apa", [], [5, 0, 0, 0, 0, 0]]]]]],
+  [
+    "apa",
+    [
+      ["itu", [["apa", [], [5, 0, 0, 0, 0, 0]]]],
+      ["untuk", [["menyatakan", [["tujuan", []]]]]],
+    ],
+  ],
   [
     "kata",
     [
@@ -36,9 +42,67 @@ const brainBigegi84 = [
       ],
       ["depan", [["untuk", [["menyatakan", [["bagi", []]]]]]]],
       ["untuk", [["menyebut", [["atau", [["memanggil", [["orang", []]]]]]]]]],
+      [
+        "menyatakan",
+        [
+          [
+            "barang",
+            [["atau", [["hal", [["yang", [["tidak", [["tentu", []]]]]]]]]]],
+          ],
+        ],
+      ],
     ],
   ],
-  ["tanya", [["itu", [["apa", [], [36, 0]]]]]],
+  [
+    "tanya",
+    [
+      ["itu", [["apa", [], [36, 0]]]],
+      [
+        "bahwa",
+        [
+          [
+            "kata",
+            [
+              [
+                "atau",
+                [
+                  [
+                    "kalimat",
+                    [
+                      [
+                        "yang",
+                        [
+                          [
+                            "berikut",
+                            [
+                              [
+                                "diutamakan",
+                                [
+                                  [
+                                    "atau",
+                                    [
+                                      [
+                                        "dibedakan",
+                                        [["dari", [["yang", [["lain", []]]]]]],
+                                      ],
+                                    ],
+                                  ],
+                                ],
+                              ],
+                            ],
+                          ],
+                        ],
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    ],
+  ],
   ["untuk", [["itu", [["apa", [], [5, 0, 0, 0, 0]]]]]],
   ["menanyakan", [["itu", [["apa", [], [36, 0]]]]]],
   [
@@ -72,9 +136,9 @@ const brainBigegi84 = [
   ["gaul", [["itu", [["apa", [], [69, 0]]]]]],
   ["kamu", [["itu", [["apa", [], [22, 0, 0]]]]]],
   ["penunjuk", [["itu", [["apa", [], [73, 0, 0, 0, 0, 0, 0, 0, 0]]]]]],
-  ["bagi", []],
-  ["benda", []],
-  ["sesuatu", []],
+  ["bagi", [["itu", [["apa", [], [5, 4, 0, 0, 0]]]]]],
+  ["benda", [["itu", [["apa", [], [81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]]]],
+  ["sesuatu", [["itu", [["apa", [], [5, 5, 0, 0, 0, 0, 0, 0, 0]]]]]],
   [
     "unsur",
     [
@@ -162,14 +226,19 @@ const brainBigegi84 = [
           ],
         ],
       ],
+      ["itu", [["apa", [], [90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]],
     ],
   ],
-  ["bahasa", []],
+  [
+    "bahasa",
+    [["itu", [["apa", [], [97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]]],
+  ],
   [
     "yang",
     [
       ["membuat", []],
       ["diajak", [["bicara", []]]],
+      ["itu", [["apa", [], [5, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]]],
     ],
   ],
   ["diucapkan", []],
@@ -420,4 +489,188 @@ const brainBigegi84 = [
   ["bagaimana", []],
   ["harus", []],
   ["dilakukan", []],
+  ["tujuan", []],
+  [
+    "segala",
+    [
+      [
+        "sesuatu",
+        [
+          [
+            "di",
+            [
+              [
+                "alam",
+                [
+                  [
+                    "semesta",
+                    [
+                      [
+                        "yang",
+                        [
+                          [
+                            "dapat",
+                            [
+                              [
+                                "berwujud",
+                                [["maupun", [["tidak", [["berwujud", []]]]]]],
+                              ],
+                            ],
+                          ],
+                        ],
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    ],
+  ],
+  ["di", []],
+  ["alam", []],
+  ["semesta", []],
+  ["berwujud", []],
+  ["maupun", []],
+  ["barang", []],
+  ["hal", []],
+  ["tentu", []],
+  [
+    "zat",
+    [
+      [
+        "tunggal",
+        [
+          [
+            "yang",
+            [
+              [
+                "tidak",
+                [
+                  [
+                    "dapat",
+                    [
+                      [
+                        "diuraikan",
+                        [
+                          [
+                            "lagi",
+                            [
+                              [
+                                "menjadi",
+                                [
+                                  [
+                                    "zat",
+                                    [
+                                      [
+                                        "yang",
+                                        [["lebih", [["sederhana", []]]]],
+                                      ],
+                                    ],
+                                  ],
+                                ],
+                              ],
+                            ],
+                          ],
+                        ],
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    ],
+  ],
+  ["tunggal", []],
+  ["diuraikan", []],
+  ["lagi", []],
+  ["menjadi", []],
+  ["lebih", []],
+  ["sederhana", []],
+  [
+    "kemampuan",
+    [
+      [
+        "yang",
+        [
+          [
+            "dimiliki",
+            [
+              [
+                "manusia",
+                [
+                  [
+                    "untuk",
+                    [
+                      [
+                        "berkomunikasi",
+                        [
+                          [
+                            "dengan",
+                            [
+                              [
+                                "manusia",
+                                [
+                                  [
+                                    "lainnya",
+                                    [
+                                      [
+                                        "menggunakan",
+                                        [
+                                          [
+                                            "tanda,",
+                                            [
+                                              [
+                                                "misalnya",
+                                                [
+                                                  [
+                                                    "kata",
+                                                    [
+                                                      [
+                                                        "dan",
+                                                        [["gerakan", []]],
+                                                      ],
+                                                    ],
+                                                  ],
+                                                ],
+                                              ],
+                                            ],
+                                          ],
+                                        ],
+                                      ],
+                                    ],
+                                  ],
+                                ],
+                              ],
+                            ],
+                          ],
+                        ],
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    ],
+  ],
+  ["dimiliki", []],
+  ["berkomunikasi", []],
+  ["lainnya", []],
+  ["menggunakan", []],
+  ["tanda,", []],
+  ["gerakan", []],
+  ["bahwa", []],
+  ["kalimat", []],
+  ["berikut", []],
+  ["diutamakan", []],
+  ["dibedakan", []],
+  ["lain", []],
 ];

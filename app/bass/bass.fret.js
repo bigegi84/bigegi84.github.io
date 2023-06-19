@@ -48,15 +48,16 @@ const bassFret = {
   view: () => {
     const fret = bassState.fret;
     const view = [];
-    for (var x in fret) {
+    for (const x in fret) {
       const fretLine = [];
-      for (var y in fret[x]) {
+      for (const y in fret[x]) {
         fretLine.push(
           <div
             key={y}
             id={"fret-" + x + "-" + y}
             className="bass-fret"
             onMouseDown={(e) => bassFret.action.mouse.down(e)}
+            onMouseOut={(e) => bassFret.action.mouse.up(e)}
             onMouseUp={(e) => bassFret.action.mouse.up(e)}
           >
             {fret[x][y]}
@@ -71,6 +72,25 @@ const bassFret = {
         </div>
       );
     }
-    return <div>{view}</div>;
+    const [show, setShow] = React.useState(false);
+    return (
+      <div className="column-a">
+        <div className="row-a">
+          <strong
+            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
+          >
+            Fret
+          </strong>
+          <div
+            style={bigegi84theme.styleCircle}
+            className="circle-a"
+            onClick={() => setShow(!show)}
+          >
+            <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
+          </div>
+        </div>
+        {show ? <div>{view}</div> : null}
+      </div>
+    );
   },
 };

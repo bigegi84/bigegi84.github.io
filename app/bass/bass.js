@@ -40,7 +40,7 @@ const bass = {
         onKeyUp={(e) => bass.action.key.up(e)}
       >
         <h2 style={bigegi84theme.style}>bigegi84 - Bass</h2>
-        <bassSustain.view />
+        <bassConfig.view />
         <bassFret.view />
       </div>
     );

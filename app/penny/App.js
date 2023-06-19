@@ -6,18 +6,6 @@ const Register = () => <h1>Register</h1>;
 
 const App = () => (
   <ReactRouterDOM.HashRouter>
-    {/* <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-    </ul> */}
-
     <Route path="/" exact component={Home} />
     <Route path="/new" component={New} />
     <Route path="/dashboard" component={Dashboard} />

@@ -4,8 +4,9 @@
 
   const app = {
     action: {
-      withFooter: (Children) => (
+      withFooter: ([props, Children]) => (
         <div style={bigegi84theme.style}>
+          <bigegi84Navbar.view {...props} />
           <Children />
           <bigegi84footer.view />
         </div>
@@ -13,58 +14,56 @@
     },
     view: () => (
       <ReactRouterDOM.HashRouter>
-        {/* <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-    </ul> */}
-
         <Route path="/" exact component={bigegi84.view} />
         <Route
           path="/bass"
           exact
-          component={() => app.action.withFooter(bass.view)}
+          component={(props) => {
+            return app.action.withFooter([props, bass.view]);
+          }}
         />
         <Route
           path="/clone"
           exact
-          component={() => app.action.withFooter(clone.view)}
+          component={(props) => {
+            return app.action.withFooter([props, clone.view]);
+          }}
         />
         <Route
           path="/piano"
           exact
-          component={() => app.action.withFooter(piano.view)}
+          component={(props) => {
+            return app.action.withFooter([props, piano.view]);
+          }}
         />
         <Route
           path="/pixel-art"
           exact
-          component={() => app.action.withFooter(pixelArt.view)}
+          component={(props) => {
+            return app.action.withFooter([props, pixelArt.view]);
+          }}
         />
         <Route
           path="/ukulele"
           exact
-          component={() => app.action.withFooter(ukulele.view)}
+          component={(props) => {
+            return app.action.withFooter([props, ukulele.view]);
+          }}
         />
         <Route
           path="/guitar"
           exact
-          component={() => app.action.withFooter(guitar.view)}
+          component={(props) => {
+            return app.action.withFooter([props, guitar.view]);
+          }}
         />
         <Route
           path="/drum"
           exact
-          component={() => app.action.withFooter(drum.view)}
+          component={(props) => {
+            return app.action.withFooter([props, drum.view]);
+          }}
         />
-        {/* <Route path="/new" component={New} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} /> */}
       </ReactRouterDOM.HashRouter>
     ),
   };

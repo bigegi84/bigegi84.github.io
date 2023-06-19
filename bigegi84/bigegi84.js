@@ -1,14 +1,7 @@
 const bigegi84 = {
   view: () => {
     return (
-      <div
-        // style={{
-        //   background:
-        //     bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
-        //   color: bigegi84store.theme[bigegi84store.theme.value].textColor,
-        // }}
-        className={bigegi84theme.class.basic}
-      >
+      <div className={bigegi84theme.class.basic}>
         <bigegi84title.view />
         <bigegi84education.view />
         <bigegi84experience.view />

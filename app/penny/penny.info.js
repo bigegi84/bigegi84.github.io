@@ -133,7 +133,7 @@ const pennyInfo = {
                 {() => (
                   <div className="column-a card-a">
                     <strong className={bigegi84theme.class.basic}>
-                      Aktiva
+                      Ringkasan
                     </strong>
                     <pennyInfo.action.balance />
                   </div>

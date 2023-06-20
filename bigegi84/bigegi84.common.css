@@ -15,6 +15,11 @@
   flex-wrap: wrap;
   gap: 5px;
 }
+.card-a {
+  border: 1px solid;
+  border-radius: 1em;
+  padding: 1em;
+}
 .circle-a {
   text-align: center;
   border-radius: 2.75em;

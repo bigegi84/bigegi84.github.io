@@ -21,6 +21,11 @@ const bigegi84state = {
       link: "#/guitar",
     },
     {
+      name: "Penny",
+      description: "Aplikasi web untuk megatur keuangan.",
+      link: "#/penny",
+    },
+    {
       name: "Piano",
       description: "Aplikasi web untuk memainkan piano.",
       link: "#/piano",

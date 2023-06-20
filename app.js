@@ -30,6 +30,13 @@
           }}
         />
         <Route
+          path="/penny"
+          exact
+          component={(props) => {
+            return app.action.withFooter([props, penny.view]);
+          }}
+        />
+        <Route
           path="/piano"
           exact
           component={(props) => {
@@ -62,6 +69,24 @@
           exact
           component={(props) => {
             return app.action.withFooter([props, drum.view]);
+          }}
+        />
+        <Route
+          path="/fa"
+          exact
+          component={(props) => {
+            return app.action.withFooter([
+              props,
+              () => (
+                <div className="row-a" style={{ margin: "3em" }}>
+                  {bigegi84icon.map((it, i) => (
+                    <div key={i} className="circle-a">
+                      <i className={"fa-solid fa-" + it}></i>
+                    </div>
+                  ))}
+                </div>
+              ),
+            ]);
           }}
         />
       </ReactRouterDOM.HashRouter>

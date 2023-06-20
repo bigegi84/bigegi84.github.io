@@ -1,4 +1,18 @@
 const pennyConfig = {
+  action: {
+    save: () => {
+      const dataStr =
+        "data:text/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(pennyStore));
+      const dlAnchorElem = document.getElementById("downloadA");
+      dlAnchorElem.setAttribute("href", dataStr);
+      dlAnchorElem.setAttribute(
+        "download",
+        `bigegi84-Penny-${pennyStore.info.name}-${Date.now()}.json`
+      );
+      dlAnchorElem.click();
+    },
+  },
   view: () => {
     const [show, setShow] = React.useState(false);
     const inputFile = React.useRef();
@@ -23,15 +37,7 @@ const pennyConfig = {
             <a id="downloadA" style={{ display: "none" }} />
             <button
               className={bigegi84theme.class.button}
-              onClick={() => {
-                const dataStr =
-                  "data:text/json;charset=utf-8," +
-                  encodeURIComponent(JSON.stringify(pennyStore));
-                const dlAnchorElem = document.getElementById("downloadA");
-                dlAnchorElem.setAttribute("href", dataStr);
-                dlAnchorElem.setAttribute("download", "penny.json");
-                dlAnchorElem.click();
-              }}
+              onClick={() => pennyConfig.action.save()}
             >
               Save
             </button>

@@ -2,8 +2,20 @@ const pennyInfo = {
   action: {
     balance: () => {
       return (
-        <div>
-          <strong>Total Saldo</strong>
+        <div className="row-a">
+          <strong className={bigegi84theme.class.basic}>Total Saldo:</strong>
+          <mobxReact.Observer>
+            {() => (
+              <span>
+                {pennyStore.show.balance
+                  ? pennyStore.account.reduce(
+                      (partialSum, [, , balance]) => partialSum + balance,
+                      0
+                    )
+                  : "XXX"}
+              </span>
+            )}
+          </mobxReact.Observer>
         </div>
       );
     },
@@ -34,6 +46,7 @@ const pennyInfo = {
                   <strong className={bigegi84theme.class.basic}>
                     {pennyStore.info.name}
                   </strong>
+                  <pennyInfo.action.balance />
                 </div>
               )}
             </mobxReact.Observer>

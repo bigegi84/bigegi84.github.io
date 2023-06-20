@@ -32,6 +32,11 @@
   color: white !important;
   border-color: white !important;
 }
+.black-gold-circle {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255);
+  color: white;
+  /* border-color: white !important; */
+}
 input[type="checkbox"]:checked + .black-gold-input::before {
   border-color: white;
   color: white;

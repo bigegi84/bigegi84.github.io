@@ -100,6 +100,32 @@ const pennyInfo = {
         </div>
       );
     },
+    summary: {
+      account: () => (
+        <div className="column-a">
+          {pennyStore.account.map(([name, owner, balance], i) => (
+            <div key={i} className="column-b">
+              <span>
+                {owner} - {name}
+              </span>
+              <span>{pennyAction.formatNumber(balance)}</span>
+            </div>
+          ))}
+        </div>
+      ),
+      debt: () => (
+        <div className="column-a">
+          {pennyStore.debt.map(([name, owner, balance, , total], i) => (
+            <div key={i} className="column-b">
+              <span>
+                {owner} - {name}
+              </span>
+              <span>{pennyAction.formatNumber(balance * total)}</span>
+            </div>
+          ))}
+        </div>
+      ),
+    },
   },
   view: () => {
     const [show, setShow] = React.useState(false);
@@ -146,6 +172,26 @@ const pennyInfo = {
                       Kewajiban Bulanan
                     </strong>
                     <pennyInfo.action.obligation />
+                  </div>
+                )}
+              </mobxReact.Observer>
+              <mobxReact.Observer>
+                {() => (
+                  <div className="column-a card-a">
+                    <strong className={bigegi84theme.class.basic}>
+                      Ringkasan Akun
+                    </strong>
+                    <pennyInfo.action.summary.account />
+                  </div>
+                )}
+              </mobxReact.Observer>
+              <mobxReact.Observer>
+                {() => (
+                  <div className="column-a card-a">
+                    <strong className={bigegi84theme.class.basic}>
+                      Ringkasan Utang
+                    </strong>
+                    <pennyInfo.action.summary.debt />
                   </div>
                 )}
               </mobxReact.Observer>

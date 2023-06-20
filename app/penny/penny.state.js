@@ -11,7 +11,7 @@ const pennyState = {
     account: [["Contoh", "bigegi84", 0.0]],
     asset: [["Contoh", "bigegi84", 0.0, 0.0]],
     claim: [["Contoh", "bigegi84", 0.0, 0.0]],
-    debt: [["Contoh Utang", "bigegi84", 5056900.0, 7, 239]],
+    debt: [["Contoh Utang", "bigegi84", 100.0, 7, 2]],
     info: { name: "" },
     show: { balance: false },
   },

@@ -8,9 +8,11 @@ const pennyInfo = {
             {() => (
               <span>
                 {pennyStore.show.balance
-                  ? pennyStore.account.reduce(
-                      (partialSum, [, , balance]) => partialSum + balance,
-                      0
+                  ? pennyAction.formatNumber(
+                      pennyStore.account.reduce(
+                        (partialSum, [, , balance]) => partialSum + balance,
+                        0
+                      )
                     )
                   : "XXX"}
               </span>

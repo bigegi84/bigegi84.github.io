@@ -1,19 +1,22 @@
 const pennyAccount = {
   action: {
-    accountList: mobxReact.observer(() =>
+    list: mobxReact.observer(() =>
       pennyStore.account.map(([name, owner, balance], i) => (
         <div key={i} className="column-a card-a">
           <span>
             {owner} - {name}
           </span>
-          <span>{pennyStore.show.balance ? balance : "XXX"}</span>
+          <span>
+            {pennyStore.show.balance
+              ? pennyAction.formatNumber(balance)
+              : "XXX"}
+          </span>
         </div>
       ))
     ),
   },
   view: () => {
     const [show, setShow] = React.useState(false);
-    const [showBalance, setShowBalance] = React.useState(false);
     const [add, setAdd] = React.useState(false);
     const [form, setForm] = React.useState(["", "", 0.0]);
     const [fName, fOwner, fBalance] = form;
@@ -103,7 +106,7 @@ const pennyAccount = {
               </div>
             ) : null}
             <div className="row-a">
-              <pennyAccount.action.accountList showBalance={showBalance} />
+              <pennyAccount.action.list />
             </div>
           </div>
         ) : null}

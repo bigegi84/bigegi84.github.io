@@ -1,9 +1,8 @@
 const pennyDebt = {
   action: {
     form: () => {
-      const [form, setForm] = React.useState(["", "", 0.0, "-", 0.0]);
-      const [name, owner, installment, dueDate, installmentRemaining, total] =
-        form;
+      const [form, setForm] = React.useState(["", "", 0.0, "-"]);
+      const [name, owner, installment, dueDate, installmentRemaining] = form;
       return (
         <div className="row-a">
           <div className="column-a">
@@ -75,15 +74,18 @@ const pennyDebt = {
             />
           </div>
           <div className="column-a">
-            <label htmlFor="total" className={bigegi84theme.class.basic}>
-              Total
+            <label
+              htmlFor="installmentRemaining"
+              className={bigegi84theme.class.basic}
+            >
+              Sisa Cicilan
             </label>
             <input
               type="text"
-              id="total"
-              name="total"
+              id="installmentRemaining"
+              name="installmentRemaining"
               className={bigegi84theme.class.inputText}
-              value={total}
+              value={installmentRemaining}
               onChange={(e) => {
                 const newState = [...form];
                 newState[4] = e.target.value;
@@ -95,6 +97,17 @@ const pennyDebt = {
             <button
               className={bigegi84theme.class.button}
               onClick={() => {
+                if (isNaN(parseFloat(installment))) {
+                  alert("Cicilan salah!");
+                  return;
+                }
+                if (
+                  installmentRemaining != "-" &&
+                  isNaN(parseFloat(installmentRemaining))
+                ) {
+                  alert("Sisa Cicilan salah!");
+                  return;
+                }
                 pennyStore.debt.push(form);
                 setForm(["", "", 0.0, "-", 0.0]);
               }}

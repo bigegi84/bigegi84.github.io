@@ -3,7 +3,13 @@ const pennyState = {
     account: [],
     asset: [],
     claim: [],
+    config: {
+      payday: 28,
+    },
     debt: [],
+    form: {
+      account: [, , , , false],
+    },
     info: { name: "" },
     show: { balance: false },
   },
@@ -11,7 +17,13 @@ const pennyState = {
     account: [["Contoh", "bigegi84", 0.0]],
     asset: [["Contoh", "bigegi84", 0.0, 0.0]],
     claim: [["Contoh", "bigegi84", 0.0, 0.0]],
+    config: {
+      payday: 28,
+    },
     debt: [["Contoh Utang", "bigegi84", 100.0, 7, 2]],
+    form: {
+      account: [, , , , false],
+    },
     info: { name: "" },
     show: { balance: false },
   },

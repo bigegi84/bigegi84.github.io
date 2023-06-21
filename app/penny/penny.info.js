@@ -79,6 +79,49 @@ const pennyInfo = {
         </div>
       );
     },
+    decision: {
+      budget: () => {
+        return (
+          <mobxReact.Observer>
+            {() => {
+              const account = pennyStore.account.reduce(
+                (partialSum, [name, , balance]) =>
+                  partialSum + (name == "BPJSTK" ? 0 : balance),
+                0
+              );
+              const today = moment();
+              const nextMonth = moment().add(
+                moment().format("MM") < pennyStore.config.payday ? 0 : 1,
+                "M"
+              );
+              const nextPayday = moment(
+                `${nextMonth.format("YYYY")}-${nextMonth.format("MM")}-${
+                  pennyStore.config.payday
+                }`
+              );
+              const dayLeftToPayday = nextPayday.diff(today, "days");
+              return (
+                <div className="column-a card-a">
+                  <strong className={bigegi84theme.class.basic}>Budget</strong>
+                  <div className="column-a">
+                    <div className="column-b">
+                      <span>Per Hari</span>
+                      <span>
+                        {pennyAction.formatNumber(account / dayLeftToPayday)}
+                      </span>
+                    </div>
+                    <div className="column-b">
+                      <span>Gajian Selanjutnya</span>
+                      <span>{nextPayday.format("DD-MM-YYYY")}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          </mobxReact.Observer>
+        );
+      },
+    },
     obligation: () => {
       return (
         <div className="row-a">
@@ -195,6 +238,7 @@ const pennyInfo = {
                   </div>
                 )}
               </mobxReact.Observer>
+              <pennyInfo.action.decision.budget />
             </div>
           </div>
         ) : null}

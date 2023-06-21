@@ -179,7 +179,7 @@ const pennyDebt = {
                 className="circle-a"
                 onClick={() => setAdd(!add)}
               >
-                <i className={"fa-solid fa-plus"} />
+                <i className={"fa-solid" + (add ? " fa-minus" : " fa-plus")} />
               </div>
             </div>
             {add ? <pennyDebt.action.form /> : null}

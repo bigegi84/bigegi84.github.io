@@ -65,7 +65,17 @@ const pennyStuff = {
                     const [, , name, price, amount, unit] =
                       pennyStore.form.stuff;
                     pennyStore.stuff.push([
-                      ...[name, [parseFloat(price), parseFloat(amount), unit]],
+                      ...[
+                        name,
+                        [
+                          [
+                            parseFloat(price),
+                            parseFloat(amount),
+                            unit,
+                            moment().format(),
+                          ],
+                        ],
+                      ],
                       ...[moment().format()],
                     ]);
                     pennyStore.form.stuff = [false, false, "", 0.0, 0.0, ""];
@@ -88,7 +98,8 @@ const pennyStuff = {
               const isEdit =
                 pennyStore.form.stuff[0] == "edit" &&
                 pennyStore.form.stuff[1] == i;
-              const [] = priceHistory[priceHistory.lenght - 1];
+              const [price, amount, unit] =
+                priceHistory[priceHistory.length - 1];
               return (
                 <div key={i} className="column-a card-a">
                   {isEdit ? (
@@ -96,9 +107,9 @@ const pennyStuff = {
                       <div>
                         <input
                           type="text"
-                          value={pennyStore.form.stuff[1]}
+                          value={pennyStore.form.stuff[2]}
                           onChange={(e) =>
-                            (pennyStore.form.account[1] = e.target.value)
+                            (pennyStore.form.stuff[2] = e.target.value)
                           }
                         />
                       </div>
@@ -107,58 +118,110 @@ const pennyStuff = {
                     <span>{name}</span>
                   )}
                   {isEdit ? (
-                    <div className="row-a">
-                      IDR
-                      <div>
-                        <input
-                          type="text"
-                          value={pennyStore.form.account[2]}
-                          onChange={(e) =>
-                            (pennyStore.form.account[2] = e.target.value)
-                          }
-                        />
+                    <div className="column-b">
+                      <div className="row-a">
+                        IDR
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.stuff[3]}
+                            onChange={(e) =>
+                              (pennyStore.form.stuff[3] = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="row-a">
+                        /
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.stuff[4]}
+                            onChange={(e) =>
+                              (pennyStore.form.stuff[4] = e.target.value)
+                            }
+                          />
+                        </div>
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.stuff[5]}
+                            onChange={(e) =>
+                              (pennyStore.form.stuff[5] = e.target.value)
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   ) : (
-                    <span>
-                      {pennyStore.show.balance
-                        ? pennyAction.formatNumber(balance)
-                        : "XXX"}
-                    </span>
+                    <div className="column-b">
+                      <span>
+                        {pennyStore.show.balance
+                          ? pennyAction.formatNumber(price)
+                          : "XXX"}
+                      </span>
+                      <span>
+                        {pennyStore.show.balance ? `/${amount} ${unit}` : "XXX"}
+                      </span>
+                    </div>
                   )}
                   <div className="row-a">
                     <div
                       style={bigegi84theme.styleCircle}
                       className="circle-a"
                       onClick={() => {
-                        if (pennyStore.form.account[4]) {
+                        if (isEdit) {
+                          if (!pennyStuff.action.validate()) return;
+                          const [, index, name, price, amount, unit] =
+                            pennyStore.form.stuff;
+                          let isChangePriceHistory = false;
+                          const [, priceHistory] = pennyStore.stuff[index];
+                          const [lPrice, lAmount, lUnit] =
+                            priceHistory[priceHistory.length - 1];
                           if (
-                            !pennyAccount.action.validate(
-                              pennyStore.form.account
-                            )
+                            price != lPrice ||
+                            amount != lAmount ||
+                            unit != lUnit
                           )
-                            return;
-                          const [fname, fowner, fbalance, ,] =
-                            pennyStore.form.account;
-                          pennyStore.account[i] = [
-                            ...[fname, fowner, parseFloat(fbalance)],
+                            isChangePriceHistory = true;
+                          let newPriceHistory = [...priceHistory];
+                          if (isChangePriceHistory)
+                            newPriceHistory.push([
+                              parseFloat(price),
+                              parseFloat(amount),
+                              unit,
+                              moment().format(),
+                            ]);
+                          pennyStore.stuff[index] = [
+                            ...[name, newPriceHistory],
                             ...[moment().format()],
                           ];
-                          pennyStore.form.account[4] = false;
+                          pennyStore.form.stuff = [
+                            false,
+                            false,
+                            "",
+                            0.0,
+                            0.0,
+                            "",
+                          ];
+                          pennyStuff.action.sort();
                         } else {
-                          pennyStore.form.account = [
-                            ...[name, owner, parseFloat(balance), , true, i],
+                          pennyStore.form.stuff = [
+                            ...[
+                              "edit",
+                              i,
+                              name,
+                              parseFloat(price),
+                              parseFloat(amount),
+                              unit,
+                            ],
                           ];
                         }
                       }}
                     >
                       <i
                         className={
-                          "fa-solid" +
-                          (pennyStore.form.account[4] &&
-                          pennyStore.form.account[5] == i
-                            ? " fa-check"
-                            : " fa-pen")
+                          "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
                         }
                       />
                     </div>
@@ -220,7 +283,7 @@ const pennyStuff = {
             </div>
             {add ? <pennyStuff.action.form /> : null}
             <div className="row-a">
-              <pennyAsset.action.list />
+              <pennyStuff.action.list />
             </div>
           </div>
         ) : null}

@@ -114,6 +114,10 @@ const pennyInfo = {
                       <span>Gajian Selanjutnya</span>
                       <span>{nextPayday.format("DD-MM-YYYY")}</span>
                     </div>
+                    <div className="column-b">
+                      <span>Jarak Ke Hari Gajian</span>
+                      <span>{dayLeftToPayday} hari</span>
+                    </div>
                   </div>
                 </div>
               );

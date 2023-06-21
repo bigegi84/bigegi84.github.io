@@ -25,6 +25,7 @@ const pennyState = {
     debt: [["Contoh Utang", "bigegi84", 100.0, 7, 2]],
     form: {
       account: [, , , , false],
+      stuff: [false, false, "", 0.0, 0.0, ""],
     },
     info: { name: "" },
     show: { balance: false },

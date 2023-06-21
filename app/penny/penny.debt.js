@@ -97,19 +97,16 @@ const pennyDebt = {
             <button
               className={bigegi84theme.class.button}
               onClick={() => {
-                if (isNaN(parseFloat(installment))) {
-                  alert("Cicilan salah!");
-                  return;
-                }
-                if (
-                  installmentRemaining != "-" &&
-                  isNaN(parseFloat(installmentRemaining))
-                ) {
-                  alert("Sisa Cicilan salah!");
-                  return;
-                }
-                pennyStore.debt.push(form);
+                if (!pennyDebt.action.validate(form)) return;
+                pennyStore.debt.push([
+                  name,
+                  owner,
+                  -parseFloat(installment),
+                  parseFloat(dueDate),
+                  parseFloat(installmentRemaining),
+                ]);
                 setForm(["", "", 0.0, "-", 0.0]);
+                pennyDebt.action.sort();
               }}
             >
               Simpan
@@ -151,6 +148,29 @@ const pennyDebt = {
         )
       )
     ),
+    sort: () => {
+      pennyStore.debt = pennyStore.debt.sort(([name, owner], [bname, bowner]) =>
+        owner + name > bowner + bname
+          ? 1
+          : bowner + bname > owner + name
+          ? -1
+          : 0
+      );
+    },
+    validate: ([name, owner, installment, dueDate, installmentRemaining]) => {
+      if (isNaN(parseFloat(installment))) {
+        alert("Cicilan salah!");
+        return false;
+      }
+      if (
+        installmentRemaining != "-" &&
+        isNaN(parseFloat(installmentRemaining))
+      ) {
+        alert("Sisa Cicilan salah!");
+        return false;
+      }
+      return true;
+    },
   },
   view: () => {
     const [show, setShow] = React.useState(false);

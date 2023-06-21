@@ -1,1 +1,1 @@
-const pennyStore = mobx.observable(pennyState.example);
+const pennyStore = mobx.observable(pennyState.empty);

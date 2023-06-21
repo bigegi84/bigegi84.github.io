@@ -9,9 +9,11 @@ const pennyState = {
     debt: [],
     form: {
       account: [, , , , false],
+      stuff: [false, false, "", 0.0, 0.0, ""],
     },
     info: { name: "" },
     show: { balance: false },
+    stuff: [],
   },
   example: {
     account: [["Contoh", "bigegi84", 0.0]],
@@ -26,5 +28,9 @@ const pennyState = {
     },
     info: { name: "" },
     show: { balance: false },
+    stuff: [["Contoh Barang", ["2023-06-21T16:55:41+07:00", 10000]]],
+  },
+  stuff: {
+    unit: [],
   },
 };

@@ -102,7 +102,7 @@ const pennyInfo = {
               const dayLeftToPayday = nextPayday.diff(today, "days");
               return (
                 <div className="column-a card-a">
-                  <strong className={bigegi84theme.class.basic}>Budget</strong>
+                  <strong className={bigegi84theme.class.basic}>Anggaran</strong>
                   <div className="column-a">
                     <div className="column-b">
                       <span>Per Hari</span>

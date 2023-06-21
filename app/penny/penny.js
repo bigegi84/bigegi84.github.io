@@ -23,8 +23,8 @@ const penny = {
             )}
           </mobxReact.Observer>
         </div>
-        <pennyInfo.view />
         <pennyConfig.view />
+        <pennyInfo.view />
         <pennyAccount.view />
         <pennyAsset.view />
         <pennyDebt.view />

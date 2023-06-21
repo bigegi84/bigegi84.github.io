@@ -82,98 +82,101 @@ const pennyAccount = {
       return (
         <mobxReact.Observer>
           {() => {
-            return pennyStore.account.map(([name, owner, balance], i) => {
-              return (
-                <div key={i} className="column-a card-a">
-                  {pennyStore.form.account[4] &&
-                  pennyStore.form.account[5] == i ? (
+            return pennyStore.account.map(
+              ([name, owner, balance, updatedAt], i) => {
+                return (
+                  <div key={i} className="column-a card-a">
+                    {pennyStore.form.account[4] &&
+                    pennyStore.form.account[5] == i ? (
+                      <div className="row-a">
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.account[1]}
+                            onChange={(e) =>
+                              (pennyStore.form.account[1] = e.target.value)
+                            }
+                          />
+                        </div>
+                        -
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.account[0]}
+                            onChange={(e) =>
+                              (pennyStore.form.account[0] = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span>
+                        {owner} - {name}
+                      </span>
+                    )}
+                    {pennyStore.form.account[4] &&
+                    pennyStore.form.account[5] == i ? (
+                      <div className="row-a">
+                        IDR
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.account[2]}
+                            onChange={(e) =>
+                              (pennyStore.form.account[2] = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span>
+                        {pennyStore.show.balance
+                          ? pennyAction.formatNumber(balance)
+                          : "XXX"}
+                      </span>
+                    )}
+                    <span>{moment(updatedAt).locale("id").fromNow()}</span>
                     <div className="row-a">
-                      <div>
-                        <input
-                          type="text"
-                          value={pennyStore.form.account[1]}
-                          onChange={(e) =>
-                            (pennyStore.form.account[1] = e.target.value)
-                          }
-                        />
-                      </div>
-                      -
-                      <div>
-                        <input
-                          type="text"
-                          value={pennyStore.form.account[0]}
-                          onChange={(e) =>
-                            (pennyStore.form.account[0] = e.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <span>
-                      {owner} - {name}
-                    </span>
-                  )}
-                  {pennyStore.form.account[4] &&
-                  pennyStore.form.account[5] == i ? (
-                    <div className="row-a">
-                      IDR
-                      <div>
-                        <input
-                          type="text"
-                          value={pennyStore.form.account[2]}
-                          onChange={(e) =>
-                            (pennyStore.form.account[2] = e.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <span>
-                      {pennyStore.show.balance
-                        ? pennyAction.formatNumber(balance)
-                        : "XXX"}
-                    </span>
-                  )}
-                  <div className="row-a">
-                    <div
-                      style={bigegi84theme.styleCircle}
-                      className="circle-a"
-                      onClick={() => {
-                        if (pennyStore.form.account[4]) {
-                          if (
-                            !pennyAccount.action.validate(
-                              pennyStore.form.account
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() => {
+                          if (pennyStore.form.account[4]) {
+                            if (
+                              !pennyAccount.action.validate(
+                                pennyStore.form.account
+                              )
                             )
-                          )
-                            return;
-                          const [fname, fowner, fbalance, ,] =
-                            pennyStore.form.account;
-                          pennyStore.account[i] = [
-                            ...[fname, fowner, parseFloat(fbalance)],
-                            ...[moment().format()],
-                          ];
-                          pennyStore.form.account[4] = false;
-                        } else {
-                          pennyStore.form.account = [
-                            ...[name, owner, parseFloat(balance), , true, i],
-                          ];
-                        }
-                      }}
-                    >
-                      <i
-                        className={
-                          "fa-solid" +
-                          (pennyStore.form.account[4] &&
-                          pennyStore.form.account[5] == i
-                            ? " fa-check"
-                            : " fa-pen")
-                        }
-                      />
+                              return;
+                            const [fname, fowner, fbalance, ,] =
+                              pennyStore.form.account;
+                            pennyStore.account[i] = [
+                              ...[fname, fowner, parseFloat(fbalance)],
+                              ...[moment().format()],
+                            ];
+                            pennyStore.form.account[4] = false;
+                          } else {
+                            pennyStore.form.account = [
+                              ...[name, owner, parseFloat(balance), , true, i],
+                            ];
+                          }
+                        }}
+                      >
+                        <i
+                          className={
+                            "fa-solid" +
+                            (pennyStore.form.account[4] &&
+                            pennyStore.form.account[5] == i
+                              ? " fa-check"
+                              : " fa-pen")
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            });
+                );
+              }
+            );
           }}
         </mobxReact.Observer>
       );

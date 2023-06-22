@@ -116,7 +116,7 @@ const gardenStuff = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.stuff.map(([name, priceList], i) => {
+            return gardenStore.stuff.map(([,name, priceList], i) => {
               const isEdit =
                 gardenStore.form.stuff[0] == "edit" &&
                 gardenStore.form.stuff[1] == i;

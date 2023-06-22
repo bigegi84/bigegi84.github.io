@@ -64,6 +64,21 @@ const gardenConfig = {
             >
               Load
             </button>
+            <button
+              className={bigegi84theme.class.button}
+              onClick={() => {
+                gardenStore.purchase = bigegi84Orm.migrate(
+                  gardenStore.purchase
+                );
+                gardenStore.customer = bigegi84Orm.migrate(
+                  gardenStore.customer
+                );
+                gardenStore.stuff = bigegi84Orm.migrate(gardenStore.stuff);
+                gardenStore.supply = bigegi84Orm.migrate(gardenStore.supply);
+              }}
+            >
+              debug
+            </button>
           </div>
         ) : null}
       </div>

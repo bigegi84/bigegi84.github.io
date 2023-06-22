@@ -1,5 +1,16 @@
 const gardenCustomer = {
   action: {
+    add: () => {
+      if (!gardenCustomer.action.validate()) return;
+      const [, , name] = gardenStore.form.customer;
+      // gardenStore.customer.push([...[name], ...[moment().format()]]);
+      bigegi84Orm.createOne(gardenStore.customer, [
+        ...[name],
+        ...[moment().format()],
+      ]);
+      gardenStore.form.customer = [false, false, "", "", 0.0, 0.0, ""];
+      gardenCustomer.action.sort();
+    },
     form: () => {
       return (
         <mobxReact.Observer>
@@ -23,25 +34,7 @@ const gardenCustomer = {
               <div className="column-a">
                 <button
                   className={bigegi84theme.class.button}
-                  onClick={() => {
-                    if (!gardenCustomer.action.validate()) return;
-                    const [, , name, source, link, price, amount, unit] =
-                      gardenStore.form.customer;
-                    gardenStore.customer.push([
-                      ...[name],
-                      ...[moment().format()],
-                    ]);
-                    gardenStore.form.customer = [
-                      false,
-                      false,
-                      "",
-                      "",
-                      0.0,
-                      0.0,
-                      "",
-                    ];
-                    gardenCustomer.action.sort();
-                  }}
+                  onClick={() => gardenCustomer.action.add()}
                 >
                   Simpan
                 </button>
@@ -55,7 +48,7 @@ const gardenCustomer = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.customer.map(([name, priceList, scale], i) => {
+            return gardenStore.customer.map(([, name], i) => {
               const isEdit =
                 gardenStore.form.customer[0] == "edit" &&
                 gardenStore.form.customer[1] == i;

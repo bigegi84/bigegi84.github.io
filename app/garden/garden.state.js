@@ -11,11 +11,13 @@ const gardenState = {
     form: {
       account: [, , , , false],
       customer: [false, false, ""],
+      purchase: [false, false, "", 0.0],
       stuff: [false, false, "", "", 0.0, 0.0, ""],
       supply: [false, false, "", "", "", 0.0, 0.0, ""],
       supplyScale: [[1, "sachet"]],
     },
     info: { name: "" },
+    purchase: [],
     show: { balance: false },
     stuff: [],
     supply: [],

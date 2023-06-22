@@ -1,13 +1,13 @@
-const gardenPurchase = {
+const gardenSale = {
   action: {
     add: () => {
-      if (!gardenPurchase.action.validate()) return;
-      const { supplyAndSourceId, amount } = gardenStore.form.purchase;
+      if (!gardenSale.action.validate()) return;
+      const { supplyAndSourceId, amount, unit: iScale } = gardenStore.form.sale;
       const [i, si] = supplyAndSourceId.split("-");
-      const { id: supplyId, source } = gardenStore.supply[i];
+      const { id: supplyId, source, scale } = gardenStore.supply[i];
       const { id: sourceId, price } = source[si];
       const priceTotal = -(parseFloat(amount) * parseFloat(price));
-      bigegi84Orm.obj.createOne(gardenStore.purchase, {
+      bigegi84Orm.obj.createOne(gardenStore.sale, {
         ...{
           supplyId,
           sourceId,
@@ -17,8 +17,17 @@ const gardenPurchase = {
           updatedAtt: moment().format(),
         },
       });
-      gardenStore.supply[i].stock += parseFloat(amount);
-      gardenPurchase.action.sort();
+      const { ratio } = scale[iScale];
+      gardenStore.supply[i].stock += -parseFloat(amount / ratio);
+      gardenStore.form.sale = {
+        mode: null,
+        i: null,
+        supplyAndSourceId: "",
+        amount: 0,
+        unit: "",
+        unitList: [],
+      };
+      gardenSale.action.sort();
     },
     form: () => {
       return (
@@ -30,22 +39,45 @@ const gardenPurchase = {
                   Barang
                 </label>
                 <select
-                  value={gardenStore.form.purchase.supplyAndSourceId}
-                  onChange={(e) =>
-                    (gardenStore.form.purchase.supplyAndSourceId =
-                      e.target.value)
-                  }
+                  value={gardenStore.form.sale.supplyAndSourceId}
+                  onChange={(e) => {
+                    gardenStore.form.sale.supplyAndSourceId = e.target.value;
+                  }}
                 >
                   <option value="">Pilih Supply</option>
-                  {gardenStore.supply.map(({ id, name, source }, i) => {
+                  {gardenStore.supply.map(({ id, name, source, stock }, i) => {
                     return source.map((it, si) => (
                       <option key={si} value={`${i}-${si}`}>
-                        {name}-{it.name}
+                        {`(${stock})${name}-${it.name}`}
                       </option>
                     ));
                   })}
                 </select>
               </div>
+              {gardenStore.form.sale.supplyAndSourceId == "" ? null : (
+                <div className="column-a">
+                  <label htmlFor="name" className={bigegi84theme.class.basic}>
+                    Unit
+                  </label>
+                  <select
+                    value={gardenStore.form.sale.unit}
+                    onChange={(e) =>
+                      (gardenStore.form.sale.unit = e.target.value)
+                    }
+                  >
+                    <option value="">Pilih Unit</option>
+                    {gardenStore.supply[
+                      gardenStore.form.sale.supplyAndSourceId.split("-")[0]
+                    ].scale.map(({ id, ratio, unit }, i) => {
+                      return (
+                        <option key={i} value={`${i}`}>
+                          {unit}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              )}
               <div className="column-a">
                 <label htmlFor="owner" className={bigegi84theme.class.basic}>
                   Jumlah
@@ -55,16 +87,16 @@ const gardenPurchase = {
                   id="owner"
                   name="owner"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.purchase.amount}
+                  value={gardenStore.form.sale.amount}
                   onChange={(e) =>
-                    (gardenStore.form.purchase.amount = e.target.value)
+                    (gardenStore.form.sale.amount = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
                 <button
                   className={bigegi84theme.class.button}
-                  onClick={() => gardenPurchase.action.add()}
+                  onClick={() => gardenSale.action.add()}
                 >
                   Simpan
                 </button>
@@ -78,14 +110,14 @@ const gardenPurchase = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.purchase.map(
+            return gardenStore.sale.map(
               (
                 { id, supplyId, sourceId, amount, price, createdAt, updateAt },
                 i
               ) => {
                 const isEdit =
-                  gardenStore.form.purchase[0] == "edit" &&
-                  gardenStore.form.purchase[1] == i;
+                  gardenStore.form.sale[0] == "edit" &&
+                  gardenStore.form.sale[1] == i;
                 //   const [source, price, amount, unit] =
                 //     priceList[priceList.length - 1];
                 const { name } = bigegi84Orm.obj.readOneById(
@@ -99,9 +131,9 @@ const gardenPurchase = {
                         <div>
                           <input
                             type="text"
-                            value={gardenStore.form.purchase[2]}
+                            value={gardenStore.form.sale[2]}
                             onChange={(e) =>
-                              (gardenStore.form.purchase[2] = e.target.value)
+                              (gardenStore.form.sale[2] = e.target.value)
                             }
                           />
                         </div>
@@ -118,12 +150,11 @@ const gardenPurchase = {
                         className="circle-a"
                         onClick={() => {
                           if (isEdit) {
-                            if (!gardenPurchase.action.validate()) return;
+                            if (!gardenSale.action.validate()) return;
                             const [, index, name, price, amount, unit] =
-                              gardenStore.form.purchase;
+                              gardenStore.form.sale;
                             let isChangePriceHistory = false;
-                            const [, priceHistory] =
-                              gardenStore.purchase[index];
+                            const [, priceHistory] = gardenStore.sale[index];
                             const [lPrice, lAmount, lUnit] =
                               priceHistory[priceHistory.length - 1];
                             if (
@@ -140,11 +171,11 @@ const gardenPurchase = {
                                 unit,
                                 moment().format(),
                               ]);
-                            gardenStore.purchase[index] = [
+                            gardenStore.sale[index] = [
                               ...[name, newPriceHistory],
                               ...[moment().format()],
                             ];
-                            gardenStore.form.purchase = [
+                            gardenStore.form.sale = [
                               false,
                               false,
                               "",
@@ -152,9 +183,9 @@ const gardenPurchase = {
                               0.0,
                               "",
                             ];
-                            gardenPurchase.action.sort();
+                            gardenSale.action.sort();
                           } else {
-                            gardenStore.form.purchase = [
+                            gardenStore.form.sale = [
                               ...[
                                 "edit",
                                 i,
@@ -183,14 +214,18 @@ const gardenPurchase = {
       );
     },
     sort: () => {
-      gardenStore.purchase = gardenStore.purchase.sort(([name], [bname]) =>
+      gardenStore.sale = gardenStore.sale.sort(([name], [bname]) =>
         name > bname ? 1 : bname > name ? -1 : 0
       );
     },
     validate: () => {
-      const { supplyAndSourceId, amount } = gardenStore.form.purchase;
+      const { supplyAndSourceId, unit, amount } = gardenStore.form.sale;
       if (supplyAndSourceId == "") {
         alert("Pilih supply!");
+        return false;
+      }
+      if (unit == "") {
+        alert("Pilih unit!");
         return false;
       }
       if (isNaN(parseFloat(amount))) {
@@ -213,7 +248,7 @@ const gardenPurchase = {
           <strong
             style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
           >
-            Pembelian
+            Penjualan
           </strong>
           <div
             style={bigegi84theme.styleCircle}
@@ -234,9 +269,9 @@ const gardenPurchase = {
                 <i className={"fa-solid" + (add ? " fa-minus" : " fa-plus")} />
               </div>
             </div>
-            {add ? <gardenPurchase.action.form /> : null}
+            {add ? <gardenSale.action.form /> : null}
             <div className="row-a">
-              <gardenPurchase.action.list />
+              <gardenSale.action.list />
             </div>
           </div>
         ) : null}

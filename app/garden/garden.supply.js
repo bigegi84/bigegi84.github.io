@@ -138,7 +138,18 @@ const gardenSupply = {
           {() => {
             return gardenStore.supply.map(
               (
-                { id, name, amount, unit, source, scale, createdAt, updateAt },
+                {
+                  id,
+                  name,
+                  amount,
+                  stock,
+                  sellPrice,
+                  unit,
+                  source,
+                  scale,
+                  createdAt,
+                  updateAt,
+                },
                 i
               ) => {
                 const isEdit =
@@ -162,6 +173,8 @@ const gardenSupply = {
                     ) : (
                       <span>{name}</span>
                     )}
+                    <span>Stok: {stock}</span>
+                    <span>Harga Jual: {sellPrice}</span>
                     {source.map((it, si) => {
                       const { id, name, link, price, createdAt, updateAt } = it;
                       return (

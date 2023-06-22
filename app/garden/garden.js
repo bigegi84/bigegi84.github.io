@@ -25,6 +25,7 @@ const garden = {
         </div>
         <gardenConfig.view />
         <gardenInfo.view />
+        <gardenSale.view />
         <gardenPurchase.view />
         <gardenCustomer.view />
         <gardenStuff.view />

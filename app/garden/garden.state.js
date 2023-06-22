@@ -10,6 +10,7 @@ const gardenState = {
     debt: [],
     form: {
       account: [, , , , false],
+      customer: [false, false, ""],
       stuff: [false, false, "", "", 0.0, 0.0, ""],
       supply: [false, false, "", "", "", 0.0, 0.0, ""],
       supplyScale: [[1, "sachet"]],

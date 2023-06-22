@@ -24,6 +24,7 @@ const garden = {
           </mobxReact.Observer>
         </div>
         <gardenConfig.view />
+        <gardenCustomer.view />
         <gardenStuff.view />
         <gardenSupply.view />
       </div>

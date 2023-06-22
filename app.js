@@ -30,6 +30,13 @@
           }}
         />
         <Route
+          path="/garden"
+          exact
+          component={(props) => {
+            return app.action.withFooter([props, garden.view]);
+          }}
+        />
+        <Route
           path="/penny"
           exact
           component={(props) => {

@@ -323,11 +323,15 @@ const gardenSupply = {
           <div className="column-a card-a">
             <span>Skala</span>
             {scale.map(({ id, ratio, unit }, i) => {
-              const a = supply.unit == unit ? supply.amount / ratio : ratio;
+              const normal = scale.find(({ unit }) => unit == supply.unit);
+              const normalize = normal ? normal.ratio : 1;
+              const normalRatio = ratio / normalize;
+              const a =
+                supply.unit == unit ? supply.amount / normalRatio : normalRatio;
               const b = source.price / a;
               return (
                 <span key={i}>
-                  {b}/1 {unit}
+                  {b}/{unit}
                 </span>
               );
             })}

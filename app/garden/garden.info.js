@@ -180,7 +180,7 @@ const gardenInfo = {
             {() => {
               const count = gardenStore.purchase.length;
               const total = gardenStore.purchase.reduce(
-                (partialSum, [, , balance]) => partialSum + balance,
+                (partialSum, { price }) => partialSum + price,
                 0
               );
               return (

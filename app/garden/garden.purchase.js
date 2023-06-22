@@ -2,18 +2,21 @@ const gardenPurchase = {
   action: {
     add: () => {
       if (!gardenPurchase.action.validate()) return;
-      const [, , iSupply, amount] = gardenStore.form.purchase;
-      const [i, pi] = iSupply.split("-");
-      const [name, priceList] = gardenStore.supply[i];
-      const [pName, , pPrice, pAmount, unit] = priceList[pi];
-      gardenStore.purchase.push([
-        ...[
-          `${name}-${pName} ${pAmount} ${unit}`,
-          parseFloat(amount),
-          -parseFloat(pPrice),
-          moment().format(),
-        ],
-      ]);
+      const { supplyAndSourceId, amount } = gardenStore.form.purchase;
+      const [i, si] = supplyAndSourceId.split("-");
+      const { id: supplyId, source } = gardenStore.supply[i];
+      const { id: sourceId, price } = source[si];
+      const priceTotal = -(parseFloat(amount) * parseFloat(price));
+      bigegi84Orm.obj.createOne(gardenStore.purchase, {
+        ...{
+          supplyId,
+          sourceId,
+          amount: parseFloat(amount),
+          price: priceTotal,
+          createdAt: moment().format(),
+          updatedAtt: moment().format(),
+        },
+      });
       gardenStore.form.purchase = [false, false, "", 0.0];
       gardenPurchase.action.sort();
     },
@@ -27,16 +30,17 @@ const gardenPurchase = {
                   Barang
                 </label>
                 <select
-                  value={gardenStore.form.purchase[2]}
+                  value={gardenStore.form.purchase.supplyAndSourceId}
                   onChange={(e) =>
-                    (gardenStore.form.purchase[2] = e.target.value)
+                    (gardenStore.form.purchase.supplyAndSourceId =
+                      e.target.value)
                   }
                 >
                   <option value="">Pilih Supply</option>
-                  {gardenStore.supply.map(([name, priceList], i) => {
-                    return priceList.map(([pName], pi) => (
-                      <option key={pi} value={`${i}-${pi}`}>
-                        {name}-{pName}
+                  {gardenStore.supply.map(({ id, name, source }, i) => {
+                    return source.map((it, si) => (
+                      <option key={si} value={`${i}-${si}`}>
+                        {name}-{it.name}
                       </option>
                     ));
                   })}
@@ -51,9 +55,9 @@ const gardenPurchase = {
                   id="owner"
                   name="owner"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.purchase[3]}
+                  value={gardenStore.form.purchase.amount}
                   onChange={(e) =>
-                    (gardenStore.form.purchase[3] = e.target.value)
+                    (gardenStore.form.purchase.amount = e.target.value)
                   }
                 />
               </div>
@@ -74,96 +78,106 @@ const gardenPurchase = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.purchase.map(([,name, amount, price], i) => {
-              const isEdit =
-                gardenStore.form.purchase[0] == "edit" &&
-                gardenStore.form.purchase[1] == i;
-              //   const [source, price, amount, unit] =
-              //     priceList[priceList.length - 1];
-              return (
-                <div key={i} className="column-a card-a">
-                  {isEdit ? (
+            return gardenStore.purchase.map(
+              (
+                { id, supplyId, sourceId, amount, price, createdAt, updateAt },
+                i
+              ) => {
+                const isEdit =
+                  gardenStore.form.purchase[0] == "edit" &&
+                  gardenStore.form.purchase[1] == i;
+                //   const [source, price, amount, unit] =
+                //     priceList[priceList.length - 1];
+                const { name } = bigegi84Orm.obj.readOneById(
+                  gardenStore.supply,
+                  supplyId
+                );
+                return (
+                  <div key={i} className="column-a card-a">
+                    {isEdit ? (
+                      <div className="row-a">
+                        <div>
+                          <input
+                            type="text"
+                            value={gardenStore.form.purchase[2]}
+                            onChange={(e) =>
+                              (gardenStore.form.purchase[2] = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span>{name}</span>
+                    )}
+                    <span>
+                      {amount} {gardenAction.formatNumber(price)}
+                    </span>
                     <div className="row-a">
-                      <div>
-                        <input
-                          type="text"
-                          value={gardenStore.form.purchase[2]}
-                          onChange={(e) =>
-                            (gardenStore.form.purchase[2] = e.target.value)
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() => {
+                          if (isEdit) {
+                            if (!gardenPurchase.action.validate()) return;
+                            const [, index, name, price, amount, unit] =
+                              gardenStore.form.purchase;
+                            let isChangePriceHistory = false;
+                            const [, priceHistory] =
+                              gardenStore.purchase[index];
+                            const [lPrice, lAmount, lUnit] =
+                              priceHistory[priceHistory.length - 1];
+                            if (
+                              price != lPrice ||
+                              amount != lAmount ||
+                              unit != lUnit
+                            )
+                              isChangePriceHistory = true;
+                            let newPriceHistory = [...priceHistory];
+                            if (isChangePriceHistory)
+                              newPriceHistory.push([
+                                parseFloat(price),
+                                parseFloat(amount),
+                                unit,
+                                moment().format(),
+                              ]);
+                            gardenStore.purchase[index] = [
+                              ...[name, newPriceHistory],
+                              ...[moment().format()],
+                            ];
+                            gardenStore.form.purchase = [
+                              false,
+                              false,
+                              "",
+                              0.0,
+                              0.0,
+                              "",
+                            ];
+                            gardenPurchase.action.sort();
+                          } else {
+                            gardenStore.form.purchase = [
+                              ...[
+                                "edit",
+                                i,
+                                name,
+                                parseFloat(price),
+                                parseFloat(amount),
+                                unit,
+                              ],
+                            ];
+                          }
+                        }}
+                      >
+                        <i
+                          className={
+                            "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
                           }
                         />
                       </div>
                     </div>
-                  ) : (
-                    <span>{name}</span>
-                  )}
-                  <span>
-                    {amount} {gardenAction.formatNumber(price)}
-                  </span>
-                  <div className="row-a">
-                    <div
-                      style={bigegi84theme.styleCircle}
-                      className="circle-a"
-                      onClick={() => {
-                        if (isEdit) {
-                          if (!gardenPurchase.action.validate()) return;
-                          const [, index, name, price, amount, unit] =
-                            gardenStore.form.purchase;
-                          let isChangePriceHistory = false;
-                          const [, priceHistory] = gardenStore.purchase[index];
-                          const [lPrice, lAmount, lUnit] =
-                            priceHistory[priceHistory.length - 1];
-                          if (
-                            price != lPrice ||
-                            amount != lAmount ||
-                            unit != lUnit
-                          )
-                            isChangePriceHistory = true;
-                          let newPriceHistory = [...priceHistory];
-                          if (isChangePriceHistory)
-                            newPriceHistory.push([
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                              moment().format(),
-                            ]);
-                          gardenStore.purchase[index] = [
-                            ...[name, newPriceHistory],
-                            ...[moment().format()],
-                          ];
-                          gardenStore.form.purchase = [
-                            false,
-                            false,
-                            "",
-                            0.0,
-                            0.0,
-                            "",
-                          ];
-                          gardenPurchase.action.sort();
-                        } else {
-                          gardenStore.form.purchase = [
-                            ...[
-                              "edit",
-                              i,
-                              name,
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                            ],
-                          ];
-                        }
-                      }}
-                    >
-                      <i
-                        className={
-                          "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
-                        }
-                      />
-                    </div>
                   </div>
-                </div>
-              );
-            });
+                );
+              }
+            );
           }}
         </mobxReact.Observer>
       );
@@ -174,8 +188,8 @@ const gardenPurchase = {
       );
     },
     validate: () => {
-      const [, , name, amount] = gardenStore.form.purchase;
-      if (name == "") {
+      const { supplyAndSourceId, amount } = gardenStore.form.purchase;
+      if (supplyAndSourceId == "") {
         alert("Pilih supply!");
         return false;
       }

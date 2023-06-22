@@ -1,5 +1,29 @@
 const gardenSupply = {
   action: {
+    add: () => {
+      if (!gardenSupply.action.validate()) return;
+      const [, , name, source, link, price, amount, unit] =
+        gardenStore.form.supply;
+      bigegi84Orm.createOne(gardenStore.supply, [
+        ...[
+          name,
+          [
+            [
+              source,
+              link,
+              parseFloat(price),
+              parseFloat(amount),
+              unit,
+              moment().format(),
+            ],
+          ],
+          [],
+        ],
+        ...[moment().format()],
+      ]);
+      gardenStore.form.supply = [false, false, "", "", 0.0, 0.0, ""];
+      gardenSupply.action.sort();
+    },
     form: () => {
       return (
         <mobxReact.Observer>
@@ -98,37 +122,7 @@ const gardenSupply = {
               <div className="column-a">
                 <button
                   className={bigegi84theme.class.button}
-                  onClick={() => {
-                    if (!gardenSupply.action.validate()) return;
-                    const [, , name, source, link, price, amount, unit] =
-                      gardenStore.form.supply;
-                    gardenStore.supply.push([
-                      ...[
-                        name,
-                        [
-                          [
-                            source,
-                            link,
-                            parseFloat(price),
-                            parseFloat(amount),
-                            unit,
-                            moment().format(),
-                          ],
-                        ],
-                      ],
-                      ...[moment().format()],
-                    ]);
-                    gardenStore.form.supply = [
-                      false,
-                      false,
-                      "",
-                      "",
-                      0.0,
-                      0.0,
-                      "",
-                    ];
-                    gardenSupply.action.sort();
-                  }}
+                  onClick={() => gardenSupply.action.add()}
                 >
                   Simpan
                 </button>
@@ -142,175 +136,191 @@ const gardenSupply = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.supply.map(([, name, priceList, scale], i) => {
-              const isEdit =
-                gardenStore.form.supply[0] == "edit" &&
-                gardenStore.form.supply[1] == i;
-              //   const [source, price, amount, unit] =
-              //     priceList[priceList.length - 1];
-              return (
-                <div key={i} className="column-a card-a">
-                  {isEdit ? (
+            return gardenStore.supply.map(
+              (
+                { id, name, amount, unit, source, scale, createdAt, updateAt },
+                i
+              ) => {
+                const isEdit =
+                  gardenStore.form.supply[0] == "edit" &&
+                  gardenStore.form.supply[1] == i;
+                const supply = gardenStore.supply[i];
+                return (
+                  <div key={i} className="column-a card-a">
+                    {isEdit ? (
+                      <div className="row-a">
+                        <div>
+                          <input
+                            type="text"
+                            value={gardenStore.form.supply[2]}
+                            onChange={(e) =>
+                              (gardenStore.form.supply[2] = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span>{name}</span>
+                    )}
+                    {source.map((it, si) => {
+                      const { id, name, link, price, createdAt, updateAt } = it;
+                      return (
+                        <div key={si}>
+                          {isEdit ? (
+                            <div className="column-b">
+                              <span>{name}</span>
+                              <div className="row-a">
+                                IDR
+                                <div>
+                                  <input
+                                    type="text"
+                                    value={gardenStore.form.supply[3]}
+                                    onChange={(e) =>
+                                      (gardenStore.form.supply[3] =
+                                        e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                              <div className="row-a">
+                                /
+                                <div>
+                                  <input
+                                    type="text"
+                                    value={gardenStore.form.supply[4]}
+                                    onChange={(e) =>
+                                      (gardenStore.form.supply[4] =
+                                        e.target.value)
+                                    }
+                                  />
+                                </div>
+                                <div>
+                                  <input
+                                    type="text"
+                                    value={gardenStore.form.supply[5]}
+                                    onChange={(e) =>
+                                      (gardenStore.form.supply[5] =
+                                        e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="column-b card-a">
+                              <a
+                                href={link}
+                                target="_blank"
+                                className={bigegi84theme.class.basic}
+                              >
+                                {name}
+                              </a>
+                              <span>
+                                {gardenStore.show.balance
+                                  ? gardenAction.formatNumber(price)
+                                  : "XXX"}
+                              </span>
+                              <span>
+                                {gardenStore.show.balance
+                                  ? `/${amount} ${unit}`
+                                  : "XXX"}
+                              </span>
+                              <gardenSupply.action.render.scale
+                                supply={supply}
+                                source={it}
+                                scale={scale}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                     <div className="row-a">
-                      <div>
-                        <input
-                          type="text"
-                          value={gardenStore.form.supply[2]}
-                          onChange={(e) =>
-                            (gardenStore.form.supply[2] = e.target.value)
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() => {
+                          if (isEdit) {
+                            if (!gardenSupply.action.validate()) return;
+                            const [, index, name, price, amount, unit] =
+                              gardenStore.form.supply;
+                            let isChangePriceHistory = false;
+                            const [, priceHistory] = gardenStore.supply[index];
+                            const [lPrice, lAmount, lUnit] =
+                              priceHistory[priceHistory.length - 1];
+                            if (
+                              price != lPrice ||
+                              amount != lAmount ||
+                              unit != lUnit
+                            )
+                              isChangePriceHistory = true;
+                            let newPriceHistory = [...priceHistory];
+                            if (isChangePriceHistory)
+                              newPriceHistory.push([
+                                parseFloat(price),
+                                parseFloat(amount),
+                                unit,
+                                moment().format(),
+                              ]);
+                            gardenStore.supply[index] = [
+                              ...[name, newPriceHistory],
+                              ...[moment().format()],
+                            ];
+                            gardenStore.form.supply = [
+                              false,
+                              false,
+                              "",
+                              0.0,
+                              0.0,
+                              "",
+                            ];
+                            gardenSupply.action.sort();
+                          } else {
+                            gardenStore.form.supply = [
+                              ...[
+                                "edit",
+                                i,
+                                name,
+                                parseFloat(price),
+                                parseFloat(amount),
+                                unit,
+                              ],
+                            ];
+                          }
+                        }}
+                      >
+                        <i
+                          className={
+                            "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
                           }
                         />
                       </div>
                     </div>
-                  ) : (
-                    <span>{name}</span>
-                  )}
-                  {priceList.map(([source, link, price, amount, unit], i) => {
-                    return (
-                      <div key={i}>
-                        {isEdit ? (
-                          <div className="column-b">
-                            <span>{source}</span>
-                            <div className="row-a">
-                              IDR
-                              <div>
-                                <input
-                                  type="text"
-                                  value={gardenStore.form.supply[3]}
-                                  onChange={(e) =>
-                                    (gardenStore.form.supply[3] =
-                                      e.target.value)
-                                  }
-                                />
-                              </div>
-                            </div>
-                            <div className="row-a">
-                              /
-                              <div>
-                                <input
-                                  type="text"
-                                  value={gardenStore.form.supply[4]}
-                                  onChange={(e) =>
-                                    (gardenStore.form.supply[4] =
-                                      e.target.value)
-                                  }
-                                />
-                              </div>
-                              <div>
-                                <input
-                                  type="text"
-                                  value={gardenStore.form.supply[5]}
-                                  onChange={(e) =>
-                                    (gardenStore.form.supply[5] =
-                                      e.target.value)
-                                  }
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="column-b card-a">
-                            <a
-                              href={link}
-                              target="_blank"
-                              className={bigegi84theme.class.basic}
-                            >
-                              {source}
-                            </a>
-                            <span>
-                              {gardenStore.show.balance
-                                ? gardenAction.formatNumber(price)
-                                : "XXX"}
-                            </span>
-                            <span>
-                              {gardenStore.show.balance
-                                ? `/${amount} ${unit}`
-                                : "XXX"}
-                            </span>
-                            <div className="column-a card-a">
-                              <span>Skala</span>
-                              {scale.map(([x, y], i) => {
-                                const a = unit == y ? amount / x : x;
-                                const b = price / a;
-                                return (
-                                  <span key={i}>
-                                    {b}/1 {y}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                  <div className="row-a">
-                    <div
-                      style={bigegi84theme.styleCircle}
-                      className="circle-a"
-                      onClick={() => {
-                        if (isEdit) {
-                          if (!gardenSupply.action.validate()) return;
-                          const [, index, name, price, amount, unit] =
-                            gardenStore.form.supply;
-                          let isChangePriceHistory = false;
-                          const [, priceHistory] = gardenStore.supply[index];
-                          const [lPrice, lAmount, lUnit] =
-                            priceHistory[priceHistory.length - 1];
-                          if (
-                            price != lPrice ||
-                            amount != lAmount ||
-                            unit != lUnit
-                          )
-                            isChangePriceHistory = true;
-                          let newPriceHistory = [...priceHistory];
-                          if (isChangePriceHistory)
-                            newPriceHistory.push([
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                              moment().format(),
-                            ]);
-                          gardenStore.supply[index] = [
-                            ...[name, newPriceHistory],
-                            ...[moment().format()],
-                          ];
-                          gardenStore.form.supply = [
-                            false,
-                            false,
-                            "",
-                            0.0,
-                            0.0,
-                            "",
-                          ];
-                          gardenSupply.action.sort();
-                        } else {
-                          gardenStore.form.supply = [
-                            ...[
-                              "edit",
-                              i,
-                              name,
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                            ],
-                          ];
-                        }
-                      }}
-                    >
-                      <i
-                        className={
-                          "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
-                        }
-                      />
-                    </div>
                   </div>
-                </div>
-              );
-            });
+                );
+              }
+            );
           }}
         </mobxReact.Observer>
       );
+    },
+    render: {
+      scale: ({ supply, source, scale }) => {
+        return (
+          <div className="column-a card-a">
+            <span>Skala</span>
+            {scale.map(({ id, ratio, unit }, i) => {
+              const a = supply.unit == unit ? supply.amount / ratio : ratio;
+              const b = source.price / a;
+              return (
+                <span key={i}>
+                  {b}/1 {unit}
+                </span>
+              );
+            })}
+          </div>
+        );
+      },
     },
     sort: () => {
       gardenStore.supply = gardenStore.supply.sort(([name], [bname]) =>

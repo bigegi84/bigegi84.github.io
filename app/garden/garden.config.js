@@ -67,14 +67,72 @@ const gardenConfig = {
             <button
               className={bigegi84theme.class.button}
               onClick={() => {
-                gardenStore.purchase = bigegi84Orm.migrate(
-                  gardenStore.purchase
+                const json = {
+                  ...gardenStore,
+                  ...{
+                    customer: gardenStore.customer.map(
+                      ([id, name, createdAt]) => ({
+                        id,
+                        name,
+                        createdAt,
+                        updatedAt: createdAt,
+                      })
+                    ),
+                    purchase: gardenStore.purchase.map(
+                      ([id, name, amount, price, createdAt]) => ({
+                        id,
+                        name,
+                        amount,
+                        price,
+                        createdAt,
+                        updatedAt: createdAt,
+                      })
+                    ),
+                    supply: gardenStore.supply.map(
+                      ([id, name, source, scale, createdAt]) => {
+                        const [, , , amount, unit] = source[0];
+                        return {
+                          id,
+                          name,
+                          amount,
+                          unit,
+                          source: source.map(
+                            ([name, link, price, , , createdAt]) => ({
+                              id: bigegi84Orm.uuid(),
+                              name,
+                              link,
+                              price,
+                              createdAt,
+                              updatedAt: createdAt,
+                            })
+                          ),
+                          scale: scale.map(([ratio, unit]) => ({
+                            id: bigegi84Orm.uuid(),
+                            ratio,
+                            unit,
+                          })),
+                          createdAt,
+                          updatedAt: createdAt,
+                        };
+                      }
+                    ),
+                  },
+                };
+                const dataStr =
+                  "data:text/json;charset=utf-8," +
+                  encodeURIComponent(JSON.stringify(json));
+                const dlAnchorElem = document.getElementById("downloadA");
+                dlAnchorElem.setAttribute("href", dataStr);
+                dlAnchorElem.setAttribute(
+                  "download",
+                  `${gardenStore.info.name}.bigegi84-Garden.json`
                 );
-                gardenStore.customer = bigegi84Orm.migrate(
-                  gardenStore.customer
-                );
-                gardenStore.stuff = bigegi84Orm.migrate(gardenStore.stuff);
-                gardenStore.supply = bigegi84Orm.migrate(gardenStore.supply);
+                dlAnchorElem.click();
+                // gardenStore.customer = bigegi84Orm.migrate(
+                //   gardenStore.customer
+                // );
+                // gardenStore.stuff = bigegi84Orm.migrate(gardenStore.stuff);
+                // gardenStore.supply = bigegi84Orm.migrate(gardenStore.supply);
               }}
             >
               debug

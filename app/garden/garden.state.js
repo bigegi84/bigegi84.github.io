@@ -11,7 +11,7 @@ const gardenState = {
     form: {
       account: [, , , , false],
       customer: [false, false, ""],
-      purchase: [false, false, "", 0.0],
+      purchase: { mode: null, i: null, supplyAndSourceId: "", amount: 0 },
       stuff: [false, false, "", "", 0.0, 0.0, ""],
       supply: [false, false, "", "", "", 0.0, 0.0, ""],
       supplyScale: [[1, "sachet"]],

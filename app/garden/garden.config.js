@@ -51,6 +51,7 @@ const gardenConfig = {
                   reader.onload = (it) => {
                     const text = it.target.result;
                     const json = JSON.parse(text);
+                    delete json.form;
                     for (const key in json) gardenStore[key] = json[key];
                   };
                   reader.readAsText(e.target.files[0]);

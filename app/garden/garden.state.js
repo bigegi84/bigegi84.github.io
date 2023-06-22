@@ -3,6 +3,7 @@ const gardenState = {
     account: [],
     asset: [],
     claim: [],
+    customer: [],
     config: {
       payday: 28,
     },
@@ -10,10 +11,12 @@ const gardenState = {
     form: {
       account: [, , , , false],
       stuff: [false, false, "", "", 0.0, 0.0, ""],
+      supply: [false, false, "", "", "", 0.0, 0.0, ""],
     },
     info: { name: "" },
     show: { balance: false },
     stuff: [],
+    supply: [],
   },
   example: {
     account: [["Contoh", "bigegi84", 0.0]],

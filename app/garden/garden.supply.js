@@ -142,7 +142,7 @@ const gardenSupply = {
       return (
         <mobxReact.Observer>
           {() => {
-            return gardenStore.supply.map(([name, priceList], i) => {
+            return gardenStore.supply.map(([name, priceList, scale], i) => {
               const isEdit =
                 gardenStore.form.supply[0] == "edit" &&
                 gardenStore.form.supply[1] == i;
@@ -227,6 +227,18 @@ const gardenSupply = {
                                 ? `/${amount} ${unit}`
                                 : "XXX"}
                             </span>
+                            <div className="column-a card-a">
+                              <span>Skala</span>
+                              {scale.map(([x, y], i) => {
+                                const a = unit == y ? amount / x : x;
+                                const b = price / a;
+                                return (
+                                  <span key={i}>
+                                    {b}/1 {y}
+                                  </span>
+                                );
+                              })}
+                            </div>
                           </div>
                         )}
                       </div>

@@ -12,6 +12,7 @@ const gardenState = {
       account: [, , , , false],
       stuff: [false, false, "", "", 0.0, 0.0, ""],
       supply: [false, false, "", "", "", 0.0, 0.0, ""],
+      supplyScale: [[1, "sachet"]],
     },
     info: { name: "" },
     show: { balance: false },

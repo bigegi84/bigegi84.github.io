@@ -14,7 +14,6 @@ const gardenSupply = {
         name: unit,
         ratio: 1,
       });
-      console.log(scale);
       const { id } = scale[0];
       const source = bigegi84Orm.obj.createOne([], {
         name: sourceName,
@@ -205,6 +204,7 @@ const gardenSupply = {
                       sale={sale}
                       scale={scale}
                     />
+                    <gardenSupplyScale.view iSupply={i} />
                     {source.map((it, si) => {
                       const {
                         id,
@@ -290,7 +290,7 @@ const gardenSupply = {
                         </div>
                       );
                     })}
-                    <div className="row-a">
+                    {/* <div className="row-a">
                       <div
                         style={bigegi84theme.styleCircle}
                         className="circle-a"
@@ -350,7 +350,7 @@ const gardenSupply = {
                           }
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 );
               }

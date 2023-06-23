@@ -141,7 +141,6 @@ const gardenSupply = {
                 {
                   id,
                   name,
-                  amount,
                   stock,
                   sale,
                   sellPrice,
@@ -185,7 +184,20 @@ const gardenSupply = {
                       scale={scale}
                     />
                     {source.map((it, si) => {
-                      const { id, name, link, price, createdAt, updateAt } = it;
+                      const {
+                        id,
+                        name,
+                        link,
+                        price,
+                        amount,
+                        scaleId,
+                        createdAt,
+                        updateAt,
+                      } = it;
+                      const { name: scaleName } = bigegi84Orm.obj.readOneById(
+                        scale,
+                        scaleId
+                      );
                       return (
                         <div key={si}>
                           {isEdit ? (
@@ -244,13 +256,12 @@ const gardenSupply = {
                               </span>
                               <span>
                                 {gardenStore.show.balance
-                                  ? `/${amount} ${unit}`
+                                  ? `/${amount} ${scaleName}`
                                   : "XXX"}
                               </span>
                               <gardenSupply.action.render.scale
-                                supply={supply}
-                                source={it}
-                                scale={scale}
+                                supplyI={i}
+                                sourceI={si}
                               />
                             </div>
                           )}
@@ -327,20 +338,19 @@ const gardenSupply = {
       );
     },
     render: {
-      scale: ({ supply, source, scale }) => {
+      scale: ({ supplyI, sourceI }) => {
+        const { scale, source } = gardenStore.supply[supplyI];
+        const { price, amount, scaleId } = source[sourceI];
+        const { name: sourceScaleName, ratio: sourceScaleRatio } =
+          bigegi84Orm.obj.readOneById(scale, scaleId);
         return (
           <div className="column-a card-a">
             <span>Skala</span>
-            {scale.map(({ id, ratio, unit }, i) => {
-              const normal = scale.find(({ unit }) => unit == supply.unit);
-              const normalize = normal ? normal.ratio : 1;
-              const normalRatio = ratio / normalize;
-              const a =
-                supply.unit == unit ? supply.amount / normalRatio : normalRatio;
-              const b = source.price / a;
+            {scale.map(({ id, ratio, name }, i) => {
+              const b = (sourceScaleRatio / ratio) * price;
               return (
                 <span key={i}>
-                  {b}/{unit}
+                  {b}/{name}
                 </span>
               );
             })}

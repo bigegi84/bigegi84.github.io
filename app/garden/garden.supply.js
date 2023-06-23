@@ -143,6 +143,7 @@ const gardenSupply = {
                   name,
                   amount,
                   stock,
+                  sale,
                   sellPrice,
                   unit,
                   source,
@@ -173,8 +174,16 @@ const gardenSupply = {
                     ) : (
                       <span>{name}</span>
                     )}
-                    <span>Stok: {stock}</span>
-                    <span>Harga Jual: {sellPrice}</span>
+                    <div className="column-a card-a">
+                      <span>
+                        Stok: {stock.amount} {stock.unit}
+                      </span>
+                    </div>
+                    <gardenSupplySale.view
+                      iSupply={i}
+                      sale={sale}
+                      scale={scale}
+                    />
                     {source.map((it, si) => {
                       const { id, name, link, price, createdAt, updateAt } = it;
                       return (

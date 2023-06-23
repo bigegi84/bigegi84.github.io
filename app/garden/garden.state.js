@@ -17,10 +17,17 @@ const gardenState = {
         i: null,
         supplyAndSourceId: "",
         amount: 0,
-        unit: ""
+        unit: "",
       },
       stuff: [false, false, "", "", 0.0, 0.0, ""],
       supply: [false, false, "", "", "", 0.0, 0.0, ""],
+      supplySale: {
+        mode: null,
+        iSupply: null,
+        i: null,
+        price: "",
+        scaleId: "",
+      },
       supplyScale: [[1, "sachet"]],
     },
     info: { name: "" },

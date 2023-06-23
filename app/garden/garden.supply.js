@@ -2,27 +2,49 @@ const gardenSupply = {
   action: {
     add: () => {
       if (!gardenSupply.action.validate()) return;
-      const [, , name, source, link, price, amount, unit] =
-        gardenStore.form.supply;
-      bigegi84Orm.createOne(gardenStore.supply, [
-        ...[
-          name,
-          [
-            [
-              source,
-              link,
-              parseFloat(price),
-              parseFloat(amount),
-              unit,
-              moment().format(),
-            ],
-          ],
-          [],
-        ],
-        ...[moment().format()],
-      ]);
-      gardenStore.form.supply = [false, false, "", "", 0.0, 0.0, ""];
-      gardenSupply.action.sort();
+      const {
+        name,
+        source: sourceName,
+        link,
+        price,
+        amount,
+        unit,
+      } = gardenStore.form.supply;
+      const scale = bigegi84Orm.obj.createOne([], {
+        name: unit,
+        ratio: 1,
+      });
+      console.log(scale);
+      const { id } = scale[0];
+      const source = bigegi84Orm.obj.createOne([], {
+        name: sourceName,
+        link,
+        price,
+        amount,
+        scaleId: id,
+      });
+      bigegi84Orm.obj.createOne(gardenStore.supply, {
+        name,
+        stock: {
+          amount: 0,
+          scaleId: id,
+        },
+        sale: [],
+        source,
+        scale,
+        createdAt: moment().format(),
+        updatedAt: moment().format(),
+      });
+      gardenStore.form.supply = {
+        mode: null,
+        i: null,
+        name: "",
+        source: "",
+        link: "",
+        price: 0.0,
+        amount: 0.0,
+        unit: "",
+      };
     },
     form: () => {
       return (
@@ -38,9 +60,9 @@ const gardenSupply = {
                   id="name"
                   name="name"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[2]}
+                  value={gardenStore.form.supply.name}
                   onChange={(e) =>
-                    (gardenStore.form.supply[2] = e.target.value)
+                    (gardenStore.form.supply.name = e.target.value)
                   }
                 />
               </div>
@@ -53,69 +75,69 @@ const gardenSupply = {
                   id="owner"
                   name="owner"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[3]}
+                  value={gardenStore.form.supply.source}
                   onChange={(e) =>
-                    (gardenStore.form.supply[3] = e.target.value)
+                    (gardenStore.form.supply.source = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="owner" className={bigegi84theme.class.basic}>
+                <label htmlFor="link" className={bigegi84theme.class.basic}>
                   Link
                 </label>
                 <input
                   type="text"
-                  id="owner"
-                  name="owner"
+                  id="link"
+                  name="link"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[4]}
+                  value={gardenStore.form.supply.link}
                   onChange={(e) =>
-                    (gardenStore.form.supply[4] = e.target.value)
+                    (gardenStore.form.supply.link = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="owner" className={bigegi84theme.class.basic}>
+                <label htmlFor="price" className={bigegi84theme.class.basic}>
                   Harga
                 </label>
                 <input
                   type="text"
-                  id="owner"
-                  name="owner"
+                  id="price"
+                  name="price"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[5]}
+                  value={gardenStore.form.supply.price}
                   onChange={(e) =>
-                    (gardenStore.form.supply[5] = e.target.value)
+                    (gardenStore.form.supply.price = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="balance" className={bigegi84theme.class.basic}>
+                <label htmlFor="amount" className={bigegi84theme.class.basic}>
                   Jumlah
                 </label>
                 <input
                   type="text"
-                  id="balance"
-                  name="balance"
+                  id="amount"
+                  name="amount"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[6]}
+                  value={gardenStore.form.supply.amount}
                   onChange={(e) =>
-                    (gardenStore.form.supply[6] = e.target.value)
+                    (gardenStore.form.supply.amount = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="balance" className={bigegi84theme.class.basic}>
+                <label htmlFor="unit" className={bigegi84theme.class.basic}>
                   Satuan
                 </label>
                 <input
                   type="text"
-                  id="balance"
-                  name="balance"
+                  id="unit"
+                  name="unit"
                   className={bigegi84theme.class.inputText}
-                  value={gardenStore.form.supply[7]}
+                  value={gardenStore.form.supply.unit}
                   onChange={(e) =>
-                    (gardenStore.form.supply[7] = e.target.value)
+                    (gardenStore.form.supply.unit = e.target.value)
                   }
                 />
               </div>
@@ -364,7 +386,7 @@ const gardenSupply = {
       );
     },
     validate: () => {
-      const [, , name, , , price, amount, unit] = gardenStore.form.supply;
+      const { name, price, amount, unit } = gardenStore.form.supply;
       if (isNaN(parseFloat(price))) {
         alert("Harga salah!");
         return false;

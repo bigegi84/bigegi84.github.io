@@ -27,7 +27,8 @@ const bigegi84Orm = {
         newUuid = bigegi84Orm.uuid();
         find = array.findIndex(({ id }) => id == newUuid);
       }
-      return array.push({ ...{ id: newUuid }, ...item });
+      array.push({ ...{ id: newUuid }, ...item });
+      return array;
     },
     createOneAtBegining: (array, item) => {
       let newUuid = null;

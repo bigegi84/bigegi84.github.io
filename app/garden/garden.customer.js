@@ -161,7 +161,7 @@ const gardenCustomer = {
           <strong
             style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
           >
-            Pelanggan
+            Pembeli
           </strong>
           <div
             style={bigegi84theme.styleCircle}

@@ -31,7 +31,16 @@ const gardenState = {
         productName: [],
       },
       stuff: [false, false, "", "", 0.0, 0.0, ""],
-      supply: [false, false, "", "", "", 0.0, 0.0, ""],
+      supply: {
+        mode: null,
+        i: null,
+        name: "",
+        source: "",
+        link: "",
+        price: 0.0,
+        amount: 0.0,
+        unit: "",
+      },
       supplySale: {
         mode: null,
         iSupply: null,

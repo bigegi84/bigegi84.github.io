@@ -2,23 +2,31 @@ const gardenPurchase = {
   action: {
     add: () => {
       if (!gardenPurchase.action.validate()) return;
-      const { supplyAndSourceId, amount } = gardenStore.form.purchase;
+      const {
+        supplyAndSourceId,
+        amount,
+        productName: productNameList,
+      } = gardenStore.form.purchase;
       const [i, si] = supplyAndSourceId.split("-");
-      const { id: supplyId, source } = gardenStore.supply[i];
+      const { id: supplyId, source, stock, scale } = gardenStore.supply[i];
       const { id: sourceId, price } = source[si];
+      const productName = productNameList[si];
       const priceTotal = -(parseFloat(amount) * parseFloat(price));
       bigegi84Orm.obj.createOne(gardenStore.purchase, {
-        ...{
-          supplyId,
-          sourceId,
-          amount: parseFloat(amount),
-          price: priceTotal,
-          createdAt: moment().format(),
-          updatedAtt: moment().format(),
-        },
+        name: productName,
+        amount: parseFloat(amount),
+        price: priceTotal,
+        createdAt: moment().format(),
+        updatedAtt: moment().format(),
       });
-      gardenStore.supply[i].stock += parseFloat(amount);
-      gardenPurchase.action.sort();
+      // gardenStore.supply[i].stock += parseFloat(amount);
+      gardenAction.stock.purchase({
+        i,
+        scale,
+        source: source[si],
+        stock,
+        amount: parseFloat(amount),
+      });
     },
     form: () => {
       return (
@@ -37,12 +45,24 @@ const gardenPurchase = {
                   }
                 >
                   <option value="">Pilih Supply</option>
-                  {gardenStore.supply.map(({ id, name, source }, i) => {
-                    return source.map((it, si) => (
-                      <option key={si} value={`${i}-${si}`}>
-                        {name}-{it.name}
-                      </option>
-                    ));
+                  {gardenStore.supply.map(({ id, name, source, scale }, i) => {
+                    return source.map(
+                      ({ name: sourceName, scaleId, amount, price }, si) => {
+                        const { name: scaleName } = bigegi84Orm.obj.readOneById(
+                          scale,
+                          scaleId
+                        );
+                        const productName = `${sourceName}-${name} (${amount} ${scaleName}) ${gardenAction.formatNumber(
+                          price
+                        )}`;
+                        gardenStore.form.purchase.productName[si] = productName;
+                        return (
+                          <option key={si} value={`${i}-${si}`}>
+                            {productName}
+                          </option>
+                        );
+                      }
+                    );
                   })}
                 </select>
               </div>
@@ -79,19 +99,10 @@ const gardenPurchase = {
         <mobxReact.Observer>
           {() => {
             return gardenStore.purchase.map(
-              (
-                { id, supplyId, sourceId, amount, price, createdAt, updateAt },
-                i
-              ) => {
+              ({ id, name, amount, price, createdAt, updateAt }, i) => {
                 const isEdit =
                   gardenStore.form.purchase[0] == "edit" &&
                   gardenStore.form.purchase[1] == i;
-                //   const [source, price, amount, unit] =
-                //     priceList[priceList.length - 1];
-                const { name } = bigegi84Orm.obj.readOneById(
-                  gardenStore.supply,
-                  supplyId
-                );
                 return (
                   <div key={i} className="column-a card-a">
                     {isEdit ? (
@@ -213,7 +224,7 @@ const gardenPurchase = {
           <strong
             style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
           >
-            Pembelian
+            Beli
           </strong>
           <div
             style={bigegi84theme.styleCircle}

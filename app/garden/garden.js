@@ -28,7 +28,7 @@ const garden = {
         <gardenSale.view />
         <gardenPurchase.view />
         <gardenCustomer.view />
-        <gardenStuff.view />
+        {/* <gardenStuff.view /> */}
         <gardenSupply.view />
       </div>
     );

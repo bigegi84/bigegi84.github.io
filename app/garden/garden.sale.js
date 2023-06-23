@@ -45,13 +45,32 @@ const gardenSale = {
                   }}
                 >
                   <option value="">Pilih Supply</option>
-                  {gardenStore.supply.map(({ id, name, source, stock }, i) => {
+                  {/* {gardenStore.supply.map(({ id, name, source, stock }, i) => {
                     return source.map((it, si) => (
                       <option key={si} value={`${i}-${si}`}>
                         {`(${stock})${name}-${it.name}`}
                       </option>
                     ));
-                  })}
+                  })} */}
+                  {gardenStore.supply.map(
+                    ({ name, source, stock, sale, scale }, i) => {
+                      return sale.map(({ scaleId, price }, si) => {
+                        const { name: scaleName } = bigegi84Orm.obj.readOneById(
+                          scale,
+                          scaleId
+                        );
+                        return (
+                          <option key={si} value={`${i}-${si}`}>
+                            {`(${
+                              stock.amount
+                            }) ${name} (1 ${scaleName}) ${gardenAction.formatNumber(
+                              price
+                            )}`}
+                          </option>
+                        );
+                      });
+                    }
+                  )}
                 </select>
               </div>
               {gardenStore.form.sale.supplyAndSourceId == "" ? null : (
@@ -66,7 +85,7 @@ const gardenSale = {
                     }
                   >
                     <option value="">Pilih Unit</option>
-                    {gardenStore.supply[
+                    {/* {gardenStore.supply[
                       gardenStore.form.sale.supplyAndSourceId.split("-")[0]
                     ].scale.map(({ id, ratio, unit }, i) => {
                       return (
@@ -74,7 +93,7 @@ const gardenSale = {
                           {unit}
                         </option>
                       );
-                    })}
+                    })} */}
                   </select>
                 </div>
               )}

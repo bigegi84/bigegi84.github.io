@@ -174,6 +174,42 @@ const gardenInfo = {
           ))}
         </div>
       ),
+      profit: () => {
+        return (
+          <mobxReact.Observer>
+            {() => {
+              const count =
+                gardenStore.purchase.length + gardenStore.sale.length;
+              const total =
+                gardenStore.purchase.reduce(
+                  (partialSum, { price }) => partialSum + price,
+                  0
+                ) +
+                gardenStore.sale.reduce(
+                  (partialSum, { price }) => partialSum + price,
+                  0
+                );
+              return (
+                <div className="column-a card-a">
+                  <strong className={bigegi84theme.class.basic}>
+                    Keuntungan
+                  </strong>
+                  <div className="column-a">
+                    <div className="column-b">
+                      <span>Jumlah</span>
+                      <span>{count}</span>
+                    </div>
+                    <div className="column-b">
+                      <span>Total</span>
+                      <span>{gardenAction.formatNumber(total)}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          </mobxReact.Observer>
+        );
+      },
       purchase: () => {
         return (
           <mobxReact.Observer>
@@ -185,9 +221,35 @@ const gardenInfo = {
               );
               return (
                 <div className="column-a card-a">
-                  <strong className={bigegi84theme.class.basic}>
-                    Pembelian
-                  </strong>
+                  <strong className={bigegi84theme.class.basic}>Beli</strong>
+                  <div className="column-a">
+                    <div className="column-b">
+                      <span>Jumlah</span>
+                      <span>{count}</span>
+                    </div>
+                    <div className="column-b">
+                      <span>Total</span>
+                      <span>{gardenAction.formatNumber(total)}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            }}
+          </mobxReact.Observer>
+        );
+      },
+      sale: () => {
+        return (
+          <mobxReact.Observer>
+            {() => {
+              const count = gardenStore.sale.length;
+              const total = gardenStore.sale.reduce(
+                (partialSum, { price }) => partialSum + price,
+                0
+              );
+              return (
+                <div className="column-a card-a">
+                  <strong className={bigegi84theme.class.basic}>Jual</strong>
                   <div className="column-a">
                     <div className="column-b">
                       <span>Jumlah</span>
@@ -235,6 +297,8 @@ const gardenInfo = {
             </mobxReact.Observer>
             <div className="row-a">
               <gardenInfo.action.summary.purchase />
+              <gardenInfo.action.summary.sale />
+              <gardenInfo.action.summary.profit />
             </div>
           </div>
         ) : null}

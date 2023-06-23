@@ -26,5 +26,22 @@ const gardenAction = {
         (ratioStock / ratioSource) * amount
       );
     },
+    sale: ({ supplyI, saleI }) => {
+      const { amount } = gardenStore.form.sale;
+      const { sale, scale, stock } = gardenStore.supply[supplyI];
+      const { scaleId: stockScaleId } = stock;
+      const { ratio: ratioStock } = bigegi84Orm.obj.readOneById(
+        scale,
+        stockScaleId
+      );
+      const { scaleId: scaleIdSale } = sale[saleI];
+      const { ratio: ratioSale } = bigegi84Orm.obj.readOneById(
+        scale,
+        scaleIdSale
+      );
+      gardenStore.supply[supplyI].stock.amount -= parseFloat(
+        (ratioStock / ratioSale) * amount
+      );
+    },
   },
 };

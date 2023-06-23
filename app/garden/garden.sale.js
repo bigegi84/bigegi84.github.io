@@ -2,32 +2,32 @@ const gardenSale = {
   action: {
     add: () => {
       if (!gardenSale.action.validate()) return;
-      const { supplyAndSourceId, amount, unit: iScale } = gardenStore.form.sale;
-      const [i, si] = supplyAndSourceId.split("-");
-      const { id: supplyId, source, scale } = gardenStore.supply[i];
-      const { id: sourceId, price } = source[si];
-      const priceTotal = -(parseFloat(amount) * parseFloat(price));
-      bigegi84Orm.obj.createOne(gardenStore.sale, {
-        ...{
-          supplyId,
-          sourceId,
-          amount: parseFloat(amount),
-          price: priceTotal,
-          createdAt: moment().format(),
-          updatedAtt: moment().format(),
-        },
+      const {
+        supplyAndSaleId,
+        amount,
+        unit: iScale,
+        name,
+        price,
+      } = gardenStore.form.sale;
+      const [i, si] = supplyAndSaleId.split("-");
+      bigegi84Orm.obj.createOneAtBegining(gardenStore.sale, {
+        name,
+        amount: parseFloat(amount),
+        price: parseFloat(price),
+        createdAt: moment().format(),
+        updatedAtt: moment().format(),
       });
-      const { ratio } = scale[iScale];
-      gardenStore.supply[i].stock += -parseFloat(amount / ratio);
+      gardenAction.stock.sale({ supplyI: i, saleI: si });
       gardenStore.form.sale = {
         mode: null,
         i: null,
-        supplyAndSourceId: "",
+        supplyAndSaleId: "",
+        name: "",
         amount: 0,
-        unit: "",
-        unitList: [],
+        price: 0,
+        unitPrice: 0,
+        productName: [],
       };
-      gardenSale.action.sort();
     },
     form: () => {
       return (
@@ -39,64 +39,43 @@ const gardenSale = {
                   Barang
                 </label>
                 <select
-                  value={gardenStore.form.sale.supplyAndSourceId}
+                  value={gardenStore.form.sale.supplyAndSaleId}
                   onChange={(e) => {
-                    gardenStore.form.sale.supplyAndSourceId = e.target.value;
+                    gardenStore.form.sale.supplyAndSaleId = e.target.value;
+                    if (e.target.value != "") {
+                      const [supplyI, saleI] = e.target.value.split("-");
+                      const { sale } = gardenStore.supply[supplyI];
+                      const { price } = sale[saleI];
+                      const { amount } = gardenStore.form.sale;
+                      gardenStore.form.sale.price = isNaN(parseFloat(amount))
+                        ? 0
+                        : parseFloat(amount) * price;
+                      console.log([gardenStore.form.sale.productName[saleI]]);
+                      gardenStore.form.sale.name =
+                        gardenStore.form.sale.productName[saleI];
+                    }
                   }}
                 >
                   <option value="">Pilih Supply</option>
-                  {/* {gardenStore.supply.map(({ id, name, source, stock }, i) => {
-                    return source.map((it, si) => (
-                      <option key={si} value={`${i}-${si}`}>
-                        {`(${stock})${name}-${it.name}`}
-                      </option>
-                    ));
-                  })} */}
-                  {gardenStore.supply.map(
-                    ({ name, source, stock, sale, scale }, i) => {
-                      return sale.map(({ scaleId, price }, si) => {
-                        const { name: scaleName } = bigegi84Orm.obj.readOneById(
-                          scale,
-                          scaleId
-                        );
-                        return (
-                          <option key={si} value={`${i}-${si}`}>
-                            {`(${
-                              stock.amount
-                            }) ${name} (1 ${scaleName}) ${gardenAction.formatNumber(
-                              price
-                            )}`}
-                          </option>
-                        );
-                      });
-                    }
-                  )}
-                </select>
-              </div>
-              {gardenStore.form.sale.supplyAndSourceId == "" ? null : (
-                <div className="column-a">
-                  <label htmlFor="name" className={bigegi84theme.class.basic}>
-                    Unit
-                  </label>
-                  <select
-                    value={gardenStore.form.sale.unit}
-                    onChange={(e) =>
-                      (gardenStore.form.sale.unit = e.target.value)
-                    }
-                  >
-                    <option value="">Pilih Unit</option>
-                    {/* {gardenStore.supply[
-                      gardenStore.form.sale.supplyAndSourceId.split("-")[0]
-                    ].scale.map(({ id, ratio, unit }, i) => {
+                  {gardenStore.supply.map(({ name, stock, sale, scale }, i) => {
+                    return sale.map(({ scaleId, price }, si) => {
+                      const { name: scaleName } = bigegi84Orm.obj.readOneById(
+                        scale,
+                        scaleId
+                      );
+                      const productName = `${name} (1 ${scaleName}) ${gardenAction.formatNumber(
+                        price
+                      )}`;
+                      gardenStore.form.sale.productName[si] = productName;
                       return (
-                        <option key={i} value={`${i}`}>
-                          {unit}
+                        <option key={si} value={`${i}-${si}`}>
+                          {`(${stock.amount}) ${productName}`}
                         </option>
                       );
-                    })} */}
-                  </select>
-                </div>
-              )}
+                    });
+                  })}
+                </select>
+              </div>
               <div className="column-a">
                 <label htmlFor="owner" className={bigegi84theme.class.basic}>
                   Jumlah
@@ -109,6 +88,21 @@ const gardenSale = {
                   value={gardenStore.form.sale.amount}
                   onChange={(e) =>
                     (gardenStore.form.sale.amount = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label htmlFor="owner" className={bigegi84theme.class.basic}>
+                  Harga
+                </label>
+                <input
+                  type="text"
+                  id="owner"
+                  name="owner"
+                  className={bigegi84theme.class.inputText}
+                  value={gardenStore.form.sale.price}
+                  onChange={(e) =>
+                    (gardenStore.form.sale.price = e.target.value)
                   }
                 />
               </div>
@@ -130,92 +124,19 @@ const gardenSale = {
         <mobxReact.Observer>
           {() => {
             return gardenStore.sale.map(
-              (
-                { id, supplyId, sourceId, amount, price, createdAt, updateAt },
-                i
-              ) => {
-                const isEdit =
-                  gardenStore.form.sale[0] == "edit" &&
-                  gardenStore.form.sale[1] == i;
-                //   const [source, price, amount, unit] =
-                //     priceList[priceList.length - 1];
-                const { name } = bigegi84Orm.obj.readOneById(
-                  gardenStore.supply,
-                  supplyId
-                );
+              ({ id, name, amount, price, createdAt, updateAt }, i) => {
                 return (
                   <div key={i} className="column-a card-a">
-                    {isEdit ? (
-                      <div className="row-a">
-                        <div>
-                          <input
-                            type="text"
-                            value={gardenStore.form.sale[2]}
-                            onChange={(e) =>
-                              (gardenStore.form.sale[2] = e.target.value)
-                            }
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <span>{name}</span>
-                    )}
+                    <span>{moment(createdAt).locale("id").fromNow()}</span>
+                    <span>{name}</span>
                     <span>
                       {amount} {gardenAction.formatNumber(price)}
                     </span>
-                    <div className="row-a">
+                    {/* <div className="row-a">
                       <div
                         style={bigegi84theme.styleCircle}
                         className="circle-a"
-                        onClick={() => {
-                          if (isEdit) {
-                            if (!gardenSale.action.validate()) return;
-                            const [, index, name, price, amount, unit] =
-                              gardenStore.form.sale;
-                            let isChangePriceHistory = false;
-                            const [, priceHistory] = gardenStore.sale[index];
-                            const [lPrice, lAmount, lUnit] =
-                              priceHistory[priceHistory.length - 1];
-                            if (
-                              price != lPrice ||
-                              amount != lAmount ||
-                              unit != lUnit
-                            )
-                              isChangePriceHistory = true;
-                            let newPriceHistory = [...priceHistory];
-                            if (isChangePriceHistory)
-                              newPriceHistory.push([
-                                parseFloat(price),
-                                parseFloat(amount),
-                                unit,
-                                moment().format(),
-                              ]);
-                            gardenStore.sale[index] = [
-                              ...[name, newPriceHistory],
-                              ...[moment().format()],
-                            ];
-                            gardenStore.form.sale = [
-                              false,
-                              false,
-                              "",
-                              0.0,
-                              0.0,
-                              "",
-                            ];
-                            gardenSale.action.sort();
-                          } else {
-                            gardenStore.form.sale = [
-                              ...[
-                                "edit",
-                                i,
-                                name,
-                                parseFloat(price),
-                                parseFloat(amount),
-                                unit,
-                              ],
-                            ];
-                          }
-                        }}
+                        onClick={() => {}}
                       >
                         <i
                           className={
@@ -223,7 +144,7 @@ const gardenSale = {
                           }
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 );
               }

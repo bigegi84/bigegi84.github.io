@@ -23,9 +23,11 @@ const gardenState = {
       sale: {
         mode: null,
         i: null,
+        supplyAndSaleId: "",
         name: "",
         amount: 0,
         price: 0,
+        unitPrice: 0,
         productName: [],
       },
       stuff: [false, false, "", "", 0.0, 0.0, ""],

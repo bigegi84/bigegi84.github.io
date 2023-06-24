@@ -2,81 +2,82 @@ const pennyInfo = {
   action: {
     balance: () => {
       const account = pennyStore.account.reduce(
-        (partialSum, [, , balance]) => partialSum + balance,
+        (partialSum, { balance }) => partialSum + balance,
         0
       );
       const assetBuy = pennyStore.asset.reduce(
-        (partialSum, [, , buy]) => partialSum + parseFloat(buy),
+        (partialSum, { buyPrice }) => partialSum + parseFloat(buyPrice),
         0
       );
       const assetSell = pennyStore.asset.reduce(
-        (partialSum, [, , , sell]) => partialSum + parseFloat(sell),
+        (partialSum, { sellPrice }) => partialSum + parseFloat(sellPrice),
         0
       );
       const debt = pennyStore.debt.reduce(
-        (partialSum, [, , installment, , installmentRemaining]) =>
-          partialSum + installment * installmentRemaining,
+        (partialSum, { installment, installmentLeft }) =>
+          partialSum + installment * installmentLeft,
         0
       );
       const total = account + assetSell + debt;
       return (
-        <div className="column-a">
-          <div className="row-a">
-            <strong className={bigegi84theme.class.basic}>Akun:</strong>
-            <mobxReact.Observer>
-              {() => (
-                <span>
-                  {pennyStore.show.balance
-                    ? pennyAction.formatNumber(account)
-                    : "XXX"}
-                </span>
-              )}
-            </mobxReact.Observer>
-          </div>
-          <div className="row-a">
-            <strong className={bigegi84theme.class.basic}>Aset:</strong>
-            <mobxReact.Observer>
-              {() => (
+        <mobxReact.Observer>
+          {() => {
+            return (
+              <div className="column-a card-a">
+                <strong className={bigegi84theme.class.basic}>Ringkasan</strong>
                 <div className="column-a">
-                  <span>
-                    {pennyStore.show.balance
-                      ? `${pennyAction.formatNumber(assetBuy)}(beli)`
-                      : "XXX"}
-                  </span>
-                  <span>
-                    {pennyStore.show.balance
-                      ? `${pennyAction.formatNumber(assetSell)}(jual)`
-                      : "XXX"}
-                  </span>
+                  <div className="row-a">
+                    <strong className={bigegi84theme.class.basic}>Akun:</strong>
+                    <mobxReact.Observer>
+                      {() => (
+                        <span>
+                          {pennyStore.show.balance
+                            ? pennyAction.formatNumber(account)
+                            : "XXX"}
+                        </span>
+                      )}
+                    </mobxReact.Observer>
+                  </div>
+                  <div className="row-a">
+                    <strong className={bigegi84theme.class.basic}>Aset:</strong>
+                    <div className="column-a">
+                      <span>
+                        {pennyStore.show.balance
+                          ? `${pennyAction.formatNumber(assetBuy)}(beli)`
+                          : "XXX"}
+                      </span>
+                      <span>
+                        {pennyStore.show.balance
+                          ? `${pennyAction.formatNumber(assetSell)}(jual)`
+                          : "XXX"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="row-a">
+                    <strong className={bigegi84theme.class.basic}>
+                      Utang:
+                    </strong>
+                    <span>
+                      {pennyStore.show.balance
+                        ? pennyAction.formatNumber(debt)
+                        : "XXX"}
+                    </span>
+                  </div>
+                  <div className="row-a">
+                    <strong className={bigegi84theme.class.basic}>
+                      Total:
+                    </strong>
+                    <span>
+                      {pennyStore.show.balance
+                        ? pennyAction.formatNumber(total)
+                        : "XXX"}
+                    </span>
+                  </div>
                 </div>
-              )}
-            </mobxReact.Observer>
-          </div>
-          <div className="row-a">
-            <strong className={bigegi84theme.class.basic}>Utang:</strong>
-            <mobxReact.Observer>
-              {() => (
-                <span>
-                  {pennyStore.show.balance
-                    ? pennyAction.formatNumber(debt)
-                    : "XXX"}
-                </span>
-              )}
-            </mobxReact.Observer>
-          </div>
-          <div className="row-a">
-            <strong className={bigegi84theme.class.basic}>Total:</strong>
-            <mobxReact.Observer>
-              {() => (
-                <span>
-                  {pennyStore.show.balance
-                    ? pennyAction.formatNumber(total)
-                    : "XXX"}
-                </span>
-              )}
-            </mobxReact.Observer>
-          </div>
-        </div>
+              </div>
+            );
+          }}
+        </mobxReact.Observer>
       );
     },
     decision: {
@@ -85,7 +86,7 @@ const pennyInfo = {
           <mobxReact.Observer>
             {() => {
               const account = pennyStore.account.reduce(
-                (partialSum, [name, , balance]) =>
+                (partialSum, { name, balance }) =>
                   partialSum + (name == "BPJSTK" ? 0 : balance),
                 0
               );
@@ -102,7 +103,9 @@ const pennyInfo = {
               const dayLeftToPayday = nextPayday.diff(today, "days");
               return (
                 <div className="column-a card-a">
-                  <strong className={bigegi84theme.class.basic}>Anggaran</strong>
+                  <strong className={bigegi84theme.class.basic}>
+                    Anggaran
+                  </strong>
                   <div className="column-a">
                     <div className="column-b">
                       <span>Per Hari</span>
@@ -128,23 +131,29 @@ const pennyInfo = {
     },
     obligation: () => {
       return (
-        <div className="row-a">
-          <strong className={bigegi84theme.class.basic}>Total:</strong>
-          <mobxReact.Observer>
-            {() => (
-              <span>
-                {pennyStore.show.balance
-                  ? pennyAction.formatNumber(
-                      pennyStore.debt.reduce(
-                        (partialSum, [, , balance]) => partialSum + balance,
-                        0
+        <mobxReact.Observer>
+          {() => (
+            <div className="column-a card-a">
+              <strong className={bigegi84theme.class.basic}>
+                Kewajiban Bulanan
+              </strong>
+              <div className="row-a">
+                <strong className={bigegi84theme.class.basic}>Total:</strong>
+                <span>
+                  {pennyStore.show.balance
+                    ? pennyAction.formatNumber(
+                        pennyStore.debt.reduce(
+                          (partialSum, { installment }) =>
+                            partialSum + installment,
+                          0
+                        )
                       )
-                    )
-                  : "XXX"}
-              </span>
-            )}
-          </mobxReact.Observer>
-        </div>
+                    : "XXX"}
+                </span>
+              </div>
+            </div>
+          )}
+        </mobxReact.Observer>
       );
     },
     summary: {
@@ -202,27 +211,9 @@ const pennyInfo = {
               )}
             </mobxReact.Observer>
             <div className="row-a">
-              <mobxReact.Observer>
-                {() => (
-                  <div className="column-a card-a">
-                    <strong className={bigegi84theme.class.basic}>
-                      Ringkasan
-                    </strong>
-                    <pennyInfo.action.balance />
-                  </div>
-                )}
-              </mobxReact.Observer>
-              <mobxReact.Observer>
-                {() => (
-                  <div className="column-a card-a">
-                    <strong className={bigegi84theme.class.basic}>
-                      Kewajiban Bulanan
-                    </strong>
-                    <pennyInfo.action.obligation />
-                  </div>
-                )}
-              </mobxReact.Observer>
-              <mobxReact.Observer>
+              <pennyInfo.action.balance />
+              <pennyInfo.action.obligation />
+              {/* <mobxReact.Observer>
                 {() => (
                   <div className="column-a card-a">
                     <strong className={bigegi84theme.class.basic}>
@@ -241,7 +232,7 @@ const pennyInfo = {
                     <pennyInfo.action.summary.debt />
                   </div>
                 )}
-              </mobxReact.Observer>
+              </mobxReact.Observer> */}
               <pennyInfo.action.decision.budget />
             </div>
           </div>

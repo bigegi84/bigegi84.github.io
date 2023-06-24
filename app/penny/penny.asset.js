@@ -88,7 +88,7 @@ const pennyAsset = {
       );
     },
     list: mobxReact.observer(() =>
-      pennyStore.asset.map(([name, owner, priceBuy, priceSell], i) => (
+      pennyStore.asset.map(({ name, owner, buyPrice, sellPrice }, i) => (
         <div key={i} className="column-a card-a">
           <span>
             {owner} - {name}
@@ -96,13 +96,13 @@ const pennyAsset = {
           <span>
             Beli:{" "}
             {pennyStore.show.balance
-              ? pennyAction.formatNumber(priceBuy)
+              ? pennyAction.formatNumber(buyPrice)
               : "XXX"}
           </span>
           <span>
             Jual:{" "}
             {pennyStore.show.balance
-              ? pennyAction.formatNumber(priceSell)
+              ? pennyAction.formatNumber(sellPrice)
               : "XXX"}
           </span>
         </div>

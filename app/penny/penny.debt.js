@@ -2,7 +2,7 @@ const pennyDebt = {
   action: {
     form: () => {
       const [form, setForm] = React.useState(["", "", 0.0, "-"]);
-      const [name, owner, installment, dueDate, installmentRemaining] = form;
+      const [name, owner, installment, dueDate, installmentLeft] = form;
       return (
         <div className="row-a">
           <div className="column-a">
@@ -85,7 +85,7 @@ const pennyDebt = {
               id="installmentRemaining"
               name="installmentRemaining"
               className={bigegi84theme.class.inputText}
-              value={installmentRemaining}
+              value={installmentLeft}
               onChange={(e) => {
                 const newState = [...form];
                 newState[4] = e.target.value;
@@ -103,7 +103,7 @@ const pennyDebt = {
                   owner,
                   -parseFloat(installment),
                   parseFloat(dueDate),
-                  parseFloat(installmentRemaining),
+                  parseFloat(installmentLeft),
                 ]);
                 setForm(["", "", 0.0, "-", 0.0]);
                 pennyDebt.action.sort();
@@ -117,10 +117,7 @@ const pennyDebt = {
     },
     list: mobxReact.observer(() =>
       pennyStore.debt.map(
-        (
-          [name, owner, installment, dueDate, installmentRemaining, total],
-          i
-        ) => (
+        ({ name, owner, installment, dueDate, installmentLeft }, i) => (
           <div key={i} className="column-a card-a">
             <span>
               {owner} - {name}
@@ -136,12 +133,12 @@ const pennyDebt = {
             </span>
             <span>
               Sisa Cicilan :{" "}
-              {pennyStore.show.balance ? installmentRemaining + "x" : "XXX"}
+              {pennyStore.show.balance ? installmentLeft + "x" : "XXX"}
             </span>
             <span>
               Total:{" "}
               {pennyStore.show.balance
-                ? pennyAction.formatNumber(installment * installmentRemaining)
+                ? pennyAction.formatNumber(installment * installmentLeft)
                 : "XXX"}
             </span>
           </div>

@@ -63,6 +63,56 @@ const pennyConfig = {
             >
               Load
             </button>
+            <button
+              className={bigegi84theme.class.button}
+              onClick={() => {
+                const newDb = { account: [], asset: [], debt: [] };
+                pennyStore.account.forEach(
+                  ([name, owner, balance, createdAt]) =>
+                    bigegi84Orm.obj.createOne(newDb.account, {
+                      name,
+                      owner,
+                      balance,
+                      createdAt,
+                      updatedAt: createdAt,
+                    })
+                );
+                pennyStore.asset.forEach(([name, owner, buyPrice, sellPrice]) =>
+                  bigegi84Orm.obj.createOne(newDb.asset, {
+                    name,
+                    owner,
+                    buyPrice,
+                    sellPrice,
+                    createdAt: moment().format(),
+                    updatedAt: moment().format(),
+                  })
+                );
+                pennyStore.debt.forEach(
+                  ([name, owner, installment, dueDate, installmentLeft]) =>
+                    bigegi84Orm.obj.createOne(newDb.debt, {
+                      name,
+                      owner,
+                      installment,
+                      dueDate,
+                      installmentLeft,
+                      createdAt: moment().format(),
+                      updatedAt: moment().format(),
+                    })
+                );
+                const dataStr =
+                  "data:text/json;charset=utf-8," +
+                  encodeURIComponent(JSON.stringify(newDb));
+                const dlAnchorElem = document.getElementById("downloadA");
+                dlAnchorElem.setAttribute("href", dataStr);
+                dlAnchorElem.setAttribute(
+                  "download",
+                  `${pennyStore.info.name}.bigegi84-Penny.json`
+                );
+                dlAnchorElem.click();
+              }}
+            >
+              Debug
+            </button>
           </div>
         ) : null}
       </div>

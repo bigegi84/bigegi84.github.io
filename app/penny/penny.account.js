@@ -83,7 +83,7 @@ const pennyAccount = {
         <mobxReact.Observer>
           {() => {
             return pennyStore.account.map(
-              ([name, owner, balance, updatedAt], i) => {
+              ({ name, owner, balance, updatedAt }, i) => {
                 return (
                   <div key={i} className="column-a card-a">
                     {pennyStore.form.account[4] &&

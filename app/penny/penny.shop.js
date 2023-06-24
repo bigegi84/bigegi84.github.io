@@ -1,4 +1,4 @@
-const pennyDebt = {
+const pennyShop = {
   action: {
     addForm: () => {
       return (
@@ -14,8 +14,8 @@ const pennyDebt = {
                   id="name"
                   name="name"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.debt.name}
-                  onChange={(e) => (pennyStore.form.debt.name = e.target.value)}
+                  value={pennyStore.form.shop.name}
+                  onChange={(e) => (pennyStore.form.shop.name = e.target.value)}
                 />
               </div>
               <div className="column-a">
@@ -27,58 +27,38 @@ const pennyDebt = {
                   id="owner"
                   name="owner"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.debt.owner}
+                  value={pennyStore.form.shop.owner}
                   onChange={(e) =>
-                    (pennyStore.form.debt.owner = e.target.value)
+                    (pennyStore.form.shop.owner = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
                 <label htmlFor="cicilan" className={bigegi84theme.class.basic}>
-                  Cicilan
+                  Lokasi
                 </label>
                 <input
                   type="text"
                   id="cicilan"
                   name="cicilan"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.debt.installment}
+                  value={pennyStore.form.shop.location}
                   onChange={(e) =>
-                    (pennyStore.form.debt.installment = e.target.value)
+                    (pennyStore.form.shop.location = e.target.value)
                   }
                 />
               </div>
               <div className="column-a">
                 <label htmlFor="dueDate" className={bigegi84theme.class.basic}>
-                  Tenggat Waktu
+                  Link
                 </label>
                 <input
                   type="text"
                   id="dueDate"
                   name="dueDate"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.debt.dueDate}
-                  onChange={(e) =>
-                    (pennyStore.form.debt.dueDate = e.target.value)
-                  }
-                />
-              </div>
-              <div className="column-a">
-                <label
-                  htmlFor="installmentRemaining"
-                  className={bigegi84theme.class.basic}
-                >
-                  Sisa Cicilan
-                </label>
-                <input
-                  type="text"
-                  id="installmentRemaining"
-                  name="installmentRemaining"
-                  className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.debt.installmentLeft}
-                  onChange={(e) =>
-                    (pennyStore.form.debt.installmentLeft = e.target.value)
-                  }
+                  value={pennyStore.form.shop.link}
+                  onChange={(e) => (pennyStore.form.shop.link = e.target.value)}
                 />
               </div>
               <div className="column-a">
@@ -86,32 +66,25 @@ const pennyDebt = {
                   className={bigegi84theme.class.button}
                   onClick={() => {
                     if (!pennyDebt.action.validate()) return;
-                    const {
+                    const { name, owner, location, link } =
+                      pennyStore.form.shop;
+                    bigegi84Orm.obj.createOne(pennyStore.shop, {
                       name,
                       owner,
-                      installment,
-                      dueDate,
-                      installmentLeft,
-                    } = pennyStore.form.debt;
-                    bigegi84Orm.obj.createOne(pennyStore.debt, {
-                      name,
-                      owner,
-                      installment: parseFloat(installment),
-                      dueDate: parseFloat(dueDate),
-                      installmentLeft: parseFloat(installmentLeft),
+                      location,
+                      link,
                       createdAt: moment().format(),
                       updatedAt: moment().format(),
                     });
-                    pennyStore.form.debt = {
+                    pennyStore.form.shop = {
                       mode: null,
                       i: null,
                       name: "",
                       owner: "",
-                      installment: 0,
-                      dueDate: "-",
-                      installmentLeft: 0,
+                      location: "",
+                      link: "",
                     };
-                    bigegi84Orm.obj.sort(pennyStore.debt, "name");
+                    bigegi84Orm.obj.sort(pennyStore.shop, "name");
                   }}
                 >
                   Simpan
@@ -123,37 +96,17 @@ const pennyDebt = {
       );
     },
     list: mobxReact.observer(() =>
-      pennyStore.debt.map(
-        ({ name, owner, installment, dueDate, installmentLeft }, i) => (
-          <div key={i} className="column-a card-a">
-            <span>
-              {owner} - {name}
-            </span>
-            <span>
-              Cicilan:{" "}
-              {pennyStore.show.balance
-                ? pennyAction.formatNumber(installment)
-                : "XXX"}
-            </span>
-            <span>
-              Tanggal Jatuh Tempo: {pennyStore.show.balance ? dueDate : "XXX"}
-            </span>
-            <span>
-              Sisa Cicilan :{" "}
-              {pennyStore.show.balance ? installmentLeft + "x" : "XXX"}
-            </span>
-            <span>
-              Total:{" "}
-              {pennyStore.show.balance
-                ? pennyAction.formatNumber(installment * installmentLeft)
-                : "XXX"}
-            </span>
-          </div>
-        )
-      )
+      pennyStore.shop.map(({ name, owner, location, link }, i) => (
+        <div key={i} className="column-a card-a">
+          <span>
+            {name}-{location}
+          </span>
+          <span>{owner}</span>
+        </div>
+      ))
     ),
     sort: () => {
-      pennyStore.debt = pennyStore.debt.sort(([name, owner], [bname, bowner]) =>
+      pennyStore.shop = pennyStore.shop.sort(([name, owner], [bname, bowner]) =>
         owner + name > bowner + bname
           ? 1
           : bowner + bname > owner + name
@@ -162,8 +115,7 @@ const pennyDebt = {
       );
     },
     validate: () => {
-      const { name, owner, installment, dueDate, installmentLeft } =
-        pennyStore.form.debt;
+      const { name, owner, location, link } = pennyStore.form.shop;
       if (isNaN(parseFloat(installment))) {
         alert("Cicilan salah!");
         return false;
@@ -184,7 +136,7 @@ const pennyDebt = {
           <strong
             style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
           >
-            Utang
+            Toko
           </strong>
           <div
             style={bigegi84theme.styleCircle}
@@ -205,9 +157,9 @@ const pennyDebt = {
                 <i className={"fa-solid" + (add ? " fa-minus" : " fa-plus")} />
               </div>
             </div>
-            {add ? <pennyDebt.action.addForm /> : null}
+            {add ? <pennyShop.action.addForm /> : null}
             <div className="row-a">
-              <pennyDebt.action.list />
+              <pennyShop.action.list />
             </div>
           </div>
         ) : null}

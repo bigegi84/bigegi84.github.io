@@ -66,38 +66,38 @@ const pennyConfig = {
             <button
               className={bigegi84theme.class.button}
               onClick={() => {
-                const newDb = { account: [], asset: [], debt: [] };
-                pennyStore.account.forEach(
-                  ([name, owner, balance, createdAt]) =>
-                    bigegi84Orm.obj.createOne(newDb.account, {
-                      name,
-                      owner,
-                      balance,
-                      createdAt,
-                      updatedAt: createdAt,
-                    })
-                );
-                pennyStore.asset.forEach(([name, owner, buyPrice, sellPrice]) =>
-                  bigegi84Orm.obj.createOne(newDb.asset, {
+                const newDb = { stuff: [], stuffPrice: [] };
+                pennyStore.stuff.forEach(
+                  ({
+                    id,
                     name,
-                    owner,
-                    buyPrice,
-                    sellPrice,
-                    createdAt: moment().format(),
-                    updatedAt: moment().format(),
-                  })
-                );
-                pennyStore.debt.forEach(
-                  ([name, owner, installment, dueDate, installmentLeft]) =>
-                    bigegi84Orm.obj.createOne(newDb.debt, {
-                      name,
-                      owner,
-                      installment,
-                      dueDate,
-                      installmentLeft,
-                      createdAt: moment().format(),
-                      updatedAt: moment().format(),
-                    })
+                    shopId,
+                    priceHistory,
+                    createdAt,
+                    updatedAt,
+                  }) => {
+                    const unit = [];
+                    bigegi84Orm.obj.createOne(unit, {
+                      name: priceHistory[0].unit,
+                      ratio: 1,
+                      createdAt,
+                      updatedAt,
+                    });
+                    newDb.stuff.push({
+                      id,
+                      name: `${name} (1 ${priceHistory[0].unit})`,
+                      createdAt,
+                      updatedAt,
+                    });
+                    bigegi84Orm.obj.createOne(newDb.stuffPrice, {
+                      stuffId: id,
+                      shopId,
+                      amount: priceHistory[0].amount,
+                      price: priceHistory[0].price,
+                      createdAt,
+                      updatedAt,
+                    });
+                  }
                 );
                 const dataStr =
                   "data:text/json;charset=utf-8," +

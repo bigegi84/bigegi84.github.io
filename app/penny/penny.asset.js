@@ -1,90 +1,103 @@
 const pennyAsset = {
   action: {
-    form: () => {
-      const [form, setForm] = React.useState(["", "", 0.0, 0.0]);
-      const [fName, fOwner, priceBuy, priceSell] = form;
+    addForm: () => {
       return (
-        <div className="row-a">
-          <div className="column-a">
-            <label htmlFor="name" className={bigegi84theme.class.basic}>
-              Nama
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className={bigegi84theme.class.inputText}
-              value={fName}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[0] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <label htmlFor="owner" className={bigegi84theme.class.basic}>
-              Pemilik
-            </label>
-            <input
-              type="text"
-              id="owner"
-              name="owner"
-              className={bigegi84theme.class.inputText}
-              value={fOwner}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[1] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <label htmlFor="priceBuy" className={bigegi84theme.class.basic}>
-              Beli
-            </label>
-            <input
-              type="text"
-              id="priceBuy"
-              name="priceBuy"
-              className={bigegi84theme.class.inputText}
-              value={priceBuy}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[2] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <label htmlFor="priceSell" className={bigegi84theme.class.basic}>
-              Jual
-            </label>
-            <input
-              type="text"
-              id="priceSell"
-              name="priceSell"
-              className={bigegi84theme.class.inputText}
-              value={priceSell}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[3] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <button
-              className={bigegi84theme.class.button}
-              onClick={() => {
-                pennyStore.asset.push(form);
-                setForm(["", "", 0.0, 0.0]);
-              }}
-            >
-              Simpan
-            </button>
-          </div>
-        </div>
+        <mobxReact.Observer>
+          {() => (
+            <div className="row-a">
+              <div className="column-a">
+                <label htmlFor="name" className={bigegi84theme.class.basic}>
+                  Nama
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.asset.name}
+                  onChange={(e) =>
+                    (pennyStore.form.asset.name = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label htmlFor="owner" className={bigegi84theme.class.basic}>
+                  Pemilik
+                </label>
+                <input
+                  type="text"
+                  id="owner"
+                  name="owner"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.asset.owner}
+                  onChange={(e) =>
+                    (pennyStore.form.asset.owner = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label htmlFor="priceBuy" className={bigegi84theme.class.basic}>
+                  Beli
+                </label>
+                <input
+                  type="text"
+                  id="priceBuy"
+                  name="priceBuy"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.asset.buyPrice}
+                  onChange={(e) =>
+                    (pennyStore.form.asset.buyPrice = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label
+                  htmlFor="priceSell"
+                  className={bigegi84theme.class.basic}
+                >
+                  Jual
+                </label>
+                <input
+                  type="text"
+                  id="priceSell"
+                  name="priceSell"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.asset.sellPrice}
+                  onChange={(e) =>
+                    (pennyStore.form.asset.sellPrice = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <button
+                  className={bigegi84theme.class.button}
+                  onClick={() => {
+                    const { name, owner, buyPrice, sellPrice } =
+                      pennyStore.form.asset;
+                    bigegi84Orm.obj.createOne(pennyStore.asset, {
+                      name,
+                      owner,
+                      buyPrice,
+                      sellPrice,
+                      createdAt: moment().format(),
+                      updatedAt: moment().format(),
+                    });
+                    pennyStore.form.asset = {
+                      mode: null,
+                      i: null,
+                      name: "",
+                      owner: "",
+                      buyPrice: 0,
+                      sellPrice: 0,
+                    };
+                  }}
+                >
+                  Simpan
+                </button>
+              </div>
+            </div>
+          )}
+        </mobxReact.Observer>
       );
     },
     list: mobxReact.observer(() =>
@@ -139,7 +152,7 @@ const pennyAsset = {
                 <i className={"fa-solid" + (add ? " fa-minus" : " fa-plus")} />
               </div>
             </div>
-            {add ? <pennyAsset.action.form /> : null}
+            {add ? <pennyAsset.action.addForm /> : null}
             <div className="row-a">
               <pennyAsset.action.list />
             </div>

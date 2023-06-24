@@ -8,7 +8,15 @@ const pennyState = {
     },
     debt: [],
     form: {
-      account: [, , , , false],
+      account: { mode: null, i: null, name: "", owner: "", balance: 0 },
+      asset: {
+        mode: null,
+        i: null,
+        name: "",
+        owner: "",
+        buyPrice: 0,
+        sellPrice: 0,
+      },
       stuff: [false, false, "", 0.0, 0.0, ""],
     },
     info: { name: "" },

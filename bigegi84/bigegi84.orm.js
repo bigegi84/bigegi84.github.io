@@ -45,8 +45,24 @@ const bigegi84Orm = {
       if (find != -1) result = array[find];
       return result;
     },
+    readMany: (array, where) => {
+      const filter = array.filter((it) => {
+        let check = 1;
+        for (const key in where) {
+          if (it[key] == where[key]) check = check * 1;
+          else check = check * 0;
+        }
+        if (check == 1) return it;
+      });
+      return filter;
+    },
     migrate: (array) => {
       return array.map((it) => [...[bigegi84Orm.uuid()], ...it]);
+    },
+    sort: (array, name) => {
+      return array.sort((a, b) =>
+        a[name] > b[name] ? 1 : b[name] > a[name] ? -1 : 0
+      );
     },
   },
 };

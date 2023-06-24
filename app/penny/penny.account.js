@@ -1,81 +1,85 @@
 const pennyAccount = {
   action: {
+    add: () => {
+      if (!pennyAccount.action.validate()) return;
+      const { name, owner, balance } = pennyStore.form.account;
+      bigegi84Orm.obj.createOne(pennyStore.account, {
+        name,
+        owner,
+        balance,
+        createdAt: moment().format(),
+        updatedAt: moment().format(),
+      });
+      pennyStore.account = bigegi84Orm.obj.sort(pennyStore.account, "name");
+      pennyStore.form.account = {
+        mode: null,
+        i: null,
+        name: "",
+        owner: "",
+        balance: "",
+      };
+    },
     form: () => {
-      const [form, setForm] = React.useState(["", "", 0.0]);
-      const [name, owner, balance] = form;
       return (
-        <div className="row-a">
-          <div className="column-a">
-            <label htmlFor="name" className={bigegi84theme.class.basic}>
-              Nama
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className={bigegi84theme.class.inputText}
-              value={name}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[0] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <label htmlFor="owner" className={bigegi84theme.class.basic}>
-              Pemilik
-            </label>
-            <input
-              type="text"
-              id="owner"
-              name="owner"
-              className={bigegi84theme.class.inputText}
-              value={owner}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[1] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <label htmlFor="balance" className={bigegi84theme.class.basic}>
-              Balance
-            </label>
-            <input
-              type="text"
-              id="balance"
-              name="balance"
-              className={bigegi84theme.class.inputText}
-              value={balance}
-              onChange={(e) => {
-                const newState = [...form];
-                newState[2] = e.target.value;
-                setForm(newState);
-              }}
-            />
-          </div>
-          <div className="column-a">
-            <button
-              className={bigegi84theme.class.button}
-              onClick={() => {
-                if (isNaN(parseFloat(balance))) {
-                  alert("Saldo salah!");
-                  return;
-                }
-                pennyStore.account.push([
-                  ...[name, owner, parseFloat(balance)],
-                  ...[moment().format()],
-                ]);
-                setForm(["", "", 0.0]);
-                pennyAccount.action.sort();
-              }}
-            >
-              Simpan
-            </button>
-          </div>
-        </div>
+        <mobxReact.Observer>
+          {() => (
+            <div className="row-a">
+              <div className="column-a">
+                <label htmlFor="name" className={bigegi84theme.class.basic}>
+                  Nama
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.account.name}
+                  onChange={(e) =>
+                    (pennyStore.form.account.name = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label htmlFor="owner" className={bigegi84theme.class.basic}>
+                  Pemilik
+                </label>
+                <input
+                  type="text"
+                  id="owner"
+                  name="owner"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.account.owner}
+                  onChange={(e) =>
+                    (pennyStore.form.account.owner = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <label htmlFor="balance" className={bigegi84theme.class.basic}>
+                  Balance
+                </label>
+                <input
+                  type="text"
+                  id="balance"
+                  name="balance"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.account.balance}
+                  onChange={(e) =>
+                    (pennyStore.form.account.balance = e.target.value)
+                  }
+                />
+              </div>
+              <div className="column-a">
+                <button
+                  className={bigegi84theme.class.button}
+                  onClick={() => pennyAccount.action.add()}
+                >
+                  Simpan
+                </button>
+              </div>
+            </div>
+          )}
+        </mobxReact.Observer>
       );
     },
     list: () => {
@@ -84,17 +88,19 @@ const pennyAccount = {
           {() => {
             return pennyStore.account.map(
               ({ name, owner, balance, updatedAt }, i) => {
+                const isEdit = (pennyStore.form.account.mode =
+                  "edit" && pennyStore.form.account.i == i);
                 return (
                   <div key={i} className="column-a card-a">
-                    {pennyStore.form.account[4] &&
-                    pennyStore.form.account[5] == i ? (
+                    {isEdit ? (
                       <div className="row-a">
                         <div>
                           <input
                             type="text"
-                            value={pennyStore.form.account[1]}
+                            name="owner"
+                            value={pennyStore.form.account.owner}
                             onChange={(e) =>
-                              (pennyStore.form.account[1] = e.target.value)
+                              (pennyStore.form.account.owner = e.target.value)
                             }
                           />
                         </div>
@@ -102,9 +108,10 @@ const pennyAccount = {
                         <div>
                           <input
                             type="text"
-                            value={pennyStore.form.account[0]}
+                            name="name"
+                            value={pennyStore.form.account.name}
                             onChange={(e) =>
-                              (pennyStore.form.account[0] = e.target.value)
+                              (pennyStore.form.account.name = e.target.value)
                             }
                           />
                         </div>
@@ -114,16 +121,16 @@ const pennyAccount = {
                         {owner} - {name}
                       </span>
                     )}
-                    {pennyStore.form.account[4] &&
-                    pennyStore.form.account[5] == i ? (
+                    {isEdit ? (
                       <div className="row-a">
                         IDR
                         <div>
                           <input
                             type="text"
-                            value={pennyStore.form.account[2]}
+                            name="balance"
+                            value={pennyStore.form.account.balance}
                             onChange={(e) =>
-                              (pennyStore.form.account[2] = e.target.value)
+                              (pennyStore.form.account.balance = e.target.value)
                             }
                           />
                         </div>
@@ -141,34 +148,37 @@ const pennyAccount = {
                         style={bigegi84theme.styleCircle}
                         className="circle-a"
                         onClick={() => {
-                          if (pennyStore.form.account[4]) {
-                            if (
-                              !pennyAccount.action.validate(
-                                pennyStore.form.account
-                              )
-                            )
-                              return;
-                            const [fname, fowner, fbalance, ,] =
-                              pennyStore.form.account;
-                            pennyStore.account[i] = [
-                              ...[fname, fowner, parseFloat(fbalance)],
-                              ...[moment().format()],
-                            ];
-                            pennyStore.form.account[4] = false;
+                          if (isEdit) {
+                            pennyAccount.action.validate();
+                            pennyStore.account[i] = {
+                              name: pennyStore.form.account.name,
+                              owner: pennyStore.form.account.owner,
+                              balance: parseFloat(
+                                pennyStore.form.account.balance
+                              ),
+                              updatedAt: moment().format(),
+                            };
+                            pennyStore.form.account = {
+                              mode: null,
+                              i: null,
+                              name: "",
+                              owner: "",
+                              balance: 0,
+                            };
                           } else {
-                            pennyStore.form.account = [
-                              ...[name, owner, parseFloat(balance), , true, i],
-                            ];
+                            pennyStore.form.account = {
+                              mode: "edit",
+                              i,
+                              name,
+                              owner,
+                              balance,
+                            };
                           }
                         }}
                       >
                         <i
                           className={
-                            "fa-solid" +
-                            (pennyStore.form.account[4] &&
-                            pennyStore.form.account[5] == i
-                              ? " fa-check"
-                              : " fa-pen")
+                            "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
                           }
                         />
                       </div>
@@ -181,17 +191,8 @@ const pennyAccount = {
         </mobxReact.Observer>
       );
     },
-    sort: () => {
-      pennyStore.account = pennyStore.account.sort(
-        ([name, owner], [bname, bowner]) =>
-          owner + name > bowner + bname
-            ? 1
-            : bowner + bname > owner + name
-            ? -1
-            : 0
-      );
-    },
-    validate: ([name, owner, balance]) => {
+    validate: () => {
+      const { balance } = pennyStore.form.account;
       if (isNaN(parseFloat(balance))) {
         alert("Saldo salah!");
         return false;

@@ -29,6 +29,7 @@ const penny = {
         <pennyAsset.view />
         <pennyDebt.view />
         <pennyStuff.view />
+        <pennyShop.view />
         {/* <pennyClaim.view /> */}
       </div>
     );

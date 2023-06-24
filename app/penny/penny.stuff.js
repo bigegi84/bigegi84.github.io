@@ -14,9 +14,31 @@ const pennyStuff = {
                   id="name"
                   name="name"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.stuff[2]}
-                  onChange={(e) => (pennyStore.form.stuff[2] = e.target.value)}
+                  value={pennyStore.form.stuff.name}
+                  onChange={(e) =>
+                    (pennyStore.form.stuff.name = e.target.value)
+                  }
                 />
+              </div>
+              <div className="column-a">
+                <label htmlFor="name" className={bigegi84theme.class.basic}>
+                  Nama
+                </label>
+                <select
+                  type="text"
+                  id="shopId"
+                  name="shopId"
+                  className={bigegi84theme.class.inputText}
+                  value={pennyStore.form.stuff.shopId}
+                  onChange={(e) => (pennyStore.form.stuff.na = e.target.value)}
+                >
+                  <option value="">Pilih Toko</option>
+                  {pennyStore.shop.map(({ id, name, location }, i) => (
+                    <option key={i} value={id}>
+                      {name} {location}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="column-a">
                 <label htmlFor="owner" className={bigegi84theme.class.basic}>
@@ -27,34 +49,40 @@ const pennyStuff = {
                   id="owner"
                   name="owner"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.stuff[3]}
-                  onChange={(e) => (pennyStore.form.stuff[3] = e.target.value)}
+                  value={pennyStore.form.stuff.price}
+                  onChange={(e) =>
+                    (pennyStore.form.stuff.price = e.target.value)
+                  }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="balance" className={bigegi84theme.class.basic}>
+                <label htmlFor="amount" className={bigegi84theme.class.basic}>
                   Jumlah
                 </label>
                 <input
                   type="text"
-                  id="balance"
-                  name="balance"
+                  id="amount"
+                  name="amount"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.stuff[4]}
-                  onChange={(e) => (pennyStore.form.stuff[4] = e.target.value)}
+                  value={pennyStore.form.stuff.amount}
+                  onChange={(e) =>
+                    (pennyStore.form.stuff.amount = e.target.value)
+                  }
                 />
               </div>
               <div className="column-a">
-                <label htmlFor="balance" className={bigegi84theme.class.basic}>
+                <label htmlFor="unit" className={bigegi84theme.class.basic}>
                   Satuan
                 </label>
                 <input
                   type="text"
-                  id="balance"
-                  name="balance"
+                  id="unit"
+                  name="unit"
                   className={bigegi84theme.class.inputText}
-                  value={pennyStore.form.stuff[5]}
-                  onChange={(e) => (pennyStore.form.stuff[5] = e.target.value)}
+                  value={pennyStore.form.stuff.unit}
+                  onChange={(e) =>
+                    (pennyStore.form.stuff.unit = e.target.value)
+                  }
                 />
               </div>
               <div className="column-a">
@@ -62,24 +90,33 @@ const pennyStuff = {
                   className={bigegi84theme.class.button}
                   onClick={() => {
                     if (!pennyStuff.action.validate()) return;
-                    const [, , name, price, amount, unit] =
+                    const { name, shopId, price, amount, unit } =
                       pennyStore.form.stuff;
-                    pennyStore.stuff.push([
-                      ...[
-                        name,
-                        [
-                          [
-                            parseFloat(price),
-                            parseFloat(amount),
-                            unit,
-                            moment().format(),
-                          ],
-                        ],
-                      ],
-                      ...[moment().format()],
-                    ]);
-                    pennyStore.form.stuff = [false, false, "", 0.0, 0.0, ""];
-                    pennyStuff.action.sort();
+                    const priceHistory = [];
+                    bigegi84Orm.obj.createOne(priceHistory, {
+                      price,
+                      amount,
+                      unit,
+                      createdAt: moment().format(),
+                      updatedAt: moment().format(),
+                    });
+                    bigegi84Orm.obj.createOne(pennyStore.stuff, {
+                      name,
+                      shopId,
+                      priceHistory,
+                      createdAt: moment().format(),
+                      updatedAt: moment().format(),
+                    });
+                    pennyStore.form.stuff = {
+                      mode: null,
+                      i: null,
+                      name: "",
+                      shopId: "",
+                      amount: 0,
+                      price: 0,
+                      unit: "",
+                    };
+                    bigegi84Orm.obj.sort(pennyStore.stuff, "name");
                   }}
                 >
                   Simpan
@@ -94,12 +131,16 @@ const pennyStuff = {
       return (
         <mobxReact.Observer>
           {() => {
-            return pennyStore.stuff.map(([name, priceHistory], i) => {
+            return pennyStore.stuff.map(({ id, name, createdAt }, i) => {
               const isEdit =
                 pennyStore.form.stuff[0] == "edit" &&
                 pennyStore.form.stuff[1] == i;
-              const [price, amount, unit] =
-                priceHistory[priceHistory.length - 1];
+              const stuffPrice = bigegi84Orm.obj.readMany(
+                pennyStore.stuffPrice,
+                {
+                  stuffId: id,
+                }
+              );
               return (
                 <div key={i} className="column-a card-a">
                   {isEdit ? (
@@ -117,6 +158,24 @@ const pennyStuff = {
                   ) : (
                     <span>{name}</span>
                   )}
+                  {stuffPrice.map(({ shopId, amount, price }, i) => {
+                    return (
+                      <div className="column-b card-a" key={i}>
+                        <span>
+                          {
+                            bigegi84Orm.obj.readOneById(pennyStore.shop, shopId)
+                              .name
+                          }
+                        </span>
+                        <span>
+                          {pennyStore.show.balance
+                            ? `${pennyAction.formatNumber(price)} (${amount})`
+                            : "XXX"}
+                        </span>
+                      </div>
+                    );
+                  })}
+
                   {isEdit ? (
                     <div className="column-b">
                       <div className="row-a">
@@ -153,18 +212,7 @@ const pennyStuff = {
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    <div className="column-b">
-                      <span>
-                        {pennyStore.show.balance
-                          ? pennyAction.formatNumber(price)
-                          : "XXX"}
-                      </span>
-                      <span>
-                        {pennyStore.show.balance ? `/${amount} ${unit}` : "XXX"}
-                      </span>
-                    </div>
-                  )}
+                  ) : null}
                   <div className="row-a">
                     <div
                       style={bigegi84theme.styleCircle}

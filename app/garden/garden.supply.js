@@ -176,7 +176,10 @@ const gardenSupply = {
                 const isEdit =
                   gardenStore.form.supply[0] == "edit" &&
                   gardenStore.form.supply[1] == i;
-                const supply = gardenStore.supply[i];
+                const { name: scaleName } = bigegi84Orm.obj.readOneById(
+                  scale,
+                  stock.scaleId
+                );
                 return (
                   <div key={i} className="column-a card-a">
                     {isEdit ? (
@@ -196,7 +199,7 @@ const gardenSupply = {
                     )}
                     <div className="column-a card-a">
                       <span>
-                        Stok: {stock.amount} {stock.unit}
+                        Stok: {stock.amount} {scaleName}
                       </span>
                     </div>
                     <gardenSupplySale.view

@@ -133,8 +133,8 @@ const pennyStuff = {
           {() => {
             return pennyStore.stuff.map(({ id, name, createdAt }, stuffI) => {
               const isEdit =
-                pennyStore.form.stuff[0] == "edit" &&
-                pennyStore.form.stuff[1] == stuffI;
+                pennyStore.form.stuff.mode == "edit" &&
+                pennyStore.form.stuff.i == stuffI;
               const stuffPrice = bigegi84Orm.obj.readMany(
                 pennyStore.stuffPrice,
                 {
@@ -143,21 +143,54 @@ const pennyStuff = {
               );
               return (
                 <div key={stuffI} className="column-a card-a">
-                  {isEdit ? (
+                  <div className="row-a">
+                    {isEdit ? (
+                      <div className="row-a">
+                        <div>
+                          <input
+                            type="text"
+                            value={pennyStore.form.stuff.name}
+                            onChange={(e) =>
+                              (pennyStore.form.stuff.name = e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <span>{name}</span>
+                    )}
                     <div className="row-a">
-                      <div>
-                        <input
-                          type="text"
-                          value={pennyStore.form.stuff[2]}
-                          onChange={(e) =>
-                            (pennyStore.form.stuff[2] = e.target.value)
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() => {
+                          if (isEdit) {
+                            const { i, name: formName } = pennyStore.form.stuff;
+                            pennyStore.stuff[i].name = formName;
+                            pennyStore.form.stuff = {
+                              mode: null,
+                              i: null,
+                              name: "",
+                              shopId: "",
+                              amount: 0,
+                              price: 0,
+                              unit: "",
+                            };
+                          } else {
+                            pennyStore.form.stuff.mode = "edit";
+                            pennyStore.form.stuff.i = stuffI;
+                            pennyStore.form.stuff.name = name;
+                          }
+                        }}
+                      >
+                        <i
+                          className={
+                            "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
                           }
                         />
                       </div>
                     </div>
-                  ) : (
-                    <span>{name}</span>
-                  )}
+                  </div>
                   <pennyStuff.action.stuffPrice.addForm
                     stuffI={stuffI}
                     stuffId={id}
@@ -234,67 +267,6 @@ const pennyStuff = {
                       </div>
                     </div>
                   ) : null}
-                  <div className="row-a">
-                    <div
-                      style={bigegi84theme.styleCircle}
-                      className="circle-a"
-                      onClick={() => {
-                        if (isEdit) {
-                          if (!pennyStuff.action.validate()) return;
-                          const [, index, name, price, amount, unit] =
-                            pennyStore.form.stuff;
-                          let isChangePriceHistory = false;
-                          const [, priceHistory] = pennyStore.stuff[index];
-                          const [lPrice, lAmount, lUnit] =
-                            priceHistory[priceHistory.length - 1];
-                          if (
-                            price != lPrice ||
-                            amount != lAmount ||
-                            unit != lUnit
-                          )
-                            isChangePriceHistory = true;
-                          let newPriceHistory = [...priceHistory];
-                          if (isChangePriceHistory)
-                            newPriceHistory.push([
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                              moment().format(),
-                            ]);
-                          pennyStore.stuff[index] = [
-                            ...[name, newPriceHistory],
-                            ...[moment().format()],
-                          ];
-                          pennyStore.form.stuff = [
-                            false,
-                            false,
-                            "",
-                            0.0,
-                            0.0,
-                            "",
-                          ];
-                          pennyStuff.action.sort();
-                        } else {
-                          pennyStore.form.stuff = [
-                            ...[
-                              "edit",
-                              stuffI,
-                              name,
-                              parseFloat(price),
-                              parseFloat(amount),
-                              unit,
-                            ],
-                          ];
-                        }
-                      }}
-                    >
-                      <i
-                        className={
-                          "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
-                        }
-                      />
-                    </div>
-                  </div>
                 </div>
               );
             });
@@ -480,7 +452,7 @@ const pennyStuff = {
       },
     },
     validate: () => {
-      const [, , name, price, amount, unit] = pennyStore.form.stuff;
+      const { name, price, amount, unit } = pennyStore.form.stuff;
       if (isNaN(parseFloat(price))) {
         alert("Harga salah!");
         return false;

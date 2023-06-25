@@ -141,36 +141,8 @@ const pennyStuff = {
                   stuffId: id,
                 }
               );
-              const isAddPrice =
-                pennyStore.form.stuffPrice.mode == "add" &&
-                pennyStore.form.stuffPrice.stuffI == i;
               return (
                 <div key={i} className="column-a card-a">
-                  <mobxReact.Observer>
-                    {() => {
-                      return (
-                        <div className="row-a">
-                          <div
-                            style={bigegi84theme.styleCircle}
-                            className="circle-a"
-                            onClick={() => {
-                              pennyStore.form.stuffPrice.mode = isAddPrice
-                                ? null
-                                : "add";
-                              pennyStore.form.stuffPrice.stuffI = i;
-                            }}
-                          >
-                            <i
-                              className={
-                                "fa-solid" +
-                                (isAddPrice ? " fa-minus" : " fa-plus")
-                              }
-                            />
-                          </div>
-                        </div>
-                      );
-                    }}
-                  </mobxReact.Observer>
                   {isEdit ? (
                     <div className="row-a">
                       <div>
@@ -186,6 +158,10 @@ const pennyStuff = {
                   ) : (
                     <span>{name}</span>
                   )}
+                  <pennyStuff.action.stuffPrice.addForm
+                    stuffI={i}
+                    stuffId={id}
+                  />
                   {stuffPrice.map(({ shopId, amount, price }, i) => {
                     return (
                       <div className="column-b card-a" key={i}>
@@ -313,6 +289,99 @@ const pennyStuff = {
       pennyStore.stuff = pennyStore.stuff.sort(([name], [bname]) =>
         name > bname ? 1 : bname > name ? -1 : 0
       );
+    },
+    stuffPrice: {
+      add: () => {
+        if (!pennyStuff.action.stuffPrice.validate()) return;
+        const { stuffId, shopId, price, amount } = pennyStore.form.stuffPrice;
+        bigegi84Orm.obj.createOne(pennyStore.stuffPrice, {
+          stuffId,
+          shopId,
+          amount: parseFloat(amount),
+          price: parseFloat(price),
+          createdAt: moment().format(),
+          updatedAt: moment().format(),
+        });
+        pennyStore.form.stuffPrice = {
+          mode: null,
+          stuffI: null,
+          i: null,
+          stuffId: "",
+          shopId: "",
+          amount: 0,
+          price: 0,
+        };
+      },
+      addForm: ({ stuffI, stuffId }) => {
+        return (
+          <mobxReact.Observer>
+            {() => {
+              const isAddPrice =
+                pennyStore.form.stuffPrice.mode == "add" &&
+                pennyStore.form.stuffPrice.stuffI == stuffI;
+              return (
+                <div className="column-a">
+                  <div className="row-a">
+                    <div
+                      style={bigegi84theme.styleCircle}
+                      className="circle-a"
+                      onClick={() => {
+                        pennyStore.form.stuffPrice.mode = isAddPrice
+                          ? null
+                          : "add";
+                        pennyStore.form.stuffPrice.stuffI = stuffI;
+                        pennyStore.form.stuffPrice.stuffId = stuffId;
+                      }}
+                    >
+                      <i
+                        className={
+                          "fa-solid" + (isAddPrice ? " fa-minus" : " fa-plus")
+                        }
+                      />
+                    </div>
+                  </div>
+                  {isAddPrice ? (
+                    <div className="row-a">
+                      <select
+                        onChange={(e) =>
+                          (pennyStore.form.stuffPrice.shopId = e.target.value)
+                        }
+                      >
+                        <option value="">Pilih Toko</option>
+                        {pennyStore.shop.map(({ id, name }, i) => (
+                          <option key={i} value={id}>
+                            {name}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        value={pennyStore.form.stuffPrice.price}
+                        onChange={(e) =>
+                          (pennyStore.form.stuffPrice.price = e.target.value)
+                        }
+                      />
+                      <input
+                        value={pennyStore.form.stuffPrice.amount}
+                        onChange={(e) =>
+                          (pennyStore.form.stuffPrice.amount = e.target.value)
+                        }
+                      />
+                      <button
+                        onClick={() => pennyStuff.action.stuffPrice.add()}
+                      >
+                        simpan
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            }}
+          </mobxReact.Observer>
+        );
+      },
+      validate: () => {
+        return true;
+      },
     },
     validate: () => {
       const [, , name, price, amount, unit] = pennyStore.form.stuff;

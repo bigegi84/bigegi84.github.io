@@ -122,36 +122,95 @@ const pennyDebt = {
         </mobxReact.Observer>
       );
     },
-    list: mobxReact.observer(() =>
-      pennyStore.debt.map(
-        ({ name, owner, installment, dueDate, installmentLeft }, i) => (
-          <div key={i} className="column-a card-a">
-            <span>
-              {owner} - {name}
-            </span>
-            <span>
-              Cicilan:{" "}
-              {pennyStore.show.balance
-                ? pennyAction.formatNumber(installment)
-                : "XXX"}
-            </span>
-            <span>
-              Tanggal Jatuh Tempo: {pennyStore.show.balance ? dueDate : "XXX"}
-            </span>
-            <span>
-              Sisa Cicilan :{" "}
-              {pennyStore.show.balance ? installmentLeft + "x" : "XXX"}
-            </span>
-            <span>
-              Total:{" "}
-              {pennyStore.show.balance
-                ? pennyAction.formatNumber(installment * installmentLeft)
-                : "XXX"}
-            </span>
-          </div>
-        )
-      )
-    ),
+    edit: () => {
+      pennyStore.form.debt = {
+        mode: null,
+        i: null,
+        name: "",
+        owner: "",
+        installment: 0,
+        dueDate: "-",
+        installmentLeft: 0,
+      };
+    },
+    list: mobxReact.observer(() => {
+      return pennyStore.debt.map(
+        ({ name, owner, installment, dueDate, installmentLeft }, debtI) => {
+          const isEdit =
+            pennyStore.form.debt.mode == "edit" &&
+            pennyStore.form.debt.i == debtI;
+          return (
+            <div key={debtI} className="column-a card-a">
+              <div className="row-a">
+                {isEdit ? (
+                  <div className="column-a">
+                    <div className="row-a">
+                      <input /> -
+                      <input />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="column-a">
+                    <span>
+                      {owner} - {name}
+                    </span>
+                    <span>
+                      Cicilan:{" "}
+                      {pennyStore.show.balance
+                        ? pennyAction.formatNumber(installment)
+                        : "XXX"}
+                    </span>
+                    <span>
+                      Tanggal Jatuh Tempo:{" "}
+                      {pennyStore.show.balance ? dueDate : "XXX"}
+                    </span>
+                    <span>
+                      Sisa Cicilan :{" "}
+                      {pennyStore.show.balance ? installmentLeft + "x" : "XXX"}
+                    </span>
+                    <span>
+                      Total:{" "}
+                      {pennyStore.show.balance
+                        ? pennyAction.formatNumber(
+                            installment * installmentLeft
+                          )
+                        : "XXX"}
+                    </span>
+                  </div>
+                )}
+                <div className="row-a">
+                  <div
+                    style={bigegi84theme.styleCircle}
+                    className="circle-a"
+                    onClick={() => {
+                      if (isEdit) {
+                        pennyDebt.action.edit();
+                      } else {
+                        pennyStore.form.debt = {
+                          mode: "edit",
+                          i: debtI,
+                          name,
+                          owner,
+                          installment,
+                          dueDate,
+                          installmentLeft,
+                        };
+                      }
+                    }}
+                  >
+                    <i
+                      className={
+                        "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        }
+      );
+    }),
     sort: () => {
       pennyStore.debt = pennyStore.debt.sort(([name, owner], [bname, bowner]) =>
         owner + name > bowner + bname

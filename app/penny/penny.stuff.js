@@ -141,8 +141,36 @@ const pennyStuff = {
                   stuffId: id,
                 }
               );
+              const isAddPrice =
+                pennyStore.form.stuffPrice.mode == "add" &&
+                pennyStore.form.stuffPrice.stuffI == i;
               return (
                 <div key={i} className="column-a card-a">
+                  <mobxReact.Observer>
+                    {() => {
+                      return (
+                        <div className="row-a">
+                          <div
+                            style={bigegi84theme.styleCircle}
+                            className="circle-a"
+                            onClick={() => {
+                              pennyStore.form.stuffPrice.mode = isAddPrice
+                                ? null
+                                : "add";
+                              pennyStore.form.stuffPrice.stuffI = i;
+                            }}
+                          >
+                            <i
+                              className={
+                                "fa-solid" +
+                                (isAddPrice ? " fa-minus" : " fa-plus")
+                              }
+                            />
+                          </div>
+                        </div>
+                      );
+                    }}
+                  </mobxReact.Observer>
                   {isEdit ? (
                     <div className="row-a">
                       <div>

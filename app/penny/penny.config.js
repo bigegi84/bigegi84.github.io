@@ -51,7 +51,8 @@ const pennyConfig = {
                   reader.onload = (it) => {
                     const text = it.target.result;
                     const json = JSON.parse(text);
-                    for (const key in json) pennyStore[key] = json[key];
+                    for (const key in json)
+                      if (key != "form") pennyStore[key] = json[key];
                   };
                   reader.readAsText(e.target.files[0]);
                 }

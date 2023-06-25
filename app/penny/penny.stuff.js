@@ -131,10 +131,10 @@ const pennyStuff = {
       return (
         <mobxReact.Observer>
           {() => {
-            return pennyStore.stuff.map(({ id, name, createdAt }, i) => {
+            return pennyStore.stuff.map(({ id, name, createdAt }, stuffI) => {
               const isEdit =
                 pennyStore.form.stuff[0] == "edit" &&
-                pennyStore.form.stuff[1] == i;
+                pennyStore.form.stuff[1] == stuffI;
               const stuffPrice = bigegi84Orm.obj.readMany(
                 pennyStore.stuffPrice,
                 {
@@ -142,7 +142,7 @@ const pennyStuff = {
                 }
               );
               return (
-                <div key={i} className="column-a card-a">
+                <div key={stuffI} className="column-a card-a">
                   {isEdit ? (
                     <div className="row-a">
                       <div>
@@ -159,27 +159,44 @@ const pennyStuff = {
                     <span>{name}</span>
                   )}
                   <pennyStuff.action.stuffPrice.addForm
-                    stuffI={i}
+                    stuffI={stuffI}
                     stuffId={id}
                   />
-                  {stuffPrice.map(({ shopId, amount, price }, i) => {
+                  {stuffPrice.map(({ shopId, amount, price }, stuffPriceI) => {
+                    const isEditPrice =
+                      pennyStore.form.stuffPrice.mode == "edit" &&
+                      pennyStore.form.stuffPrice.stuffI == stuffI &&
+                      pennyStore.form.stuffPrice.i == stuffPriceI;
                     return (
-                      <div className="column-b card-a" key={i}>
-                        <span>
-                          {
-                            bigegi84Orm.obj.readOneById(pennyStore.shop, shopId)
-                              .name
-                          }
-                        </span>
-                        <span>
-                          {pennyStore.show.balance
-                            ? `${pennyAction.formatNumber(price)} (${amount})`
-                            : "XXX"}
-                        </span>
+                      <div className="column-b card-a" key={stuffPriceI}>
+                        <div className="row-a">
+                          <div className="column-a">
+                            <span>
+                              {
+                                bigegi84Orm.obj.readOneById(
+                                  pennyStore.shop,
+                                  shopId
+                                ).name
+                              }
+                            </span>
+                            {isEditPrice ? null : (
+                              <span>
+                                {pennyStore.show.balance
+                                  ? `${pennyAction.formatNumber(
+                                      price
+                                    )} (${amount})`
+                                  : "XXX"}
+                              </span>
+                            )}
+                          </div>
+                          <pennyStuff.action.stuffPrice.editForm
+                            stuffI={stuffI}
+                            stuffPriceI={stuffPriceI}
+                          />
+                        </div>
                       </div>
                     );
                   })}
-
                   {isEdit ? (
                     <div className="column-b">
                       <div className="row-a">
@@ -261,7 +278,7 @@ const pennyStuff = {
                           pennyStore.form.stuff = [
                             ...[
                               "edit",
-                              i,
+                              stuffI,
                               name,
                               parseFloat(price),
                               parseFloat(amount),
@@ -373,6 +390,85 @@ const pennyStuff = {
                       </button>
                     </div>
                   ) : null}
+                </div>
+              );
+            }}
+          </mobxReact.Observer>
+        );
+      },
+      edit: () => {
+        if (!pennyStuff.action.stuffPrice.validate()) return;
+        const { i, price, amount } = pennyStore.form.stuffPrice;
+        pennyStore.stuffPrice[i].price = parseFloat(price);
+        pennyStore.stuffPrice[i].amount = parseFloat(amount);
+        pennyStore.form.stuffPrice = {
+          mode: null,
+          i: null,
+          stuffI: null,
+          stuffId: "",
+          shopId: "",
+          amount: 0,
+          price: 0,
+        };
+      },
+      editForm: ({ stuffI, stuffPriceI }) => {
+        return (
+          <mobxReact.Observer>
+            {() => {
+              const isEdit =
+                pennyStore.form.stuffPrice.mode == "edit" &&
+                pennyStore.form.stuffPrice.stuffI == stuffI &&
+                pennyStore.form.stuffPrice.i == stuffPriceI;
+              return (
+                <div className="column-a">
+                  {isEdit ? (
+                    <div className="row-a">
+                      <input
+                        value={pennyStore.form.stuffPrice.price}
+                        onChange={(e) =>
+                          (pennyStore.form.stuffPrice.price = e.target.value)
+                        }
+                      />
+                      <input
+                        value={pennyStore.form.stuffPrice.amount}
+                        onChange={(e) =>
+                          (pennyStore.form.stuffPrice.amount = e.target.value)
+                        }
+                      />
+                      <button
+                        onClick={() => pennyStuff.action.stuffPrice.add()}
+                      >
+                        simpan
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="row-a">
+                    <div
+                      style={bigegi84theme.styleCircle}
+                      className="circle-a"
+                      onClick={() => {
+                        if (isEdit) {
+                          pennyStuff.action.stuffPrice.edit();
+                        } else {
+                          const { price, amount } =
+                            pennyStore.stuffPrice[stuffPriceI];
+                          pennyStore.form.stuffPrice = {
+                            mode: "edit",
+                            stuffI,
+                            i: stuffPriceI,
+                            price: parseFloat(price),
+                            amount: parseFloat(amount),
+                          };
+                        }
+                      }}
+                    >
+                      <i
+                        className={
+                          "fa-solid" + (isEdit ? " fa-check" : " fa-pen")
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             }}

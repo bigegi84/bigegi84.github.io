@@ -44,8 +44,8 @@ const pennyStore = mobx.observable({
     },
     stuffPrice: {
       mode: null,
-      stuffI: null,
       i: null,
+      stuffI: null,
       stuffId: "",
       shopId: "",
       amount: 0,

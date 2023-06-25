@@ -23,7 +23,7 @@ const cloneChat = {
         >
           Kirim
         </button>
-        <button
+        {/* <button
           className={bigegi84theme.class.button}
           onClick={() => {
             const brain = cloneStore.brain[cloneStore.brain.selected];
@@ -37,6 +37,22 @@ const cloneChat = {
           }}
         >
           Simpan Pengetahuan
+        </button> */}
+        <button
+          className={bigegi84theme.class.button}
+          onClick={() => {
+            const brain = cloneStore.brain[cloneStore.brain.selected];
+            const yaml = jsyaml.dump(mobx.toJS(brain));
+            const dataStr =
+              "data:text/yaml;charset=utf-8," +
+              encodeURIComponent(yaml);
+            const dlAnchorElem = document.getElementById("downloadA");
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "bigegi84.bigegi84-Clone.yaml");
+            dlAnchorElem.click();
+          }}
+        >
+          Simpan yaml
         </button>
         <a id="downloadA" style={{ display: "none" }}></a>
         {/* <strong>Jumlah kata yang dipelajari: </strong>

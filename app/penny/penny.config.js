@@ -67,47 +67,56 @@ const pennyConfig = {
             <button
               className={bigegi84theme.class.button}
               onClick={() => {
-                const newDb = { stuff: [], stuffPrice: [] };
-                pennyStore.stuff.forEach(
-                  ({
-                    id,
-                    name,
-                    shopId,
-                    priceHistory,
-                    createdAt,
-                    updatedAt,
-                  }) => {
-                    const unit = [];
-                    bigegi84Orm.obj.createOne(unit, {
-                      name: priceHistory[0].unit,
-                      ratio: 1,
-                      createdAt,
-                      updatedAt,
-                    });
-                    newDb.stuff.push({
-                      id,
-                      name: `${name} (1 ${priceHistory[0].unit})`,
-                      createdAt,
-                      updatedAt,
-                    });
-                    bigegi84Orm.obj.createOne(newDb.stuffPrice, {
-                      stuffId: id,
-                      shopId,
-                      amount: priceHistory[0].amount,
-                      price: priceHistory[0].price,
-                      createdAt,
-                      updatedAt,
-                    });
-                  }
-                );
+                const yaml = jsyaml.dump(mobx.toJS(pennyStore));
                 const dataStr =
-                  "data:text/json;charset=utf-8," +
-                  encodeURIComponent(JSON.stringify(newDb));
+                  "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
                 const dlAnchorElem = document.getElementById("downloadA");
                 dlAnchorElem.setAttribute("href", dataStr);
                 dlAnchorElem.setAttribute(
                   "download",
-                  `${pennyStore.info.name}.bigegi84-Penny.json`
+                  `${pennyStore.info.name}.bigegi84-Penny.yaml`
+                );
+                dlAnchorElem.click();
+              }}
+            >
+              save yaml
+            </button>
+            <div>
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={inputFile}
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (it) => {
+                      const text = it.target.result;
+                      const json = jsyaml.load(text);
+                      for (const key in json)
+                        if (key != "form") pennyStore[key] = json[key];
+                    };
+                    reader.readAsText(e.target.files[0]);
+                  }
+                }}
+              />
+              <button
+                className={bigegi84theme.class.button}
+                onClick={() => inputFile.current.click()}
+              >
+                Load yaml
+              </button>
+            </div>
+            <button
+              className={bigegi84theme.class.button}
+              onClick={() => {
+                const yaml = jsyaml.dump(mobx.toJS(pennyStore));
+                const dataStr =
+                  "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
+                const dlAnchorElem = document.getElementById("downloadA");
+                dlAnchorElem.setAttribute("href", dataStr);
+                dlAnchorElem.setAttribute(
+                  "download",
+                  `${pennyStore.info.name}.bigegi84-Penny.yaml`
                 );
                 dlAnchorElem.click();
               }}

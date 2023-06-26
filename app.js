@@ -23,6 +23,11 @@
           }}
         />
         <Route
+          path="/chord"
+          exact
+          component={(props) => app.action.withFooter([props, chord.view])}
+        />
+        <Route
           path="/clone"
           exact
           component={(props) => {

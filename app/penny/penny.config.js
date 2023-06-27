@@ -14,7 +14,7 @@ const pennyConfig = {
       });
     },
     load: {
-      yaml: () => {
+      yaml: (e) => {
         if (e.target.files && e.target.files[0]) {
           const reader = new FileReader();
           reader.onload = (it) => {

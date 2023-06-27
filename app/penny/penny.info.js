@@ -92,7 +92,9 @@ const pennyInfo = {
               );
               const today = moment();
               const nextMonth = moment().add(
-                moment().format("MM") < pennyStore.config.payday ? 0 : 1,
+                parseInt(moment().format("DD")) < pennyStore.config.payday - 1
+                  ? 0
+                  : 1,
                 "M"
               );
               const nextPayday = moment(

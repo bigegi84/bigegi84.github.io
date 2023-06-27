@@ -1,3 +1,20 @@
+.bigegi84-card {
+  border: 1px solid;
+  border-radius: 1em;
+  padding: 1em;
+}
+.bigegi84-column {
+  display: flex;
+  flex-direction: column;
+}
+.bigegi84-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.bigegi84-text {
+  margin: 0;
+}
 .column-a {
   display: flex;
   flex-direction: column;

@@ -99,79 +99,52 @@ const chordSong = {
                 chordI++;
               }
               return (
-                <div key={i} className="column-a card-a">
-                  <span>
-                    {singer} - {title}
-                  </span>
-                  <div className="column-a">
-                    <div className="row-a">
-                      <strong
-                        style={{
-                          ...bigegi84theme.style,
-                          ...{ alignSelf: "center" },
-                        }}
-                      >
-                        Akor
-                      </strong>
-                      <div
-                        style={bigegi84theme.styleCircle}
-                        className="circle-a"
-                        onClick={() =>
-                          (chordStore.song[i].show.chord =
-                            !chordStore.song[i].show.chord)
-                        }
-                      >
-                        <i
-                          className={
-                            "fas" +
-                            (chordStore.song[i].show.chord
-                              ? " fa-angle-up"
-                              : " fa-angle-down")
-                          }
-                        />
-                      </div>
-                    </div>
+                <bigegi84View.card key={i}>
+                  <bigegi84View.textStrong
+                    label={`${singer} - ${title}`}
+                    color={"#A7ECEE"}
+                  />
+                  <bigegi84View.column>
+                    <bigegi84View.circle
+                      label="Akor"
+                      onClick={() =>
+                        (chordStore.song[i].show.chord =
+                          !chordStore.song[i].show.chord)
+                      }
+                      iClassName={
+                        "fas" +
+                        (chordStore.song[i].show.chord
+                          ? " fa-angle-up"
+                          : " fa-angle-down")
+                      }
+                    />
                     {chordStore.song[i].show.chord ? (
-                      <div className="column-a card-a">{chordView}</div>
+                      <bigegi84View.card>{chordView}</bigegi84View.card>
                     ) : null}
-                  </div>
-                  <div className="column-a">
-                    <div className="row-a">
-                      <strong
-                        style={{
-                          ...bigegi84theme.style,
-                          ...{ alignSelf: "center" },
-                        }}
-                      >
-                        Lirik
-                      </strong>
-                      <div
-                        style={bigegi84theme.styleCircle}
-                        className="circle-a"
-                        onClick={() =>
-                          (chordStore.song[i].show.lyric =
-                            !chordStore.song[i].show.lyric)
-                        }
-                      >
-                        <i
-                          className={
-                            "fas" +
-                            (chordStore.song[i].show.lyric
-                              ? " fa-angle-up"
-                              : " fa-angle-down")
-                          }
-                        />
-                      </div>
-                    </div>
+                  </bigegi84View.column>
+                  <bigegi84View.column>
+                    <bigegi84View.circle
+                      label="Lirik"
+                      onClick={() =>
+                        (chordStore.song[i].show.lyric =
+                          !chordStore.song[i].show.lyric)
+                      }
+                      iClassName={
+                        "fas" +
+                        (chordStore.song[i].show.lyric
+                          ? " fa-angle-up"
+                          : " fa-angle-down")
+                      }
+                    />
                     {chordStore.song[i].show.lyric ? (
-                      <div className="column-a card-a">
+                      <bigegi84View.card>
                         {lyric.map((e, i) => (
-                          <span key={i}>{e}</span>
+                          <bigegi84View.text key={i} label={e} />
                         ))}
-                      </div>
+                      </bigegi84View.card>
                     ) : null}
-                  </div>
-                </div>
+                  </bigegi84View.column>
+                </bigegi84View.card>
               );
             });
           }}

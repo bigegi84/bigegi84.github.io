@@ -4,8 +4,14 @@ const pennyStore = mobx.observable({
   claim: [],
   config: {
     payday: 28,
+    investForecast: {
+      balance: 8000000,
+      period: 1,
+      periodUnit: "year",
+    },
   },
   debt: [],
+  deposit: [],
   form: {
     account: { mode: null, i: null, name: "", owner: "", balance: 0 },
     asset: {
@@ -33,6 +39,7 @@ const pennyStore = mobx.observable({
       dueDate: "-",
       installmentLeft: 0,
     },
+    deposit: { name: "", annualInterestRate: 0, type: "" },
     stuff: {
       mode: null,
       i: null,

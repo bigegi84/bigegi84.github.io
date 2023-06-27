@@ -25,6 +25,7 @@ const penny = {
         </div>
         <pennyConfig.view />
         <pennyInfo.view />
+        <pennyInvestForecast.view />
         <pennyAccount.view />
         <pennyAsset.view />
         <pennyDebt.view />

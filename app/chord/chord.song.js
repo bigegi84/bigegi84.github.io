@@ -181,7 +181,13 @@ const chordSong = {
     return (
       <bigegi84View.letsRock
         column={{
-          sectionLagu: <chordSong.action.list />,
+          sectionLagu: {
+            add: {
+              inputTextPenyanyi: React.useState(""),
+              inputTextJudul: React.useState(""),
+            },
+            content: <chordSong.action.list />,
+          },
         }}
       />
     );

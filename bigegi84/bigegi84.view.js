@@ -161,12 +161,34 @@ const bigegi84View = {
   observer: ({ onChange }) => (
     <mobxReact.Observer>{onChange}</mobxReact.Observer>
   ),
-  section: ({ name, state, show }) => {
+  section: ({ name, state, show, add }) => {
     let stateIsReal = state ? state : React.useState(false);
+    let stateAdd = React.useState(false);
+    let [sAdd, sSetAdd] = stateAdd;
     return (
       <bigegi84View.column>
         <bigegi84View.circleAngle label={name} state={stateIsReal} />
-        <bigegi84View.isShow value={stateIsReal[0]} show={show} />
+        <bigegi84View.isShow
+          value={stateIsReal[0]}
+          show={
+            <bigegi84View.column>
+              {add ? (
+                <bigegi84View.circle
+                  iClassName={"fa-solid" + (sAdd ? " fa-minus" : " fa-plus")}
+                  onClick={() => sSetAdd(!sAdd)}
+                />
+              ) : null}
+              {sAdd ? (
+                <bigegi84View.card>
+                  <bigegi84View.row>
+                    {bigegi84View.render(add)}
+                  </bigegi84View.row>
+                </bigegi84View.card>
+              ) : null}
+              {show}
+            </bigegi84View.column>
+          }
+        />
       </bigegi84View.column>
     );
   },
@@ -248,11 +270,13 @@ const bigegi84View = {
           );
         }
         if (key.search("section") != -1) {
+          const { add, content } = props[key];
           view.push(
             <bigegi84View.section
               key={i}
               name={key.replace("section", "")}
-              show={props[key]}
+              add={add}
+              show={content}
             />
           );
         }

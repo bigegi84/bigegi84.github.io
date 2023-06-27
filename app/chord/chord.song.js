@@ -82,11 +82,12 @@ const chordSong = {
         </mobxReact.Observer>
       );
     },
-    list: () => {
-      return (
-        <mobxReact.Observer>
-          {() => {
-            return chordStore.song.map(({ singer, title, chord, lyric }, i) => {
+    list: () => (
+      <bigegi84View.listCard
+        arr={chordStore.song}
+        onMap={({ singer, title, chord, lyric }, i) => (
+          <bigegi84View.observer
+            onChange={() => {
               const chordView = [];
               let chordI = 0;
               for (const key in chord) {
@@ -99,7 +100,7 @@ const chordSong = {
                 chordI++;
               }
               return (
-                <bigegi84View.card key={i}>
+                <bigegi84View.column>
                   <bigegi84View.textStrong
                     label={`${singer} - ${title}`}
                     color={"#A7ECEE"}
@@ -118,9 +119,10 @@ const chordSong = {
                           : " fa-angle-down")
                       }
                     />
-                    {chordStore.song[i].show.chord ? (
-                      <bigegi84View.card>{chordView}</bigegi84View.card>
-                    ) : null}
+                    <bigegi84View.isShow
+                      value={chordStore.song[i].show.chord}
+                      show={<bigegi84View.card>{chordView}</bigegi84View.card>}
+                    />
                   </bigegi84View.column>
                   <bigegi84View.column>
                     <bigegi84View.circle
@@ -136,21 +138,24 @@ const chordSong = {
                           : " fa-angle-down")
                       }
                     />
-                    {chordStore.song[i].show.lyric ? (
-                      <bigegi84View.card>
-                        {lyric.map((e, i) => (
-                          <bigegi84View.text key={i} label={e} />
-                        ))}
-                      </bigegi84View.card>
-                    ) : null}
+                    <bigegi84View.isShow
+                      value={chordStore.song[i].show.lyric}
+                      show={
+                        <bigegi84View.card>
+                          {lyric.map((e, i) => (
+                            <bigegi84View.text key={i} label={e} />
+                          ))}
+                        </bigegi84View.card>
+                      }
+                    />
                   </bigegi84View.column>
-                </bigegi84View.card>
+                </bigegi84View.column>
               );
-            });
-          }}
-        </mobxReact.Observer>
-      );
-    },
+            }}
+          />
+        )}
+      />
+    ),
     validate: () => {
       const { balance } = chordStore.form.account;
       if (isNaN(parseFloat(balance))) {
@@ -161,32 +166,24 @@ const chordSong = {
     },
   },
   view: () => {
-    const [show, setShow] = React.useState(false);
-    const [add, setAdd] = React.useState(false);
+    // <bigegi84View.letsRock
+    //       column={{
+    //         sectionLagu: <chordSong.action.list />,
+    //         row: {
+    //           inputTextNama: name,
+    //           inputTextareaAlamat: name,
+    //           "inputTextNo Hp": name,
+    //           "inputSelectJenis Kelamin": [name, ["Pria", "Wanita"]],
+    //           buttonSimpan: () => alert("test"),
+    //         },
+    //       }}
+    //     />
     return (
-      <div className="column-a">
-        <div className="row-a">
-          <strong
-            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
-          >
-            Lagu
-          </strong>
-          <div
-            style={bigegi84theme.styleCircle}
-            className="circle-a"
-            onClick={() => setShow(!show)}
-          >
-            <i className={"fas" + (show ? " fa-angle-up" : " fa-angle-down")} />
-          </div>
-        </div>
-        {show ? (
-          <div className="column-a">
-            <div className="row-a">
-              <chordSong.action.list />
-            </div>
-          </div>
-        ) : null}
-      </div>
+      <bigegi84View.letsRock
+        column={{
+          sectionLagu: <chordSong.action.list />,
+        }}
+      />
     );
   },
 };

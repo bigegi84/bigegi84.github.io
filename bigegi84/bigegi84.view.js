@@ -1,4 +1,12 @@
 const bigegi84View = {
+  button: ({ name, onClick }) => (
+    <button
+      className={bigegi84theme.class.button}
+      onClick={(e) => (onClick ? onClick(e) : () => {})}
+    >
+      {name}
+    </button>
+  ),
   card: ({ children }) => (
     <div className="bigegi84-column bigegi84-card">{children}</div>
   ),
@@ -21,18 +29,147 @@ const bigegi84View = {
       </div>
     </bigegi84View.row>
   ),
+  circleAngle: ({ label, state: [state, setState] }) => (
+    <bigegi84View.row>
+      {label ? (
+        <strong
+          className={bigegi84theme.class.basic}
+          style={{ alignSelf: "center" }}
+        >
+          {label}
+        </strong>
+      ) : null}
+      <div
+        style={bigegi84theme.styleCircle}
+        className="circle-a"
+        onClick={() => (setState ? setState(!state) : () => {})}
+      >
+        <i className={"fas" + (state ? " fa-angle-up" : " fa-angle-down")} />
+      </div>
+    </bigegi84View.row>
+  ),
   column: ({ gap, children }) => (
     <div className="bigegi84-column" style={{ gap: gap ? gap : "10px" }}>
       {children}
     </div>
   ),
-  listCard: ({ arr, onMap }) =>
-    arr.map((e, i) => (onMap ? onMap(e, i) : () => {})),
+  form: ({ input, button }) => {
+    const view = [];
+    let i = 0;
+    for (const key in input) {
+      const [type, state, option] = input[key];
+      if (type) {
+        switch (type) {
+          case "select":
+            view.push(
+              <bigegi84View.inputSelect
+                key={i}
+                name={key}
+                state={state}
+                option={option}
+              />
+            );
+            break;
+          case "text":
+            view.push(
+              <bigegi84View.inputText key={i} name={key} state={state} />
+            );
+            break;
+          case "textarea":
+            view.push(
+              <bigegi84View.inputTextarea key={i} name={key} state={state} />
+            );
+            break;
+          default:
+            break;
+        }
+      }
+      i++;
+    }
+    for (const key in button) {
+      view.push(
+        <bigegi84View.button key={i} name={key} onClick={button[key]} />
+      );
+      i++;
+    }
+    return view;
+  },
+  inputText: ({ name, state: [state, setState] }) => (
+    <bigegi84View.column>
+      <label className={bigegi84theme.class.basic}>{name}</label>
+      <input
+        type="text"
+        name={name}
+        className={bigegi84theme.class.inputText}
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+      />
+    </bigegi84View.column>
+  ),
+  inputSelect: ({ name, state: [state, setState], option }) => (
+    <bigegi84View.column>
+      <label className={bigegi84theme.class.basic}>{name}</label>
+      <select
+        className={bigegi84theme.class.input}
+        name={name}
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+      >
+        <option>{`Pilih ${name}`}</option>
+        {option
+          ? option.map((e, i) => (
+              <option key={i} value={typeof e == "string" ? e : e[1]}>
+                {typeof e == "string" ? e : e[0]}
+              </option>
+            ))
+          : null}
+      </select>
+    </bigegi84View.column>
+  ),
+  inputTextarea: ({ name, state: [state, setState] }) => (
+    <bigegi84View.column>
+      <label className={bigegi84theme.class.basic}>{name}</label>
+      <textarea
+        rows="2"
+        cols="50"
+        name={name}
+        className={bigegi84theme.class.inputText}
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+      />
+    </bigegi84View.column>
+  ),
+  isShow: ({ value, show, nope }) => (value ? show : nope ? nope : null),
+  letsPlay: (props) => bigegi84View.render(props),
+  letsRock: (props) => bigegi84View.render(props),
+  listCard: ({ arr, onMap }) => (
+    <bigegi84View.column>
+      <bigegi84View.row>
+        {arr.map((e, i) => (
+          <bigegi84View.card key={i}>
+            {onMap ? onMap(e, i) : () => {}}
+          </bigegi84View.card>
+        ))}
+      </bigegi84View.row>
+    </bigegi84View.column>
+  ),
   row: ({ gap, children }) => (
     <div className="bigegi84-row" style={{ gap: gap ? gap : "10px" }}>
       {children}
     </div>
   ),
+  observer: ({ onChange }) => (
+    <mobxReact.Observer>{onChange}</mobxReact.Observer>
+  ),
+  section: ({ name, state, show }) => {
+    let stateIsReal = state ? state : React.useState(false);
+    return (
+      <bigegi84View.column>
+        <bigegi84View.circleAngle label={name} state={stateIsReal} />
+        <bigegi84View.isShow value={stateIsReal[0]} show={show} />
+      </bigegi84View.column>
+    );
+  },
   text: ({ label, fontSize }) => (
     <p
       className={bigegi84theme.class.basic + " bigegi84-text"}
@@ -50,16 +187,78 @@ const bigegi84View = {
     </strong>
   ),
   render: (props) => {
-    bigegi84View.render({
-      circle: {
-        i: {
-          onClick: () => {
-            alert("halo");
-          },
-        },
-      },
-    });
-    if (typeof props === "object") {
+    const view = [];
+    if (typeof props == "object") {
+      let i = 0;
+      let found = false;
+      for (const key in props) {
+        if (key.search("button") != -1) {
+          view.push(
+            <bigegi84View.button
+              key={i}
+              name={key.replace("button", "")}
+              onClick={props[key]}
+            />
+          );
+        }
+        if (key.search("column") != -1) {
+          view.push(
+            <bigegi84View.column key={i}>
+              {bigegi84View.render(props[key])}
+            </bigegi84View.column>
+          );
+        }
+        if (key.search("inputSelect") != -1) {
+          const [state, option] = props[key];
+          view.push(
+            <bigegi84View.inputSelect
+              key={i}
+              name={key.replace("inputSelect", "")}
+              state={state}
+              option={option}
+            />
+          );
+        }
+        if (key.search("inputTextarea") != -1) {
+          found = true;
+          const state = props[key];
+          view.push(
+            <bigegi84View.inputTextarea
+              key={i}
+              name={key.replace("inputTextarea", "")}
+              state={state}
+            />
+          );
+        }
+        if (!found && key.search("inputText") != -1) {
+          const state = props[key];
+          view.push(
+            <bigegi84View.inputText
+              key={i}
+              name={key.replace("inputText", "")}
+              state={state}
+            />
+          );
+        }
+        if (key.search("row") != -1) {
+          view.push(
+            <bigegi84View.row key={i}>
+              {bigegi84View.render(props[key])}
+            </bigegi84View.row>
+          );
+        }
+        if (key.search("section") != -1) {
+          view.push(
+            <bigegi84View.section
+              key={i}
+              name={key.replace("section", "")}
+              show={props[key]}
+            />
+          );
+        }
+        i++;
+      }
     }
+    return view;
   },
 };

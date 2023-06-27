@@ -209,6 +209,14 @@ const pennyInfo = {
   },
   view: () => {
     const [show, setShow] = React.useState(false);
+    const invest = { balance: 8000000, rate: 4, day: 365 * 3 };
+    let total = 0;
+    let balance = invest.balance;
+    for (let i = 0; i < invest.day; i++) {
+      const bunga = parseInt((balance * 4) / 100 / 365);
+      total += (balance * 4) / 100;
+      balance += bunga;
+    }
     return (
       <div className="column-a">
         <div className="row-a">
@@ -235,6 +243,7 @@ const pennyInfo = {
               )}
             </mobxReact.Observer>
             <div className="row-a">
+              {balance}
               <pennyInfo.action.balance />
               <pennyInfo.action.obligation />
               <pennyInfo.action.summary.account />

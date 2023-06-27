@@ -86,32 +86,94 @@ const chordSong = {
       return (
         <mobxReact.Observer>
           {() => {
-            return chordStore.song.map(
-              ({ singer, title, chord, lyric }, i) => {
-                const chordView = [];
-                let chordI = 0;
-                for (const key in chord) {
-                  chordView.push(
-                    <div key={chordI} className="column-a">
-                      <span>{key}</span>
-                      <span>{chord[key]}</span>
-                    </div>
-                  );
-                  chordI++;
-                }
-                return (
-                  <div key={i} className="column-a card-a">
-                    <span>
-                      {singer} - {title}
-                    </span>
-                    {chordView}
-                    {lyric.map((e, i) => (
-                      <span key={i}>{e}</span>
-                    ))}
+            return chordStore.song.map(({ singer, title, chord, lyric }, i) => {
+              const chordView = [];
+              let chordI = 0;
+              for (const key in chord) {
+                chordView.push(
+                  <div key={chordI} className="column-a">
+                    <span>{key}</span>
+                    <span>{chord[key]}</span>
                   </div>
                 );
+                chordI++;
               }
-            );
+              return (
+                <div key={i} className="column-a card-a">
+                  <span>
+                    {singer} - {title}
+                  </span>
+                  <div className="column-a">
+                    <div className="row-a">
+                      <strong
+                        style={{
+                          ...bigegi84theme.style,
+                          ...{ alignSelf: "center" },
+                        }}
+                      >
+                        Akor
+                      </strong>
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() =>
+                          (chordStore.song[i].show.chord =
+                            !chordStore.song[i].show.chord)
+                        }
+                      >
+                        <i
+                          className={
+                            "fas" +
+                            (chordStore.song[i].show.chord
+                              ? " fa-angle-up"
+                              : " fa-angle-down")
+                          }
+                        />
+                      </div>
+                    </div>
+                    {chordStore.song[i].show.chord ? (
+                      <div className="column-a card-a">{chordView}</div>
+                    ) : null}
+                  </div>
+                  <div className="column-a">
+                    <div className="row-a">
+                      <strong
+                        style={{
+                          ...bigegi84theme.style,
+                          ...{ alignSelf: "center" },
+                        }}
+                      >
+                        Lirik
+                      </strong>
+                      <div
+                        style={bigegi84theme.styleCircle}
+                        className="circle-a"
+                        onClick={() =>
+                          (chordStore.song[i].show.lyric =
+                            !chordStore.song[i].show.lyric)
+                        }
+                      >
+                        <i
+                          className={
+                            "fas" +
+                            (chordStore.song[i].show.lyric
+                              ? " fa-angle-up"
+                              : " fa-angle-down")
+                          }
+                        />
+                      </div>
+                    </div>
+                    {chordStore.song[i].show.lyric ? (
+                      <div className="column-a card-a">
+                        {lyric.map((e, i) => (
+                          <span key={i}>{e}</span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              );
+            });
           }}
         </mobxReact.Observer>
       );

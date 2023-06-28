@@ -1,0 +1,14 @@
+{
+  "name": "bigegi84.github.io",
+  "version": "1.0.0",
+  "description": "aaa",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "npx http-server -c-s"
+  },
+  "author": "",
+  "license": "ISC"
+}

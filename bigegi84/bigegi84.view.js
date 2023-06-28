@@ -53,6 +53,18 @@ const bigegi84View = {
       {children}
     </div>
   ),
+  container: ({ gap, children }) => (
+    <div
+      className="bigegi84-column"
+      style={{
+        padding: "1em",
+        gap: gap ? gap : "10px",
+      }}
+    >
+      {children}
+    </div>
+  ),
+  empty: ({ view }) => view,
   form: ({ input, button }) => {
     const view = [];
     let i = 0;
@@ -230,6 +242,13 @@ const bigegi84View = {
             </bigegi84View.column>
           );
         }
+        if (key.search("container") != -1) {
+          view.push(
+            <bigegi84View.container key={i}>
+              {bigegi84View.render(props[key])}
+            </bigegi84View.container>
+          );
+        }
         if (key.search("inputSelect") != -1) {
           const [state, option] = props[key];
           view.push(
@@ -279,6 +298,10 @@ const bigegi84View = {
               show={content}
             />
           );
+        }
+        if (key.search("view") != -1) {
+          const { add, content } = props[key];
+          view.push(<bigegi84View.empty key={i} view={props[key]} />);
         }
         i++;
       }

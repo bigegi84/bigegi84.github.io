@@ -1,6 +1,11 @@
 const bigegi84state = {
   creation: [
     {
+      name: "Akor",
+      description: "Aplikasi akor lagu.",
+      link: "#/chord",
+    },
+    {
       name: "Bass",
       description: "Aplikasi web untuk memainkan bas.",
       link: "#/bass",

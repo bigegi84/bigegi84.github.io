@@ -1,5 +1,17 @@
 const pennyBudget = {
   action: {
+    add: () => {
+      const [name, setName] = stateName;
+      const [amount, setAmount] = stateAmount;
+      bigegi84Orm.obj.createOne(pennyStore.budget, {
+        name,
+        amount: parseFloat(amount),
+        createdAt: moment().format(),
+        updatedAt: moment().format(),
+      });
+      setName("");
+      setAmount(0);
+    },
     list: () => (
       <bigegi84View.listCard
         arr={pennyStore.budget}

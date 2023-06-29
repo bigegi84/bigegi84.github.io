@@ -76,12 +76,12 @@ const pennyConfig = {
         {show ? (
           <div className="row-a">
             <a id="downloadA" style={{ display: "none" }} />
-            <button
+            {/* <button
               className={bigegi84theme.class.button}
               onClick={() => pennyConfig.action.save.json()}
             >
               Save
-            </button>
+            </button> */}
             <input
               type="file"
               style={{ display: "none" }}
@@ -99,12 +99,12 @@ const pennyConfig = {
                 }
               }}
             />
-            <button
+            {/* <button
               className={bigegi84theme.class.button}
               onClick={() => inputFile.current.click()}
             >
               Load
-            </button>
+            </button> */}
             <button
               className={bigegi84theme.class.button}
               onClick={() => pennyConfig.action.save.yaml()}

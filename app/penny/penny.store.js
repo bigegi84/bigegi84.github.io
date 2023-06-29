@@ -1,6 +1,7 @@
 const pennyStore = mobx.observable({
   account: [],
   asset: [],
+  budget: [],
   claim: [],
   config: {
     payday: 28,
@@ -29,6 +30,12 @@ const pennyStore = mobx.observable({
       owner: "",
       buyPrice: 0,
       sellPrice: 0,
+    },
+    budget: {
+      mode: null,
+      i: null,
+      name: "",
+      amount: 0,
     },
     debt: {
       mode: null,

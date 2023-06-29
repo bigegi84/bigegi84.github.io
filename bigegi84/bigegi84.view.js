@@ -157,11 +157,15 @@ const bigegi84View = {
   listCard: ({ arr, onMap }) => (
     <bigegi84View.column>
       <bigegi84View.row>
-        {arr.map((e, i) => (
-          <bigegi84View.card key={i}>
-            {onMap ? onMap(e, i) : () => {}}
-          </bigegi84View.card>
-        ))}
+        <bigegi84View.observer
+          onChange={() =>
+            arr.map((e, i) => (
+              <bigegi84View.card key={i}>
+                {onMap ? onMap(e, i) : () => {}}
+              </bigegi84View.card>
+            ))
+          }
+        />
       </bigegi84View.row>
     </bigegi84View.column>
   ),

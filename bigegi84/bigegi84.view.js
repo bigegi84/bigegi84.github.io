@@ -303,6 +303,9 @@ const bigegi84View = {
             />
           );
         }
+        if (!found && key.search("text") != -1) {
+          view.push(<bigegi84View.text key={i} label={props[key]} />);
+        }
         if (key.search("view") != -1) {
           const { add, content } = props[key];
           view.push(<bigegi84View.empty key={i} view={props[key]} />);

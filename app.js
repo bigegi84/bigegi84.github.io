@@ -35,6 +35,11 @@
           }}
         />
         <Route
+          path="/einstein"
+          exact
+          component={(props) => app.action.withFooter([props, einstein.view])}
+        />
+        <Route
           path="/garden"
           exact
           component={(props) => {

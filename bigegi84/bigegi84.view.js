@@ -7,6 +7,14 @@ const bigegi84View = {
       {name}
     </button>
   ),
+  buttonSmall: ({ name, onClick }) => (
+    <button
+      className={`${bigegi84theme.class.button} small`}
+      onClick={(e) => (onClick ? onClick(e) : () => {})}
+    >
+      {name}
+    </button>
+  ),
   card: ({ children }) => (
     <div className="bigegi84-column bigegi84-card">{children}</div>
   ),
@@ -230,7 +238,18 @@ const bigegi84View = {
       let i = 0;
       let found = false;
       for (const key in props) {
-        if (key.search("button") != -1) {
+        if (!found && key.search("buttonSmall") != -1) {
+          found = true;
+          view.push(
+            <bigegi84View.buttonSmall
+              key={i}
+              name={key.replace("buttonSmall", "")}
+              onClick={props[key]}
+            />
+          );
+        }
+        if (!found && key.search("button") != -1) {
+          found = true;
           view.push(
             <bigegi84View.button
               key={i}
@@ -285,6 +304,10 @@ const bigegi84View = {
             />
           );
         }
+        if (!found && key.search("observer") != -1) {
+          found = true;
+          view.push(<bigegi84View.observer key={i} onChange={props[key]} />);
+        }
         if (key.search("row") != -1) {
           view.push(
             <bigegi84View.row key={i}>
@@ -304,7 +327,12 @@ const bigegi84View = {
           );
         }
         if (!found && key.search("text") != -1) {
+          found = true;
           view.push(<bigegi84View.text key={i} label={props[key]} />);
+        }
+        if (!found && key.search("textStrong") != -1) {
+          found = true;
+          view.push(<bigegi84View.textStrong key={i} label={props[key]} />);
         }
         if (key.search("view") != -1) {
           const { add, content } = props[key];
@@ -313,6 +341,7 @@ const bigegi84View = {
         i++;
       }
     }
+    // console.log(view);
     return view;
   },
 };

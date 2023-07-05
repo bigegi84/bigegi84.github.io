@@ -24,6 +24,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.black-gold-input {
+  border-color: white !important;
+}
 .black-gold-input-text {
   border-color: white !important;
 }

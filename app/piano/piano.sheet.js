@@ -117,7 +117,7 @@ const pianoSheet = {
                       onClick={() => {
                         if (!pianoSheet.store.playing) {
                           pianoSheet.store.playing = true;
-                          pianoSheet.playText(currentSong[ia][1][ib][1]);
+                          pianoSheet.action.playText(currentSong[ia][1][ib][1]);
                         } else {
                           pianoSheet.store.playing = false;
                           pianoSheet.action.stop();

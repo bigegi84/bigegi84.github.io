@@ -1,5 +1,70 @@
 const cloneChat = {
   view: () => {
+    const chat = React.useState("");
+    return (
+      <bigegi84View.letsRock
+        sectionNgobrol={{
+          content: {
+            row: {
+              card: {
+                column: {
+                  textStrong: "Coba",
+                  observer: () => {
+                    return (
+                      <bigegi84View.letsRock
+                        column={{
+                          inputTextarea: [
+                            cloneStore.input.text,
+                            (e) => (cloneStore.input.text = e),
+                          ],
+                          row: {
+                            buttonSmallKirim: () => {
+                              cloneAction.send();
+                            },
+                          },
+                        }}
+                      />
+                    );
+                  },
+                },
+              },
+              cardAnswer: {
+                column: {
+                  textStrong: "Jawaban",
+                  observer: () => {
+                    let column = {
+                      textStrong: cloneStore.text.answer,
+                    };
+                    if (cloneStore.text.answer == "Gatau Jawabannya")
+                      column = {
+                        ...column,
+                        ...{
+                          inputTextJawaban: [
+                            cloneStore.teach,
+                            (e) => (cloneStore.teach = e),
+                          ],
+                          buttonSimpan: () => {
+                            const path = cloneStore.lastText
+                              .split(" ")
+                              .join(".");
+                            cloneStore.brain.bigegi84 = _.set(
+                              cloneStore.brain.bigegi84,
+                              `${path}.$answer`,
+                              [cloneStore.teach.split(" ")]
+                            );
+                            cloneStore.text.answer = "";
+                          },
+                        },
+                      };
+                    return <bigegi84View.letsRock column={column} />;
+                  },
+                },
+              },
+            },
+          },
+        }}
+      />
+    );
     return (
       <div className="column-a">
         <label htmlFor="text" style={bigegi84theme.style}>
@@ -92,8 +157,7 @@ const cloneChat = {
             newBrain = convertAnswer(newBrain);
             const yaml = jsyaml.dump(newBrain);
             const dataStr =
-              "data:text/yaml;charset=utf-8," +
-              encodeURIComponent(yaml);
+              "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
             const dlAnchorElem = document.getElementById("downloadA");
             dlAnchorElem.setAttribute("href", dataStr);
             dlAnchorElem.setAttribute(
@@ -106,8 +170,6 @@ const cloneChat = {
           Simpan yaml ss
         </button>
         <a id="downloadA" style={{ display: "none" }}></a>
-        {/* <strong>Jumlah kata yang dipelajari: </strong>
-        <p id="word-count">tes</p> */}
       </div>
     );
   },

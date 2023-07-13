@@ -329,17 +329,17 @@ const bigegi84View = {
               key={i}
               name={key.replace("section", "")}
               add={add}
-              show={content}
+              show={bigegi84View.render(content)}
             />
           );
-        }
-        if (!found && key.search("text") != -1) {
-          found = true;
-          view.push(<bigegi84View.text key={i} label={props[key]} />);
         }
         if (!found && key.search("textStrong") != -1) {
           found = true;
           view.push(<bigegi84View.textStrong key={i} label={props[key]} />);
+        }
+        if (!found && key.search("text") != -1) {
+          found = true;
+          view.push(<bigegi84View.text key={i} label={props[key]} />);
         }
         if (key.search("view") != -1) {
           const { add, content } = props[key];

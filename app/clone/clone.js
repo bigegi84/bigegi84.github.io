@@ -1,17 +1,19 @@
 const clone = {
   view: () => {
     React.useEffect(() => {
-      cloneAction.ask.definition();
+      // cloneAction.ask.definition();
     });
     return (
-      <div className="column-a" style={{ padding: "3em" }}>
-        <h1 style={bigegi84theme.style}>bigegi84 - Clone</h1>
-        <div className="row-a">
-          <cloneChat.view />
-          <cloneInfo.view />
-        </div>
-        <cloneNoAnswer.view />
-      </div>
+      <bigegi84View.letsRock
+        container={{
+          viewA: (
+            <h1 className={bigegi84theme.class.basic}>bigegi84 - Clone</h1>
+          ),
+          viewAB: <cloneConfig.view />,
+          viewB: <cloneChat.view />,
+          viewC: <cloneNoAnswer.view />,
+        }}
+      />
     );
   },
 };

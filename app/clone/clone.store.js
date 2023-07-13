@@ -10,7 +10,9 @@ const cloneStore = mobx.observable({
     text: "",
     noAnswerText: [],
   },
+  lastText: "",
   noAnswer: [],
+  teach: "",
   text: {
     answer: "",
   },

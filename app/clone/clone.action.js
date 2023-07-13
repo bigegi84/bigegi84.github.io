@@ -141,7 +141,10 @@ const cloneAction = {
   },
   send: () => {
     const text = cloneStore.input.text;
-    const path = text.split(" ").join(".");
+    const path = text
+      .split(" ")
+      .join(".");
+    console.log(path);
     const answer = _.get(cloneStore.brain.bigegi84, `${path}.$answer`);
     cloneStore.text.answer = answer ? answer[0].join(" ") : "Gatau Jawabannya";
     cloneStore.lastText = text;

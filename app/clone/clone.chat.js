@@ -48,7 +48,7 @@ const cloneChat = {
                               .split(" ")
                               .join(".");
                             cloneStore.brain.bigegi84 = _.set(
-                              cloneStore.brain.bigegi84,
+                              mobx.toJS(cloneStore.brain.bigegi84),
                               `${path}.$answer`,
                               [cloneStore.teach.split(" ")]
                             );

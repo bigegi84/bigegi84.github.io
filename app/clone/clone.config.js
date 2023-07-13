@@ -1,6 +1,7 @@
 const cloneConfig = {
   view: () => {
     const inputFile = React.useRef();
+    const copyText = React.useRef();
     return (
       <bigegi84View.letsRock
         sectionPengaturan={{
@@ -35,8 +36,12 @@ const cloneConfig = {
                 />
               ),
               buttonMuat: () => inputFile.current.click(),
+              viewText: <textarea ref={copyText} style={{ display: "none" }} />,
               buttonKopi: () => {
                 const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain.bigegi84));
+                copyText.current.value = yaml;
+                copyText.current.select();
+                // copyText.setSelectionRange(0, 99999);
                 navigator.clipboard.writeText(yaml);
                 alert("Copied the text.");
               },

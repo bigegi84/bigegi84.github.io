@@ -141,12 +141,9 @@ const cloneAction = {
   },
   send: () => {
     const text = cloneStore.input.text;
-    const path = text
-      .split(" ")
-      .join(".");
-    console.log(path);
-    const answer = _.get(cloneStore.brain.bigegi84, `${path}.$answer`);
-    cloneStore.text.answer = answer ? answer[0].join(" ") : "Gatau Jawabannya";
+    const path = text.split(" ").join(".");
+    const answer = _.get(cloneStore.brain.bigegi84, `${path}.$answer.0`);
+    cloneStore.text.answer = answer ? answer.join(" ") : "Gatau Jawabannya";
     cloneStore.lastText = text;
     cloneStore.input.text = "";
   },

@@ -32,9 +32,19 @@ const cloneChat = {
                 column: {
                   textStrong: "Jawaban",
                   observer: () => {
-                    let column = {
-                      textStrong: cloneStore.text.answer,
-                    };
+                    let column =
+                      cloneStore.text.answer.search("base64") == -1
+                        ? {
+                            textStrong: cloneStore.text.answer,
+                          }
+                        : {
+                            view: (
+                              <img
+                                src={cloneStore.text.answer}
+                                style={{ width: "100%" }}
+                              />
+                            ),
+                          };
                     if (cloneStore.text.answer == "Gatau Jawabannya")
                       column = {
                         ...column,
@@ -47,10 +57,11 @@ const cloneChat = {
                             const path = cloneStore.lastText
                               .split(" ")
                               .join(".");
-                            cloneStore.brain.bigegi84 = _.set(
+                            cloneStore.brain.bigegi84 = _.setWith(
                               mobx.toJS(cloneStore.brain.bigegi84),
-                              `${path}.$answer`,
-                              [cloneStore.teach.split(" ")]
+                              `${path}.$answer.0`,
+                              cloneStore.teach.split(" "),
+                              Object
                             );
                             cloneStore.text.answer = "";
                           },

@@ -236,8 +236,8 @@ const bigegi84View = {
     const view = [];
     if (typeof props == "object") {
       let i = 0;
-      let found = false;
       for (const key in props) {
+        let found = false;
         if (!found && key.search("buttonSmall") != -1) {
           found = true;
           view.push(
@@ -256,6 +256,13 @@ const bigegi84View = {
               name={key.replace("button", "")}
               onClick={props[key]}
             />
+          );
+        }
+        if (key.search("card") != -1) {
+          view.push(
+            <bigegi84View.card key={i}>
+              {bigegi84View.render(props[key])}
+            </bigegi84View.card>
           );
         }
         if (key.search("column") != -1) {

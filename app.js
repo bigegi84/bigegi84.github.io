@@ -16,6 +16,11 @@
       <ReactRouterDOM.HashRouter>
         <Route path="/" exact component={bigegi84.view} />
         <Route
+          path="/bahasa"
+          exact
+          component={(props) => app.action.withFooter([props, bahasa.view])}
+        />
+        <Route
           path="/bass"
           exact
           component={(props) => {

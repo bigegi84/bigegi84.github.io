@@ -227,7 +227,10 @@ const bigegi84View = {
   textStrong: ({ label, color }) => (
     <strong
       className={bigegi84theme.class.basic}
-      style={{ ...{ whiteSpace: "pre" }, ...(color ? { color: color } : {}) }}
+      style={{
+        ...{ whiteSpace: "pre-wrap" },
+        ...(color ? { color: color } : {}),
+      }}
     >
       {label ? label : ""}
     </strong>

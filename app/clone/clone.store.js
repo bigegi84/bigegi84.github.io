@@ -4,7 +4,7 @@ const cloneStore = mobx.observable({
   },
   brain: {
     selected: "bigegi84",
-    bigegi84: brainBigegi84,
+    bigegi84: {},
   },
   input: {
     text: "",

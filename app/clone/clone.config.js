@@ -46,7 +46,35 @@ const cloneConfig = {
                 alert("Copied the text.");
               },
               buttonDebug: () => {
-                const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain.bigegi84));
+                const atom = [];
+                const answer = [];
+                const findAllAnswer = (obj) => {
+                  for (const key in obj) {
+                    if (key == "$answer") {
+                      if (obj[key]) {
+                        const newAnswer = [];
+                        obj[key][0].forEach((it) => {
+                          const found = atom.findIndex((e) => e == it);
+                          if (found == -1) {
+                            newAnswer.push(atom.length);
+                            atom.push(it);
+                          } else {
+                            newAnswer.push(found);
+                          }
+                        });
+                        obj[key][0] = "" + answer.length;
+                        answer.push(newAnswer.join(","));
+                      }
+                    } else {
+                      findAllAnswer(obj[key]);
+                    }
+                  }
+                  return obj;
+                };
+                const node = findAllAnswer(
+                  mobx.toJS(cloneStore.brain.bigegi84)
+                );
+                const yaml = jsyaml.dump({ answer, atom, node });
                 const dataStr =
                   "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
                 const a = document.createElement("a");

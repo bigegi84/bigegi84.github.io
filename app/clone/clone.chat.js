@@ -19,7 +19,22 @@ const cloneChat = {
                           ],
                           row: {
                             buttonSmallKirim: () => {
-                              cloneAction.send();
+                              const text = cloneStore.input.text;
+                              const path = text.split(" ").join(".");
+                              const { answer, atom, node } = mobx.toJS(
+                                cloneStore.brain.bigegi84
+                              );
+                              const answerI = _.get(node, `${path}.$answer.0`);
+                              const atomWord = answerI
+                                ? answer[answerI]
+                                    .split(",")
+                                    .map((it) => atom[it])
+                                : null;
+                              cloneStore.text.answer = atomWord
+                                ? atomWord.join(" ")
+                                : "Gatau Jawabannya";
+                              cloneStore.lastText = text;
+                              cloneStore.input.text = "";
                             },
                           },
                         }}
@@ -57,17 +72,63 @@ const cloneChat = {
                             const path = cloneStore.lastText
                               .split(" ")
                               .join(".");
-                            cloneStore.brain.bigegi84 = _.setWith(
-                              mobx.toJS(cloneStore.brain.bigegi84),
+                            const { answer, atom, node } =
+                              cloneStore.brain.bigegi84;
+                            const answerValue = cloneStore.teach
+                              .split(" ")
+                              .map((e) => {
+                                const found = mobx
+                                  .toJS(atom)
+                                  .findIndex((eA) => eA == e);
+                                if (found == -1) {
+                                  cloneStore.brain.bigegi84.atom.push(e);
+                                  return (
+                                    cloneStore.brain.bigegi84.atom.length - 1
+                                  );
+                                } else return found;
+                              })
+                              .join(",");
+                            let findAi = answer.findIndex(
+                              (e) => e == answerValue
+                            );
+                            if (findAi == -1) {
+                              cloneStore.brain.bigegi84.answer.push(
+                                answerValue
+                              );
+                              findAi =
+                                cloneStore.brain.bigegi84.answer.length - 1;
+                            }
+                            cloneStore.brain.bigegi84.node = _.setWith(
+                              mobx.toJS(node),
                               `${path}.$answer.0`,
-                              cloneStore.teach.split(" "),
+                              findAi,
                               Object
                             );
                             cloneStore.text.answer = "";
                           },
                         },
                       };
-                    return <bigegi84View.letsRock column={column} />;
+                    return (
+                      <bigegi84View.letsRock
+                        column={{
+                          ...column,
+                          ...{
+                            buttonSmallHapus: () => {
+                              const path = cloneStore.lastText
+                                .split(" ")
+                                .join(".");
+                              cloneStore.brain.bigegi84.node = _.setWith(
+                                mobx.toJS(cloneStore.brain.bigegi84.node),
+                                `${path}.$answer`,
+                                null,
+                                Object
+                              );
+                              cloneStore.text.answer = "";
+                            },
+                          },
+                        }}
+                      />
+                    );
                   },
                 },
               },

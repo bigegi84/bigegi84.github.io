@@ -50,6 +50,18 @@ const cloneChat = {
                     let column =
                       cloneStore.text.answer.search("base64") == -1
                         ? {
+                            buttonSmallHapus: () => {
+                              const path = cloneStore.lastText
+                                .split(" ")
+                                .join(".");
+                              cloneStore.brain.bigegi84.node = _.setWith(
+                                mobx.toJS(cloneStore.brain.bigegi84.node),
+                                `${path}.$answer`,
+                                null,
+                                Object
+                              );
+                              cloneStore.text.answer = "";
+                            },
                             textStrong: cloneStore.text.answer,
                           }
                         : {
@@ -108,27 +120,7 @@ const cloneChat = {
                           },
                         },
                       };
-                    return (
-                      <bigegi84View.letsRock
-                        column={{
-                          ...column,
-                          ...{
-                            buttonSmallHapus: () => {
-                              const path = cloneStore.lastText
-                                .split(" ")
-                                .join(".");
-                              cloneStore.brain.bigegi84.node = _.setWith(
-                                mobx.toJS(cloneStore.brain.bigegi84.node),
-                                `${path}.$answer`,
-                                null,
-                                Object
-                              );
-                              cloneStore.text.answer = "";
-                            },
-                          },
-                        }}
-                      />
-                    );
+                    return <bigegi84View.letsRock column={column} />;
                   },
                 },
               },

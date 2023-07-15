@@ -25,15 +25,11 @@ const pianoSheet = {
       return list;
     },
     play: () => {
-      const selected = pianoStore.sheet.selected;
-      const currentSong = pianoStore.sheet.data[selected];
-      currentSong.map(([name, value], ia) => {
-        let text = [];
-        value.forEach(([part, pValue, enable], ib) => {
-          if (enable) text.push(pValue);
-        });
-        pianoSheet.action.playText(text.join(" "));
-      });
+      const { left, right } = pianoStore.sheet.data[pianoStore.sheet.selected];
+      const lText = left.map(([, text]) => text).join(" ");
+      const rText = right.map(([, text]) => text).join(" ");
+      pianoSheet.action.playText(lText);
+      pianoSheet.action.playText(rText);
     },
     playText: (text) => {
       let sec = 0;
@@ -63,6 +59,55 @@ const pianoSheet = {
     sheetList: () => {
       const selected = pianoStore.sheet.selected;
       const currentSong = pianoStore.sheet.data[selected];
+      const { left, right } = pianoStore.sheet.data[selected];
+      return (
+        <bigegi84View.letsRock
+          observer={() => (
+            <bigegi84View.letsRock
+              row={{
+                column: {
+                  textStrong: "Kiri",
+                  viewA: left.map(([], i) => (
+                    <bigegi84View.letsRock
+                      key={i}
+                      card={{
+                        observer: () => (
+                          <bigegi84View.letsRock
+                            column={{
+                              inputTextBagian: [
+                                pianoStore.sheet.data[pianoStore.sheet.selected]
+                                  .left[i][0],
+                                (e) => {
+                                  pianoStore.sheet.data[
+                                    pianoStore.sheet.selected
+                                  ].left[i][0] = e;
+                                  console.log(e);
+                                },
+                                () => (pianoStore.keymapActive = false),
+                              ],
+                              inputTextareaNotasi: [
+                                pianoStore.sheet.data[pianoStore.sheet.selected]
+                                  .left[i][1],
+                                (e) =>
+                                  (pianoStore.sheet.data[
+                                    pianoStore.sheet.selected
+                                  ].left[i][1] = e),
+                              ],
+                            }}
+                          />
+                        ),
+                      }}
+                    />
+                  )),
+                },
+                columnB: {
+                  textStrong: "Kanan",
+                },
+              }}
+            />
+          )}
+        />
+      );
       return pianoStore.sheet.data[selected].map(([name, value], ia) => {
         return (
           <div key={ia} className="column-a">
@@ -219,10 +264,17 @@ const pianoSheet = {
                       {pianoSheet.action.option()}
                     </select>
                   ),
-                  inputTextBPM: [60, () => {}],
+                  inputTextBPM: [
+                    pianoStore.sheet.selected
+                      ? pianoStore.sheet.data[pianoStore.sheet.selected].bpm
+                      : 0,
+                    (e) =>
+                      (pianoStore.sheet.data[pianoStore.sheet.selected].bpm =
+                        e),
+                  ],
                   textStrongNada: "Nada",
                   row: {
-                    observer: () => pianoSheet.action.sheetList(),
+                    view: <pianoSheet.action.sheetList />,
                   },
                 },
               },

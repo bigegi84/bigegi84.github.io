@@ -114,7 +114,7 @@ const bigegi84View = {
     }
     return view;
   },
-  inputText: ({ name, state: [state, setState] }) => (
+  inputText: ({ name, state: [state, setState, onFocus] }) => (
     <bigegi84View.column>
       <label className={bigegi84theme.class.basic}>{name}</label>
       <input
@@ -122,6 +122,7 @@ const bigegi84View = {
         name={name}
         className={bigegi84theme.class.inputText}
         value={state}
+        onFocus={onFocus ? onFocus : null}
         onChange={(e) => setState(e.target.value)}
       />
     </bigegi84View.column>

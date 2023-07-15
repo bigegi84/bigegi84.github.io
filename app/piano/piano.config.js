@@ -66,6 +66,28 @@ const pianoConfig = {
                         />
                       ),
                       buttonSmallMuat: () => inputFile.current.click(),
+                      buttonSmallDebug: () => {
+                        let json = mobx.toJS(pianoStore);
+                        for (const key in json.sheet.data) {
+                          const [left, right] = json.sheet.data[key];
+                          const [, lText] = left;
+                          const [, rText] = right;
+                          json.sheet.data[key] = {
+                            BPM: 60,
+                            Left: lText,
+                            Right: rText,
+                          };
+                        }
+                        const yaml = jsyaml.dump(json);
+                        const dataStr =
+                          "data:text/yaml;charset=utf-8," +
+                          encodeURIComponent(yaml);
+                        const a = document.createElement("a");
+                        a.setAttribute("href", dataStr);
+                        a.setAttribute("download", "bigegi84-Piano.yaml");
+                        a.click();
+                        a.remove();
+                      },
                     },
                   },
                   rowB: {

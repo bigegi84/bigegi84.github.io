@@ -21,29 +21,51 @@ const pianoConfig = {
     },
   },
   view: () => {
+    const inputFile = React.useRef();
     return (
       <bigegi84View.letsRock
         column={{
           sectionPengaturan: {
-            content: (
-              <bigegi84View.letsRock
-                column={{
-                  rowA: {
-                    buttonSmallSimpan: () => {
-                      let json = {
-                        ...mobx.toJS(pianoStore),
-                        ...{ song: mobx.toJS(pianoSong) },
-                      };
-                      const yaml = jsyaml.dump(json);
-                      const dataStr =
-                        "data:text/yaml;charset=utf-8," +
-                        encodeURIComponent(yaml);
-                      const a = document.createElement("a");
-                      a.setAttribute("href", dataStr);
-                      a.setAttribute("download", "bigegi84-Piano.yaml");
-                      document.body.appendChild(a);
-                      a.click();
-                      a.remove();
+            content: {
+              card: {
+                column: {
+                  card: {
+                    rowA: {
+                      buttonSmallSimpan: () => {
+                        let json = {
+                          ...mobx.toJS(pianoStore),
+                          ...{ sheet: { data: mobx.toJS(pianoSong) } },
+                        };
+                        const yaml = jsyaml.dump(json);
+                        const dataStr =
+                          "data:text/yaml;charset=utf-8," +
+                          encodeURIComponent(yaml);
+                        const a = document.createElement("a");
+                        a.setAttribute("href", dataStr);
+                        a.setAttribute("download", "bigegi84-Piano.yaml");
+                        a.click();
+                        a.remove();
+                      },
+                      viewFile: (
+                        <input
+                          type="file"
+                          style={{ display: "none" }}
+                          ref={inputFile}
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                              const reader = new FileReader();
+                              reader.onload = (it) => {
+                                const text = it.target.result;
+                                const json = jsyaml.load(text);
+                                for (const key in json)
+                                  pianoStore[key] = json[key];
+                              };
+                              reader.readAsText(e.target.files[0]);
+                            }
+                          }}
+                        />
+                      ),
+                      buttonSmallMuat: () => inputFile.current.click(),
                     },
                   },
                   rowB: {
@@ -55,9 +77,9 @@ const pianoConfig = {
                       textStrong: "Tipe Bermain: ",
                     },
                   },
-                }}
-              />
-            ),
+                },
+              },
+            },
           },
         }}
       />

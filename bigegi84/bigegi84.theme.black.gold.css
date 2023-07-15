@@ -1,6 +1,6 @@
 .black-gold {
   background: black;
-  color: white;
+  color: white !important;
 }
 .black-gold-h {
   background: radial-gradient(

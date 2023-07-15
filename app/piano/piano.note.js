@@ -6,7 +6,7 @@ const pianoNote = {
           {
             backgroundColor: "#88FFAA",
           },
-          0
+          300
         );
       if (!press) {
         $("#piano-note-" + note).animate({

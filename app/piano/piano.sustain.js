@@ -17,7 +17,7 @@ const pianoSustain = {
             );
           }}
         </mobxReact.Observer>
-        <label htmlFor="sustain" className={bigegi84theme.class.input}>
+        <label htmlFor="sustain" className={bigegi84theme.class.basic}>
           Sustain
         </label>
       </div>

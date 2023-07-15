@@ -166,27 +166,13 @@ const chordSong = {
     },
   },
   view: () => {
-    // <bigegi84View.letsRock
-    //       column={{
-    //         sectionLagu: <chordSong.action.list />,
-    //         row: {
-    //           inputTextNama: name,
-    //           inputTextareaAlamat: name,
-    //           "inputTextNo Hp": name,
-    //           "inputSelectJenis Kelamin": [name, ["Pria", "Wanita"]],
-    //           buttonSimpan: () => alert("test"),
-    //         },
-    //       }}
-    //     />
     return (
       <bigegi84View.letsRock
         column={{
           sectionLagu: {
-            add: {
-              inputTextPenyanyi: React.useState(""),
-              inputTextJudul: React.useState(""),
+            content: {
+              view: <chordSong.action.list />,
             },
-            content: <chordSong.action.list />,
           },
         }}
       />

@@ -5,21 +5,16 @@ const searchChord = (chRaw) => {
 };
 let playTimeout = [];
 const pianoSheet = {
-  store: mobx.observable({
-    selected: "bigegi84 - Omong Kosong",
-    playing: false,
-    playText: "Mainkan",
-    song: pianoSong,
-  }),
+  store: pianoStore.sheet,
   action: {
     change: (e) => {
       const selected = e.target.value;
-      pianoSheet.store.selected = selected;
+      pianoStore.sheet.selected = selected;
     },
     option: () => {
       let i = 0;
       const list = [];
-      for (const key in pianoSheet.store.song) {
+      for (const key in pianoStore.sheet.data) {
         list.push(
           <option key={i} value={key}>
             {key}
@@ -30,8 +25,8 @@ const pianoSheet = {
       return list;
     },
     play: () => {
-      const selected = pianoSheet.store.selected;
-      const currentSong = pianoSheet.store.song[selected];
+      const selected = pianoStore.sheet.selected;
+      const currentSong = pianoStore.sheet.data[selected];
       currentSong.map(([name, value], ia) => {
         let text = [];
         value.forEach(([part, pValue, enable], ib) => {
@@ -66,9 +61,9 @@ const pianoSheet = {
       });
     },
     sheetList: () => {
-      const selected = pianoSheet.store.selected;
-      const currentSong = pianoSheet.store.song[selected];
-      return pianoSheet.store.song[selected].map(([name, value], ia) => {
+      const selected = pianoStore.sheet.selected;
+      const currentSong = pianoStore.sheet.data[selected];
+      return pianoStore.sheet.data[selected].map(([name, value], ia) => {
         return (
           <div key={ia} className="column-a">
             <strong>{name}</strong>
@@ -112,14 +107,14 @@ const pianoSheet = {
                     <i
                       className={
                         "fas" +
-                        (pianoSheet.store.playing ? " fa-stop" : " fa-play")
+                        (pianoStore.sheet.playing ? " fa-stop" : " fa-play")
                       }
                       onClick={() => {
-                        if (!pianoSheet.store.playing) {
-                          pianoSheet.store.playing = true;
+                        if (!pianoStore.sheet.playing) {
+                          pianoStore.sheet.playing = true;
                           pianoSheet.action.playText(currentSong[ia][1][ib][1]);
                         } else {
-                          pianoSheet.store.playing = false;
+                          pianoStore.sheet.playing = false;
                           pianoSheet.action.stop();
                         }
                       }}
@@ -148,107 +143,93 @@ const pianoSheet = {
     },
   },
   view: () => {
-    const [sheetShow, setSheetShow] = React.useState(false);
-    const [menuShow, setMenuShow] = React.useState(false);
     return (
-      <div className="column-a">
-        <div className="row-a">
-          <strong
-            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
-          >
-            Lembar
-          </strong>
-          <div
-            style={bigegi84theme.styleCircle}
-            className="circle-a"
-            onClick={() => setSheetShow(!sheetShow)}
-          >
-            <i
-              className={
-                "fas" + (sheetShow ? " fa-angle-up" : " fa-angle-down")
-              }
-            />
-          </div>
-        </div>
-        {sheetShow ? (
-          <div className="column-a">
-            <div className="field">
-              <select
-                onChange={(e) => pianoSheet.action.change(e)}
-                name="sheet-select"
-                id="sheet-select"
-                className={bigegi84theme.class.inputText}
-              >
-                {pianoSheet.action.option()}
-              </select>
-            </div>
-            <div className="row-a">
-              <mobxReact.Observer>
-                {() => pianoSheet.action.sheetList()}
-              </mobxReact.Observer>
-            </div>
-          </div>
-        ) : null}
-        <div className="row-a">
-          <strong
-            style={{ ...bigegi84theme.style, ...{ alignSelf: "center" } }}
-          >
-            Menu
-          </strong>
-          <div
-            style={bigegi84theme.styleCircle}
-            className="circle-a"
-            onClick={() => setMenuShow(!menuShow)}
-          >
-            <i
-              className={"fas" + (menuShow ? " fa-angle-up" : " fa-angle-down")}
-            />
-          </div>
-        </div>
-        {menuShow ? (
-          <div className="row-a">
-            <a id="downloadA" style={{ display: "none" }}></a>
-            <button
-              className={"button small " + bigegi84theme.class.button}
-              onClick={() => {
-                const selected = pianoSheet.store.selected;
-                const dataStr =
-                  "data:text/json;charset=utf-8," +
-                  encodeURIComponent(
-                    JSON.stringify(pianoSheet.store.song[selected])
-                  );
-                const dlAnchorElem = document.getElementById("downloadA");
-                dlAnchorElem.setAttribute("href", dataStr);
-                dlAnchorElem.setAttribute("download", selected + ".json");
-                dlAnchorElem.click();
-              }}
-            >
-              Export
-            </button>
-            <mobxReact.Observer>
-              {() => (
-                <button
-                  className={"button small " + bigegi84theme.class.button}
-                  onClick={() => {
-                    if (!pianoSheet.store.playing) {
-                      pianoSheet.store.playing = true;
-                      pianoSheet.store.playText = "Berhenti";
-                      pianoSheet.action.play();
-                    } else {
-                      pianoSheet.store.playing = false;
-                      pianoSheet.store.playText = "Mainkan";
-                      pianoSheet.action.stop();
-                    }
-                  }}
-                  id="play"
-                >
-                  {pianoSheet.store.playText}
-                </button>
-              )}
-            </mobxReact.Observer>
-          </div>
-        ) : null}
-      </div>
+      <bigegi84View.letsRock
+        column={{
+          sectionLembar: {
+            content: {
+              card: {
+                column: {
+                  card: {
+                    column: {
+                      textStrong: "Menu",
+                      view: (
+                        <div className="row-a">
+                          <a id="downloadA" style={{ display: "none" }}></a>
+                          <button
+                            className={
+                              "button small " + bigegi84theme.class.button
+                            }
+                            onClick={() => {
+                              const selected = pianoStore.sheet.selected;
+                              const dataStr =
+                                "data:text/json;charset=utf-8," +
+                                encodeURIComponent(
+                                  JSON.stringify(
+                                    pianoStore.sheet.data[selected]
+                                  )
+                                );
+                              const dlAnchorElem =
+                                document.getElementById("downloadA");
+                              dlAnchorElem.setAttribute("href", dataStr);
+                              dlAnchorElem.setAttribute(
+                                "download",
+                                selected + ".json"
+                              );
+                              dlAnchorElem.click();
+                            }}
+                          >
+                            Export
+                          </button>
+                          <mobxReact.Observer>
+                            {() => (
+                              <button
+                                className={
+                                  "button small " + bigegi84theme.class.button
+                                }
+                                onClick={() => {
+                                  if (!pianoStore.sheet.playing) {
+                                    pianoStore.sheet.playing = true;
+                                    pianoStore.sheet.playText = "Berhenti";
+                                    pianoSheet.action.play();
+                                  } else {
+                                    pianoStore.sheet.playing = false;
+                                    pianoStore.sheet.playText = "Mainkan";
+                                    pianoSheet.action.stop();
+                                  }
+                                }}
+                                id="play"
+                              >
+                                {pianoStore.sheet.playText}
+                              </button>
+                            )}
+                          </mobxReact.Observer>
+                        </div>
+                      ),
+                    },
+                  },
+                  textStrong: "Lagu",
+                  observer: () => (
+                    <select
+                      onChange={(e) => pianoSheet.action.change(e)}
+                      name="sheet-select"
+                      id="sheet-select"
+                      className={bigegi84theme.class.inputText}
+                    >
+                      {pianoSheet.action.option()}
+                    </select>
+                  ),
+                  inputTextBPM: [60, () => {}],
+                  textStrongNada: "Nada",
+                  row: {
+                    observer: () => pianoSheet.action.sheetList(),
+                  },
+                },
+              },
+            },
+          },
+        }}
+      />
     );
   },
 };

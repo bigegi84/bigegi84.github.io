@@ -19,4 +19,10 @@ const pianoStore = mobx.observable({
   },
   keymapActive: true,
   keymap: "jp",
+  sheet: {
+    data: [],
+    selected: "bigegi84 - Omong Kosong",
+    playing: false,
+    playText: "Mainkan",
+  },
 });

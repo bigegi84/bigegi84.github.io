@@ -22,7 +22,7 @@ const cloneChat = {
                               const text = cloneStore.input.text;
                               const path = text.split(" ").join(".");
                               const { answer, atom, node } = mobx.toJS(
-                                cloneStore.brain.bigegi84
+                                cloneStore.brain.data[cloneStore.brain.i]
                               );
                               const answerI = _.get(node, `${path}.$answer.0`);
                               const atomWord = answerI
@@ -34,7 +34,7 @@ const cloneChat = {
                                 ? atomWord.join(" ")
                                 : "Gatau Jawabannya";
                               cloneStore.lastText = text;
-                              cloneStore.input.text = "";
+                              // cloneStore.input.text = "";
                             },
                           },
                         }}
@@ -54,15 +54,15 @@ const cloneChat = {
                               const path = cloneStore.lastText
                                 .split(" ")
                                 .join(".");
-                              cloneStore.brain.bigegi84.node = _.setWith(
-                                mobx.toJS(cloneStore.brain.bigegi84.node),
+                              cloneStore.brain.data[cloneStore.brain.i].node = _.setWith(
+                                mobx.toJS(cloneStore.brain.data[cloneStore.brain.i].node),
                                 `${path}.$answer`,
                                 null,
                                 Object
                               );
-                              cloneStore.text.answer = "";
+                              // cloneStore.text.answer = "";
                             },
-                            textStrong: cloneStore.text.answer,
+                            text: cloneStore.text.answer,
                           }
                         : {
                             view: (
@@ -85,7 +85,7 @@ const cloneChat = {
                               .split(" ")
                               .join(".");
                             const { answer, atom, node } =
-                              cloneStore.brain.bigegi84;
+                              cloneStore.brain.data[cloneStore.brain.i];
                             const answerValue = cloneStore.teach
                               .split(" ")
                               .map((e) => {
@@ -93,9 +93,9 @@ const cloneChat = {
                                   .toJS(atom)
                                   .findIndex((eA) => eA == e);
                                 if (found == -1) {
-                                  cloneStore.brain.bigegi84.atom.push(e);
+                                  cloneStore.brain.data[cloneStore.brain.i].atom.push(e);
                                   return (
-                                    cloneStore.brain.bigegi84.atom.length - 1
+                                    cloneStore.brain.data[cloneStore.brain.i].atom.length - 1
                                   );
                                 } else return found;
                               })
@@ -104,13 +104,13 @@ const cloneChat = {
                               (e) => e == answerValue
                             );
                             if (findAi == -1) {
-                              cloneStore.brain.bigegi84.answer.push(
+                              cloneStore.brain.data[cloneStore.brain.i].answer.push(
                                 answerValue
                               );
                               findAi =
-                                cloneStore.brain.bigegi84.answer.length - 1;
+                                cloneStore.brain.data[cloneStore.brain.i].answer.length - 1;
                             }
-                            cloneStore.brain.bigegi84.node = _.setWith(
+                            cloneStore.brain.data[cloneStore.brain.i].node = _.setWith(
                               mobx.toJS(node),
                               `${path}.$answer.0`,
                               findAi,

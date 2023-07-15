@@ -3,8 +3,14 @@ const cloneStore = mobx.observable({
     definition: [],
   },
   brain: {
-    selected: "bigegi84",
-    bigegi84: {},
+    i: 0,
+    data: [
+      {
+        answer: [],
+        atom: [],
+        node: [],
+      },
+    ],
   },
   input: {
     text: "",

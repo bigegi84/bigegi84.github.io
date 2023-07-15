@@ -220,7 +220,10 @@ const bigegi84View = {
   text: ({ label, fontSize }) => (
     <p
       className={bigegi84theme.class.basic + " bigegi84-text"}
-      style={{ fontSize: fontSize ? fontSize : "medium" }}
+      style={{
+        whiteSpace: "pre-wrap",
+        fontSize: fontSize ? fontSize : "medium",
+      }}
     >
       {label ? label : ""}
     </p>

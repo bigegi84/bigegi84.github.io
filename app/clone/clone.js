@@ -11,7 +11,8 @@ const clone = {
           ),
           viewAB: <cloneConfig.view />,
           viewB: <cloneChat.view />,
-          viewC: <cloneNoAnswer.view />,
+          viewC: <cloneDetail.view />,
+          viewD: <cloneNoAnswer.view />,
         }}
       />
     );

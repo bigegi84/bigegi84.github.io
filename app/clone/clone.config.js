@@ -8,7 +8,7 @@ const cloneConfig = {
           content: {
             row: {
               buttonSimpan: () => {
-                const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain.bigegi84));
+                const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain));
                 const dataStr =
                   "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
                 const a = document.createElement("a");
@@ -28,7 +28,7 @@ const cloneConfig = {
                       reader.onload = (it) => {
                         const text = it.target.result;
                         const json = jsyaml.load(text);
-                        cloneStore.brain.bigegi84 = json;
+                        cloneStore.brain = json;
                       };
                       reader.readAsText(e.target.files[0]);
                     }
@@ -38,7 +38,7 @@ const cloneConfig = {
               buttonMuat: () => inputFile.current.click(),
               viewText: <textarea ref={copyText} style={{ display: "none" }} />,
               buttonKopi: () => {
-                const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain.bigegi84));
+                const yaml = jsyaml.dump(mobx.toJS(cloneStore.brain));
                 copyText.current.value = yaml;
                 copyText.current.select();
                 // copyText.setSelectionRange(0, 99999);
@@ -46,35 +46,14 @@ const cloneConfig = {
                 alert("Copied the text.");
               },
               buttonDebug: () => {
-                const atom = [];
-                const answer = [];
-                const findAllAnswer = (obj) => {
-                  for (const key in obj) {
-                    if (key == "$answer") {
-                      if (obj[key]) {
-                        const newAnswer = [];
-                        obj[key][0].forEach((it) => {
-                          const found = atom.findIndex((e) => e == it);
-                          if (found == -1) {
-                            newAnswer.push(atom.length);
-                            atom.push(it);
-                          } else {
-                            newAnswer.push(found);
-                          }
-                        });
-                        obj[key][0] = "" + answer.length;
-                        answer.push(newAnswer.join(","));
-                      }
-                    } else {
-                      findAllAnswer(obj[key]);
-                    }
-                  }
-                  return obj;
+                const json = mobx.toJS(cloneStore);
+                const res = {
+                  brain: {
+                    selected: 0,
+                    data: [{ ...json, ...{ name: "bigegi84" } }],
+                  },
                 };
-                const node = findAllAnswer(
-                  mobx.toJS(cloneStore.brain.bigegi84)
-                );
-                const yaml = jsyaml.dump({ answer, atom, node });
+                const yaml = jsyaml.dump(res);
                 const dataStr =
                   "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
                 const a = document.createElement("a");

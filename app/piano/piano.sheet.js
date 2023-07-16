@@ -25,13 +25,16 @@ const pianoSheet = {
       return list;
     },
     play: () => {
-      const { left, right } = pianoStore.sheet.data[pianoStore.sheet.selected];
+      const { bpm, left, right } =
+        pianoStore.sheet.data[pianoStore.sheet.selected];
+      const bps = bpm / 60;
+      const ms = 1000 / bps;
       const lText = left.map(([, text]) => text).join(" ");
       const rText = right.map(([, text]) => text).join(" ");
-      pianoSheet.action.playText(lText);
-      pianoSheet.action.playText(rText);
+      pianoSheet.action.playText(lText, ms);
+      pianoSheet.action.playText(rText, ms);
     },
-    playText: (text) => {
+    playText: (text, ms = 1000) => {
       let sec = 0;
       text.split(" ").forEach((it) => {
         const note = it.split("-")[0];
@@ -46,11 +49,11 @@ const pianoSheet = {
         const timeoutA = setTimeout(() => {
           if (it.search("#") == -1) pianoNote.action.mouseDown(code);
           if (it.search("#") != -1) pianoChord.action.mouseDown(code);
-        }, sec * 1000);
+        }, sec * ms);
         const timeoutB = setTimeout(() => {
           if (it.search("#") == -1) pianoNote.action.mouseUp(code);
           if (it.search("#") != -1) pianoChord.action.mouseUp(code);
-        }, (sec + duration) * 1000);
+        }, (sec + duration) * ms);
         sec += duration;
         playTimeout.push(timeoutA);
         playTimeout.push(timeoutB);
@@ -92,6 +95,7 @@ const pianoSheet = {
                                   (pianoStore.sheet.data[
                                     pianoStore.sheet.selected
                                   ].left[i][1] = e),
+                                () => (pianoStore.keymapActive = false),
                               ],
                             }}
                           />
@@ -264,14 +268,20 @@ const pianoSheet = {
                       {pianoSheet.action.option()}
                     </select>
                   ),
-                  inputTextBPM: [
-                    pianoStore.sheet.selected
-                      ? pianoStore.sheet.data[pianoStore.sheet.selected].bpm
-                      : 0,
-                    (e) =>
-                      (pianoStore.sheet.data[pianoStore.sheet.selected].bpm =
-                        e),
-                  ],
+                  observer: () => (
+                    <bigegi84View.letsRock
+                      inputTextBPM={[
+                        pianoStore.sheet.selected != null
+                          ? pianoStore.sheet.data[pianoStore.sheet.selected].bpm
+                          : 0,
+                        (e) => {
+                          pianoStore.sheet.data[pianoStore.sheet.selected].bpm =
+                            isNaN(parseInt(e)) ? "" : parseInt(e);
+                        },
+                        () => (pianoStore.keymapActive = false),
+                      ]}
+                    />
+                  ),
                   textStrongNada: "Nada",
                   row: {
                     view: <pianoSheet.action.sheetList />,

@@ -32,10 +32,7 @@ const pianoConfig = {
                   card: {
                     rowA: {
                       buttonSmallSimpan: () => {
-                        let json = {
-                          ...mobx.toJS(pianoStore),
-                          ...{ sheet: { data: mobx.toJS(pianoSong) } },
-                        };
+                        let json = mobx.toJS(pianoStore);
                         const yaml = jsyaml.dump(json);
                         const dataStr =
                           "data:text/yaml;charset=utf-8," +

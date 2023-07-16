@@ -20,8 +20,8 @@ const pianoStore = mobx.observable({
   keymapActive: true,
   keymap: "jp",
   sheet: {
-    data: [],
-    selected: null,
+    data: {},
+    i: null,
     playing: false,
     playText: "Mainkan",
   },

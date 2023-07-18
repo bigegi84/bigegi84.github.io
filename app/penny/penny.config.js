@@ -44,13 +44,14 @@ const pennyConfig = {
         const yaml = jsyaml.dump(mobx.toJS(pennyStore));
         const dataStr =
           "data:text/yaml;charset=utf-8," + encodeURIComponent(yaml);
-        const dlAnchorElem = document.getElementById("downloadA");
-        dlAnchorElem.setAttribute("href", dataStr);
-        dlAnchorElem.setAttribute(
+        const a = document.createElement("a");
+        a.setAttribute("href", dataStr);
+        a.setAttribute(
           "download",
           `${pennyStore.info.name}.bigegi84-Penny.yaml`
         );
-        dlAnchorElem.click();
+        a.click();
+        a.remove();
       },
     },
   },
@@ -74,64 +75,26 @@ const pennyConfig = {
           </div>
         </div>
         {show ? (
-          <div className="row-a">
-            <a id="downloadA" style={{ display: "none" }} />
-            {/* <button
-              className={bigegi84theme.class.button}
-              onClick={() => pennyConfig.action.save.json()}
-            >
-              Save
-            </button> */}
-            <input
-              type="file"
-              style={{ display: "none" }}
-              ref={inputFile}
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  const reader = new FileReader();
-                  reader.onload = (it) => {
-                    const text = it.target.result;
-                    const json = JSON.parse(text);
-                    for (const key in json)
-                      if (key != "form") pennyStore[key] = json[key];
-                  };
-                  reader.readAsText(e.target.files[0]);
-                }
-              }}
-            />
-            {/* <button
-              className={bigegi84theme.class.button}
-              onClick={() => inputFile.current.click()}
-            >
-              Load
-            </button> */}
-            <button
-              className={bigegi84theme.class.button}
-              onClick={() => pennyConfig.action.save.yaml()}
-            >
-              save yaml
-            </button>
-            <div>
-              <input
-                type="file"
-                style={{ display: "none" }}
-                ref={inputFile}
-                onChange={(e) => pennyConfig.action.load.yaml(e)}
-              />
-              <button
-                className={bigegi84theme.class.button}
-                onClick={() => inputFile.current.click()}
-              >
-                Load yaml
-              </button>
-            </div>
-            <button
-              className={bigegi84theme.class.button}
-              onClick={() => pennyConfig.action.debug()}
-            >
-              Debug
-            </button>
-          </div>
+          <bigegi84View.letsRock
+            row={{
+              buttonSmallSimpan: () => pennyConfig.action.save.yaml(),
+              viewFile: (
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={inputFile}
+                  onChange={(e) => pennyConfig.action.load.yaml(e)}
+                />
+              ),
+              buttonSmallMuat: () => inputFile.current.click(),
+              buttonSmallKopi: () => {
+                const yaml = jsyaml.dump(mobx.toJS(pennyStore));
+                navigator.clipboard.writeText(yaml);
+                alert("Copied the text.");
+              },
+              buttonSmallDebug: () => pennyConfig.action.debug(),
+            }}
+          />
         ) : null}
       </div>
     );

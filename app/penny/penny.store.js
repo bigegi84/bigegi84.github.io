@@ -40,6 +40,7 @@ const pennyStore = mobx.observable({
     debt: {
       mode: null,
       i: null,
+      id: null,
       name: "",
       owner: "",
       installment: 0,

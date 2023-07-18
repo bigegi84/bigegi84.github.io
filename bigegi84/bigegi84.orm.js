@@ -39,6 +39,10 @@ const bigegi84Orm = {
       }
       return array.unshift({ ...{ id: newUuid }, ...item });
     },
+    deleteOne: (array, uuid) => {
+      const i = array.findIndex(({ id }) => id == uuid);
+      array.splice(i, 1);
+    },
     readOneById: (array, id) => {
       let result = null;
       const find = array.findIndex(({ id: iid }) => id == iid);
@@ -55,6 +59,12 @@ const bigegi84Orm = {
         if (check == 1) return it;
       });
       return filter;
+    },
+    updateOne: (array, obj) => {
+      let result = null;
+      const find = array.findIndex(({ id: iid }) => id == iid);
+      if (find != -1) result = array[find];
+      return result;
     },
     migrate: (array) => {
       return array.map((it) => [...[bigegi84Orm.uuid()], ...it]);

@@ -123,6 +123,18 @@ const pennyDebt = {
       );
     },
     edit: () => {
+      const { name, owner, installment, dueDate, installmentLeft } =
+        pennyStore.form.debt;
+      pennyStore.debt[pennyStore.form.debt.i] = {
+        ...pennyStore.debt[pennyStore.form.debt.i],
+        ...{
+          name,
+          owner,
+          installment: parseFloat(installment),
+          dueDate: parseFloat(dueDate),
+          installmentLeft: parseFloat(installmentLeft),
+        },
+      };
       pennyStore.form.debt = {
         mode: null,
         i: null,
@@ -135,20 +147,41 @@ const pennyDebt = {
     },
     list: mobxReact.observer(() => {
       return pennyStore.debt.map(
-        ({ name, owner, installment, dueDate, installmentLeft }, debtI) => {
+        ({ id, name, owner, installment, dueDate, installmentLeft }, debtI) => {
           const isEdit =
             pennyStore.form.debt.mode == "edit" &&
             pennyStore.form.debt.i == debtI;
           return (
             <div key={debtI} className="column-a card-a">
+              <bigegi84View.letsRock
+                column={{
+                  buttonSmallHapus: () => {
+                    bigegi84Orm.obj.deleteOne(pennyStore.debt, id);
+                  },
+                }}
+              />
               <div className="row-a">
                 {isEdit ? (
-                  <div className="column-a">
-                    <div className="row-a">
-                      <input /> -
-                      <input />
-                    </div>
-                  </div>
+                  <bigegi84View.letsRock
+                    column={{
+                      inputTextNama: [
+                        pennyStore.form.debt.name,
+                        (e) => (pennyStore.form.debt.name = e),
+                      ],
+                      inputTextCicilan: [
+                        pennyStore.form.debt.installment,
+                        (e) => (pennyStore.form.debt.installment = e),
+                      ],
+                      "inputTextTanggal Jatuh Tempo": [
+                        pennyStore.form.debt.dueDate,
+                        (e) => (pennyStore.form.debt.dueDate = e),
+                      ],
+                      "inputTextSisa Cicilan": [
+                        pennyStore.form.debt.installmentLeft,
+                        (e) => (pennyStore.form.debt.installmentLeft = e),
+                      ],
+                    }}
+                  />
                 ) : (
                   <div className="column-a">
                     <span>
@@ -189,6 +222,7 @@ const pennyDebt = {
                         pennyStore.form.debt = {
                           mode: "edit",
                           i: debtI,
+                          id,
                           name,
                           owner,
                           installment,

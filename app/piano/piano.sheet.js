@@ -134,6 +134,67 @@ const pianoSheet = {
                 },
                 columnB: {
                   textStrong: "Kanan",
+                  viewA: right.map(([], i) => (
+                    <bigegi84View.letsRock
+                      key={i}
+                      card={{
+                        column: {
+                          inputTextBagian: [
+                            pianoStore.sheet.data[pianoStore.sheet.selected]
+                              .right[i][0],
+                            (e) => {
+                              pianoStore.sheet.data[
+                                pianoStore.sheet.selected
+                              ].right[i][0] = e;
+                              console.log(e);
+                            },
+                            () => (pianoStore.keymapActive = false),
+                          ],
+                          inputTextareaNotasi: [
+                            pianoStore.sheet.data[pianoStore.sheet.selected]
+                              .right[i][1],
+                            (e) =>
+                              (pianoStore.sheet.data[
+                                pianoStore.sheet.selected
+                              ].right[i][1] = e),
+                            () => (pianoStore.keymapActive = false),
+                          ],
+                          row: {
+                            circleTwo: [
+                              ["fas fa-ban", "fas fa-music"],
+                              (e) =>
+                                (pianoStore.sheet.data[
+                                  pianoStore.sheet.selected
+                                ].right[i][2] = e),
+                            ],
+                            circleTwoB: [
+                              ["fas fa-stop", "fas fa-play"],
+                              (e) => {
+                                if (!pianoStore.sheet.playing) {
+                                  pianoStore.sheet.playing = true;
+                                  pianoSheet.action.playText(
+                                    pianoStore.sheet.data[
+                                      pianoStore.sheet.selected
+                                    ].right[i][1]
+                                  );
+                                } else {
+                                  pianoStore.sheet.playing = false;
+                                  pianoSheet.action.stop();
+                                }
+                              },
+                            ],
+                            circleTwoC: [
+                              ["fas fa-plus", "fas fa-plus"],
+                              () =>
+                                pianoStore.sheet.data[
+                                  pianoStore.sheet.selected
+                                ].right.push(["", ""]),
+                            ],
+                          },
+                        },
+                      }}
+                    />
+                  )),
                 },
               }}
             />
@@ -286,7 +347,7 @@ const pianoSheet = {
                     },
                   },
                   textStrong: "Lagu",
-                  observer: () => (
+                  observerSong: () => (
                     <select
                       onChange={(e) => pianoSheet.action.change(e)}
                       name="sheet-select"
@@ -312,7 +373,7 @@ const pianoSheet = {
                   ),
                   textStrongNada: "Nada",
                   row: {
-                    view: <pianoSheet.action.sheetList />,
+                    observer: () => <pianoSheet.action.sheetList />,
                   },
                 },
               },

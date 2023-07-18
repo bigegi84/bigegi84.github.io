@@ -103,6 +103,29 @@ const pianoSheet = {
                                   pianoStore.sheet.selected
                                 ].left[i][2] = e),
                             ],
+                            circleTwoB: [
+                              ["fas fa-stop", "fas fa-play"],
+                              (e) => {
+                                if (!pianoStore.sheet.playing) {
+                                  pianoStore.sheet.playing = true;
+                                  pianoSheet.action.playText(
+                                    pianoStore.sheet.data[
+                                      pianoStore.sheet.selected
+                                    ].left[i][1]
+                                  );
+                                } else {
+                                  pianoStore.sheet.playing = false;
+                                  pianoSheet.action.stop();
+                                }
+                              },
+                            ],
+                            circleTwoC: [
+                              ["fas fa-plus", "fas fa-plus"],
+                              () =>
+                                pianoStore.sheet.data[
+                                  pianoStore.sheet.selected
+                                ].left.push(["", ""]),
+                            ],
                           },
                         },
                       }}

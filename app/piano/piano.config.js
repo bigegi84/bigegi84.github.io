@@ -63,6 +63,11 @@ const pianoConfig = {
                         />
                       ),
                       buttonSmallMuat: () => inputFile.current.click(),
+                      buttonSmallKopi: () => {
+                        const yaml = jsyaml.dump(mobx.toJS(pianoStore));
+                        navigator.clipboard.writeText(yaml);
+                        alert("Copied the text.");
+                      },
                       buttonSmallDebug: () => {
                         let json = mobx.toJS(pianoStore);
                         for (const key in json.sheet.data) {

@@ -74,32 +74,37 @@ const pianoSheet = {
                     <bigegi84View.letsRock
                       key={i}
                       card={{
-                        observer: () => (
-                          <bigegi84View.letsRock
-                            column={{
-                              inputTextBagian: [
-                                pianoStore.sheet.data[pianoStore.sheet.selected]
-                                  .left[i][0],
-                                (e) => {
-                                  pianoStore.sheet.data[
-                                    pianoStore.sheet.selected
-                                  ].left[i][0] = e;
-                                  console.log(e);
-                                },
-                                () => (pianoStore.keymapActive = false),
-                              ],
-                              inputTextareaNotasi: [
-                                pianoStore.sheet.data[pianoStore.sheet.selected]
-                                  .left[i][1],
-                                (e) =>
-                                  (pianoStore.sheet.data[
-                                    pianoStore.sheet.selected
-                                  ].left[i][1] = e),
-                                () => (pianoStore.keymapActive = false),
-                              ],
-                            }}
-                          />
-                        ),
+                        column: {
+                          inputTextBagian: [
+                            pianoStore.sheet.data[pianoStore.sheet.selected]
+                              .left[i][0],
+                            (e) => {
+                              pianoStore.sheet.data[
+                                pianoStore.sheet.selected
+                              ].left[i][0] = e;
+                              console.log(e);
+                            },
+                            () => (pianoStore.keymapActive = false),
+                          ],
+                          inputTextareaNotasi: [
+                            pianoStore.sheet.data[pianoStore.sheet.selected]
+                              .left[i][1],
+                            (e) =>
+                              (pianoStore.sheet.data[
+                                pianoStore.sheet.selected
+                              ].left[i][1] = e),
+                            () => (pianoStore.keymapActive = false),
+                          ],
+                          row: {
+                            circleTwo: [
+                              ["fas fa-ban", "fas fa-music"],
+                              (e) =>
+                                (pianoStore.sheet.data[
+                                  pianoStore.sheet.selected
+                                ].left[i][2] = e),
+                            ],
+                          },
+                        },
                       }}
                     />
                   )),

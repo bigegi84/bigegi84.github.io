@@ -37,6 +37,23 @@ const bigegi84View = {
       </div>
     </bigegi84View.row>
   ),
+  circleTwo: ({ iClassNameTrue, iClassNameFalse, onClick }) => {
+    const [state, setState] = React.useState(false);
+    return (
+      <bigegi84View.row>
+        <div
+          style={bigegi84theme.styleCircle}
+          className="circle-a"
+          onClick={() => {
+            setState(!state);
+            onClick ? onClick(state) : () => {};
+          }}
+        >
+          <i className={state ? iClassNameTrue : iClassNameFalse} />
+        </div>
+      </bigegi84View.row>
+    );
+  },
   circleAngle: ({ label, state: [state, setState] }) => (
     <bigegi84View.row>
       {label ? (
@@ -271,6 +288,23 @@ const bigegi84View = {
               {bigegi84View.render(props[key])}
             </bigegi84View.card>
           );
+        }
+        if (!found && key.search("circleTwo") != -1) {
+          found = true;
+          const [[a, b], c] = props[key];
+          view.push(
+            <bigegi84View.circleTwo
+              key={i}
+              iClassNameTrue={a}
+              iClassNameFalse={b}
+              onClick={c}
+            />
+          );
+        }
+        if (!found && key.search("circle") != -1) {
+          found = true;
+          const [a, b] = props[key];
+          view.push(<bigegi84View.circle key={i} iClassName={a} onClick={b} />);
         }
         if (key.search("column") != -1) {
           view.push(

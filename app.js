@@ -45,6 +45,11 @@
           component={(props) => app.action.withFooter([props, einstein.view])}
         />
         <Route
+          path="/game"
+          exact
+          component={(props) => app.action.withFooter([props, game.view])}
+        />
+        <Route
           path="/garden"
           exact
           component={(props) => {

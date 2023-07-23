@@ -65,7 +65,6 @@ const gameSprite = {
         for (let ix = 0; ix < y; ix++) {
           if (image[iy] != null && image[ix][iy] != null) {
             const iColor = image[ix][iy];
-            console.log(iColor);
             svgChild.push(
               <rect
                 key={iy + " " + ix}

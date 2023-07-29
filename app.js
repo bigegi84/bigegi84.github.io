@@ -40,6 +40,11 @@
           }}
         />
         <Route
+          path="/computer"
+          exact
+          component={(props) => app.action.withFooter([props, computer.view])}
+        />
+        <Route
           path="/einstein"
           exact
           component={(props) => app.action.withFooter([props, einstein.view])}

@@ -11,16 +11,15 @@ const chordAdminLogin = {
           buttonLogin: async () => {
             try {
               const res = await axios.post(
-                chordAdminState.url + "/user/login",
+                chordAdminState.apiUrl + "/user/login",
                 {
                   username: username[0],
                   password: password[0],
                 }
               );
               if (res.data.status == "ok") {
-                localStorage.setItem("chordAdminToken", res.data.result);
-                chordAdminState = res.data.result;
-                window.location.reload();
+                localStorage.setItem("chordAdmin-apiToken", res.data.result);
+                chordAdminStore.apiToken = res.data.result;
               }
             } catch (e) {}
           },

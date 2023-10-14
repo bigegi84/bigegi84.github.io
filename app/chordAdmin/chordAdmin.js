@@ -16,10 +16,16 @@ const chordAdmin = {
           viewA: (
             <h1 className={bigegi84theme.class.basic}>bigegi84 - Akor Admin</h1>
           ),
-          viewC: chordAdminState.token ? (
-            <chordAdminSong.view />
-          ) : (
-            <chordAdminLogin.view />
+          viewC: (
+            <bigegi84View.letsRock
+              observer={() =>
+                chordAdminState.apiToken ? (
+                  <chordAdminSong.view />
+                ) : (
+                  <chordAdminLogin.view />
+                )
+              }
+            />
           ),
         }}
       />

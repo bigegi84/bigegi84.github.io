@@ -31,6 +31,7 @@ const bass = {
     },
   },
   view: () => {
+    bassInit();
     return (
       <div
         className="column-a"

@@ -15,6 +15,7 @@ const ukulele = {
     },
   },
   view: () => {
+    ukuleleInit();
     return (
       <div
         style={{ padding: "3em" }}

@@ -1,5 +1,6 @@
 const piano = {
   view: () => {
+    pianoInit();
     return (
       <div
         className="conlumn-a"

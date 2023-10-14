@@ -84,7 +84,7 @@ const chordAdminSong = {
     },
     list: () => (
       <bigegi84View.listCard
-        arr={chordStore.song}
+        arr={chordAdminStore.song}
         onMap={({ singer, title, chord, lyric }, i) => (
           <bigegi84View.observer
             onChange={() => {
@@ -165,7 +165,18 @@ const chordAdminSong = {
       return true;
     },
   },
+  http: {
+    readMany: async () => {
+      try {
+        const res = await axios.post(chordAdminState.apiUrl + "/song/readMany");
+        if (res.data.status == "ok") {
+          console.log("halo");
+        }
+      } catch (e) {}
+    },
+  },
   view: () => {
+    chordAdminSong.http.readMany();
     return (
       <bigegi84View.letsRock
         column={{

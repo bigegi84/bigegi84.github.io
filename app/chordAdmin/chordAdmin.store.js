@@ -1,3 +1,3 @@
-const chordStore = mobx.observable({
+const chordAdminStore = mobx.observable({
   song: [],
 });

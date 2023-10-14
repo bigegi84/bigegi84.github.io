@@ -13,9 +13,14 @@ const chordAdmin = {
     return (
       <bigegi84View.letsRock
         container={{
-          viewA: <h1 className={bigegi84theme.class.basic}>bigegi84 - Akor</h1>,
-          viewB: <chordConfig.view />,
-          viewC: <chordSong.view />,
+          viewA: (
+            <h1 className={bigegi84theme.class.basic}>bigegi84 - Akor Admin</h1>
+          ),
+          viewC: chordAdminState.token ? (
+            <chordAdminSong.view />
+          ) : (
+            <chordAdminLogin.view />
+          ),
         }}
       />
     );

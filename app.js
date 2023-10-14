@@ -33,6 +33,11 @@
           component={(props) => app.action.withFooter([props, chord.view])}
         />
         <Route
+          path="/chordAdmin"
+          exact
+          component={(props) => app.action.withFooter([props, chordAdmin.view])}
+        />
+        <Route
           path="/clone"
           exact
           component={(props) => {

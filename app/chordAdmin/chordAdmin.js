@@ -1,4 +1,4 @@
-const chord = {
+const chordAdmin = {
   action: {
     loadState: async () => {
       const text = await bigegi84File.get(

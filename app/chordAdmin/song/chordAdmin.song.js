@@ -27,17 +27,36 @@ const chordAdminSong = {
               column={{
                 inputTextJudul: [
                   chordAdminSongStore.form.title,
-                  (e) => (chordAdminSongStore.form.title = e.target.value),
+                  (value) => (chordAdminSongStore.form.title = value),
                 ],
                 inputTextareaLirik: [
-                  chordAdminSongStore.form.title,
-                  (e) => (chordAdminSongStore.form.title = e.target.value),
+                  chordAdminSongStore.form.lyric,
+                  (value) => (chordAdminSongStore.form.lyric = value),
                 ],
                 inputTextPenyanyi: [
-                  chordAdminSongStore.form.title,
-                  (e) => (chordAdminSongStore.form.title = e.target.value),
+                  chordAdminSongStore.form.artist,
+                  (value) => (chordAdminSongStore.form.artist_name = value),
                 ],
-                buttonSimpan: () => {},
+                buttonSimpan: async () => {
+                  try {
+                    const res = await axios.post(
+                      chordAdminState.apiUrl + "/song/createOne",
+                      {
+                        title: chordAdminSongStore.form.title,
+                        lyric: chordAdminSongStore.form.lyric,
+                        artist_name: chordAdminSongStore.form.artist_name,
+                      },
+                      {
+                        headers: {
+                          "jwt-token": chordAdminStore.token,
+                        },
+                      }
+                    );
+                    if (res.data.status == "ok") {
+                      chordAdminSong.http.readMany();
+                    }
+                  } catch (e) {}
+                },
               }}
             />
           )}
@@ -45,77 +64,20 @@ const chordAdminSong = {
       );
     },
     list: () => (
-      <bigegi84View.listCard
-        arr={chordAdminStore.song}
-        onMap={({ singer, title, chord, lyric }, i) => (
-          <bigegi84View.observer
-            onChange={() => {
-              const chordView = [];
-              let chordI = 0;
-              for (const key in chord) {
-                chordView.push(
-                  <div key={chordI} className="column-a">
-                    <span>{key}</span>
-                    <span>{chord[key]}</span>
-                  </div>
-                );
-                chordI++;
-              }
-              return (
-                <bigegi84View.column>
-                  <bigegi84View.textStrong
-                    label={`${singer} - ${title}`}
-                    color={"#A7ECEE"}
-                  />
-                  <bigegi84View.column>
-                    <bigegi84View.circle
-                      label="Akor"
-                      onClick={() =>
-                        (chordStore.song[i].show.chord =
-                          !chordStore.song[i].show.chord)
-                      }
-                      iClassName={
-                        "fas" +
-                        (chordStore.song[i].show.chord
-                          ? " fa-angle-up"
-                          : " fa-angle-down")
-                      }
-                    />
-                    <bigegi84View.isShow
-                      value={chordStore.song[i].show.chord}
-                      show={<bigegi84View.card>{chordView}</bigegi84View.card>}
-                    />
-                  </bigegi84View.column>
-                  <bigegi84View.column>
-                    <bigegi84View.circle
-                      label="Lirik"
-                      onClick={() =>
-                        (chordStore.song[i].show.lyric =
-                          !chordStore.song[i].show.lyric)
-                      }
-                      iClassName={
-                        "fas" +
-                        (chordStore.song[i].show.lyric
-                          ? " fa-angle-up"
-                          : " fa-angle-down")
-                      }
-                    />
-                    <bigegi84View.isShow
-                      value={chordStore.song[i].show.lyric}
-                      show={
-                        <bigegi84View.card>
-                          {lyric.map((e, i) => (
-                            <bigegi84View.text key={i} label={e} />
-                          ))}
-                        </bigegi84View.card>
-                      }
-                    />
-                  </bigegi84View.column>
-                </bigegi84View.column>
-              );
-            }}
-          />
-        )}
+      <bigegi84View.letsRock
+        observer={() =>
+          chordAdminSongStore.data.map(({ title, lyric }, i) => (
+            <bigegi84View.letsRock
+              key={i}
+              cardA={{
+                column: {
+                  text: title,
+                  textB: lyric,
+                },
+              }}
+            />
+          ))
+        }
       />
     ),
     validate: () => {
@@ -132,7 +94,7 @@ const chordAdminSong = {
       try {
         const res = await axios.post(chordAdminState.apiUrl + "/song/readMany");
         if (res.data.status == "ok") {
-          console.log("halo");
+          chordAdminSongStore.data = res.data.result;
         }
       } catch (e) {}
     },

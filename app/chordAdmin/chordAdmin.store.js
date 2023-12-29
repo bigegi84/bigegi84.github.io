@@ -1,3 +1,12 @@
 const chordAdminStore = mobx.observable({
-  song: [],
+  isLogin: false,
+  token: localStorage.getItem("chordAdmin-apiToken"),
+  song: {
+    data: [],
+    form: {
+      title: "",
+      lyric: "",
+      artist_name: "",
+    },
+  },
 });

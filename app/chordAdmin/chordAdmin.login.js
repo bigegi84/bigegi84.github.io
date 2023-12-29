@@ -19,7 +19,8 @@ const chordAdminLogin = {
               );
               if (res.data.status == "ok") {
                 localStorage.setItem("chordAdmin-apiToken", res.data.result);
-                chordAdminStore.apiToken = res.data.result;
+                chordAdminStore.token = res.data.result;
+                chordAdminStore.isLogin = true;
               }
             } catch (e) {}
           },

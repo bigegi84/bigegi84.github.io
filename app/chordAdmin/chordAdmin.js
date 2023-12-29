@@ -19,7 +19,7 @@ const chordAdmin = {
           viewC: (
             <bigegi84View.letsRock
               observer={() =>
-                chordAdminState.apiToken ? (
+                chordAdminStore.token ? (
                   <chordAdminSong.view />
                 ) : (
                   <chordAdminLogin.view />

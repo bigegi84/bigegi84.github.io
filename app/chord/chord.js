@@ -2,7 +2,7 @@ const chord = {
   action: {
     loadState: async () => {
       const text = await bigegi84File.get(
-        "https://bigegi84.000webhostapp.com/app-state/bigegi84-Chord.yaml"
+        "https://raw.githubusercontent.com/bigegi84/bigegi84-state/main/yaml/bigegi84-chord.yaml"
       );
       const json = jsyaml.load(text);
       for (const key in json) if (key != "form") chordStore[key] = json[key];

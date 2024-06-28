@@ -14,7 +14,7 @@ const bigegi84experience = {
             style={{
               background:
                 bigegi84store.theme[bigegi84store.theme.value].backgroundColor,
-              color: bigegi84store.theme[bigegi84store.theme.value].textColor,
+              color: bigegi84store.theme[bigegi84store.theme.value].titleTextColor,
             }}
           >
             Pengalaman

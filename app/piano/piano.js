@@ -1,6 +1,17 @@
 const piano = {
+  action: {
+    loadState: async () => {
+      const text = await bigegi84File.get(
+        "https://raw.githubusercontent.com/bigegi84/bigegi84-state/main/yaml/bigegi84-piano.yaml"
+      );
+      const json = jsyaml.load(text);
+      for (const key in json)
+        pianoStore[key] = json[key];
+    },
+  },
   view: () => {
     pianoInit();
+    piano.action.loadState();
     return (
       <div
         className="conlumn-a"

@@ -104,6 +104,11 @@ const chordAdminSong = {
     return (
       <bigegi84View.letsRock
         column={{
+          buttonLogout: () => {
+            localStorage.removeItem("chordAdmin-apiToken");
+            chordAdminStore.token = null;
+            chordAdminStore.isLogin = true;
+          },
           "sectionTambah Lagu": {
             content: {
               view: <chordAdminSong.action.form />,

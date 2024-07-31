@@ -8,5 +8,6 @@ const chordAdminStore = mobx.observable({
       lyric: "",
       artist_name: "",
     },
+    search: "",
   },
 });

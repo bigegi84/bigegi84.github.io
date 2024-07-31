@@ -25,6 +25,10 @@ const chordAdminSong = {
           {() => (
             <bigegi84View.letsRock
               column={{
+                inputTextPenyanyi: [
+                  chordAdminSongStore.form.artist,
+                  (value) => (chordAdminSongStore.form.artist_name = value),
+                ],
                 inputTextJudul: [
                   chordAdminSongStore.form.title,
                   (value) => (chordAdminSongStore.form.title = value),
@@ -32,10 +36,6 @@ const chordAdminSong = {
                 inputTextareaLirik: [
                   chordAdminSongStore.form.lyric,
                   (value) => (chordAdminSongStore.form.lyric = value),
-                ],
-                inputTextPenyanyi: [
-                  chordAdminSongStore.form.artist,
-                  (value) => (chordAdminSongStore.form.artist_name = value),
                 ],
                 buttonSimpan: async () => {
                   try {
@@ -66,7 +66,7 @@ const chordAdminSong = {
     list: () => (
       <bigegi84View.letsRock
         observer={() =>
-          chordAdminSongStore.data.map(({ title, lyric }, i) => (
+          chordAdminSongStore.data.data.map(({ title, lyric }, i) => (
             <bigegi84View.letsRock
               key={i}
               cardA={{
@@ -92,7 +92,15 @@ const chordAdminSong = {
   http: {
     readMany: async () => {
       try {
-        const res = await axios.post(chordAdminState.apiUrl + "/song/readMany");
+        const res = await axios.post(
+          chordAdminState.apiUrl + "/song/readMany",
+          null,
+          {
+            params: {
+              title: chordAdminSongStore.search,
+            },
+          }
+        );
         if (res.data.status == "ok") {
           chordAdminSongStore.data = res.data.result;
         }
@@ -116,6 +124,11 @@ const chordAdminSong = {
           },
           sectionLagu: {
             content: {
+              "inputTextKata Kunci": [
+                chordAdminSongStore.search,
+                (value) => (chordAdminSongStore.search = value),
+              ],
+              buttonCari: () => chordAdminSong.http.readMany(),
               view: <chordAdminSong.action.list />,
             },
           },

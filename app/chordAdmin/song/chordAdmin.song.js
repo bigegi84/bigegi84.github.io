@@ -37,27 +37,10 @@ const chordAdminSong = {
                   chordAdminSongStore.form.lyric,
                   (value) => (chordAdminSongStore.form.lyric = value),
                 ],
-                buttonSimpan: async () => {
-                  try {
-                    const res = await axios.post(
-                      chordAdminState.apiUrl + "/song/createOne",
-                      {
-                        title: chordAdminSongStore.form.title,
-                        lyric: chordAdminSongStore.form.lyric,
-                        artist_name: chordAdminSongStore.form.artist_name,
-                      },
-                      {
-                        headers: {
-                          "jwt-token": chordAdminStore.token,
-                        },
-                      }
-                    );
-                    if (res.data.status == "ok") {
-                      chordAdminSong.http.readMany();
-                      alertify.success('Berhasil.');
-                    }
-                  } catch (e) {}
-                },
+                buttonSimpan: () =>
+                  load("app/chordAdmin/song/action/createOne.js", () => {
+                    chordAdminSong.action.createOne();
+                  }),
               }}
             />
           )}
@@ -82,12 +65,7 @@ const chordAdminSong = {
       />
     ),
     validate: () => {
-      const { balance } = chordStore.form.account;
-      if (isNaN(parseFloat(balance))) {
-        alert("Saldo salah!");
-        return false;
-      }
-      return true;
+      loadJS("test.js");
     },
   },
   http: {
@@ -113,11 +91,10 @@ const chordAdminSong = {
     return (
       <bigegi84View.letsRock
         column={{
-          buttonLogout: () => {
-            localStorage.removeItem("chordAdmin-apiToken");
-            chordAdminStore.token = null;
-            chordAdminStore.isLogin = true;
-          },
+          buttonLogout: () =>
+            load("app/chordAdmin/action/logout.js", () => {
+              chordAdmin.action.logout();
+            }),
           "sectionTambah Lagu": {
             content: {
               view: <chordAdminSong.action.form />,

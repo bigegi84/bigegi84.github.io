@@ -21,6 +21,7 @@ const chordAdminLogin = {
                 localStorage.setItem("chordAdmin-apiToken", res.data.result);
                 chordAdminStore.token = res.data.result;
                 chordAdminStore.isLogin = true;
+                alertify.success('Login berhasil.');
               }
             } catch (e) {}
           },

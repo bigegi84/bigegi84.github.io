@@ -54,6 +54,7 @@ const chordAdminSong = {
                     );
                     if (res.data.status == "ok") {
                       chordAdminSong.http.readMany();
+                      alertify.success('Berhasil.');
                     }
                   } catch (e) {}
                 },

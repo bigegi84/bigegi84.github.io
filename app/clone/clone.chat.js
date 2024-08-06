@@ -25,11 +25,12 @@ const cloneChat = {
                                 cloneStore.brain.data[cloneStore.brain.i]
                               );
                               const answerI = _.get(node, `${path}.$answer.0`);
-                              const atomWord = answerI
-                                ? answer[answerI]
-                                    .split(",")
-                                    .map((it) => atom[it])
-                                : null;
+                              const atomWord =
+                                answerI !== null && typeof answerI !== "undefined"
+                                  ? answer[answerI]
+                                      .split(",")
+                                      .map((it) => atom[it])
+                                  : null;
                               cloneStore.text.answer = atomWord
                                 ? atomWord.join(" ")
                                 : "Gatau Jawabannya";
@@ -54,12 +55,16 @@ const cloneChat = {
                               const path = cloneStore.lastText
                                 .split(" ")
                                 .join(".");
-                              cloneStore.brain.data[cloneStore.brain.i].node = _.setWith(
-                                mobx.toJS(cloneStore.brain.data[cloneStore.brain.i].node),
-                                `${path}.$answer`,
-                                null,
-                                Object
-                              );
+                              cloneStore.brain.data[cloneStore.brain.i].node =
+                                _.setWith(
+                                  mobx.toJS(
+                                    cloneStore.brain.data[cloneStore.brain.i]
+                                      .node
+                                  ),
+                                  `${path}.$answer`,
+                                  null,
+                                  Object
+                                );
                               // cloneStore.text.answer = "";
                             },
                             text: cloneStore.text.answer,
@@ -93,9 +98,12 @@ const cloneChat = {
                                   .toJS(atom)
                                   .findIndex((eA) => eA == e);
                                 if (found == -1) {
-                                  cloneStore.brain.data[cloneStore.brain.i].atom.push(e);
+                                  cloneStore.brain.data[
+                                    cloneStore.brain.i
+                                  ].atom.push(e);
                                   return (
-                                    cloneStore.brain.data[cloneStore.brain.i].atom.length - 1
+                                    cloneStore.brain.data[cloneStore.brain.i]
+                                      .atom.length - 1
                                   );
                                 } else return found;
                               })
@@ -104,18 +112,22 @@ const cloneChat = {
                               (e) => e == answerValue
                             );
                             if (findAi == -1) {
-                              cloneStore.brain.data[cloneStore.brain.i].answer.push(
-                                answerValue
-                              );
+                              cloneStore.brain.data[
+                                cloneStore.brain.i
+                              ].answer.push(answerValue);
                               findAi =
-                                cloneStore.brain.data[cloneStore.brain.i].answer.length - 1;
+                                cloneStore.brain.data[cloneStore.brain.i].answer
+                                  .length - 1;
                             }
-                            cloneStore.brain.data[cloneStore.brain.i].node = _.setWith(
+                            let newNode = _.setWith(
                               mobx.toJS(node),
                               `${path}.$answer.0`,
                               findAi,
                               Object
                             );
+                            newNode = _.toPlainObject(newNode);
+                            cloneStore.brain.data[cloneStore.brain.i].node =
+                              newNode;
                             cloneStore.text.answer = "";
                           },
                         },

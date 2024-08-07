@@ -6,11 +6,18 @@ define((require) => {
     inputLabelText,
     text,
     textHighlight,
+    textStrong,
   } = require("../../../lib/view/index");
   var main = (obj) => {
     var component = [];
     for (var key in obj) {
       var found = false;
+      if (!found && key.includes("buttonCircle")) {
+        found = true;
+        component.push(
+          button(key.replace("buttonCircle", ""), theme.className.basic)
+        );
+      }
       if (!found && key.includes("button")) {
         found = true;
         component.push(
@@ -35,6 +42,10 @@ define((require) => {
       if (!found && key.includes("textHighlight")) {
         found = true;
         component.push(textHighlight(obj[key], theme.className.basic));
+      }
+      if (!found && key.includes("textStrong")) {
+        found = true;
+        component.push(textStrong(obj[key], theme.className.basic));
       }
       if (!found && key.includes("text")) {
         found = true;

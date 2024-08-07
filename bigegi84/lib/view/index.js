@@ -3,6 +3,7 @@ define((require) => {
   var buttonCircle = require("./buttonCircle");
   var column = require("./column");
   var inputLabelText = require("./inputLabelText");
+  var observer = require("./observer");
   var panel = require("./panel");
   var row = require("./row");
   var text = require("./text");
@@ -12,6 +13,7 @@ define((require) => {
     buttonCircle,
     column,
     inputLabelText,
+    observer,
     panel,
     row,
     text,

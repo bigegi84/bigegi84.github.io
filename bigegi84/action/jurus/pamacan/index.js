@@ -2,8 +2,10 @@ define((require) => {
   var { theme } = require("../../../store/index");
   var {
     button,
+    buttonCircle,
     column,
     inputLabelText,
+    observer,
     text,
     textHighlight,
     textStrong,
@@ -15,7 +17,7 @@ define((require) => {
       if (!found && key.includes("buttonCircle")) {
         found = true;
         component.push(
-          button(key.replace("buttonCircle", ""), theme.className.basic)
+          buttonCircle(key.replace("buttonCircle", ""), theme.className.basic)
         );
       }
       if (!found && key.includes("button")) {
@@ -38,6 +40,10 @@ define((require) => {
             theme.className.inputText
           )
         );
+      }
+      if (!found && key.includes("observer")) {
+        found = true;
+        component.push(observer(obj[key], theme.className.basic));
       }
       if (!found && key.includes("textHighlight")) {
         found = true;

@@ -1,5 +1,5 @@
 define((require) => {
-  var { observer } = require("../observer");
+  var observer = require("../observer");
   return (initial = null) => {
     var _value = initial;
     var _observer = observer();

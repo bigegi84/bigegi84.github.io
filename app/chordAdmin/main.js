@@ -6,7 +6,8 @@ define((require) => {
   return () => {
     jurus.pamacan({
       textHighlight: "bigegi84 - Chord Admin",
-      view: true ? song.view : login.view,
+      view: store.token ? song.view : login.view,
+      // observer: () => (store.token ? song.view : login.view),
     })(document.getElementById("root"));
   };
 });

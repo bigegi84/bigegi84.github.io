@@ -15,7 +15,7 @@ define((require) => {
       var render = () => {
         row([
           label ? textStrong(label, lCls) : null,
-          div(icon(isShow ? "fas fa-angle-up" : "fas fa-angle-down")),
+          div([icon(isShow ? "fas fa-angle-up" : "fas fa-angle-down")]),
         ])(parent);
       };
       isShow.onChange = () => {

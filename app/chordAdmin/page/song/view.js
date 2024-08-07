@@ -4,7 +4,9 @@ define((require) => {
   var store = require("../../store/index");
   var action = require("./action/index");
   return jurus.pamacan({
-    buttonLogout: () => action.logout(),
-    buttonCircleCoba: () => action.logout(),
+    buttonLogout: () => {
+      action.logout();
+    },
+    buttonCircleCoba: "",
   });
 });

@@ -1,27 +1,29 @@
 define((require) => {
+  var button = require("./button");
+  var column = require("./column");
   var div = require("./div");
   var icon = require("./icon");
   var row = require("./row");
   var textStrong = require("./textStrong");
   var useState = require("./useState");
   return (label = null, lCls = null) => {
-    return (parent) => {
+    return () => {
       var isShow = useState(false);
-
-      // var list = [];
-      // if (label) {
-      //   list.push(textStrong(label, lCls));
-      // }
-      var render = () => {
+      var child = () =>
         row([
           label ? textStrong(label, lCls) : null,
-          div([icon(isShow ? "fas fa-angle-up" : "fas fa-angle-down")]),
-        ])(parent);
-      };
-      isShow.onChange = () => {
-        render();
-      };
-      render();
+          div([
+            button(isShow.value ? "v" : "^", () => {
+              isShow.value = !isShow.value;
+            }),
+          ]),
+        ]);
+      var component = column([child()])();
+      isShow.observer.subscribe(() => {
+        component.innerHTML = "";
+        component.appendChild(child()());
+      });
+      return component;
     };
   };
 });

@@ -5,7 +5,7 @@ define(() => {
     inputCls = null,
     styleColor = "white"
   ) => {
-    return (parent) => {
+    return () => {
       var [value, setState] = state;
       const component = document.createElement("input");
       component.type = "text";
@@ -16,8 +16,7 @@ define(() => {
       component.onchange = (e) => {
         if (setState) setState(e);
       };
-
-      parent.appendChild(component);
+      return component;
     };
   };
 });

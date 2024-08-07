@@ -3,6 +3,10 @@ define((require) => {
   var { action, state, store } = bigegi84;
   var app = require("./app/index");
   action.init.all();
+  var dom = (el, children) => {
+    el.innerHTML = "";
+    el.appendChild(children());
+  };
   var route = () => {
     document.getElementById("root").innerHTML = "";
     switch (window.location.hash) {
@@ -10,7 +14,7 @@ define((require) => {
         bigegi84.action.render();
         break;
       case "#/chordAdmin":
-        app.chordAdmin.main();
+        dom(document.getElementById("root"), app.chordAdmin.main);
         break;
       default:
         bigegi84.action.render();

@@ -1,10 +1,11 @@
 define(() => {
-  return (children, className = null) => {
-    return (parent) => {
+  return (children, className = "bigegi84-row") => {
+    return () => {
       const component = document.createElement("div");
       if (className) component.setAttribute("class", className);
-      parent.appendChild(component);
-      children.forEach((it) => it(component));
+      component.style.gap = "10px";
+      children.forEach((it) => component.appendChild(it()));
+      return component;
     };
   };
 });

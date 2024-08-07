@@ -1,10 +1,14 @@
 define(() => {
   return (children = null, className = null) => {
-    return (parent) => {
+    return () => {
+      console.log("test");
       const component = document.createElement("div");
       if (className) component.setAttribute("class", className);
-      parent.appendChild(component);
-      if (children) children.forEach((it) => it(component));
+      // component.setAttribute("class", "circle-a");
+      // component.style.color = "white";
+      // component.style.boxShadow = "inset 0 0 0 1px white";
+      if (children) children.forEach((it) => component.appendChild(it()));
+      return component;
     };
   };
 });

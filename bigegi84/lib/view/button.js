@@ -1,6 +1,6 @@
 define(() => {
-  return (label, onClick, className) => {
-    return (parent) => {
+  return (label, onClick = null, className = "black-gold-button") => {
+    return () => {
       const component = document.createElement("button");
       if (typeof label !== "undefined") component.innerHTML = label;
       if (typeof className !== "undefined") component.className = className;
@@ -8,7 +8,7 @@ define(() => {
       component.onclick = () => {
         if (onClick) onClick();
       };
-      parent.appendChild(component);
+      return component;
     };
   };
 });

@@ -1,14 +1,13 @@
 define((require) => {
   var state = require("../../state/index");
   return (view) => {
-    return (parent) => {
+    return () => {
       const wrapper = document.createElement("div");
       state.observer.subscribe(() => {
         wrapper.innerHTML = "";
-        view()(wrapper);
+        wrapper.appendChild(view());
       });
-      view()(wrapper);
-      parent.appendChild(wrapper);
+      wrapper.appendChild(view());
     };
   };
 });

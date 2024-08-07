@@ -3,10 +3,11 @@ define((require) => {
   var inputText = require("./inputText");
   var column = require("./column");
   return (label = null, state = null, labelCls = null, inputCls = null) => {
-    return (parent) => {
-      column([labelV(label, labelCls), inputText(label, state, inputCls)])(
-        parent
-      );
+    return () => {
+      return column([
+        labelV(label, labelCls),
+        inputText(label, state, inputCls),
+      ])();
     };
   };
 });

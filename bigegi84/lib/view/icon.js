@@ -1,9 +1,9 @@
 define(() => {
   return (className = null) => {
-    return (parent) => {
+    return () => {
       const component = document.createElement("i");
       if (className) component.setAttribute("class", className);
-      parent.appendChild(component);
+      return component;
     };
   };
 });

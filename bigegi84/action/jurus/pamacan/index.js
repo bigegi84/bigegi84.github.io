@@ -13,6 +13,7 @@ define((require) => {
   var main = (obj) => {
     var component = [];
     for (var key in obj) {
+      console.log(key);
       var found = false;
       if (!found && key.includes("buttonCircle")) {
         found = true;

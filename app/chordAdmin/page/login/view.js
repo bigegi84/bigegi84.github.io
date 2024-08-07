@@ -6,17 +6,12 @@ define((require) => {
   return jurus.pamacan({
     inputLabelTextUsername: [
       store.loginForm.username,
-      (e) => {
-        store.loginForm.username = e.target.value;
-        console.log(store.loginForm.username);
-      },
+      (e) => (store.loginForm.username = e.target.value),
     ],
     inputLabelTextPassword: [
       store.loginForm.password,
       (e) => (store.loginForm.password = e.target.value),
     ],
-    buttonLogin: () => {
-      action.login();
-    },
+    buttonLogin: () => action.login(),
   });
 });

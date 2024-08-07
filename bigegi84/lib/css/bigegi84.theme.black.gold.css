@@ -51,7 +51,7 @@ input[type="checkbox"] + .black-gold-input::before {
 }
 input[type="text"] + .black-gold-input::before {
   border-color: white;
-  color: white;
+  color: white !important;
 }
 input[type="radio"]:checked + .black-gold-input::before {
   border-color: white;

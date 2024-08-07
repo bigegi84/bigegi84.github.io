@@ -1,6 +1,15 @@
 define((require) => {
-  var action = require("./action/index");
+  var bigegi84 = require("../../bigegi84/index");
+  var jurus = bigegi84.action.jurus;
+
+  var { login } = require("./page/index");
+  var store = require("./store/index");
   return () => {
-    action.render();
+    jurus.pamacan({
+      textHighlight: "bigegi84 - Chord Admin",
+      view: store.isLogin
+        ? jurus.pamacan({ textHighlight: "login" })
+        : login.view,
+    })(document.getElementById("root"));
   };
 });

@@ -20,6 +20,10 @@ define((require) => {
       private.isLogin = v;
       state.observer.notify();
     },
+    loginForm: {
+      username: "",
+      password: "",
+    },
     song: {
       data: [],
       form: {

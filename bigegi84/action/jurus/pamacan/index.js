@@ -1,9 +1,8 @@
 define((require) => {
   var { theme } = require("../../../store/index");
   var { button, column, text } = require("../../../lib/view/index");
-  return (obj) => {
+  var main = (obj) => {
     var component = [];
-    var i = 0;
     for (var key in obj) {
       var found = false;
       if (!found && key.includes("button")) {
@@ -12,11 +11,16 @@ define((require) => {
           button(key.replace("button", ""), obj[key], theme.className.button)
         );
       }
+      if (!found && key.includes("column")) {
+        found = true;
+        component.push(column(main(obj[key]), theme.className.column));
+      }
       if (!found && key.includes("text")) {
         found = true;
-        component.push(text(key.replace("text", obj[key])));
+        component.push(text(obj[key], theme.className.text));
       }
     }
-    return column(component);
+    return column(component, theme.className.column);
   };
+  return main;
 });

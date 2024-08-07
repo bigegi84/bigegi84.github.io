@@ -27,7 +27,6 @@ const chordAdmin = {
         />
       );
     });
-    return <div>{result}</div>;
     return (
       <bigegi84View.letsRock
         container={{

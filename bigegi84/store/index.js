@@ -1,13 +1,15 @@
 define((require) => {
   var state = require("../state/index");
+  var theme = require("./theme/index");
+  var private = { count: 0 };
   return {
-    _count: 0,
     get count() {
-      return this._count;
+      return private.count;
     },
     set count(v) {
-      this._count = v;
+      private.count = v;
       state.observer.notify();
     },
+    theme,
   };
 });

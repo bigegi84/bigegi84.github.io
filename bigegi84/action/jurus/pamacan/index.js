@@ -28,6 +28,10 @@ define((require) => {
           button(key.replace("button", ""), obj[key], theme.className.button)
         );
       }
+      if (!found && key.includes("columnList")) {
+        found = true;
+        component.push(column(obj[key], theme.className.column));
+      }
       if (!found && key.includes("column")) {
         found = true;
         component.push(column(main(obj[key]), theme.className.column));

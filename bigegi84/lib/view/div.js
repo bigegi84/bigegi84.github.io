@@ -1,7 +1,6 @@
 define(() => {
   return (children = null, className = null) => {
     return () => {
-      console.log("test");
       const component = document.createElement("div");
       if (className) component.setAttribute("class", className);
       // component.setAttribute("class", "circle-a");

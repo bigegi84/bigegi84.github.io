@@ -3,14 +3,20 @@ define((require) => {
   var jurus = bigegi84.action.jurus;
   var store = require("../../store/index");
   var action = require("./action/index");
+  action.http.readMany();
   return jurus.pamacan({
     buttonLogout: () => {
       action.logout();
     },
     panelLagu: jurus.pamacan({
-      buttonLogout: () => {
-        action.logout();
-      },
+      observer: () =>
+        jurus.pamacan({
+          columnList: store.song.data.map((it) =>
+            jurus.pamacan({
+              textJudul: it.title,
+            })
+          ),
+        }),
     }),
   });
 });

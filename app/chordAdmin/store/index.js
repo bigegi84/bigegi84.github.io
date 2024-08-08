@@ -25,7 +25,13 @@ define((require) => {
       password: "",
     },
     song: {
-      data: [],
+      get data() {
+        return private.song.data;
+      },
+      set data(v) {
+        private.song.data = v;
+        state.observer.notify();
+      },
       form: {
         title: "",
         get title() {

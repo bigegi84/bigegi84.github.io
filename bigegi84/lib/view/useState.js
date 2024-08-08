@@ -19,6 +19,7 @@ define((require) => {
         return () => {
           const component = document.createElement("div");
           _observer.subscribe(() => {
+            console.log("view", view());
             component.innerHTML = "";
             component.appendChild(view()());
           });

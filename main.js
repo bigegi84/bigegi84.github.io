@@ -5,7 +5,10 @@ define((require) => {
   action.init.all();
   var dom = (el, children) => {
     el.innerHTML = "";
-    el.appendChild(children());
+    children.forEach((it) => {
+      el.appendChild(it());
+    });
+    // el.appendChild(children());
   };
   var route = () => {
     document.getElementById("root").innerHTML = "";
@@ -15,6 +18,9 @@ define((require) => {
         break;
       case "#/chordAdmin":
         dom(document.getElementById("root"), app.chordAdmin.main);
+        break;
+      case "#/pakuanUi":
+        dom(document.getElementById("root"), app.pakuanUi.view);
         break;
       default:
         bigegi84.action.render();

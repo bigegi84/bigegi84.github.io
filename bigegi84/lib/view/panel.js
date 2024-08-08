@@ -2,6 +2,7 @@ define((require) => {
   var buttonCircle = require("./buttonCircle");
   var column = require("./column");
   var observer = require("./observer");
+  var row = require("./row");
   var useState = require("./useState");
   return (label = "", children) => {
     return () => {
@@ -9,7 +10,7 @@ define((require) => {
       var component = column([
         buttonCircle(label, isShow),
         isShow.observerView(() =>
-          isShow.value ? column([children]) : column([])
+          isShow.value ? column(children) : column([])
         ),
       ])();
       return component;

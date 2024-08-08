@@ -9,6 +9,7 @@ define((require) => {
     inputLabelTextarea,
     observer,
     panel,
+    row,
     text,
     textHighlight,
     textStrong,
@@ -33,7 +34,7 @@ define((require) => {
       }
       if (!found && key.includes("card")) {
         found = true;
-        component.push(card([main(obj[key])], theme.className.column));
+        component.push(card(main(obj[key]), theme.className.column));
       }
       if (!found && key.includes("columnList")) {
         found = true;
@@ -41,7 +42,7 @@ define((require) => {
       }
       if (!found && key.includes("column")) {
         found = true;
-        component.push(column([main(obj[key])], theme.className.column));
+        component.push(column(main(obj[key]), theme.className.column));
       }
       if (!found && key.includes("inputLabelTextarea")) {
         found = true;
@@ -73,6 +74,10 @@ define((require) => {
         found = true;
         component.push(panel(key.replace("panel", ""), main(obj[key])));
       }
+      if (!found && key.includes("row")) {
+        found = true;
+        component.push(row(main(obj[key])));
+      }
       if (!found && key.includes("textHighlight")) {
         found = true;
         component.push(textHighlight(obj[key]));
@@ -90,7 +95,7 @@ define((require) => {
         component.push(obj[key]);
       }
     }
-    return column(component, theme.className.column);
+    return component;
   };
   return main;
 });

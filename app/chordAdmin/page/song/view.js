@@ -3,7 +3,7 @@ define((require) => {
   var jurus = bigegi84.action.jurus;
   var store = require("../../store/index");
   var action = require("./action/index");
-  action.http.readMany();
+  // action.http.readMany();
   return jurus.pamacan({
     buttonLogout: () => {
       action.logout();

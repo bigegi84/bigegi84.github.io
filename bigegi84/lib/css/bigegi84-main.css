@@ -1,5 +1,6 @@
-body {
+.bigegi84-body {
   background-color: black;
+  padding: 2em;
 }
 .bigegi84-card {
   border: 1px solid;
@@ -10,11 +11,20 @@ body {
 .bigegi84-column {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
+}
+.bigegi84-highlight {
+  margin: 0;
+  /* color: mediumturquoise; */
+  /* color: #1b4b49; */
+  color: #4dbdb8;
 }
 .bigegi84-row {
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.5em;
 }
 .bigegi84-text {
   margin: 0;

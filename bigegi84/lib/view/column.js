@@ -1,9 +1,8 @@
 define(() => {
-  return (children, className = null) => {
+  return (children, className = "bigegi84-column") => {
     return () => {
       const component = document.createElement("div");
-      if (className) component.setAttribute("class", className);
-      component.style.gap = "10px";
+      component.setAttribute("class", className);
       children.forEach((it) => component.appendChild(it()));
       return component;
     };

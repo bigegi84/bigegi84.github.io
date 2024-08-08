@@ -4,6 +4,7 @@ define((require) => {
   var card = require("./card");
   var column = require("./column");
   var inputLabelText = require("./inputLabelText");
+  var inputLabelTextarea = require("./inputLabelTextarea");
   var observer = require("./observer");
   var panel = require("./panel");
   var row = require("./row");
@@ -16,6 +17,7 @@ define((require) => {
     card,
     column,
     inputLabelText,
+    inputLabelTextarea,
     observer,
     panel,
     row,

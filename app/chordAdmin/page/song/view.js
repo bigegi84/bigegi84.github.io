@@ -26,7 +26,7 @@ define((require) => {
           }),
         observerL: () =>
           jurus.pamacan({
-            inputLabelTextLyric: [
+            inputLabelTextareaLyric: [
               store.song.form.lyric,
               (e) => (store.song.form.lyric = e.target.value),
             ],
@@ -43,7 +43,7 @@ define((require) => {
       },
     },
     panelSong: {
-      column: {
+      card: {
         inputLabelTextCari: [
           store.song.search,
           (e) => (store.song.search = e.target.value),

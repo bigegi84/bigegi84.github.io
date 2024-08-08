@@ -6,6 +6,7 @@ define((require) => {
     card,
     column,
     inputLabelText,
+    inputLabelTextarea,
     observer,
     panel,
     text,
@@ -42,6 +43,17 @@ define((require) => {
         found = true;
         component.push(column([main(obj[key])], theme.className.column));
       }
+      if (!found && key.includes("inputLabelTextarea")) {
+        found = true;
+        component.push(
+          inputLabelTextarea(
+            key.replace("inputLabelTextarea", ""),
+            obj[key],
+            theme.className.basic,
+            theme.className.inputText
+          )
+        );
+      }
       if (!found && key.includes("inputLabelText")) {
         found = true;
         component.push(
@@ -63,7 +75,7 @@ define((require) => {
       }
       if (!found && key.includes("textHighlight")) {
         found = true;
-        component.push(textHighlight(obj[key], theme.className.basic));
+        component.push(textHighlight(obj[key]));
       }
       if (!found && key.includes("textStrong")) {
         found = true;

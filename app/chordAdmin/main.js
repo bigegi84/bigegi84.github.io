@@ -5,8 +5,14 @@ define((require) => {
   var store = require("./store/index");
   return jurus.pamacan({
     textHighlight: "bigegi84 - Chord Admin",
-    // view: song.view,
-    view: store.token ? song.view : login.view,
-    // observer: () => (store.token ? song.view : login.view),
+    panelTest: {
+      "buttonAlert Success": () => {
+        alertify.success("Success.");
+      },
+      "buttonAlert Error": () => {
+        alertify.error("Error.");
+      },
+    },
+    observer: () => (store.token ? song.view : login.view),
   });
 });

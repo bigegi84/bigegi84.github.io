@@ -1,9 +1,16 @@
-define(() => {
-  return (children, className = null) => {
+define((require) => {
+  var buttonCircle = require("./buttonCircle");
+  var column = require("./column");
+  var row = require("./row");
+  var observer = require("./observer");
+  var useState = require("./useState");
+  return (label = "", children) => {
     return () => {
-      const component = document.createElement("div");
-      if (className) component.setAttribute("class", className);
-      children.forEach((it) => component.appendChild(it()));
+      var isShow = useState(false);
+      var component = column([
+        buttonCircle(label, isShow),
+        isShow.observerView(() => (isShow.value ? row([children]) : row([]))),
+      ])();
       return component;
     };
   };

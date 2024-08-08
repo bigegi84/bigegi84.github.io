@@ -2,12 +2,13 @@ define((require) => {
   var state = require("../../state/index");
   return (view) => {
     return () => {
-      const wrapper = document.createElement("div");
+      const component = document.createElement("div");
       state.observer.subscribe(() => {
-        wrapper.innerHTML = "";
-        wrapper.appendChild(view());
+        component.innerHTML = "";
+        component.appendChild(view()());
       });
-      wrapper.appendChild(view());
+      component.appendChild(view()());
+      return component;
     };
   };
 });

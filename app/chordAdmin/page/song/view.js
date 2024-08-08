@@ -7,6 +7,10 @@ define((require) => {
     buttonLogout: () => {
       action.logout();
     },
-    buttonCircleCoba: "",
+    panelLagu: jurus.pamacan({
+      buttonLogout: () => {
+        action.logout();
+      },
+    }),
   });
 });

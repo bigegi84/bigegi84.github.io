@@ -6,14 +6,14 @@ define((require) => {
   var row = require("./row");
   var textStrong = require("./textStrong");
   var useState = require("./useState");
-  return (label = null, lCls = null) => {
+  return (label = null, isShowP = null, lCls = "black-gold bigegi84-text") => {
     return () => {
-      var isShow = useState(false);
+      var isShow = isShowP ? isShowP : useState(false);
       var child = () =>
         row([
           label ? textStrong(label, lCls) : null,
           div([
-            button(isShow.value ? "v" : "^", () => {
+            button(isShow.value ? "^" : "v", () => {
               isShow.value = !isShow.value;
             }),
           ]),

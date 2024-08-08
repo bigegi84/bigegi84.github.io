@@ -3,6 +3,7 @@ define((require) => {
   return (initial = null) => {
     var _value = initial;
     var _observer = Observer();
+    _observer.subscribe(() => {});
     return {
       get value() {
         return _value;
@@ -13,6 +14,17 @@ define((require) => {
       },
       get observer() {
         return _observer;
+      },
+      observerView: (view) => {
+        return () => {
+          const component = document.createElement("div");
+          _observer.subscribe(() => {
+            component.innerHTML = "";
+            component.appendChild(view()());
+          });
+          component.appendChild(view()());
+          return component;
+        };
       },
       onChange: (callback) => {
         alert("a");

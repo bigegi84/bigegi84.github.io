@@ -1,9 +1,9 @@
 define(() => {
-  return (label = null, className = null) => {
+  return (label = null, className = "black-gold bigegi84-text") => {
     return () => {
       const component = document.createElement("strong");
       if (label) component.innerHTML = label;
-      if (className) component.setAttribute("class", className);
+      component.setAttribute("class", className);
       return component;
     };
   };

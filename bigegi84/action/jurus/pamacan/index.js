@@ -6,6 +6,7 @@ define((require) => {
     column,
     inputLabelText,
     observer,
+    panel,
     text,
     textHighlight,
     textStrong,
@@ -45,6 +46,10 @@ define((require) => {
       if (!found && key.includes("observer")) {
         found = true;
         component.push(observer(obj[key], theme.className.basic));
+      }
+      if (!found && key.includes("panel")) {
+        found = true;
+        component.push(panel(key.replace("panel", ""), obj[key]));
       }
       if (!found && key.includes("textHighlight")) {
         found = true;

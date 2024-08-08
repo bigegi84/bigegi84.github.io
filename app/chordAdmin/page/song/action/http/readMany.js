@@ -10,7 +10,6 @@ define((require) => {
       });
       if (res.data.status == "ok") {
         store.song.data = res.data.result.data;
-        console.log(store);
       }
     } catch (e) {}
   };

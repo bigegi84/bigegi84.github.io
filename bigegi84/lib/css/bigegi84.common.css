@@ -3,6 +3,7 @@ body {
 }
 .bigegi84-card {
   border: 1px solid;
+  border-color: white;
   border-radius: 1em;
   padding: 1em;
 }
@@ -17,6 +18,7 @@ body {
 }
 .bigegi84-text {
   margin: 0;
+  white-space: pre;
 }
 .column-a {
   display: flex;

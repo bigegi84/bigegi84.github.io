@@ -25,9 +25,9 @@ define((require) => {
     route();
     console.log(event);
   };
-  state.observer.subscribe(() => {
-    document.getElementById("root").innerHTML = "";
-    route();
-  });
+  // state.observer.subscribe(() => {
+  //   document.getElementById("root").innerHTML = "";
+  //   route();
+  // });
   route();
 });

@@ -1,6 +1,6 @@
 define((require) => {
   var { state } = require("../../../bigegi84/index");
-  var private = {
+  var _private = {
     isLogin: false,
     song: {
       data: [],
@@ -14,10 +14,10 @@ define((require) => {
   };
   return {
     get isLogin() {
-      return private.isLogin;
+      return _private.isLogin;
     },
     set isLogin(v) {
-      private.isLogin = v;
+      _private.isLogin = v;
       state.observer.notify();
     },
     loginForm: {
@@ -26,26 +26,39 @@ define((require) => {
     },
     song: {
       get data() {
-        return private.song.data;
+        return _private.song.data;
       },
       set data(v) {
-        private.song.data = v;
+        _private.song.data = v;
         state.observer.notify();
       },
       form: {
-        title: "",
         get title() {
-          return private.isLogin;
+          return _private.song.form.title;
         },
         set title(v) {
-          private.isLogin = v;
+          _private.song.form.title = v;
           state.observer.notify();
         },
-        lyric: "",
+        get lyric() {
+          return _private.song.form.lyric;
+        },
+        set lyric(v) {
+          _private.song.form.lyric = v;
+          state.observer.notify();
+        },
         artist_name: "",
       },
-      search: "",
+      get search() {
+        return _private.song.search;
+      },
+      set search(v) {
+        _private.song.search = v;
+        state.observer.notify();
+      },
     },
-    token: localStorage.getItem("chordAdmin-apiToken"),
+    get token() {
+      return localStorage.getItem("chordAdmin-apiToken");
+    },
   };
 });

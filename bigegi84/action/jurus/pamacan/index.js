@@ -3,6 +3,7 @@ define((require) => {
   var {
     button,
     buttonCircle,
+    card,
     column,
     inputLabelText,
     observer,
@@ -13,8 +14,9 @@ define((require) => {
   } = require("../../../lib/view/index");
   var main = (obj) => {
     var component = [];
+    // console.log(obj);
     for (var key in obj) {
-      console.log(key);
+      // console.log(key);
       var found = false;
       if (!found && key.includes("buttonCircle")) {
         found = true;
@@ -28,13 +30,17 @@ define((require) => {
           button(key.replace("button", ""), obj[key], theme.className.button)
         );
       }
+      if (!found && key.includes("card")) {
+        found = true;
+        component.push(card([main(obj[key])], theme.className.column));
+      }
       if (!found && key.includes("columnList")) {
         found = true;
         component.push(column(obj[key], theme.className.column));
       }
       if (!found && key.includes("column")) {
         found = true;
-        component.push(column(main(obj[key]), theme.className.column));
+        component.push(column([main(obj[key])], theme.className.column));
       }
       if (!found && key.includes("inputLabelText")) {
         found = true;
@@ -53,7 +59,7 @@ define((require) => {
       }
       if (!found && key.includes("panel")) {
         found = true;
-        component.push(panel(key.replace("panel", ""), obj[key]));
+        component.push(panel(key.replace("panel", ""), main(obj[key])));
       }
       if (!found && key.includes("textHighlight")) {
         found = true;

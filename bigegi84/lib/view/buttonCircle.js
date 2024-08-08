@@ -13,7 +13,7 @@ define((require) => {
         row([
           label ? textStrong(label, lCls) : null,
           div([
-            button(isShow.value ? "^" : "v", () => {
+            button(isShow.value ? "<" : ">", () => {
               isShow.value = !isShow.value;
             }),
           ]),

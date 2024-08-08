@@ -19,11 +19,12 @@ define((require) => {
         return () => {
           const component = document.createElement("div");
           _observer.subscribe(() => {
-            console.log("view", view());
             component.innerHTML = "";
+            // view.forEach((it) => component.appendChild(it()));
             component.appendChild(view()());
           });
           component.appendChild(view()());
+          // view().forEach((it) => component.appendChild(it()));
           return component;
         };
       },

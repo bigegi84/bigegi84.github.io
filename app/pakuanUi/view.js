@@ -1,61 +1,69 @@
 define((require) => {
   var bigegi84 = require("../../bigegi84/index");
   var jurus = bigegi84.action.jurus;
-  return jurus.pamacan({
-    textHighlight: "bigegi84 - Pakuan UI",
-    panelAlert: {
-      buttonSuccess: () => {
-        alertify.success("Success.");
-      },
-      buttonError: () => {
-        alertify.error("Error.");
-      },
-    },
-    panelCard: {
-      card: {
-        text: "This is card.",
-      },
-    },
-    panelColumn: {
-      column: {
-        cardA: {
-          text: "This is column 1.",
+  document.title = "bigegi84 - Pakuan UI";
+  return () =>
+    jurus.pamacan({
+      textHighlight: "bigegi84 - Pakuan UI",
+      panelAlert: {
+        buttonError: () => {
+          alertify.error("Error.");
         },
-        cardB: {
-          text: "This is item 2.",
+        buttonNormal: () => {
+          alertify.message("Normal.");
         },
-        cardC: {
-          text: "This is item 3.",
+        buttonSuccess: () => {
+          alertify.success("Success.");
+        },
+        buttonWarning: () => {
+          alertify.warning("Warning.");
         },
       },
-    },
-    panelRow: {
-      row: {
-        cardA: {
-          text: "This is row 1.",
-        },
-        cardB: {
-          text: "This is row 2.",
-        },
-        cardC: {
-          text: "This is row 3.",
+      panelCard: {
+        card: {
+          text: "This is card.",
         },
       },
-    },
-    panelText: {
-      card: {
-        text: 'This is "text".',
+      panelColumn: {
+        column: {
+          cardA: {
+            text: "This is column 1.",
+          },
+          cardB: {
+            text: "This is column 2.",
+          },
+          cardC: {
+            text: "This is column 3.",
+          },
+        },
       },
-    },
-    "panelText Highlight": {
-      card: {
-        textHighlight: 'This is "textHighlight".',
+      panelRow: {
+        row: {
+          cardA: {
+            text: "This is row 1.",
+          },
+          cardB: {
+            text: "This is row 2.",
+          },
+          cardC: {
+            text: "This is row 3.",
+          },
+        },
       },
-    },
-    "panelText Strong": {
-      card: {
-        text: 'This is "textStrong".',
+      panelText: {
+        card: {
+          text: 'This is "text".',
+        },
       },
-    },
-  });
+      "panelText Highlight": {
+        card: {
+          textHighlight: 'This is "textHighlight".',
+        },
+      },
+      "panelText Strong": {
+        card: {
+          text: 'This is "textStrong".',
+        },
+      },
+    });
 });

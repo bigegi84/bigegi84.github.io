@@ -1,9 +1,16 @@
-<body class="bigegi84-body">
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" type="image/ico" href="asset/icon/ico.png" />
+  </head>
+  <body class="bigegi84-body">
     <div id="root" class="bigegi84-column"></div>
-    <!-- alertify -->
-    <div>
-        <script src="lib/axios.js"></script>
-        <script src="lib/alertifyjs/alertify.js"></script>
+    <div id="vendor">
+      <script src="lib/axios.js"></script>
+      <script src="lib/alertifyjs/alertify.js"></script>
     </div>
-    <script data-main="main" src="lib/require.js"></script>
-</body>
+    <div id="app">
+      <script data-main="main" src="lib/require.js"></script>
+    </div>
+  </body>
+</html>

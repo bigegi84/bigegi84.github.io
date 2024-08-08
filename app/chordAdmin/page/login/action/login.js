@@ -9,9 +9,9 @@ define((require) => {
     });
     if (res.data.status == "ok") {
       localStorage.setItem("chordAdmin-apiToken", res.data.result);
-      store.token = res.data.result;
-      store.isLogin = true;
       alertify.success("Login berhasil.");
+      window.location.hash = "/chordAdmin-";
+      window.location.hash = "/chordAdmin";
     } else {
       alertify.error("Login gagal.");
     }

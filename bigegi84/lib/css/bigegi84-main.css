@@ -2,6 +2,11 @@
   background-color: black;
   padding: 2em;
 }
+.bigegi84-button {
+  color: white !important;
+  width: fit-content;
+  background-color: #1b4b49;
+}
 .bigegi84-card {
   border: 1px solid;
   border-color: white;

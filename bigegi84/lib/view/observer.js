@@ -5,9 +5,9 @@ define((require) => {
       const component = document.createElement("div");
       state.observer.subscribe(() => {
         component.innerHTML = "";
-        component.appendChild(view()());
+        view().forEach((it) => component.appendChild(it()));
       });
-      component.appendChild(view()());
+      view().forEach((it) => component.appendChild(it()));
       return component;
     };
   };

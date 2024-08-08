@@ -92,7 +92,7 @@ define((require) => {
       }
       if (!found && key.includes("view")) {
         found = true;
-        component.push(obj[key]);
+        component.push(column(obj[key]));
       }
     }
     return component;

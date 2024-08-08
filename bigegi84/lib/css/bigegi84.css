@@ -1,15 +1,7 @@
 @import url(bigegi84-main.css);
+@import url(vendor/bigegi84-alertify.css);
 @import url(bigegi84.theme.black.gold.css);
-.alertify-notifier .ajs-message.ajs-success {
-  background: black;
-  border-color: teal;
-  color: turquoise;
-}
-.alertify-notifier .ajs-message.ajs-error {
-  background: black;
-  border-color: pink;
-  color: pink;
-}
+
 /* app */
 /* @import url(../../../app/); */
 /* @import url(../../../../app/bass/bass.css);

@@ -1,0 +1,24 @@
+.alertify-notifier .ajs-message.ajs-error {
+  background: black;
+  border: 3px solid pink;
+  border-radius: 0.5em;
+  color: pink;
+}
+.alertify-notifier .ajs-message {
+  background: black;
+  border: 3px solid white;
+  border-radius: 0.5em;
+  color: white;
+}
+.alertify-notifier .ajs-message.ajs-success {
+  background: black;
+  border: 3px solid #1b4b49;
+  border-radius: 0.5em;
+  color: turquoise;
+}
+.alertify-notifier .ajs-message.ajs-warning {
+  background: black;
+  border: 3px solid orangered;
+  border-radius: 0.5em;
+  color: orangered;
+}

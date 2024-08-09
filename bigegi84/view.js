@@ -10,9 +10,9 @@ define((require) => {
       panelWelcome: {
         card: {
           text1: ".ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ",
-          text2: "(Assalaamu'alaikum wa rahmatullahi wa barakaatuh.)",
+          text2: "(Assalaamu'alaikum wa rahmatullahi wa barakaatuh.)\n\r",
           text3: "ᮞᮙ᮪ᮕᮥᮛᮞᮥᮔ᮪!",
-          text4: "(Sampurasun!)",
+          text4: "(Sampurasun!)\n\r",
           text5:
             "What's up? This is my personal website. If you want to offer a business or job, please contact me immediately. I will be glad to help you. I created this website for portfolio, research and learning purposes. Hope you'll enjoy it. If you have any suggestions and advice please contact me, I would like to hear it.",
         },

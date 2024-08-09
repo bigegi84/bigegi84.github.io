@@ -13,7 +13,7 @@ define((require) => {
     text,
     textHighlight,
     textStrong,
-  } = require("../../../lib/view/index");
+  } = require("../../../lib/pakuan/index");
   var main = (obj) => {
     var component = [];
     // console.log(obj);

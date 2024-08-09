@@ -1,10 +1,9 @@
 define((require) => {
-  var bigegi84 = require("../../../../bigegi84/index");
-  var jurus = bigegi84.action.jurus;
+  var { pakuan } = require("../../../../../lib/index");
   var store = require("../../store/index");
   var action = require("./action/index");
   return () =>
-    jurus.pamacan({
+    pakuan({
       inputLabelTextUsername: [
         store.loginForm.username,
         (e) => (store.loginForm.username = e.target.value),

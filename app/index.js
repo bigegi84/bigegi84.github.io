@@ -1,8 +1,8 @@
 define((require) => {
-  var chordAdmin = require("./chordAdmin/index");
+  var c = require("./c/index");
   var pakuanUi = require("./pakuanUi/index");
   return {
-    chordAdmin,
+    c,
     pakuanUi,
   };
 });

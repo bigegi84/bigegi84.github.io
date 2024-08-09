@@ -1,5 +1,5 @@
 define((require) => {
-  var { state } = require("../../../bigegi84/index");
+  var { state } = require("../../../../bigegi84/index");
   var _private = {
     isLogin: false,
     song: {

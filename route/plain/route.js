@@ -8,7 +8,7 @@ define((require) => {
         // dom(document.getElementById("root"), app.chordAdmin.main);
         break;
       case "#/chordAdmin":
-        dom(document.getElementById("root"), app.chordAdmin.main);
+        dom(document.getElementById("root"), app.c.chordAdmin.main);
         break;
       case "#/pakuanUi":
         dom(document.getElementById("root"), app.pakuanUi.view);

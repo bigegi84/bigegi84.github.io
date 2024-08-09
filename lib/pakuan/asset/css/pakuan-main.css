@@ -19,10 +19,19 @@
   padding: 0px 1.5em;
   width: fit-content;
 }
+.pakuan-card {
+  border: 1px solid;
+  border-color: white;
+  border-radius: 1em;
+  flex: 1;
+  padding: 1em;
+}
 .pakuan-highlight {
   color: #4dbdb8;
-  font-family: "pakuan-regular";
+  font-family: "pakuan-regular", "Noto Sans Sundanese", "AB Gunung Jati",
+    "Sundanese Unicode 2013";
   font-weight: normal;
+  margin: 0;
 }
 .pakuan-inputText {
   background-color: black;
@@ -35,7 +44,19 @@
   line-height: 3.75em;
   min-width: 3.75em;
   padding: 0px 0.5em;
-  width: fit-content;
+}
+.pakuan-inputTextarea {
+  background-color: black;
+  border: 3px solid #1b4b49;
+  border-radius: 4px;
+  color: white;
+  font-family: "pakuan-regular";
+  font-weight: normal;
+  height: 3.75em;
+  line-height: 3.75em;
+  min-height: 6em;
+  min-width: 3.75em;
+  padding: 0px 0.5em;
 }
 .pakuan-label {
   color: white;
@@ -45,7 +66,9 @@
 }
 .pakuan-text {
   color: white;
-  font-family: "pakuan-regular";
+  flex: 1;
+  font-family: "pakuan-regular", "Noto Sans Sundanese", "AB Gunung Jati",
+    "Sundanese Unicode 2013";
   font-size: 0.9em;
   font-weight: normal;
   line-height: 1.4em;

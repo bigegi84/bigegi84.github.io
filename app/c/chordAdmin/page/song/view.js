@@ -1,10 +1,12 @@
 define((require) => {
+  var route = require("../../../../../route/app");
   var { pakuan } = require("../../../../../lib/index");
   var store = require("../../store/index");
   var action = require("./action/index");
   // action.http.readMany();
   return () =>
     pakuan({
+      ...route,
       buttonLogout: () => {
         action.logout();
       },

@@ -4,14 +4,21 @@ define((require) => {
   var action = require("./action/index");
   return () =>
     pakuan({
-      inputLabelTextUsername: [
-        store.loginForm.username,
-        (e) => (store.loginForm.username = e.target.value),
-      ],
-      inputLabelTextPassword: [
-        store.loginForm.password,
-        (e) => (store.loginForm.password = e.target.value),
-      ],
-      buttonLogin: () => action.login(),
+      row: {
+        card: {
+          inputLabelTextUsername: [
+            store.loginForm.username,
+            (e) => (store.loginForm.username = e.target.value),
+          ],
+          inputLabelTextPassword: [
+            store.loginForm.password,
+            (e) => (store.loginForm.password = e.target.value),
+          ],
+          buttonLogin: () => action.login(),
+        },
+        text: "",
+        textA: "",
+        textB: "",
+      },
     });
 });

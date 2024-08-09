@@ -1,9 +1,8 @@
 define((require) => {
-  var bigegi84 = require("../../bigegi84/index");
-  var jurus = bigegi84.action.jurus;
+  var { pakuan } = require("../../lib/index");
   document.title = "bigegi84 - Pakuan UI";
   return () =>
-    jurus.pamacan({
+    pakuan({
       textHighlight: "bigegi84 - Pakuan UI",
       panelAlert: {
         buttonError: () => {

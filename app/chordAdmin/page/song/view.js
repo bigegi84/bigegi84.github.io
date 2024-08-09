@@ -54,17 +54,14 @@ define((require) => {
           },
         },
         observer: () =>
-          jurus.pamacan({
-            columnList: store.song.data.map(
-              (it) =>
-                jurus.pamacan({
-                  card: {
-                    textStrong: it.title,
-                    text: it.lyric,
-                  },
-                })[0]
-            ),
-          }),
+          store.song.data.map((it) =>
+            jurus.pamacan({
+              card: {
+                textStrong: it.title,
+                text: it.lyric,
+              },
+            })
+          ),
       },
     });
 });

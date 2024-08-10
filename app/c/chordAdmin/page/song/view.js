@@ -5,7 +5,7 @@ define((require) => {
   var action = require("./action/index");
   // action.http.readMany();
   return () =>
-    pakuan({
+    pakuan.main({
       ...route,
       buttonLogout: () => {
         action.logout();

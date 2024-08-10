@@ -3,7 +3,7 @@ define((require) => {
   var { pakuan } = require("../lib/index");
   document.title = "bigegi84";
   return () =>
-    pakuan({
+    pakuan.main({
       textHighlight: "Gilang Pratama Wiguna, S.Kom.",
       textHighlightB: "ᮌᮤᮜᮀ ᮕᮛᮒᮙ ᮝᮤᮌᮥᮔ",
       ...app,

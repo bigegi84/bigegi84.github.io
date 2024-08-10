@@ -12,7 +12,7 @@ define((require) => {
         dom(document.getElementById("root"), app.c.chordAdmin.main);
         break;
       case "#/pakuanUi":
-        dom(document.getElementById("root"), app.pakuanUi.view);
+        dom(document.getElementById("root"), app.p.pakuanUi.view);
         break;
       default:
         dom(document.getElementById("root"), bigegi84.view);

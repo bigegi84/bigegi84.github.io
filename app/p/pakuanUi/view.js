@@ -1,9 +1,9 @@
 define((require) => {
-  var { pakuan } = require("../../lib/index");
-  var app = require("../../route/app");
+  var { pakuan } = require("../../../lib/index");
+  var app = require("../../../route/app");
   document.title = "bigegi84 - Pakuan UI";
   return () =>
-    pakuan({
+    pakuan.main({
       textHighlight: "bigegi84 - Pakuan UI",
       ...app,
       panelAlert: {

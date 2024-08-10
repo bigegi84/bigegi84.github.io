@@ -4,7 +4,7 @@ define((require) => {
   var store = require("../../store/index");
   var action = require("./action/index");
   return () =>
-    pakuan({
+    pakuan.main({
       ...app,
       card: {
         inputLabelTextUsername: [

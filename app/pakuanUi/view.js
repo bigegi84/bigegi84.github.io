@@ -53,17 +53,21 @@ define((require) => {
       },
       panelText: {
         card: {
-          text: 'This is "text".',
-        },
-      },
-      "panelText Highlight": {
-        card: {
-          textHighlight: 'This is "textHighlight".',
-        },
-      },
-      "panelText Strong": {
-        card: {
-          text: 'This is "textStrong".',
+          panelText: {
+            card: {
+              text: 'This is "text".',
+            },
+          },
+          "panelText Highlight": {
+            card: {
+              textHighlight: 'This is "textHighlight".',
+            },
+          },
+          "panelText Strong": {
+            card: {
+              text: 'This is "textStrong".',
+            },
+          },
         },
       },
     });

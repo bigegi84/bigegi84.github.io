@@ -7,28 +7,30 @@ define((require) => {
   return () =>
     pakuan.main({
       ...route,
-      buttonLogout: () => {
-        action.logout();
+      panelMenu: {
+        card: {
+          buttonLogout: () => action.logout(),
+        },
       },
       panelSong: {
         panelAdd: {
           card: {
             observerA: () =>
-              pakuan({
+              pakuan.main({
                 "inputLabelTextArtist Name": [
                   store.song.form.artist_name,
                   (e) => (store.song.form.artist_name = e.target.value),
                 ],
               }),
             observerT: () =>
-              pakuan({
+              pakuan.main({
                 inputLabelTextTitle: [
                   store.song.form.title,
                   (e) => (store.song.form.title = e.target.value),
                 ],
               }),
             observerL: () =>
-              pakuan({
+              pakuan.main({
                 inputLabelTextareaLyric: [
                   store.song.form.lyric,
                   (e) => (store.song.form.lyric = e.target.value),
@@ -56,7 +58,7 @@ define((require) => {
         },
         observer: () =>
           store.song.data.map((it) =>
-            pakuan({
+            pakuan.main({
               card: {
                 textStrong: it.title,
                 text: it.lyric,

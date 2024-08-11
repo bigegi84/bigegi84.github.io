@@ -1,6 +1,6 @@
 define((require) => {
-  var pakuanUi = require("./pakuanUi/index");
+  var main = require("./main");
   return {
-    pakuanUi,
+    main,
   };
 });

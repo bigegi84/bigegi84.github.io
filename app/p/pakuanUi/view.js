@@ -1,7 +1,6 @@
 define((require) => {
   var { pakuan } = require("../../../lib/index");
   var app = require("../../../route/app");
-  document.title = "bigegi84 - Pakuan UI";
   return () =>
     pakuan.main({
       textHighlight: "bigegi84 - Pakuan UI",
@@ -20,34 +19,38 @@ define((require) => {
           alertify.warning("Warning.");
         },
       },
-      panelCard: {
+      panelLayout: {
         card: {
-          text: "This is card.",
-        },
-      },
-      panelColumn: {
-        column: {
-          cardA: {
-            text: "This is column 1.",
+          panelCard: {
+            card: {
+              text: "This is card.",
+            },
           },
-          cardB: {
-            text: "This is column 2.",
+          panelColumn: {
+            column: {
+              cardA: {
+                text: "This is column 1.",
+              },
+              cardB: {
+                text: "This is column 2.",
+              },
+              cardC: {
+                text: "This is column 3.",
+              },
+            },
           },
-          cardC: {
-            text: "This is column 3.",
-          },
-        },
-      },
-      panelRow: {
-        row: {
-          cardA: {
-            text: "This is row 1.",
-          },
-          cardB: {
-            text: "This is row 2.",
-          },
-          cardC: {
-            text: "This is row 3.",
+          panelRow: {
+            row: {
+              cardA: {
+                text: "This is row 1.",
+              },
+              cardB: {
+                text: "This is row 2.",
+              },
+              cardC: {
+                text: "This is row 3.",
+              },
+            },
           },
         },
       },

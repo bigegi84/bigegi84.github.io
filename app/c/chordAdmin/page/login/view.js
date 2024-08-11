@@ -11,7 +11,7 @@ define((require) => {
           store.loginForm.username,
           (e) => (store.loginForm.username = e.target.value),
         ],
-        inputLabelTextPassword: [
+        inputLabelPasswordPassword: [
           store.loginForm.password,
           (e) => (store.loginForm.password = e.target.value),
         ],

@@ -6,18 +6,13 @@ define((require) => {
       textHighlight: "bigegi84 - Penny",
       ...app,
       panelAccount: {
-        buttonError: () => {
-          alertify.error("Error.");
-        },
-        buttonNormal: () => {
-          alertify.message("Normal.");
-        },
-        buttonSuccess: () => {
-          alertify.success("Success.");
-        },
-        buttonWarning: () => {
-          alertify.warning("Warning.");
-        },
+        buttonError: () => alertify.error("Error."),
+      },
+      panelGroup: {
+        buttonError: () => alertify.error("Error."),
+      },
+      panelFriend: {
+        buttonError: () => alertify.error("Error."),
       },
     });
 });

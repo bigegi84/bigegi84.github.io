@@ -1,11 +1,12 @@
 define((require) => {
   var { pakuan } = require("../../../lib/index");
   var app = require("../../../route/app");
+  var store = require("./store");
   return () =>
     pakuan.main({
       textHighlight: "bigegi84 - Pakuan UI",
       ...app,
-      panelAlert: {
+      panelHideAlert: {
         buttonError: () => {
           alertify.error("Error.");
         },
@@ -19,14 +20,14 @@ define((require) => {
           alertify.warning("Warning.");
         },
       },
-      panelLayout: {
+      panelHideLayout: {
         card: {
-          panelCard: {
+          panelHideCard: {
             card: {
               text: "This is card.",
             },
           },
-          panelColumn: {
+          panelHideColumn: {
             column: {
               cardA: {
                 text: "This is column 1.",
@@ -39,7 +40,7 @@ define((require) => {
               },
             },
           },
-          panelRow: {
+          panelHideRow: {
             row: {
               cardA: {
                 text: "This is row 1.",
@@ -54,19 +55,27 @@ define((require) => {
           },
         },
       },
-      panelText: {
+      panelHideStore: {
         card: {
-          panelText: {
+          observer: () => pakuan.main({ text: store.count }),
+          buttonCount: () => {
+            store.count = store.count + 1;
+          },
+        },
+      },
+      panelHideText: {
+        card: {
+          panelHideText: {
             card: {
               text: 'This is "text".',
             },
           },
-          "panelText Highlight": {
+          "panelHideText Highlight": {
             card: {
               textHighlight: 'This is "textHighlight".',
             },
           },
-          "panelText Strong": {
+          "panelHideText Strong": {
             card: {
               text: 'This is "textStrong".',
             },

@@ -1,6 +1,7 @@
 define((require) => {
   return {
     login: { username: "", password: "" },
-    token: null,
+    account: [{ name: "BNI 1248908", type: "Debit", balance: 0, detail: "" }],
+    token: "login",
   };
 });

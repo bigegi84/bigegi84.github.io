@@ -2,6 +2,7 @@ define((require) => {
   return () => {
     localStorage.removeItem("chordAdmin-apiToken");
     chordAdminStore.token = null;
-    chordAdminStore.isLogin = true;
+    window.location.hash = "/chordAdmin-";
+    window.location.hash = "/chordAdmin";
   };
 });

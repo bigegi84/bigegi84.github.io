@@ -2,7 +2,7 @@ define((require) => {
   var { pakuan } = require("../../../../../lib/index");
   var app = require("../../../../../route/app");
   var store = require("../../store/index");
-  //   var action = require("./action/index");
+  var action = require("./action/index");
   return () =>
     pakuan.main({
       ...app,
@@ -16,7 +16,7 @@ define((require) => {
           (e) => (store.login.password = e.target.value),
         ],
         buttonLogin: () => {
-        //   action.login();
+          action.login();
         },
       },
     });

@@ -70,7 +70,7 @@
   font-size: 4rem;
   font-weight: normal;
   height: 10rem;
-  line-height: 0rem;
+  /* line-height: 0rem; */
   min-height: 10rem;
   padding: 0px 0.5em;
 }

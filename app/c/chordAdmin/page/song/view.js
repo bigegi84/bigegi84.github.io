@@ -33,7 +33,10 @@ define((require) => {
               pakuan.main({
                 inputLabelTextareaLyric: [
                   store.song.form.lyric,
-                  (e) => (store.song.form.lyric = e.target.value),
+                  (e) => {
+                    store.song.form.lyric = e.target.value;
+                    console.log(store.song.form.lyric);
+                  },
                 ],
               }),
             buttonSave: async () => {

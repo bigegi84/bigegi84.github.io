@@ -1,4 +1,5 @@
 define((require) => {
+  var action = require("./action/index");
   var view = require("./view");
-  return { view };
+  return { action, view };
 });

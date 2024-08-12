@@ -13,7 +13,7 @@ define((require) => {
         },
         {
           headers: {
-            "jwt-token": store.token,
+            "jwt-token": state.apiToken,
           },
         }
       );

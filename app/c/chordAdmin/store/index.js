@@ -11,7 +11,7 @@ define((require) => {
       data: [],
       form: {
         title: "",
-        lyric: "coba",
+        lyric: "",
         artist_name: "",
       },
       search: "",

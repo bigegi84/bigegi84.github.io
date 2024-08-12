@@ -63,8 +63,11 @@ define((require) => {
           store.song.data.map((it) =>
             pakuan.main({
               card: {
-                textStrong: it.title,
-                text: it.lyric,
+                column: {
+                  textStrong: it.title,
+                  textStrong2: it.artist.name,
+                  text: it.lyric,
+                },
               },
             })
           ),

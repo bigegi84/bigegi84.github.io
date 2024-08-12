@@ -1,6 +1,6 @@
 define(() => {
   return {
-    panelApp: {
+    panelHideApp: {
       card: {
         row: {
           buttonHome: () => (window.location.hash = "/"),

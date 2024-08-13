@@ -2,6 +2,7 @@ define((require) => {
   var Observer = require("../../lib/observer");
   var host = {
     aren: "https://bigegi84.kencang.id/bigegi84-api-lumen/index.php",
+    bigegi84_oa37f: "http://192.168.1.43:8080/bigegi84-api-lumen/index.php",
     localhost: "http://localhost:840/bigegi84-api-lumen/index.php",
   };
   return {
@@ -17,7 +18,7 @@ define((require) => {
       bigegi84: "bigegi84/asset/css/bigegi84.css",
       root: "asset/css/main.css",
     },
-    host: host.localhost,
+    host: host.bigegi84_oa37f,
     observer: Observer(),
   };
 });

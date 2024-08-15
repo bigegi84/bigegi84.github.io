@@ -4,6 +4,6 @@ define((require) => {
     // apiUrl: "http://localhost:8000/api/chord",
     // apiUrl: "http://localhost:841/chord",
     api: bigegi84.state.host + "/penny",
-    apiToken: localStorage.getItem("chordAdmin-apiToken"),
+    apiToken: localStorage.getItem("penny_apiToken"),
   };
 });

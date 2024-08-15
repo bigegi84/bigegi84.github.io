@@ -1,55 +1,55 @@
 define((require) => {
-  var { pakuan } = require("../../../lib/index");
-  var app = require("../../../route/app");
-  var store = require("./store");
+  var { pakuan } = require('../../../lib/index')
+  var app = require('../../../route/app')
+  var store = require('./store')
   return () =>
     pakuan.main({
-      textHighlight: "bigegi84 - Pakuan UI",
+      textHighlight: 'bigegi84 - Pakuan UI',
       ...app,
       panelHideAlert: {
         buttonError: () => {
-          alertify.error("Error.");
+          alertify.error('Error.')
         },
         buttonNormal: () => {
-          alertify.message("Normal.");
+          alertify.message('Normal.')
         },
         buttonSuccess: () => {
-          alertify.success("Success.");
+          alertify.success('Success.')
         },
         buttonWarning: () => {
-          alertify.warning("Warning.");
+          alertify.warning('Warning.')
         },
       },
       panelHideLayout: {
         card: {
           panelHideCard: {
             card: {
-              text: "This is card.",
+              text: 'This is card.',
             },
           },
           panelHideColumn: {
             column: {
               cardA: {
-                text: "This is column 1.",
+                text: 'This is column 1.',
               },
               cardB: {
-                text: "This is column 2.",
+                text: 'This is column 2.',
               },
               cardC: {
-                text: "This is column 3.",
+                text: 'This is column 3.',
               },
             },
           },
           panelHideRow: {
             row: {
               cardA: {
-                text: "This is row 1.",
+                text: 'This is row 1.',
               },
               cardB: {
-                text: "This is row 2.",
+                text: 'This is row 2.',
               },
               cardC: {
-                text: "This is row 3.",
+                text: 'This is row 3.',
               },
             },
           },
@@ -59,7 +59,7 @@ define((require) => {
         card: {
           observer: () => pakuan.main({ text: store.count }),
           buttonCount: () => {
-            store.count = store.count + 1;
+            store.count = store.count + 1
           },
         },
       },
@@ -70,17 +70,17 @@ define((require) => {
               text: 'This is "text".',
             },
           },
-          "panelHideText Highlight": {
+          'panelHideText Highlight': {
             card: {
               textHighlight: 'This is "textHighlight".',
             },
           },
-          "panelHideText Strong": {
+          'panelHideText Strong': {
             card: {
               text: 'This is "textStrong".',
             },
           },
         },
       },
-    });
-});
+    })
+})

@@ -1,6 +1,7 @@
 define((require) => {
   var _apiUrl = {
     arenhost: 'https://bigegi84.my.id/bigegi84-api-lumen/index.php',
+    bigegi84_oa15s: 'http://192.168.1.42:8080/bigegi84-api-lumen/index.php',
     bigegi84_oa37f: 'http://192.168.1.43:8080/bigegi84-api-lumen/index.php',
     localhost: 'http://localhost:840/bigegi84-api-lumen/index.php',
   }
@@ -12,7 +13,8 @@ define((require) => {
         case '192.168.1.43':
           return _apiUrl.bigegi84_oa37f
         case 'localhost':
-          return _apiUrl.arenhost
+          //   return _apiUrl.arenhost
+          return _apiUrl.bigegi84_oa15s
         //   return _apiUrl.bigegi84_oa37f
         //   return _apiUrl.localhost
         default:

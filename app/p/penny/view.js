@@ -1,10 +1,10 @@
 define((require) => {
   var { pakuan } = require("../../../lib/index");
   var { home, login } = require("./page/index");
-  var store = require("./store/index");
+  var state = require("./state/index");
   return () =>
     pakuan.main({
       textHighlight: "bigegi84 - Penny",
-      view: store.token ? home.view() : login.view(),
+      view: state.apiToken ? home.view() : login.view(),
     });
 });

@@ -4,8 +4,8 @@ define((require) => {
   var state = require('./state/index')
   var store = require('./store/index')
   var accountStore = require('../account/store/index')
-  //   var action = require('./action/index')
-  //   action.http.readManyMe()
+  var action = require('./action/index')
+  action.http.readManyMe()
   return {
     panelHideTransaction: {
       panelAdd: {
@@ -40,12 +40,12 @@ define((require) => {
               ],
             }),
           buttonSave: async () => {
-            // var valid = action.validate()
-            // if (valid != 'ok') {
-            //   alertify.error(valid)
-            //   return
-            // }
-            // await action.http.createOneMe()
+            var valid = action.validate()
+            if (valid != 'ok') {
+              alertify.error(valid)
+              return
+            }
+            await action.http.createOneMe()
             // action.emptyForm()
           },
         },
@@ -55,9 +55,18 @@ define((require) => {
           pakuan.main({
             card: {
               column: {
-                textStrong: it.name,
+                textStrong: it.account.name,
                 textStrong2: it.type.name,
-                textStrongC: it.balance,
+                textStrongC: it.amount,
+                buttonDelete: () => {
+                  alertify.confirm(
+                    'Are you sure?',
+                    async function () {
+                      await action.http.deleteOneMe(it.id)
+                    },
+                    function () {}
+                  )
+                },
               },
             },
           })

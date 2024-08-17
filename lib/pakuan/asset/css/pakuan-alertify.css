@@ -1,9 +1,17 @@
+.ajs-header {
+  font-family: 'pakuan-regular';
+  font-size: 4rem;
+}
+.ajs-content {
+  font-family: 'pakuan-regular';
+  font-size: 4rem;
+}
 .alertify-notifier .ajs-message.ajs-error {
   background: black;
   border: 3px solid pink;
   border-radius: 0.5em;
   color: pink;
-  font-family: "pakuan-regular";
+  font-family: 'pakuan-regular';
   font-size: 4rem;
 }
 .alertify-notifier .ajs-message {
@@ -11,7 +19,7 @@
   border: 3px solid white;
   border-radius: 0.5em;
   color: white;
-  font-family: "pakuan-regular";
+  font-family: 'pakuan-regular';
   font-size: 4rem;
 }
 .alertify-notifier .ajs-message.ajs-success {
@@ -19,7 +27,7 @@
   border: 3px solid #1b4b49;
   border-radius: 0.5em;
   color: turquoise;
-  font-family: "pakuan-regular";
+  font-family: 'pakuan-regular';
   font-size: 4rem;
 }
 .alertify-notifier .ajs-message.ajs-warning {
@@ -27,6 +35,6 @@
   border: 3px solid orangered;
   border-radius: 0.5em;
   color: orangered;
-  font-family: "pakuan-regular";
+  font-family: 'pakuan-regular';
   font-size: 4rem;
 }

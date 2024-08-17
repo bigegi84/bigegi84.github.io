@@ -55,6 +55,9 @@ define((require) => {
           pakuan.main({
             card: {
               column: {
+                textStrongDate: moment(it.created_at).format(
+                  'DD MMMM yyyy HH:mm:ss'
+                ),
                 textStrong: it.account.name,
                 textStrong2: it.type.name,
                 textStrongC: it.amount,

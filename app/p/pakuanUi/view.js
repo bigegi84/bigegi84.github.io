@@ -20,6 +20,21 @@ define((require) => {
           alertify.warning('Warning.')
         },
       },
+      panelHideInput: {
+        card: {
+          inputLabelSelectSelect: {
+            state: [
+              'value',
+              (e) => {
+                console.log(e)
+                console.log(e.target.value)
+                alert('masuk')
+              },
+            ],
+            option: [['key1'], ['key2', 'value2']],
+          },
+        },
+      },
       panelHideLayout: {
         card: {
           panelHideCard: {

@@ -16,13 +16,11 @@ define((require) => {
         },
       },
       ...panel.account.view,
+      ...panel.transaction.view,
       panelHideGroup: {
         buttonError: () => alertify.error('Error.'),
       },
       panelHideFriend: {
-        buttonError: () => alertify.error('Error.'),
-      },
-      panelHideTransaction: {
         buttonError: () => alertify.error('Error.'),
       },
     })

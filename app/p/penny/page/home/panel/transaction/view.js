@@ -46,7 +46,6 @@ define((require) => {
               return
             }
             await action.http.createOneMe()
-            // action.emptyForm()
           },
         },
       },
@@ -55,12 +54,15 @@ define((require) => {
           pakuan.main({
             card: {
               column: {
-                textStrongDate: moment(it.created_at).format(
+                textStampDate: moment(it.created_at).format(
                   'DD MMMM yyyy HH:mm:ss'
                 ),
                 textStrong: it.account.name,
                 textStrong2: it.type.name,
-                textStrongC: it.amount,
+                textStrongC: it.amount.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'IDR',
+                }),
                 buttonDelete: () => {
                   alertify.confirm(
                     'Are you sure?',

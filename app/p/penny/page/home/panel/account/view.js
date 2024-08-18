@@ -48,9 +48,12 @@ define((require) => {
           pakuan.main({
             card: {
               column: {
-                textStrong: it.name,
+                textStamp: it.name,
                 textStrong2: it.type.name,
-                textStrongC: it.balance,
+                textStrongC: it.balance.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'IDR',
+                }),
               },
             },
           })

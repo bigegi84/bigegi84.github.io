@@ -88,6 +88,20 @@
   flex-wrap: wrap;
   gap: 1.5rem;
 }
+.pakuan-textStamp {
+  background: #1b4b49;
+  border-radius: 1rem;
+  color: white;
+  flex: 1;
+  font-family: 'pakuan-regular', 'Noto Sans Sundanese', 'AB Gunung Jati',
+    'Sundanese Unicode 2013';
+  font-size: 3rem;
+  font-weight: normal;
+  line-height: 1.4em;
+  margin: 0;
+  padding: 2rem;
+  white-space: pre-wrap;
+}
 .pakuan-text {
   color: white;
   flex: 1;

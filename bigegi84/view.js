@@ -5,7 +5,7 @@ define((require) => {
   return () =>
     pakuan.main({
       textHighlight: "Gilang Pratama Wiguna, S.Kom.",
-      textHighlightB: "ᮌᮤᮜᮀ ᮕᮛᮒᮙ ᮝᮤᮌᮥᮔ",
+      textHighlightB: "ᮌᮤᮜᮀ ᮕᮢᮒᮙ ᮝᮤᮌᮥᮔ",
       ...app,
       panelWelcome: {
         card: {

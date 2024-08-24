@@ -1,5 +1,5 @@
 define((require) => {
-  var account = require('./account/index')
+  var asset = require('./asset/index')
   var transaction = require('./transaction/index')
-  return { account, transaction }
+  return { asset, transaction }
 })

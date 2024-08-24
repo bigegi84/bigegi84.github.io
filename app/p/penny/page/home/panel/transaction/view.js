@@ -3,7 +3,7 @@ define((require) => {
 
   var state = require('./state/index')
   var store = require('./store/index')
-  var accountStore = require('../account/store/index')
+  var accountStore = require('../asset/store/index')
   var action = require('./action/index')
   action.http.readManyMe()
   return {
@@ -57,7 +57,7 @@ define((require) => {
                 textStampDate: moment(it.created_at).format(
                   'DD MMMM yyyy HH:mm:ss'
                 ),
-                textStrong: it.account.name,
+                textStrong: it.asset ? it.asset.name : '',
                 textStrong2: it.type.name,
                 textStrongC: it.amount.toLocaleString('en-US', {
                   style: 'currency',

@@ -5,7 +5,7 @@ define((require) => {
   return async () => {
     try {
       const res = await axios.post(
-        state.apiUrl + '/account/createOneMe',
+        state.apiUrl + '/asset/createOneMe',
         {
           name: store.form.name,
           type_name: store.form.type_name,

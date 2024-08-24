@@ -3,7 +3,7 @@ define((require) => {
   var store = require('../../store/index')
   return async () => {
     try {
-      const res = await axios.post(state.apiUrl + '/account/readManyMe', null, {
+      const res = await axios.post(state.apiUrl + '/asset/readManyMe', null, {
         headers: {
           'jwt-token': state.apiToken,
         },

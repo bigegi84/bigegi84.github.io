@@ -15,7 +15,7 @@ define((require) => {
           alertify.success('Logout Success.')
         },
       },
-      ...panel.account.view,
+      ...panel.asset.view,
       ...panel.transaction.view,
       panelHideGroup: {
         buttonError: () => alertify.error('Error.'),

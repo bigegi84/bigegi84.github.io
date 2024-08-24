@@ -6,7 +6,7 @@ define((require) => {
   var action = require('./action/index')
   action.http.readManyMe()
   return {
-    panelHideAccount: {
+    panelHideAsset: {
       panelAdd: {
         card: {
           observerA: () =>

@@ -76,10 +76,9 @@ define((require) => {
               column: {
                 textStamp: it.name,
                 textStrong2: it.type.name,
-                textStrongC: it.balance.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'IDR',
-                }),
+                textStrongC: `${new Intl.NumberFormat('en-US').format(
+                  it.balance
+                )} IDR`,
               },
             },
           })

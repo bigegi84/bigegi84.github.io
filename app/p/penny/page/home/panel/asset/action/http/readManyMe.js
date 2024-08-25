@@ -3,15 +3,21 @@ define((require) => {
   var store = require('../../store/index')
   return async () => {
     try {
-      const res = await axios.post(state.apiUrl + '/asset/readManyMe', null, {
-        headers: {
-          'jwt-token': state.apiToken,
-        },
-        params: {
+      const res = await axios.post(
+        state.apiUrl + '/asset/readManyMe',
+        {
           per_page: 1000,
-          title: store.search,
+          column: {
+            type_id: store.filter.column.type_id,
+          },
+          search: store.filter.search,
         },
-      })
+        {
+          headers: {
+            'jwt-token': state.apiToken,
+          },
+        }
+      )
       if (res.data.status == 'ok') {
         store.data = res.data.result.data
       }

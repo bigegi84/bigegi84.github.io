@@ -5,6 +5,7 @@ define((require) => {
   var store = require('./store/index')
   var action = require('./action/index')
   action.http.readManyMe()
+  action.http.assetType.readAllMe()
   return {
     panelHideAsset: {
       panelAdd: {
@@ -46,17 +47,25 @@ define((require) => {
       panelFilter: {
         card: {
           column: {
-            'inputLabelSelectAsset Type': {
-              state: [
-                null,
-                (e) => {
-                  console.log(store.form.account_id)
-                  store.form.account_id = e.target.value
+            observerA: () =>
+              pakuan.main({
+                'inputLabelSelectAsset Type': {
+                  state: [
+                    store.filter.column.type_id,
+                    (e) => {
+                      store.filter.column.type_id = e.target.value
+                    },
+                  ],
+                  option: store.assetType.data.map((it) => [it.name, it.id]),
                 },
-              ],
-              option: [['coba', 'coba']],
+              }),
+            row: {
+              buttonSave: () => action.http.readManyMe(),
+              buttonClear: () => {
+                store.filter.column.type_id = ''
+                action.http.readManyMe()
+              },
             },
-            buttonSave: () => {},
           },
         },
       },

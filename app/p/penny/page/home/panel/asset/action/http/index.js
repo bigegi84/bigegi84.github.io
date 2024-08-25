@@ -2,5 +2,6 @@ define((require) => {
   var assetType = require('./assetType/index')
   var createOneMe = require('./createOneMe')
   var readManyMe = require('./readManyMe')
-  return { assetType, createOneMe, readManyMe }
+  var updateOneMe = require('./updateOneMe')
+  return { assetType, createOneMe, readManyMe, updateOneMe }
 })

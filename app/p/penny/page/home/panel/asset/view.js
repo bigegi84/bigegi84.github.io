@@ -90,71 +90,62 @@ define((require) => {
         },
       },
       observerRow: () =>
-        store.data.map((it) => {
-          var isEdit = pakuan.view.useState(false)
-          return isEdit.observerView(() =>
-            isEdit.value
-              ? pakuan.main({
-                  card: {
-                    column: {
-                      inputLabelTextName: [it.type.name, () => {}],
-                      textStrong2: it.type.name,
-                      textStrongC: `${new Intl.NumberFormat('en-US').format(
-                        it.balance
-                      )} ${it.unit.name}`,
+        store.data.map((it) =>
+          store.form.id === it.id
+            ? pakuan.main({
+                card: {
+                  column: {
+                    inputLabelTextName: [
+                      store.form.name,
+                      (e) => (store.form.name = e.target.value),
+                    ],
+                    'inputLabelTextType Name': [
+                      store.form.type_name,
+                      (e) => (store.form.type_name = e.target.value),
+                    ],
+                    inputLabelNumberBalance: [
+                      store.form.balance,
+                      (e) => (store.form.balance = e.target.value),
+                    ],
+                    'inputLabelTextUnit Name': [
+                      store.form.unit_name,
+                      (e) => (store.form.unit_name = e.target.value),
+                    ],
+                    row: {
+                      buttonSave: async () => {
+                        var valid = action.validate()
+                        if (valid != 'ok') {
+                          alertify.error(valid)
+                          return
+                        }
+                        await action.http.updateOneMe()
+                      },
                       buttonCancel: () => {
-                        isEdit.value = false
+                        store.form.id = 0
                       },
                     },
                   },
-                })
-              : pakuan.main({
-                  card: {
-                    column: {
-                      textStamp: it.name,
-                      textStrong2: it.type.name,
-                      textStrongC: `${new Intl.NumberFormat('en-US').format(
-                        it.balance
-                      )} ${it.unit.name}`,
-                      buttonEdit: () => {
-                        isEdit.value = true
-                      },
+                },
+              })
+            : pakuan.main({
+                card: {
+                  column: {
+                    textStamp: it.name,
+                    textStrong2: it.type.name,
+                    textStrongC: `${new Intl.NumberFormat('en-US').format(
+                      it.balance
+                    )} ${it.unit.name}`,
+                    buttonEdit: () => {
+                      store.form.id = it.id
+                      store.form.name = it.name
+                      store.form.type_name = it.type.name
+                      store.form.balance = it.balance
+                      store.form.unit_name = it.unit.name
                     },
                   },
-                })
-          )
-          return pakuan.main({
-            card: {
-              view: isEdit.observerView(() =>
-                isEdit.value
-                  ? pakuan.main({
-                      column: {
-                        textLabelInputName: ['', () => {}],
-                        textStrong2: it.type.name,
-                        textStrongC: `${new Intl.NumberFormat('en-US').format(
-                          it.balance
-                        )} ${it.unit.name}`,
-                        buttonEdit: () => {
-                          isEdit.value = true
-                        },
-                      },
-                    })
-                  : pakuan.main({
-                      column: {
-                        textStamp: it.name,
-                        textStrong2: it.type.name,
-                        textStrongC: `${new Intl.NumberFormat('en-US').format(
-                          it.balance
-                        )} ${it.unit.name}`,
-                        buttonEdit: () => {
-                          isEdit.value = true
-                        },
-                      },
-                    })
-              ),
-            },
-          })
-        }),
+                },
+              })
+        ),
     },
   }
 })

@@ -12,6 +12,7 @@ define((require) => {
       search: '',
     },
     form: {
+      id: null,
       name: '',
       type_name: '',
       balance: 0,

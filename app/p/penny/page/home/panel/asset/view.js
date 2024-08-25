@@ -90,19 +90,40 @@ define((require) => {
         },
       },
       observerRow: () =>
-        store.data.map((it) =>
-          pakuan.main({
+        store.data.map((it) => {
+          var isEdit = pakuan.view.useState(false)
+          return pakuan.main({
             card: {
-              column: {
-                textStamp: it.name,
-                textStrong2: it.type.name,
-                textStrongC: `${new Intl.NumberFormat('en-US').format(
-                  it.balance
-                )} ${it.unit.name}`,
-              },
+              view: isEdit.observerView(() =>
+                isEdit.value
+                  ? pakuan.main({
+                      column: {
+                        textLabelInputName: ['', () => {}],
+                        textStrong2: it.type.name,
+                        textStrongC: `${new Intl.NumberFormat('en-US').format(
+                          it.balance
+                        )} ${it.unit.name}`,
+                        buttonEdit: () => {
+                          isEdit.value = true
+                        },
+                      },
+                    })
+                  : pakuan.main({
+                      column: {
+                        textStamp: it.name,
+                        textStrong2: it.type.name,
+                        textStrongC: `${new Intl.NumberFormat('en-US').format(
+                          it.balance
+                        )} ${it.unit.name}`,
+                        buttonEdit: () => {
+                          isEdit.value = true
+                        },
+                      },
+                    })
+              ),
             },
           })
-        ),
+        }),
     },
   }
 })

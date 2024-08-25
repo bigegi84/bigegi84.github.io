@@ -1,6 +1,8 @@
 define((require) => {
-  var chordAdmin = require("./chordAdmin/index");
+  var calculator = require('./calculator/index')
+  var chordAdmin = require('./chordAdmin/index')
   return {
+    calculator,
     chordAdmin,
-  };
-});
+  }
+})

@@ -3,7 +3,7 @@ define((require) => {
 
   var state = require('./state/index')
   var store = require('./store/index')
-  var accountStore = require('../asset/store/index')
+  var assetStore = require('../asset/store/index')
   var action = require('./action/index')
   action.http.readManyMe()
   return {
@@ -12,15 +12,15 @@ define((require) => {
         card: {
           observerA: () =>
             pakuan.main({
-              inputLabelSelectAccount: {
+              inputLabelSelectAsset: {
                 state: [
-                  store.form.account_id,
+                  store.form.asset_id,
                   (e) => {
-                    console.log(store.form.account_id)
-                    store.form.account_id = e.target.value
+                    console.log(store.form.asset_id)
+                    store.form.asset_id = e.target.value
                   },
                 ],
-                option: accountStore.data.map((it) => [it.name, it.id]),
+                option: assetStore.data.map((it) => [it.name, it.id]),
               },
             }),
           observerT: () =>

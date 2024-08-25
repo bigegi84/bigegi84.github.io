@@ -3,7 +3,7 @@ define((require) => {
   return action.useStore({
     data: [],
     form: {
-      account_id: '',
+      asset_id: '',
       type_name: '',
       amount: 0,
     },

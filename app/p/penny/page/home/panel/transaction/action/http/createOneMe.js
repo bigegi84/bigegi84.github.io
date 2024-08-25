@@ -7,7 +7,7 @@ define((require) => {
       const res = await axios.post(
         state.apiUrl + '/transaction/createOneMe',
         {
-          account_id: store.form.account_id,
+          asset_id: store.form.asset_id,
           type_name: store.form.type_name,
           amount: store.form.amount,
         },
@@ -18,7 +18,7 @@ define((require) => {
         }
       )
       if (res.data.status == 'ok') {
-        store.form.account_id = ''
+        store.form.asset_id = ''
         store.form.type_name = ''
         store.form.amount = 0
         readManyMe()

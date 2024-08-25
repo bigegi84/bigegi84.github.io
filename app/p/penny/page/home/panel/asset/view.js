@@ -43,6 +43,23 @@ define((require) => {
           },
         },
       },
+      panelFilter: {
+        card: {
+          column: {
+            'inputLabelSelectAsset Type': {
+              state: [
+                null,
+                (e) => {
+                  console.log(store.form.account_id)
+                  store.form.account_id = e.target.value
+                },
+              ],
+              option: [['coba', 'coba']],
+            },
+            buttonSave: () => {},
+          },
+        },
+      },
       observerRow: () =>
         store.data.map((it) =>
           pakuan.main({

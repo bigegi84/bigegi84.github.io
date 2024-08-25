@@ -10,6 +10,7 @@ define((require) => {
           name: store.form.name,
           type_name: store.form.type_name,
           balance: store.form.balance,
+          unit_name: store.form.unit_name,
         },
         {
           headers: {

@@ -15,6 +15,7 @@ define((require) => {
       name: '',
       type_name: '',
       balance: 0,
+      unit_name: '',
     },
   })
 })

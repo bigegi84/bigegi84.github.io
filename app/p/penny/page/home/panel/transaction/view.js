@@ -59,10 +59,9 @@ define((require) => {
                 ),
                 textStrong: it.asset ? it.asset.name : '',
                 textStrong2: it.type.name,
-                textStrongC: it.amount.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'IDR',
-                }),
+                textStrongC: `${new Intl.NumberFormat('en-US').format(
+                  it.amount
+                )} IDR`,
                 buttonDelete: () => {
                   alertify.confirm(
                     'Are you sure?',

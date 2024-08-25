@@ -22,6 +22,7 @@ define((require) => {
         store.form.name = ''
         store.form.type_name = ''
         store.form.balance = 0
+        store.form.unit_name = 'IDR'
         readManyMe()
         alertify.success('Berhasil.')
       }

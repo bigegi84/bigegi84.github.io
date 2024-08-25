@@ -50,7 +50,6 @@ define((require) => {
                 return
               }
               await action.http.createOneMe()
-              action.emptyForm()
             },
           },
         },

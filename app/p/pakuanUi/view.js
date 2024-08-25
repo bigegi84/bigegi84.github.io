@@ -6,31 +6,52 @@ define((require) => {
     textHighlight: 'bigegi84 - Pakuan UI',
     ...app,
     panelHideAlert: {
-      buttonError: () => {
-        alertify.error('Error.')
+      cardRow: {
+        buttonError: () => {
+          alertify.error('Error.')
+        },
+        buttonNormal: () => {
+          alertify.message('Normal.')
+        },
+        buttonSuccess: () => {
+          alertify.success('Success.')
+        },
+        buttonWarning: () => {
+          alertify.warning('Warning.')
+        },
       },
-      buttonNormal: () => {
-        alertify.message('Normal.')
-      },
-      buttonSuccess: () => {
-        alertify.success('Success.')
-      },
-      buttonWarning: () => {
-        alertify.warning('Warning.')
+    },
+    panelButton: {
+      card: {
+        panelRegular: {
+          card: {
+            buttonRegular: () => alertify.success('Button Regular clicked.'),
+          },
+        },
       },
     },
     panelHideInput: {
       card: {
-        inputLabelSelectSelect: {
-          state: [
-            'value',
-            (e) => {
-              console.log(e)
-              console.log(e.target.value)
-              alert('masuk')
+        'panelLabel Select': {
+          card: {
+            inputLabelSelectSelect: {
+              state: [
+                '',
+                (e) => {
+                  alertify.success(`value: '${e.target.value}' selected.`)
+                },
+              ],
+              option: [
+                ['key1', 'value1'],
+                ['key2', 'value2'],
+              ],
             },
-          ],
-          option: [['key1'], ['key2', 'value2']],
+          },
+        },
+        'panelLabel Text': {
+          card: {
+            inputLabelTextText: [],
+          },
         },
       },
     },
@@ -79,17 +100,17 @@ define((require) => {
     },
     panelHideText: {
       card: {
-        panelHideText: {
-          card: {
-            text: 'This is "text".',
-          },
-        },
-        'panelHideText Highlight': {
+        panelHideHighlight: {
           card: {
             textHighlight: 'This is "textHighlight".',
           },
         },
-        'panelHideText Strong': {
+        panelHideRegular: {
+          card: {
+            text: 'This is "text".',
+          },
+        },
+        panelHideStrong: {
           card: {
             text: 'This is "textStrong".',
           },

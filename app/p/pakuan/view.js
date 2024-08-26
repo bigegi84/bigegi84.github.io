@@ -30,8 +30,13 @@ define((require) => {
         },
       },
     },
-    panelHideInput: {
+    panelInput: {
       card: {
+        'panelLabel Password': {
+          card: {
+            inputLabelPasswordPassword: [],
+          },
+        },
         'panelLabel Select': {
           card: {
             inputLabelSelectSelect: {

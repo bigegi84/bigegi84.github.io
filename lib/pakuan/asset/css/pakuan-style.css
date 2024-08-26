@@ -51,6 +51,17 @@
   font-weight: normal;
   margin: 0;
 }
+.pakuan-inputSelect {
+  background-color: black;
+  border: 0.5rem solid #1b4b49;
+  border-radius: 1rem;
+  color: white;
+  font-family: 'pakuan-regular';
+  font-size: 4rem;
+  font-weight: normal;
+  height: 7rem;
+  padding: 0px 0.5em;
+}
 .pakuan-inputText {
   background-color: black;
   border: 0.5rem solid #1b4b49;

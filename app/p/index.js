@@ -1,8 +1,8 @@
 define((require) => {
-  var pakuanUi = require("./pakuanUi/index");
+  var pakuan = require("./pakuan/index");
   var penny = require("./penny/index");
   return {
-    pakuanUi,
+    pakuan,
     penny,
   };
 });

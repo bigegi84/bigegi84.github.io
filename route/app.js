@@ -6,7 +6,7 @@ define(() => {
           buttonHome: () => (window.location.hash = '/'),
           buttonCalculator: () => (window.location.hash = '/calculator'),
           'buttonChord Admin': () => (window.location.hash = '/chordAdmin'),
-          'buttonPakuan UI': () => (window.location.hash = '/pakuanUi'),
+          buttonPakuan: () => (window.location.hash = '/pakuan'),
           buttonPenny: () => (window.location.hash = '/penny'),
         },
       },

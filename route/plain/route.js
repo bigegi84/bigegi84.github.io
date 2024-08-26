@@ -13,8 +13,8 @@ define((require) => {
       case '#/chordAdmin':
         app.c.chordAdmin.main()
         break
-      case '#/pakuanUi':
-        app.p.pakuanUi.main()
+      case '#/pakuan':
+        app.p.pakuan.main()
         break
       case '#/penny':
         app.p.penny.main()

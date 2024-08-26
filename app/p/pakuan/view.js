@@ -3,7 +3,7 @@ define((require) => {
   var app = require('../../../route/app')
   var store = require('./store')
   return pakuan.main({
-    textHighlight: 'bigegi84 - Pakuan UI',
+    textHighlight: 'bigegi84 - Pakuan',
     ...app,
     panelHideAlert: {
       cardRow: {

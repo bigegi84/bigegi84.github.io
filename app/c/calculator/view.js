@@ -22,7 +22,7 @@ define((require) => {
           ],
           observer: () =>
             pakuan.main({
-              text: store.accounting.result,
+              textResultResult: store.accounting.result,
             }),
         },
         buttonCalculate: () => {

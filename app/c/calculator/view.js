@@ -7,8 +7,10 @@ define((require) => {
       data: 0,
     },
   }
+  var route = require('../../../route/app')
   return pakuan.main({
     textHighlight: 'bigegi84 - Calculator',
+    ...route,
     panelHideAccounting: {
       card: {
         row: {

@@ -1,8 +1,7 @@
 define((require) => {
+  var store = require('../store/index')
   return () => {
     localStorage.removeItem("chordAdmin-apiToken");
-    chordAdminStore.token = null;
-    window.location.hash = "/chordAdmin-";
-    window.location.hash = "/chordAdmin";
+    store.IsLogin = false;
   };
 });

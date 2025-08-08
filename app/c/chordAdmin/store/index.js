@@ -1,20 +1,20 @@
 define((require) => {
-  var { action } = require("../../../../lib/pakuan/index");
+  var { action } = require('../../../../lib/pakuan/index')
   return action.useStore({
-    isLogin: false,
+    IsLogin: false,
     test: [],
     loginForm: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     },
     song: {
       data: [],
       form: {
-        title: "",
-        lyric: "",
-        artist_name: "",
+        title: '',
+        lyric: '',
+        artist_name: '',
       },
-      search: "",
+      search: '',
     },
-  });
-});
+  })
+})

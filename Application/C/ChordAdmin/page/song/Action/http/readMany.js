@@ -1,9 +1,9 @@
-define((require) => {
-  var state = require("../../../../state/index");
-  var store = require("../../../../store/index");
+define((_require) => {
+  var State = _require("../../../../State/Index");
+  var store = _require("../../../../store/index");
   return async () => {
     try {
-      const res = await axios.post(state.apiUrl + "/song/readMany", null, {
+      const res = await axios.post(State.ApiUrl + "/song/readMany", null, {
         params: {
           title: store.song.search,
         },

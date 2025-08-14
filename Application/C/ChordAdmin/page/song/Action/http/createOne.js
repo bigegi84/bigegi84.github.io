@@ -1,11 +1,11 @@
-define((require) => {
-  var readMany = require("./readMany");
-  var state = require("../../../../state/index");
-  var store = require("../../../../store/index");
+define((_require) => {
+  var readMany = _require("./readMany");
+  var State = _require("../../../../State/Index");
+  var store = _require("../../../../store/index");
   return async () => {
     try {
       const res = await axios.post(
-        state.apiUrl + "/song/createOne",
+        State.ApiUrl + "/song/createOne",
         {
           title: store.song.form.title,
           lyric: store.song.form.lyric,
@@ -13,7 +13,7 @@ define((require) => {
         },
         {
           headers: {
-            "jwt-token": state.apiToken,
+            "jwt-token": State.apiToken,
           },
         }
       );

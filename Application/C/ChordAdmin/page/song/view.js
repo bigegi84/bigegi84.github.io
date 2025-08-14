@@ -1,15 +1,15 @@
 define((require) => {
-  var route = require("../../../../../route/app");
-  var { pakuan } = require("../../../../../lib/index");
-  var store = require("../../store/index");
-  var action = require("./action/index");
+  var route = require('../../../../../route/app')
+  var { pakuan } = require('../../../../../lib/index')
+  var store = require('../../store/index')
+  var Action = require('./Action/Index')
   // action.http.readMany();
   return () =>
     pakuan.main({
       ...route,
       panelMenu: {
         card: {
-          buttonLogout: () => action.logout(),
+          buttonLogout: () => Action.Logout(),
         },
       },
       panelSong: {
@@ -17,7 +17,7 @@ define((require) => {
           card: {
             observerA: () =>
               pakuan.main({
-                "inputLabelTextArtist Name": [
+                'inputLabelTextArtist Name': [
                   store.song.form.artist_name,
                   (e) => (store.song.form.artist_name = e.target.value),
                 ],
@@ -34,19 +34,19 @@ define((require) => {
                 inputLabelTextareaLyric: [
                   store.song.form.lyric,
                   (e) => {
-                    store.song.form.lyric = e.target.value;
-                    console.log(store.song.form.lyric);
+                    store.song.form.lyric = e.target.value
+                    console.log(store.song.form.lyric)
                   },
                 ],
               }),
             buttonSave: async () => {
-              var valid = action.validate();
-              if (valid != "ok") {
-                alertify.error(valid);
-                return;
+              var valid = Action.validate()
+              if (valid != 'ok') {
+                alertify.error(valid)
+                return
               }
-              await action.http.createOne();
-              action.emptyForm();
+              await Action.http.createOne()
+              Action.emptyForm()
             },
           },
         },
@@ -56,7 +56,7 @@ define((require) => {
             (e) => (store.song.search = e.target.value),
           ],
           buttonCari: () => {
-            action.http.readMany();
+            Action.http.readMany()
           },
         },
         observer: () =>
@@ -72,5 +72,5 @@ define((require) => {
             })
           ),
       },
-    });
-});
+    })
+})

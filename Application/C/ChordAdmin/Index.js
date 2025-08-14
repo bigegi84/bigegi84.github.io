@@ -1,8 +1,8 @@
 define((_require) => {
-  var action = _require('./action/index')
+  // var Action = _require('./Action/Index')
   var Main = _require('./Main')
   return {
-    action,
+    // Action,
     Main,
   }
 })

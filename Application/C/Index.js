@@ -1,5 +1,5 @@
-define((require) => {
-  var ChordAdmin = require('./ChordAdmin/Index')
+define((_require) => {
+  var ChordAdmin = _require('./ChordAdmin/Index')
   return {
     ChordAdmin,
   }

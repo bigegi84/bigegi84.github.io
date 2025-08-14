@@ -1,5 +1,5 @@
 define((require) => {
-  var env = require('../../env')
+  var Environment = require('../../Environment')
   var Observer = require('../../lib/observer')
   return {
     css: {
@@ -14,7 +14,7 @@ define((require) => {
       bigegi84: 'bigegi84/asset/css/bigegi84.css',
       root: 'asset/css/main.css',
     },
-    host: env.apiUrl,
+    host: Environment.apiUrl,
     observer: Observer(),
   }
 })

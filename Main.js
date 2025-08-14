@@ -1,7 +1,7 @@
-define((require) => {
-  var bigegi84 = require('./bigegi84/index')
+define((_require) => {
+  var bigegi84 = _require('./bigegi84/index')
   var { action } = bigegi84
-  var route = require('./route/index')
+  var route = _require('./route/index')
   action.init.all()
   route.plain.main()
   // window.e = React.createElement;

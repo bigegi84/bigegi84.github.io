@@ -13,10 +13,10 @@ define((require) => {
         case '192.168.1.43':
           return _apiUrl.bigegi84_oa37f
         case 'localhost':
-          //   return _apiUrl.arenhost
           // return _apiUrl.bigegi84_oa15s
           //   return _apiUrl.bigegi84_oa37f
-          return _apiUrl.localhost
+          return _apiUrl.arenhost
+        // return _apiUrl.localhost
         default:
           return _apiUrl.localhost
       }

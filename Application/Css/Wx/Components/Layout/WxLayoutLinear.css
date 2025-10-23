@@ -1,0 +1,4 @@
+.WxLayoutLinear {
+  display: flex;
+  flex-direction: column;
+}

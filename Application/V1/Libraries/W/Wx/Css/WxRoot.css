@@ -1,0 +1,15 @@
+html {
+  font-size: 16px;
+  background: black;
+}
+
+.WxRoot {
+  font-size: 1.2rem;
+  height: 100vh;
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 16px;
+  }
+}

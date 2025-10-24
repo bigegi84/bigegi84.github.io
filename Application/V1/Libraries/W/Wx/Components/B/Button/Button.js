@@ -1,6 +1,6 @@
 const styleClass = 'WxButton'
 
-export var Button = (label, onClick = null) => {
+export var Button = (label, onClick = () => {}) => {
   const component = document.createElement('button')
   if (typeof label !== 'undefined') component.innerHTML = label
   if (typeof styleClass !== 'undefined') component.className = styleClass

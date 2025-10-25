@@ -1,7 +1,7 @@
 import { RouteObserver } from '../Observer/RouteObserver.js'
 import { StoreObserver } from '../Observer/StoreObserver.js'
 
-const Notify = (path) => {
+const Notify = () => {
   StoreObserver.Clear()
   RouteObserver.Notify()
 }

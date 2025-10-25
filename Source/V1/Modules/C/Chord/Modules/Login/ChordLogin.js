@@ -12,7 +12,7 @@ const LoginAction = async () => {
   if (response.status == 400) alert('Bad Request.')
   const body = await response.json()
   localStorage.setItem('chord_token', body.result)
-  Wv.Route.Push('/Chord')
+  Wv.Route.Push('/chord')
 }
 export const ChordLogin = () => {
   return Wv.Row([

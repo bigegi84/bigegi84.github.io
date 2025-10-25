@@ -8,6 +8,7 @@ import { Effect } from './Components/E/Effect/Effect.js'
 import { InputText } from './Components/I/Input/InputText.js'
 import { Row } from './Components/R/Row/Row.js'
 import { Post } from '../Wh/Http/Post.js'
+import { Render } from './Actions/Render/Render.js'
 
 // Wv View Systems
 export var Wv = {
@@ -15,6 +16,7 @@ export var Wv = {
   Dom,
   Effect,
   IText: InputText,
+  Render,
   Route,
   Row,
   UseEffect,

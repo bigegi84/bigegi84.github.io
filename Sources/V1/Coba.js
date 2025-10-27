@@ -1,4 +1,4 @@
-import { Wv } from '../../Libraries/W/Wv/Wv.js'
+import { Wv } from "../Libraries/W/Wv/Wv.js"
 
 export const Coba = () => {
   const hash = window.location.hash.slice(1)

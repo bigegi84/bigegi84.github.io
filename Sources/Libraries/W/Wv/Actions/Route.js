@@ -10,7 +10,22 @@ const Push = (path) => {
   StoreObserver.Clear()
   RouteObserver.Notify()
 }
+let Type = 'Hash'
+const Path = () => {
+  if (Type == 'Hash') return location.hash.slice(1)
+  return null
+}
+// const State = {
+//   // Type: 'Hash',
+//   Path: () => {
+//     console.log('masuk sini ga')
+//     if (this.Type == 'Hash') return location.hash.slice(1)
+//     return null
+//   },
+// }
 export var Route = {
   Notify,
+  Path,
   Push,
+  Type,
 }

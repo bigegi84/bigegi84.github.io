@@ -16,6 +16,8 @@ export var Wv = {
   Button,
   Dom,
   Effect,
+  InputT: InputText,
+  InputP: InputPassword,
   IPassword: InputPassword,
   IText: InputText,
   Render,

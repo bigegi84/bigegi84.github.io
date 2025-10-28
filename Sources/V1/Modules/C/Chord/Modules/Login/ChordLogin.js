@@ -3,6 +3,7 @@ import { Wh } from '../../../../../../Libraries/W/Wh/Wh.js'
 import { UrlState } from '../../../../../States/UrlState.js'
 import { Wd } from '../../../../../../Libraries/W/Wd/Wd.js'
 import { Wc } from '../../../../../../Libraries/W/Wc/Wc.js'
+import { ChordLayout } from '../../Components/ChordLayout.js'
 
 const username = Wv.UseStore('')
 const password = Wv.UseStore('')
@@ -30,6 +31,14 @@ const LoginHttp = async () => {
   LoginOk(responseBody)
 }
 export const ChordLogin = () => {
+  // Wv.Render({
+
+  // })
+  return ChordLayout({
+    InputT: (e) => (username.Value = e.target.value),
+    InputP: (e) => (password.Value = e.target.value),
+    ButtonLogin: () => LoginHttp(),
+  })
   return Wv.Row([
     Wv.IText(username.Value, (e) => {
       username.Value = e.target.value

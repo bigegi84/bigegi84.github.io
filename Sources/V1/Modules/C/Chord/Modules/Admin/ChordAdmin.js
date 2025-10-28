@@ -1,7 +1,6 @@
 import { Wc } from '../../../../../../Libraries/W/Wc/Wc.js'
 import { Wd } from '../../../../../../Libraries/W/Wd/Wd.js'
 import { Wh } from '../../../../../../Libraries/W/Wh/Wh.js'
-import { WvRow } from '../../../../../../Libraries/W/Wv/Components/R/Row/WvRow.js'
 import { WvText } from '../../../../../../Libraries/W/Wv/Components/T/Text/WvText.js'
 import { Wv } from '../../../../../../Libraries/W/Wv/Wv.js'
 import { WvComponent } from '../../../../../../Libraries/W/Wv/WvComponent.js'
@@ -34,15 +33,6 @@ const PageHttp = async () => {
   Wd.Cache.set(cacheKey, responseBody)
   data.Value = responseBody
 }
-
-function debounce(fn, delay = 500) {
-  let timer
-  return function (...args) {
-    clearTimeout(timer)
-    timer = setTimeout(() => fn.apply(this, args), delay)
-  }
-}
-const debouncedFetch = debounce(PageHttp, 10)
 
 const LoadDataAction = async () => {
   try {

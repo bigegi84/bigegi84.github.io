@@ -8,7 +8,7 @@ export var Button = (label, onClick = () => {}) => {
   // component.style.padding = '0 1.5em'
   // component.style.padding = '0 1.5em'
   return (parent = document.createElement('div')) => {
-    component.onclick = (e) => {
+    component.onclick = () => {
       // component.classList.add('Active')
       if (onClick) onClick()
     }

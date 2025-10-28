@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint with ESLint",
+      "type": "shell",
+      "command": "pnpm eslint Sources/",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$eslint-stylish"]
+    }
+  ]
+}

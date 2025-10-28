@@ -19,7 +19,6 @@ export const Router = (
   //   component.classList.add(styleClass)
   const defaultRoute = prop['?']
   const currentPath = Wv.Route.Path()
-  const currentRoute = prop[Wv.Route.Path()]
   return (parent = document.createElement('div')) => {
     parent.appendChild(component)
     const render = (path) => {

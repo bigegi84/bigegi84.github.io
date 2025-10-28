@@ -9,7 +9,6 @@ export const UseStore = (initial = null) => {
     },
     set Value(v) {
       _value = v
-      console.log('value state', _value)
       _observer.Notify('UseState.setValue')
     },
     ObserverLayout: (
@@ -32,7 +31,7 @@ export const UseStore = (initial = null) => {
       return component
     },
     Subscribe: (callback) => {
-      _observer.subscribe(() => {
+      _observer.Subscribe(() => {
         if (callback) callback()
       })
     },

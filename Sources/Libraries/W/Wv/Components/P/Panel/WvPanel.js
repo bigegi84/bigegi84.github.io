@@ -1,9 +1,10 @@
 import { UseState } from '../../../Actions/UseState.js'
 import { Button } from '../../B/Button/Button.js'
+import { WvCard } from '../../C/Card/WvCard.js'
 import { WvCircle } from '../../C/Circle/WvCircle.js'
 import { WvColumn } from '../../C/Column/WvColumn.js'
-import { Row } from '../../R/Row/Row.js'
-import { Text } from '../../T/Text/Text.js'
+import { WvRow } from '../../R/Row/WvRow.js'
+import { WvText } from '../../T/Text/WvText.js'
 
 export const WvPanel = (
   label = '',
@@ -12,16 +13,16 @@ export const WvPanel = (
   direction = 'Row'
 ) => {
   const isShow = UseState(show)
-  const ContentWrapper = direction == 'Row' ? Row : WvColumn
+  const ContentWrapper = direction == 'Row' ? WvRow : WvColumn
   const component = () =>
-    Row([
+    WvRow([
       WvColumn([
-        Text(label),
+        WvText(label),
         WvCircle(isShow.Value ? 'X' : 'O', () => {
           isShow.Value = !isShow.Value
         }),
       ]),
-      ContentWrapper(isShow.Value ? child : []),
+      isShow.Value ? WvCard(ContentWrapper(child)) : WvRow(),
     ])
   return (parent = document.createElement('div')) => {
     const newParent = document.createElement('div')

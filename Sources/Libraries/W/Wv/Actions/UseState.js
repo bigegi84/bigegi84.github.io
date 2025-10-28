@@ -1,44 +1,35 @@
 import { Observer } from '../../../O/Observer/Observer.js'
-import { Row } from '../Components/R/Row/Row.js'
-import { StateObserver } from '../Observer/StateObserver.js'
 
-export var UseState = (initial = null) => {
-  console.log('init state')
-  var _value = initial
-  const _observer = StateObserver
-  // const _observer = Observer()
+export const UseState = (initial = null) => {
+  let _Value = initial
+  // const _Observer = StateObserver
+  const _Observer = Observer()
   return {
     get Value() {
-      return _value
+      return _Value
     },
     set Value(v) {
-      _value = v
-      console.log('value state', _value)
-      _observer.Notify('UseState.setValue')
+      _Value = v
+      _Observer.Notify('UseState.setValue')
     },
     Effect: (
-      children = () => {
+      child = () => {
         return document.createElement('div')
       }
     ) => {
-      const Wrapper = Row()(ks)
-      const a = Wrapper([])(parent)
-      const component = Wrapper([])
-      var render = () => {
-        var extract = children()
-        if (Array.isArray(extract))
-          extract.forEach((e) => component.appendChild(e))
-        else component.appendChild(extract)
-      }
-      _observer.Subscribe(() => {
-        component.innerHTML = ''
+      const component = document.createElement('div')
+      return (parent = document.createElement('div')) => {
+        const render = () => {
+          component.innerHTML = ''
+          child()(component)
+        }
         render()
-      })
-      render()
-      return component
+        parent.appendChild(component)
+        _Observer.Subscribe(() => render())
+      }
     },
     Subscribe: (callback) => {
-      _observer.Subscribe(() => {
+      _Observer.Subscribe(() => {
         if (callback) callback()
       })
     },

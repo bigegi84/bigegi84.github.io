@@ -1,5 +1,6 @@
 @import url(./Main.css);
 @import url(./Components/WvButton.css);
+@import url(./Components/Card/WvCard.css);
 @import url(./Components/Circle/WvCircle.css);
 @import url(./Components/Column/WvColumn.css);
 @import url(./Components/Input/WvInputText.css);

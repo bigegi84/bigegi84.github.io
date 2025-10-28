@@ -31,21 +31,9 @@ const LoginHttp = async () => {
   LoginOk(responseBody)
 }
 export const ChordLogin = () => {
-  // Wv.Render({
-
-  // })
   return ChordLayout({
     InputT: (e) => (username.Value = e.target.value),
     InputP: (e) => (password.Value = e.target.value),
     ButtonLogin: () => LoginHttp(),
   })
-  return Wv.Row([
-    Wv.IText(username.Value, (e) => {
-      username.Value = e.target.value
-    }),
-    Wv.IPassword(password.Value, (e) => {
-      password.Value = e.target.value
-    }),
-    Wv.Button('Login', () => LoginHttp()),
-  ])
 }

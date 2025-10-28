@@ -6,9 +6,9 @@ const Notify = () => {
   RouteObserver.Notify()
 }
 const Push = (path) => {
-  window.location.hash = path
   StoreObserver.Clear()
-  RouteObserver.Notify()
+  window.location.hash = path
+  // RouteObserver.Notify()
 }
 let Type = 'Hash'
 const Path = () => {

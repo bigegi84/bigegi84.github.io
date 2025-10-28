@@ -1,5 +1,6 @@
 import { ItemB } from './Item/ItemB.js'
 import { ItemC } from './Item/ItemC.js'
+import { ItemE } from './Item/ItemE.js'
 import { ItemI } from './Item/ItemI.js'
 import { ItemP } from './Item/ItemP.js'
 import { ItemR } from './Item/ItemR.js'
@@ -11,6 +12,8 @@ export const RenderItem = (key, value) => {
   if (B != null) return B
   var C = ItemC(key, value)
   if (C != null) return C
+  var E = ItemE(key, value)
+  if (E != null) return E
   var I = ItemI(key, value)
   if (I != null) return I
   var P = ItemP(key, value)

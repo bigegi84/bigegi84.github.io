@@ -1,29 +1,27 @@
 import { StoreObserver } from '../../../Observer/StoreObserver.js'
-import { LayoutLinear } from '../../L/Layout/LayoutLinear.js'
 
-var styleClass = 'WxLayoutLinear'
-export var Effect = (
+const styleClass = 'WxLayoutLinear'
+export const Effect = (
   child = () => {
     return () => {}
   }
 ) => {
   const component = document.createElement('div')
   component.setAttribute('class', styleClass)
-  if (typeof child !== 'function')
-    throw Error('Observer child must be function.')
-  if (typeof child() !== 'function')
-    throw Error('Observer child() must be function.')
+  const IsFunction = typeof child() == 'function'
+  const IsArray = Array.isArray(child())
+  if (!IsFunction && !IsArray)
+    throw Error('Effect child must be Function or Array.')
   return (parent = document.createElement('div')) => {
-    // const component = LayoutColumn()
-    // component.setAttribute('class', className)
-    var render = () => {
+    const render = () => {
       component.innerHTML = ''
-      child()(component)
+      if (IsArray) {
+        child().forEach((it) => it(component))
+      }
+      if (!IsArray) child()(component)
     }
     render()
     parent.appendChild(component)
-    StoreObserver.Subscribe(() => {
-      render()
-    })
+    StoreObserver.Subscribe(() => render())
   }
 }

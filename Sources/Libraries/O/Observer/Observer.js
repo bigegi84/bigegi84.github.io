@@ -25,16 +25,12 @@ export function YObserver() {
   }
 }
 export function Observer() {
-  const observers = new Map() // key: fn, value: wrapper
-
+  const observers = new Map()
   return {
     Subscribe(fn) {
-      // Jika sudah ada, timpa saja
       observers.set(fn, fn)
     },
-
     Notify(data) {
-      console.log(observers.size)
       for (const observer of observers.values()) {
         observer(data)
       }
@@ -42,11 +38,9 @@ export function Observer() {
     Clear() {
       observers.clear()
     },
-
     unsubscribe(fn) {
       observers.delete(fn)
     },
-
     get size() {
       return observers.size
     },

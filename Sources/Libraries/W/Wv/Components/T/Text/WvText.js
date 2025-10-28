@@ -1,6 +1,6 @@
 const styleClass = 'WvText'
 
-export var Text = (text) => {
+export var WvText = (text) => {
   const component = document.createElement('p')
   if (typeof text !== 'undefined') component.innerHTML = text
   if (typeof styleClass !== 'undefined') component.className = styleClass

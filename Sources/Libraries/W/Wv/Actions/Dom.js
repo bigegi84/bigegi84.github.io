@@ -9,13 +9,13 @@ const Run = (parent, child) => {
   if (isFunction) child(parent)
   console.log('run', isArray, isFunction)
 }
-window.addEventListener('hashchange', () => {
-  Wv.Route.Notify()
-})
+// window.addEventListener('hashchange', () => {
+//   Wv.Route.Notify()
+// })
 export var Dom = (child, parent = document.getElementById('Main')) => {
   const render = () => Run(parent, child)
   render()
-  RouteObserver.Subscribe(() => {
-    render()
-  })
+  // RouteObserver.Subscribe(() => {
+  //   render()
+  // })
 }

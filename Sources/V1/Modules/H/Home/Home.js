@@ -5,7 +5,7 @@ var data = Wv.UseStore([])
 var count = Wv.UseStore(1)
 export const Home = () => {
   return Wv.Render({
-    View: Navigation,
+    View: Navigation(),
     Text: 'ini home',
   })
 }

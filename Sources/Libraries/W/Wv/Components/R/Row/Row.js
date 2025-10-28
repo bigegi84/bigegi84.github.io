@@ -4,6 +4,7 @@ export var Row = (child = [() => {}]) => {
   component.setAttribute('class', styleClass)
   return (parent = document.createElement('div')) => {
     var isArray = Array.isArray(child)
+    console.log(child)
     if (isArray) child.forEach((it) => it(component))
     if (!isArray) child(component)
     parent.appendChild(component)

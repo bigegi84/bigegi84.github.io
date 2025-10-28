@@ -19,9 +19,10 @@ const PageHttp = async () => {
     page: page.Value,
     limit: limit.Value,
   }
-  // const requestHash = await Wc.SHA256(query)
-  // const cacheKey = `POST:${path}:${requestHash}`
-  const cacheKey = `GET:${path}?${new URLSearchParams(query).toString()}`
+  const queryString = `${new URLSearchParams(query).toString()}`
+  const requestHash = await Wc.SHA256(queryString)
+  const cacheKey = `GET:${path}?${requestHash}`
+  // const cacheKey = `GET:${path}?${queryString}`
   const cached = Wd.Cache.get(cacheKey)
   if (cached != null) {
     data.Value = cached
@@ -41,12 +42,12 @@ function debounce(fn, delay = 500) {
     timer = setTimeout(() => fn.apply(this, args), delay)
   }
 }
-const debouncedFetch = debounce(PageHttp)
+const debouncedFetch = debounce(PageHttp, 10)
 
 const LoadDataAction = async () => {
   try {
     Wv.Loading()
-    debouncedFetch()
+    PageHttp()
     Wv.LoadingStop()
   } catch (e) {
     alert(e.message)
@@ -59,9 +60,12 @@ export const ChordAdmin = () => {
     return null
   }
   LoadDataAction()
-  search.Subscribe(() => LoadDataAction())
-  page.Subscribe(() => LoadDataAction())
-  limit.Subscribe(() => LoadDataAction())
+  // const store = [search, page, limit]
+  // store.forEach((it) => it.Subscribe(() => debouncedFetch()))
+  Wv.UseEffect(() => LoadDataAction(), [search, page, limit])
+  // search.Subscribe(() => LoadDataAction())
+  // page.Subscribe(() => LoadDataAction())
+  // limit.Subscribe(() => LoadDataAction())
   return ChordLayout({
     PanelMenu: {
       Text: 'Ini halaman admin.',

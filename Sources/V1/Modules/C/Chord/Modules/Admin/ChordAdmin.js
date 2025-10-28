@@ -19,7 +19,7 @@ const PageHttp = async () => {
   }
   // const requestHash = await Wc.SHA256(query)
   // const cacheKey = `POST:${path}:${requestHash}`
-  const cacheKey = `POST:${path}:${JSON.stringify(query)}`
+  const cacheKey = `GET:${path}?${new URLSearchParams(query).toString()}`
   const cached = Wd.Cache.get(cacheKey)
   if (cached != null) {
     data.Value = cached
@@ -53,10 +53,15 @@ export const ChordAdmin = () => {
         Text: 'Limit: ',
         InputNU010: (e) => (limit.Value = e.target.value),
       },
+      EffectTotal: () => WvText(`Total: ${data.Value?.result?.total ?? 1}`),
       ViewTP: page.Effect(() => WvText(`Page: ${page.Value}`)),
+      EffectPages: () => WvText(`Pages: ${data.Value?.result?.pages ?? 1}`),
       Column: {
         'Button<': () => (page.Value == 1 ? 1 : (page.Value = page.Value - 1)),
-        'Button>': () => (page.Value = page.Value + 1),
+        'Button>': () =>
+          page.Value == data.Value?.result?.pages
+            ? data.Value?.result?.pages
+            : (page.Value = page.Value + 1),
       },
       Effect: () => {
         let result = {}

@@ -1,5 +1,7 @@
 import { TimeLimitedCache } from './TimeLimitedCache.js'
 
-export const Wd = {
+const Wd = {
   Cache: new TimeLimitedCache(),
 }
+window.Wd = Wd
+export { Wd }

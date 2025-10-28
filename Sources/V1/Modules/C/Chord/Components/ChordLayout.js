@@ -3,7 +3,7 @@ import { Navigation } from '../../../../Components/Navigation.js'
 
 export const ChordLayout = (child) => {
   return Wv.Render({
-    View: Navigation,
-    Row: child,
+    View: Navigation(),
+    PanelContent: child,
   })
 }

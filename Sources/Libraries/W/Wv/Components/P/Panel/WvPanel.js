@@ -12,7 +12,7 @@ export const WvPanel = (
   direction = 'Row'
 ) => {
   const isShow = UseState(show)
-  const Wrapper = direction == 'Row' ? Row : WvColumn
+  const ContentWrapper = direction == 'Row' ? Row : WvColumn
   const component = () =>
     Row([
       WvColumn([
@@ -21,13 +21,15 @@ export const WvPanel = (
           isShow.Value = !isShow.Value
         }),
       ]),
-      Wrapper(isShow.Value ? child : []),
+      ContentWrapper(isShow.Value ? child : []),
     ])
   return (parent = document.createElement('div')) => {
+    const newParent = document.createElement('div')
     const update = () => {
-      parent.innerHTML = ''
-      component()(parent)
+      newParent.innerHTML = ''
+      component()(newParent)
     }
+    parent.appendChild(newParent)
     update()
     isShow.Subscribe(() => {
       update()

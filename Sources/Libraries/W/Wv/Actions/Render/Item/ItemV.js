@@ -1,5 +1,5 @@
 export const ItemV = (key, value) => {
-  if (key.includes('View')) {
+  if (key.startsWith('View')) {
     return value()
   }
   return null

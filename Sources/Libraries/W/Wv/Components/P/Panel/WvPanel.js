@@ -1,13 +1,14 @@
-import { Wv } from '../../../Wv.js'
+import { UseState } from '../../../Actions/UseState.js'
 import { WvCircle } from '../../C/Circle/WvCircle.js'
 import { WvColumn } from '../../C/Column/WvColumn.js'
 import { Row } from '../../R/Row/Row.js'
 import { Text } from '../../T/Text/Text.js'
 
-export const WvPanel = (label = '', child, show = true) => {
-  const isShow = Wv.UseState(show)
+export const WvPanel = (label = '', child, show = true, direction = 'Row') => {
+  const isShow = UseState(show)
+  const Wrapper = direction == 'Row' ? Row : WvColumn
   const component = () =>
-    Row([
+    Wrapper([
       WvColumn([
         Text(label),
         WvCircle(isShow.Value ? 'X' : 'O', () => {

@@ -64,15 +64,22 @@ export const ChordAdmin = () => {
             : (page.Value = page.Value + 1),
       },
       Effect: () => {
-        let result = {}
-        data.Value?.result?.data?.forEach((it) => {
-          const newObj = {}
-          newObj[`PanelHide${it.artist.name} - ${it.title}`] = {
-            TextL: it.lyric,
-          }
-          result = { ...result, ...newObj }
-        })
-        return Wv.Render(result)
+        // let result = {}
+        // data.Value?.result?.data?.forEach((it) => {
+        //   const newObj = {}
+        //   newObj[`PanelHide${it.artist.name} - ${it.title}`] = {
+        //     TextL: it.lyric,
+        //   }
+        //   result = { ...result, ...newObj }
+        // })
+        // return Wv.Render(result)
+        const result = data.Value?.result?.data?.map((it) =>
+          WvComponent.PanelHide(
+            `${it.artist.name} - ${it.title}`,
+            WvComponent.Text(it.lyric)
+          )
+        )
+        return WvComponent.Row(result)
       },
     },
   })

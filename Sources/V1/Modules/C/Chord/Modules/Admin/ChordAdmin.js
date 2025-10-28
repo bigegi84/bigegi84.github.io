@@ -106,7 +106,7 @@ export const ChordAdmin = () => {
         // return Wv.Render(result)
         const result = data.Value?.result?.data?.map((it) =>
           WvComponent.PanelHide(
-            `${it.artist.name} - ${it.title}`,
+            `${it.artist_name} - ${it.title}`,
             WvComponent.Text(it.lyric)
           )
         )

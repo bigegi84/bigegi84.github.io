@@ -9,6 +9,7 @@ export const InputNumber = (value, onChange, min = null) => {
   component.setAttribute('class', styleClass ?? '')
   return (parent = document.createElement('div')) => {
     component.onchange = (e) => {
+      if (component.value < min) component.value = min
       if (onChange) onChange(e)
     }
     parent.appendChild(component)

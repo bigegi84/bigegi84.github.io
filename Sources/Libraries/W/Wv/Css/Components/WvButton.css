@@ -1,11 +1,11 @@
-.WxButton {
+.WvButton {
   background: #1b4b49;
   /* background-color: #1b4b49; */
   border: 0;
   border-radius: 0.5rem;
   color: white;
-  /* font-family: 'pakuan-regular'; */
-  /* font-size: 2rem; */
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
   font-weight: bold;
   height: 2.5rem;
   /* line-height: 4rem; */

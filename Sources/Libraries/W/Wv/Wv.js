@@ -9,12 +9,14 @@ import { InputText } from './Components/I/Input/InputText.js'
 import { Row } from './Components/R/Row/Row.js'
 import { Post } from '../Wh/Http/Post.js'
 import { Render } from './Actions/Render/Render.js'
+import { InputPassword } from './Components/I/Input/InputPassword.js'
 
 // Wv View Systems
 export var Wv = {
   Button,
   Dom,
   Effect,
+  IPassword: InputPassword,
   IText: InputText,
   Render,
   Route,

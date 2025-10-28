@@ -31,16 +31,12 @@ const LoginHttp = async () => {
 }
 export const ChordLogin = () => {
   return Wv.Row([
-    Wv.Effect(() =>
-      Wv.IText(username.Value, (e) => {
-        username.Value = e.target.value
-      })
-    ),
-    Wv.Effect(() =>
-      Wv.IText(password.Value, (e) => {
-        password.Value = e.target.value
-      })
-    ),
+    Wv.IText(username.Value, (e) => {
+      username.Value = e.target.value
+    }),
+    Wv.IPassword(password.Value, (e) => {
+      password.Value = e.target.value
+    }),
     Wv.Button('Login', () => LoginHttp()),
   ])
 }

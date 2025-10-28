@@ -1,4 +1,4 @@
-const styleClass = 'WxButton'
+const styleClass = 'WvButton'
 
 export var Button = (label, onClick = () => {}) => {
   const component = document.createElement('button')

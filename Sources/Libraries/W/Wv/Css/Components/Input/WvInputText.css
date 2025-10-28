@@ -1,0 +1,12 @@
+.WvInputText {
+  background: transparent;
+  border: 0.1rem solid #1b4b49;
+  border-radius: 0.4rem;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  padding: 0.3rem;
+}
+
+.WvInputText::placeholder {
+  color: #1b4b49;
+}

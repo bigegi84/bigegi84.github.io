@@ -2,7 +2,7 @@ export class TimeLimitedCache {
   constructor() {
     this.store = new Map()
   }
-  set(key, value, seconds = 120) {
+  set(key, value, seconds = 60 * 10) {
     const expiresAt = Date.now() + seconds * 1000
 
     if (this.store.has(key)) {

@@ -11,9 +11,11 @@ import { ChordLayout } from '../../Components/ChordLayout.js'
 const data = Wv.UseStore(null)
 const page = Wv.UseState(1)
 const limit = Wv.UseState(10)
+const search = Wv.UseState('')
 const PageHttp = async () => {
   const path = `/chord/songs`
   const query = {
+    search: search.Value,
     page: page.Value,
     limit: limit.Value,
   }
@@ -32,14 +34,34 @@ const PageHttp = async () => {
   data.Value = responseBody
 }
 
+function debounce(fn, delay = 500) {
+  let timer
+  return function (...args) {
+    clearTimeout(timer)
+    timer = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
+const debouncedFetch = debounce(PageHttp)
+
+const LoadDataAction = async () => {
+  try {
+    Wv.Loading()
+    debouncedFetch()
+    Wv.LoadingStop()
+  } catch (e) {
+    alert(e.message)
+  }
+}
+
 export const ChordAdmin = () => {
   if (localStorage.getItem('chord_token') == null) {
     Wv.Route.Push('/chord/login')
     return null
   }
-  PageHttp()
-  page.Subscribe(() => PageHttp())
-  limit.Subscribe(() => PageHttp())
+  LoadDataAction()
+  search.Subscribe(() => LoadDataAction())
+  page.Subscribe(() => LoadDataAction())
+  limit.Subscribe(() => LoadDataAction())
   return ChordLayout({
     PanelMenu: {
       Text: 'Ini halaman admin.',
@@ -49,9 +71,18 @@ export const ChordAdmin = () => {
       },
     },
     PanelSong: {
+      RowSearch: {
+        Text: 'Search: ',
+        InputT: (e) => {
+          search.Value = e.target.value
+        },
+      },
       RowLimit: {
         Text: 'Limit: ',
-        InputNU010: (e) => (limit.Value = e.target.value),
+        InputNU010: (e) => {
+          limit.Value = e.target.value
+          page.Value = 1
+        },
       },
       EffectTotal: () => WvText(`Total: ${data.Value?.result?.total ?? 1}`),
       ViewTP: page.Effect(() => WvText(`Page: ${page.Value}`)),

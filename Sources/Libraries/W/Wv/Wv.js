@@ -20,6 +20,14 @@ export var Wv = {
   InputP: InputPassword,
   IPassword: InputPassword,
   IText: InputText,
+  Loading: () => {
+    const loading = document.getElementById('WvLoading')
+    loading.style.display = 'flex'
+  },
+  LoadingStop: () => {
+    const loading = document.getElementById('WvLoading')
+    loading.style.display = 'none'
+  },
   Navigate: (path) => Route.Push(path),
   Render,
   Route,

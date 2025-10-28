@@ -13,6 +13,7 @@
   padding: 0rem 1.5rem;
   width: fit-content;
 }
-.WxButton:active{
+
+.WvButton:active {
   background: #2b7c78;
 }

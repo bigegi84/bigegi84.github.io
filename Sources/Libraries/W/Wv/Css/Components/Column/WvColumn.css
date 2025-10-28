@@ -1,5 +1,5 @@
 .WvColumn {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   flex-direction: row;
   gap: 0.2rem;

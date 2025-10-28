@@ -7,5 +7,6 @@ export const Render = (obj, direction = 'Row') => {
     var item = RenderItem(key, obj[key])
     result.push(item)
   }
+  // return Component.Button('coba')
   return direction == 'Row' ? Component.Row(result) : Component.Column(result)
 }

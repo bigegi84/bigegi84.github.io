@@ -1,4 +1,5 @@
 import { Observer } from '../../../O/Observer/Observer.js'
+import { Row } from '../Components/R/Row/Row.js'
 import { StateObserver } from '../Observer/StateObserver.js'
 
 export var UseState = (initial = null) => {
@@ -15,12 +16,14 @@ export var UseState = (initial = null) => {
       console.log('value state', _value)
       _observer.Notify('UseState.setValue')
     },
-    ObserverLayout: (
+    Effect: (
       children = () => {
         return document.createElement('div')
       }
     ) => {
-      const component = document.createElement('div')
+      const Wrapper = Row()(ks)
+      const a = Wrapper([])(parent)
+      const component = Wrapper([])
       var render = () => {
         var extract = children()
         if (Array.isArray(extract))
@@ -35,7 +38,7 @@ export var UseState = (initial = null) => {
       return component
     },
     Subscribe: (callback) => {
-      _observer.subscribe(() => {
+      _observer.Subscribe(() => {
         if (callback) callback()
       })
     },

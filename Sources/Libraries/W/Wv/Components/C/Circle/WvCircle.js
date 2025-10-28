@@ -1,15 +1,13 @@
-const styleClass = 'WvButton'
+const styleClass = 'WvCircle'
 
-export var Button = (label, onClick = () => {}) => {
+export var WvCircle = (label, onClick = () => {}) => {
   const component = document.createElement('button')
+  component.setAttribute('class', styleClass)
   if (typeof label !== 'undefined') component.innerHTML = label
-  if (typeof styleClass !== 'undefined') component.className = styleClass
-  // component.setAttribute("class", className);
   // component.style.padding = '0 1.5em'
   // component.style.padding = '0 1.5em'
   return (parent = document.createElement('div')) => {
-    component.onclick = (e) => {
-      // component.classList.add('Active')
+    component.onclick = () => {
       if (onClick) onClick()
     }
     parent.appendChild(component)

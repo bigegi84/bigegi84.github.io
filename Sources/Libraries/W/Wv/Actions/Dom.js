@@ -1,6 +1,3 @@
-import { RouteObserver } from '../Observer/RouteObserver.js'
-import { Wv } from '../Wv.js'
-
 const Run = (parent, child) => {
   parent.innerHTML = ''
   const isArray = Array.isArray(child)

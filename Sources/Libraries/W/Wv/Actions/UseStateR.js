@@ -1,4 +1,3 @@
-import { Observer } from '../../../O/Observer/Observer.js'
 import { StateObserver } from '../Observer/StateObserver.js'
 
 const _observer = StateObserver

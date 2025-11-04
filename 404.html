@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirecting…</title>
-    <meta http-equiv="refresh" content="0; URL='/?'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Preserve path, query, and hash
-      const redirectTo =
-        "/?" + location.pathname.slice(1) + location.search + location.hash;
-      window.location.replace(redirectTo);
+      sessionStorage.setItem(
+        "redirectPath",
+        location.pathname + location.search + location.hash
+      );
+      window.location.replace("/");
     </script>
     <style>
       body {
@@ -21,12 +21,6 @@
   </head>
   <body>
     <h1>Redirecting…</h1>
-    <p>
-      If you're not redirected automatically,
-      <a id="redirect-link" href="/">click here</a>.
-    </p>
-    <script>
-      document.getElementById("redirect-link").href = redirectTo;
-    </script>
+    <p>If you're not redirected automatically, <a href="/">click here</a>.</p>
   </body>
 </html>

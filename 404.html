@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link class="bigegi84-icon" rel="shortcut icon" type="image/ico" />
+    <link rel="stylesheet" href="template/story/assets/css/main.css" />
+    <noscript>
+      <link rel="stylesheet" href="template/story/assets/css/noscript.css"
+    /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper" class="divided">
+      <!-- Five -->
+      <section class="wrapper style1 align-justify">
+        <div class="inner">
+          <h2 class="bigegi84-skillTitle"></h2>
+          <p class="bigegi84-skillContent"></p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="wrapper style1 align-center">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a href="#" class="icon brands style2 fa-twitter"
+                ><span class="label">Twitter</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-facebook-f"
+                ><span class="label">Facebook</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-instagram"
+                ><span class="label">Instagram</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon brands style2 fa-linkedin-in"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+            <li>
+              <a href="#" class="icon style2 fa-envelope"
+                ><span class="label">Email</span></a
+              >
+            </li>
+          </ul>
+          <p class="bigegi84-copyright"></p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="template/story/assets/js/jquery.min.js"></script>
+    <script src="template/story/assets/js/jquery.scrollex.min.js"></script>
+    <script src="template/story/assets/js/jquery.scrolly.min.js"></script>
+    <script src="template/story/assets/js/browser.min.js"></script>
+    <script src="template/story/assets/js/breakpoints.min.js"></script>
+    <script src="template/story/assets/js/util.js"></script>
+    <script src="template/story/assets/js/main.js"></script>
+    <!-- logic -->
+    <script src="state.js"></script>
+    <script>
+      $(document).ready(() => {
+        var prefix = ".bigegi84-";
+        document.title = state.fullName + ", " + state.degree["id"];
+        $(prefix + "icon").attr("href", "gold.ico");
+
+        $(prefix + "skillTitle").text("404");
+        var skillContentHtml = "";
+        skillContentHtml +=
+          "<strong>Halaman yang anda cari tidak ditemukan.</strong>";
+        $(prefix + "skillContent").html(skillContentHtml);
+
+        $(prefix + "copyright").html(
+          "&copy; " +
+            state.fullName +
+            ", " +
+            state.degree["id"] +
+            " " +
+            new Date().getFullYear()
+        );
+      });
+    </script>
+  </body>
+</html>
